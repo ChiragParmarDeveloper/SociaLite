@@ -19,7 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.Search"></activity>
+        <activity android:name=".Activity.Faq"></activity>
+        <activity android:name=".Activity.HidedPost" />
+        <activity android:name=".Activity.Privacy" />
+        <activity android:name=".Activity.Setting" />
+        <activity android:name=".Activity.Search" />
         <activity android:name=".Activity.CameraActivity" />
         <activity android:name=".Adapter.CategoryListAdapter" />
         <activity android:name=".Activity.RegistrationVerificationActivity" />

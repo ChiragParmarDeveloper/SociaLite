@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -84,6 +83,11 @@ public class HomeActivity extends AppCompatActivity {
 
     @BindView(R.id.navigation_view)
     NavigationView navigation_view;
+
+
+    @BindView(R.id.imgsearch)
+    ImageView imgsearch;
+
 
     ConstraintLayout category, Notification, Profile, help, faq, setting, logout;
     TextView txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
@@ -186,6 +190,9 @@ public class HomeActivity extends AppCompatActivity {
                 txt_help.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_help.setImageResource(R.drawable.ic_help);
 
+                startActivity(new Intent(HomeActivity.this,Setting.class));
+
+
             }
         });
 
@@ -214,6 +221,9 @@ public class HomeActivity extends AppCompatActivity {
 
                 txt_help.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_help.setImageResource(R.drawable.ic_help);
+
+                startActivity(new Intent(HomeActivity.this,Faq.class));
+
             }
         });
 
@@ -336,7 +346,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @SuppressLint("ResourceAsColor")
-    @OnClick({R.id.layout_category, R.id.layout_interest, R.id.layout_network, R.id.layout_share, R.id.layout_business, R.id.img_leftmenu})
+    @OnClick({R.id.layout_category, R.id.layout_interest, R.id.layout_network, R.id.layout_share, R.id.layout_business, R.id.img_leftmenu,
+
+            R.id.imgsearch})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.layout_category:
@@ -438,6 +450,14 @@ public class HomeActivity extends AppCompatActivity {
                     drawer_layout.openDrawer(GravityCompat.START);
                 else drawer_layout.closeDrawer(GravityCompat.END);
                 break;
+
+
+            case R.id.imgsearch:
+                startActivity(new Intent(HomeActivity.this,Search.class));
+
+                break;
+
+
         }
     }
 
@@ -449,11 +469,11 @@ public class HomeActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.customdialog);
         dialog.setTitle("Android Custom Dialog Box");
 
-       // TextView txt = (TextView) dialog.findViewById(R.id.txt);
+        // TextView txt = (TextView) dialog.findViewById(R.id.txt);
 
-      //  txt.setText("Logout");
+        //  txt.setText("Logout");
 
-     //   Button dialogButton = (Button) dialog.findViewById(R.id.dialogButton);
+        //   Button dialogButton = (Button) dialog.findViewById(R.id.dialogButton);
 
 //        dialogButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
