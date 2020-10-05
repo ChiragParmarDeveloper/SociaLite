@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SociaLite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="navigation_drawer_open">Open navigationdrawer</string>
+    <string name="navigation_drawer_close">close navigationdrawer</string>
+
+
+    <string-array name="Category">
+        <item>Dance</item>
+        <item>News</item>
+        <item>science</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ap.SociaLite">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher_logo_circle"
+        android:usesCleartextTraffic="true"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_logo_circle"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activity.CameraActivity"></activity>
+        <activity android:name=".Adapter.CategoryListAdapter" />
+        <activity android:name=".Activity.RegistrationVerificationActivity" />
+        <activity
+            android:name=".Activity.CreatePostActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Adapter.CategoryPostAdapter"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activity.InterestActivity" />
+        <activity android:name=".Activity.ResetpasswordActivity"  android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activity.Forgot_Activity" />
+        <activity android:name=".Activity.OtpActivity" />
+        <activity android:name=".Activity.HomeActivity" />
+        <activity android:name=".Activity.SplashActivity" />
+        <activity
+            android:name=".Activity.RegisterActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.SampleActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
