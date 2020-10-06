@@ -19,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.Faq"></activity>
+        <activity android:name=".Activity.Edit"></activity>
+        <activity android:name=".Activity.Text" />
+        <activity android:name=".Activity.Faq" />
         <activity android:name=".Activity.HidedPost" />
         <activity android:name=".Activity.Privacy" />
         <activity android:name=".Activity.Setting" />

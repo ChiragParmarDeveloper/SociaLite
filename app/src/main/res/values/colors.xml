@@ -7,4 +7,18 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorAccent_new">#D81B60</color>
     <color name="colororange">#EE6851</color>
+
+
+
+    <color name="seek_bar_background">#263238</color>
+    <color name="seek_bar_progress">#F47E6A</color>
+    <color name="seek_bar_secondary_progress">#3399CC</color>
+
+
+    <color name="coloryellow">#FFF700</color>
+
+
+
+
+
 </resources>
