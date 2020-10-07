@@ -36,7 +36,6 @@ public class PropDrama extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.img_cross:
                 finish();
-                ///     startActivity(new Intent(CameraActivity.this,LoginActivity.class));
                 break;
 
             case R.id.btn_next:
