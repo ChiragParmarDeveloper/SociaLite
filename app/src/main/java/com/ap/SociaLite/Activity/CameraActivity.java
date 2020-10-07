@@ -68,8 +68,6 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.img_edit1)
     ImageView img_edit1;
 
-
-
     @BindView(R.id.img_edit2)
     ImageView img_edit2;
 
@@ -99,7 +97,7 @@ public class CameraActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.img_back,R.id.next,R.id.img_edit1,R.id.img_edit2})
+    @OnClick({R.id.img_back,R.id.next,R.id.img_edit1,R.id.img_edit2,R.id.layout_album,R.id.layout_lock,R.id.layout_clock,R.id.layout_shape,R.id.layout_drama})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -108,7 +106,7 @@ public class CameraActivity extends AppCompatActivity {
                 break;
 
             case R.id.next:
-               // startActivity(new Intent(Forgot_Activity.this,OtpActivity.class));
+                startActivity(new Intent(CameraActivity.this,Post.class));
                 break;
 
             case R.id.img_edit1:
@@ -116,6 +114,26 @@ public class CameraActivity extends AppCompatActivity {
                 break;
             case R.id.img_edit2:
                 startActivity(new Intent(CameraActivity.this,Edit.class));
+                break;
+
+            case R.id.layout_album:
+                startActivity(new Intent(CameraActivity.this,TemplateBackground.class));
+                break;
+
+            case R.id.layout_lock:
+                startActivity(new Intent(CameraActivity.this,SharePost.class));
+                break;
+
+            case R.id.layout_clock:
+                startActivity(new Intent(CameraActivity.this,SchedulePost.class));
+                break;
+
+            case R.id.layout_shape:
+                startActivity(new Intent(CameraActivity.this,PropDrama.class));
+                break;
+
+            case R.id.layout_drama:
+                startActivity(new Intent(CameraActivity.this,ShapeCut.class));
                 break;
         }
     }

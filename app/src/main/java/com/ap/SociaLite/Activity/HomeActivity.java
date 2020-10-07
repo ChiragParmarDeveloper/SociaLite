@@ -137,7 +137,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 CustomDialog();
 
                 txt_logout.setTextColor(getResources().getColor(R.color.colorBlack));

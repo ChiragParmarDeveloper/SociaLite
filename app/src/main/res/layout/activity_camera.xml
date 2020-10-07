@@ -303,7 +303,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/ic_album" />
+                        android:src="@drawable/ic_album_black" />
 
                 </LinearLayout>
 

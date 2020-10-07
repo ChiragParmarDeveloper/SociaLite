@@ -28,12 +28,12 @@
             app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
         <Button
-            android:id="@+id/next"
+            android:id="@+id/btn_save"
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/btn_next"
+            android:background="@drawable/btn_save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +70,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout48"
-            android:layout_width="00dp"
+            android:layout_width="0dp"
             android:layout_height="270dp"
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +116,6 @@
             android:id="@+id/constraintLayout47"
             android:layout_width="0dp"
             android:layout_height="90dp"
-            android:layout_marginTop="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,52 +130,44 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/white">
-                </ImageView>
+                    android:src="@drawable/white"></ImageView>
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/red">
-                </ImageView>
+                    android:src="@drawable/red"></ImageView>
 
 
                 <ImageView
                     android:id="@+id/yellow"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/yellow">
-                </ImageView>
+                    android:src="@drawable/yellow"></ImageView>
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/r1">
-                </ImageView>
+                    android:src="@drawable/r1"></ImageView>
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/orange">
-                </ImageView>
+                    android:src="@drawable/orange"></ImageView>
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/pink">
-                </ImageView>
+                    android:src="@drawable/pink"></ImageView>
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/blue">
-                </ImageView>
+                    android:src="@drawable/blue"></ImageView>
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/black">
-                </ImageView>
+                    android:src="@drawable/black"></ImageView>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

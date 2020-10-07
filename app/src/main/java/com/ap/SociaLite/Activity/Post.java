@@ -14,29 +14,30 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Edit extends AppCompatActivity {
+public class Post extends AppCompatActivity {
 
-    @BindView(R.id.img_cross)
-    ImageView img_cross;
+    @BindView(R.id.btn_share)
+    Button btn_share;
 
-    @BindView(R.id.btn_save)
-    Button btn_save;
+    @BindView(R.id.img_back)
+    ImageView img_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
+        setContentView(R.layout.activity_post);
         ButterKnife.bind(this);
     }
-    @OnClick({R.id.img_cross,R.id.btn_save})
+    @OnClick({R.id.img_back,R.id.btn_share})
     public void OnClick(View view) {
         switch (view.getId()) {
-            case R.id.img_cross:
-                finish();
+            case R.id.img_back:
+                onBackPressed();
                 ///     startActivity(new Intent(CameraActivity.this,LoginActivity.class));
                 break;
-            case R.id.btn_save:
-                startActivity(new Intent(Edit.this,CameraActivity.class));
+
+            case R.id.btn_share:
+                startActivity(new Intent(Post.this,HomeActivity.class));
                 break;
         }
     }

@@ -19,7 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.Edit"></activity>
+        <activity android:name=".Activity.ShapeCut"></activity>
+        <activity android:name=".Activity.PropDrama" />
+        <activity android:name=".Activity.SchedulePost" />
+        <activity android:name=".Activity.SharePost" />
+        <activity android:name=".Activity.TemplateBackground" />
+        <activity android:name=".Activity.Post" />
+        <activity android:name=".Activity.Edit" />
         <activity android:name=".Activity.Text" />
         <activity android:name=".Activity.Faq" />
         <activity android:name=".Activity.HidedPost" />
