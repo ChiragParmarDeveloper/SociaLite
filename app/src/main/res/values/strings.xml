@@ -5,6 +5,11 @@
 
     <string name="navigation_drawer_open">Open navigationdrawer</string>
     <string name="navigation_drawer_close">close navigationdrawer</string>
+    <string name="edittext_hint"><font size="12">Search Friends...</font></string>
+
+    <string name="edittext_email"><font size="12">Email/Mobile</font></string>
+    <string name="edittext_pwd"><font size="12">Password</font></string>
+
 
 
     <string-array name="Category">

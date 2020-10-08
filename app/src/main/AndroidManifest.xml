@@ -19,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.ShapeCut"></activity>
+        <activity android:name=".Activity.Comment"></activity>
+        <activity android:name=".Activity.ShareToFriend" />
+        <activity android:name=".Activity.ShapeCut" />
         <activity android:name=".Activity.PropDrama" />
         <activity android:name=".Activity.SchedulePost" />
         <activity android:name=".Activity.SharePost" />

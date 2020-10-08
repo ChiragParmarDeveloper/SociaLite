@@ -1,11 +1,13 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,8 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ap.SociaLite.Activity.Comment;
+import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.R;
 
 import java.util.ArrayList;
@@ -82,6 +86,23 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                 //  context.startActivity(new Intent(context, LoginActivity.class));
             }
         });
+
+        holder.layout_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(view.getContext(), ShareToFriend.class);
+                view.getContext().startActivity(in);
+            }
+        });
+
+
+        holder.layout_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(view.getContext(), Comment.class);
+                view.getContext().startActivity(in);
+            }
+        });
     }
 
     @Override
@@ -99,6 +120,12 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
         @BindView(R.id.constraint_popup)
         ConstraintLayout constraint_popup;
+
+        @BindView(R.id.layout_share)
+        LinearLayout layout_share;
+
+        @BindView(R.id.layout_comment)
+        LinearLayout layout_comment;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

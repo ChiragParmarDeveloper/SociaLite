@@ -71,14 +71,11 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.img_edit2)
     ImageView img_edit2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         ButterKnife.bind(this);
-
-
 
 //        TextView textView=(TextView) findViewById(R.id.textView);
 //        textView.setTextColor(Color.RED);

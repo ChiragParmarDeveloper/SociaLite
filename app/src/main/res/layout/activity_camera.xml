@@ -31,14 +31,13 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
             android:src="@drawable/ic_left_arrow"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toStartOf="@+id/textView"
-            app:layout_constraintHorizontal_bias="0.23"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
@@ -59,8 +58,11 @@
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/btn_next"
+            android:background="@drawable/button_style"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
