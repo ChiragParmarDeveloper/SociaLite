@@ -68,7 +68,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-<!--              -->
+                <!--              -->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout31"
@@ -156,6 +156,42 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.0" />
 
+
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:cardElevation="15dp"-->
+<!--                            app:cardUseCompatPadding="true"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
+<!--                            -->
+<!--                            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent">-->
+
+<!--                                <RatingBar-->
+<!--                                    android:id="@+id/rating_order_ratingbar"-->
+<!--                                    android:layout_width="m"-->
+<!--                                    android:layout_height="20dp"-->
+<!--                                    android:numStars="5"-->
+<!--                                    android:stepSize="0.5"-->
+<!--                                    android:progressBackgroundTint="#ECECEC"-->
+<!--                                    android:progressTint="#0094DA"-->
+<!--                                    android:rating="0"-->
+<!--                                    android:layout_marginTop="100dp"-->
+<!--                                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />-->
+
+
+<!--                            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                        </androidx.cardview.widget.CardView>-->
+
+
+
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -184,7 +220,7 @@
                         app:layout_constraintStart_toStartOf="parent">
 
                         <LinearLayout
-                            android:id="@+id/layout_category"
+                            android:id="@+id/layout_star"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
@@ -226,8 +262,8 @@
                                 android:layout_width="14dp"
                                 android:layout_height="15dp"
                                 android:layout_gravity="center"
-                                android:scaleType="fitXY"
                                 android:layout_margin="4dp"
+                                android:scaleType="fitXY"
                                 android:src="@drawable/comment" />
 
                             <TextView
@@ -302,8 +338,8 @@
                             android:id="@+id/circularImageView3"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            app:srcCompat="@drawable/img_upload"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/img_upload" />
 
 
                         <TextView
@@ -322,7 +358,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginLeft="8dp"
                             android:text="Comment"
-                            android:textSize="9sp"/>
+                            android:textSize="9sp" />
                     </LinearLayout>
 
 
@@ -339,8 +375,8 @@
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            app:srcCompat="@drawable/img_upload"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/img_upload" />
 
                         <TextView
                             android:layout_width="wrap_content"

@@ -17,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.Comment;
+import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.R;
 
@@ -75,6 +76,15 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                                 Toast.makeText(view.getContext(), "Clicked help", Toast.LENGTH_SHORT).show();
                                 break;
 
+                            case R.id.report:
+                                Intent in = new Intent(view.getContext(), Report.class);
+                                view.getContext().startActivity(in);
+                                break;
+
+                            case R.id.copylink:
+                                Toast.makeText(view.getContext(), "Clicked copy", Toast.LENGTH_SHORT).show();
+                                break;
+
                             default:
                                 return false;
                         }
@@ -92,6 +102,13 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
                 view.getContext().startActivity(in);
+            }
+        });
+
+        holder.layout_star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -126,6 +143,9 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
         @BindView(R.id.layout_comment)
         LinearLayout layout_comment;
+
+        @BindView(R.id.layout_star)
+        LinearLayout layout_star;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

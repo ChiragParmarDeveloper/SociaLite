@@ -11,7 +11,7 @@
 
     <application
         android:allowBackup="true"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher_logo_circle"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -19,7 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.Comment"></activity>
+        <activity android:name=".Activity.Notification"></activity>
+        <activity android:name=".Activity.Report_Status" />
+        <activity android:name=".Activity.Report" />
+        <activity android:name=".Activity.Comment" />
         <activity android:name=".Activity.ShareToFriend" />
         <activity android:name=".Activity.ShapeCut" />
         <activity android:name=".Activity.PropDrama" />

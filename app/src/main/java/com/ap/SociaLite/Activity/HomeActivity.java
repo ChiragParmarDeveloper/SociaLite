@@ -308,6 +308,7 @@ public class HomeActivity extends AppCompatActivity {
                 txt_setting.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_setting.setImageResource(R.drawable.ic_setting_white);
 
+                startActivity(new Intent(HomeActivity.this,Notification.class));
 
             }
         });
