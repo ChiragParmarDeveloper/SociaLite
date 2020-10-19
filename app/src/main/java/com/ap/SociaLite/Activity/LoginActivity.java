@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -54,8 +55,10 @@ public class LoginActivity extends AppCompatActivity {
                 break;
 
             case R.id.btn_login:
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                finish();
+//
+
+             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+             finish();
                 break;
 
             case R.id.txt_forgot:

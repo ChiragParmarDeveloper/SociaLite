@@ -8,9 +8,75 @@
     tools:context=".Activity.Faq">
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/ic_backback"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="@+id/toolbar">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FAQ"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout62"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginLeft="18dp"
+            android:text="Frequently Asked Questions"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_20sdp"
@@ -19,20 +85,16 @@
         <LinearLayout
             android:id="@+id/li_list1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:weightSum="1">
-            <!--            android:layout_marginStart="@dimen/_10sdp"-->
-            <!--            android:layout_marginTop="@dimen/_3sdp"-->
-            <!--            android:layout_marginEnd="@dimen/_5sdp"-->
-            <!--            android:layout_marginBottom="@dimen/_3sdp"-->
-
 
             <LinearLayout
                 android:id="@+id/li_faq_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:layout_weight="0.1"
                 android:gravity="center_vertical">
 
                 <com.google.android.material.textview.MaterialTextView
@@ -45,13 +107,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.9">
 
                 <ImageView
                     android:id="@+id/img_next"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
@@ -60,8 +122,8 @@
 
                 <ImageView
                     android:id="@+id/img_down"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
@@ -69,24 +131,25 @@
                     android:src="@drawable/ic_faq_down"
                     android:visibility="gone" />
             </RelativeLayout>
+
         </LinearLayout>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent">-->
 
-<!--            <View-->
-<!--                android:id="@+id/view"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="1dp"-->
-<!--                android:layout_marginStart="20dp"-->
-<!--                android:layout_marginEnd="20dp"-->
-<!--                android:background="#DCDCDC"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/button3" />-->
+        <!--            <View-->
+        <!--                android:id="@+id/view"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="1dp"-->
+        <!--                android:layout_marginStart="20dp"-->
+        <!--                android:layout_marginEnd="20dp"-->
+        <!--                android:background="#DCDCDC"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toBottomOf="@+id/button3" />-->
 
-<!--        </LinearLayout>-->
+        <!--        </LinearLayout>-->
 
 
     </androidx.cardview.widget.CardView>
@@ -95,10 +158,11 @@
         android:id="@+id/cv_faq_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-5dp"
         android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="-12dp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:visibility="gone"
+        app:cardElevation="@dimen/_1sdp"
         app:cardUseCompatPadding="true">
 
         <com.google.android.material.textview.MaterialTextView
@@ -106,81 +170,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:gravity="start|top"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center_vertical"
             android:text="Sociaite Faq"
             android:textSize="@dimen/_11sdp" />
     </androidx.cardview.widget.CardView>
 
-
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:id="@+id/toolbar"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="50dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--        <androidx.appcompat.widget.AppCompatImageView-->
-    <!--            android:id="@+id/img_back"-->
-    <!--            android:layout_width="20dp"-->
-    <!--            android:layout_height="20dp"-->
-    <!--            android:layout_marginStart="16dp"-->
-    <!--            android:layout_marginLeft="16dp"-->
-    <!--            android:src="@drawable/ic_backback"-->
-    <!--            app:layout_constraintBottom_toBottomOf="@+id/toolbar"-->
-    <!--            app:layout_constraintEnd_toStartOf="@+id/textView"-->
-    <!--            app:layout_constraintHorizontal_bias="0.0"-->
-    <!--            app:layout_constraintStart_toStartOf="@+id/toolbar"-->
-    <!--            app:layout_constraintTop_toTopOf="@+id/toolbar">-->
-
-    <!--        </androidx.appcompat.widget.AppCompatImageView>-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/textView"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="FAQ"-->
-    <!--            android:textColor="@color/colorBlack"-->
-    <!--            android:textSize="20sp"-->
-    <!--            android:textStyle="bold"-->
-    <!--            app:layout_constraintBottom_toBottomOf="@+id/toolbar"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="@+id/toolbar" />-->
-
-
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:id="@+id/constraintLayout62"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="40dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/toolbar">-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginStart="18dp"-->
-    <!--            android:layout_marginLeft="18dp"-->
-    <!--            android:text="Frequently Asked Questions"-->
-    <!--            android:textSize="16sp"-->
-    <!--            android:textStyle="bold"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintHorizontal_bias="0.0"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--        </TextView>-->
-
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <!--    <ScrollView-->
     <!--        android:layout_width="0dp"-->
