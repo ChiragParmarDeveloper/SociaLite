@@ -35,7 +35,6 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
