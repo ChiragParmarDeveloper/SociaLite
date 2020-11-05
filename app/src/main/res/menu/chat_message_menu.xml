@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/hide"
+        android:title="Hide" />
+
+    <item android:id="@+id/block"
+        android:title="Block" />
+
+    <item android:id="@+id/delete"
+        android:title="Delete" />
+
+    <item android:id="@+id/black_white"
+        android:title="Black &amp; White" />
+
+</menu>

@@ -3,14 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ap.SociaLite">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-
-
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -21,7 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.Notification"></activity>
+        <activity android:name=".Activity.HiddenMessageChatActivity"></activity>
+        <activity android:name=".Activity.MessageChatActivity" />
+        <activity android:name=".Activity.HideConnectionActivity" />
+        <activity android:name=".Activity.BlockedConnectionActivity" />
+        <activity android:name=".Activity.AddSpotlightActivity_2" />
+        <activity android:name=".Activity.AddSpotlightActivity" />
+        <activity android:name=".Activity.UserFriendSpotlightViewActivity" />
+        <activity android:name=".Activity.UserSpotlightViewActivity" />
+        <activity android:name=".Activity.SpotLightActivity" />
+        <activity android:name=".Activity.ViewAllContectActivity" />
+        <activity android:name=".Activity.Notification" />
         <activity android:name=".Activity.Report_Status" />
         <activity android:name=".Activity.Report" />
         <activity android:name=".Activity.Comment" />
@@ -73,5 +75,14 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
