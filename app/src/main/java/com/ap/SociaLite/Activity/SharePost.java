@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ap.SociaLite.R;
 
@@ -25,6 +26,9 @@ public class SharePost extends AppCompatActivity {
     @BindView(R.id.btn_save)
     Button btn_save;
 
+    @BindView(R.id.view_allcontect)
+    TextView view_allcontect;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,7 @@ public class SharePost extends AppCompatActivity {
         setContentView(R.layout.activity_share_post);
         ButterKnife.bind(this);
     }
-    @OnClick({R.id.img_cross,R.id.btn_next,R.id.btn_save})
+    @OnClick({R.id.img_cross,R.id.btn_next,R.id.btn_save,R.id.view_allcontect})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_cross:
@@ -42,6 +46,10 @@ public class SharePost extends AppCompatActivity {
 
             case R.id.btn_next:
                 startActivity(new Intent(SharePost.this,Post.class));
+                break;
+
+            case R.id.view_allcontect:
+                startActivity(new Intent(SharePost.this,ViewAllContectActivity.class));
                 break;
 
             case R.id.btn_save:

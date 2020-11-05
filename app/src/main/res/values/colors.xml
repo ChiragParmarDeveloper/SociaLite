@@ -14,6 +14,17 @@
 
 
     <color name="coloryellow">#FFF700</color>
+    <color name="colorred">#FF0000</color>
+    <color name="colorwhite">#FFFFFF</color>
+    <color name="colorgreen">#23B400</color>
+    <color name="colororange_text">#FF5924</color>
+    <color name="coloraqva">#00FFEE</color>
+    <color name="colorblue">#6075FF</color>
+    <color name="colorviolet">#BD00FF</color>
+    <color name="colorpink">#FF00CC</color>
+
+
+
 
 
 

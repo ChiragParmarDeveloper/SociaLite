@@ -1,66 +1,81 @@
 package com.ap.SociaLite.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ap.SociaLite.Activity.CameraActivity;
+import com.ap.SociaLite.Activity.SpotLightActivity;
+import com.ap.SociaLite.Adapter.CategoryPostAdapter;
+import com.ap.SociaLite.Adapter.MyNetworkAdapter;
 import com.ap.SociaLite.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NetworkFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class NetworkFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public NetworkFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NetworkFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static NetworkFragment newInstance(String param1, String param2) {
-        NetworkFragment fragment = new NetworkFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    @BindView(R.id.recycleview_network_post)
+    RecyclerView recycleview_network_post;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    ConstraintLayout network_image_constrain;
+    ConstraintLayout network_story_constrain;
+
+    private MyNetworkAdapter myNetworkAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name", "Name", "Name", "Name"));
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_network, container, false);
+        View view = inflater.inflate(R.layout.fragment_network, container, false);
+        ButterKnife.bind(this, view);
+
+        network_image_constrain = view.findViewById(R.id.network_image_constrain);
+        network_story_constrain = view.findViewById(R.id.network_story_constrain);
+
+
+        recycleview_network_post = view.findViewById(R.id.recycleview_network_post);
+        layoutManager = new GridLayoutManager(getActivity(), 1);
+        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        recycleview_network_post.setLayoutManager(layoutManager);
+        myNetworkAdapter = new MyNetworkAdapter(Name,getActivity());
+        recycleview_network_post.setAdapter(myNetworkAdapter);
+
+
+        network_image_constrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), CameraActivity.class));
+            }
+        });
+
+        network_story_constrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), SpotLightActivity.class));
+            }
+        });
+
+        return view;
     }
 }

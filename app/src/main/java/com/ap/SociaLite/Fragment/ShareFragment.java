@@ -1,66 +1,99 @@
 package com.ap.SociaLite.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
+import com.ap.SociaLite.Activity.BlockedConnectionActivity;
+import com.ap.SociaLite.Activity.HideConnectionActivity;
+import com.ap.SociaLite.Adapter.BlockedContactAdapter;
+import com.ap.SociaLite.Adapter.MyNetworkAdapter;
+import com.ap.SociaLite.Adapter.ShareCareAdapter;
 import com.ap.SociaLite.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShareFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ShareFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public ShareFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShareFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ShareFragment newInstance(String param1, String param2) {
-        ShareFragment fragment = new ShareFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    ConstraintLayout setting_messages_constraint;
+    ImageView set_setting_msg;
+    Button cancel,blocked_conversation,hide_conversation;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+
+    private ShareCareAdapter myshareCareAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    RecyclerView messages_recycler;
+
+    ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name", "Name", "Name", "Name"));
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_share, container, false);
+        View view = inflater.inflate(R.layout.fragment_share, container, false);
+
+
+
+        setting_messages_constraint = view.findViewById(R.id.setting_messages_constraint);
+        set_setting_msg = view.findViewById(R.id.set_setting_msg);
+        cancel = view.findViewById(R.id.cancel);
+        blocked_conversation = view.findViewById(R.id.blocked_conversation);
+        hide_conversation = view.findViewById(R.id.hide_conversation);
+
+        messages_recycler = view.findViewById(R.id.messages_recycler);
+        layoutManager = new GridLayoutManager(getActivity(), 1);
+        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        messages_recycler.setLayoutManager(layoutManager);
+        myshareCareAdapter = new ShareCareAdapter(Name,getActivity());
+        messages_recycler.setAdapter(myshareCareAdapter);
+
+        set_setting_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setting_messages_constraint.setVisibility(View.VISIBLE);
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setting_messages_constraint.setVisibility(View.GONE);
+            }
+        });
+
+        blocked_conversation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), BlockedConnectionActivity.class));
+            }
+        });
+
+        hide_conversation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), HideConnectionActivity.class));
+            }
+        });
+
+
+
+
+        return view;
     }
 }
