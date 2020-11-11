@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="3.00dp">
@@ -15,10 +16,10 @@
 
         <ImageView
             android:id="@+id/img_category"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="120dp"
             android:src="@drawable/dummyimage"
             android:scaleType="fitXY"/>
     </LinearLayout>

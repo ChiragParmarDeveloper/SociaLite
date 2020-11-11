@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ap.SociaLite.Activity.HiddedPostDetailActivity;
 import com.ap.SociaLite.R;
 
 import java.util.ArrayList;
@@ -39,6 +41,15 @@ public class HiddenPostAdapter extends RecyclerView.Adapter<HiddenPostAdapter.Ho
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         holder.img_category.setImageResource((Integer) images.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent hidden = new Intent(view.getContext(),HiddedPostDetailActivity.class);
+                view.getContext().startActivity(hidden);
+            }
+        });
+
     }
 
     @Override

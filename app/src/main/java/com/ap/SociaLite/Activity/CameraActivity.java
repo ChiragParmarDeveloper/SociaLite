@@ -25,11 +25,11 @@ import butterknife.OnClick;
 public class CameraActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.layout_album)
-    LinearLayout layout_album;
+    @BindView(R.id.layout_edit)
+    LinearLayout layout_edit;
 
-    @BindView(R.id.img_album)
-    ImageView img_album;
+    @BindView(R.id.img_edit)
+    ImageView img_edit;
 
     @BindView(R.id.layout_lock)
     LinearLayout layout_lock;
@@ -44,11 +44,11 @@ public class CameraActivity extends AppCompatActivity {
     ImageView img_clock;
 
 
-    @BindView(R.id.layout_shape)
-    LinearLayout layout_shape;
+    @BindView(R.id.layout_filter)
+    LinearLayout layout_filter;
 
-    @BindView(R.id.img_shape)
-    ImageView img_shape;
+    @BindView(R.id.img_filter)
+    ImageView img_filter;
 
     @BindView(R.id.layout_drama)
     LinearLayout layout_drama;
@@ -64,12 +64,6 @@ public class CameraActivity extends AppCompatActivity {
 
     @BindView(R.id.imageView)
     ImageView imageView;
-
-    @BindView(R.id.img_edit1)
-    ImageView img_edit1;
-
-    @BindView(R.id.img_edit2)
-    ImageView img_edit2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +88,7 @@ public class CameraActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.img_back,R.id.next,R.id.img_edit1,R.id.img_edit2,R.id.layout_album,R.id.layout_lock,R.id.layout_clock,R.id.layout_shape,R.id.layout_drama})
+    @OnClick({R.id.img_back,R.id.next,R.id.layout_edit,R.id.layout_lock,R.id.layout_clock,R.id.layout_filter,R.id.layout_drama})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -106,15 +100,9 @@ public class CameraActivity extends AppCompatActivity {
                 startActivity(new Intent(CameraActivity.this,Post.class));
                 break;
 
-            case R.id.img_edit1:
-                startActivity(new Intent(CameraActivity.this,Text.class));
-                break;
-            case R.id.img_edit2:
-                startActivity(new Intent(CameraActivity.this,Edit.class));
-                break;
 
-            case R.id.layout_album:
-                startActivity(new Intent(CameraActivity.this,TemplateBackground.class));
+            case R.id.layout_edit:
+                startActivity(new Intent(CameraActivity.this,Text.class));
                 break;
 
             case R.id.layout_lock:
@@ -125,8 +113,8 @@ public class CameraActivity extends AppCompatActivity {
                 startActivity(new Intent(CameraActivity.this,SchedulePost.class));
                 break;
 
-            case R.id.layout_shape:
-                startActivity(new Intent(CameraActivity.this,PropDrama.class));
+            case R.id.layout_filter:
+                startActivity(new Intent(CameraActivity.this,Edit.class));
                 break;
 
             case R.id.layout_drama:

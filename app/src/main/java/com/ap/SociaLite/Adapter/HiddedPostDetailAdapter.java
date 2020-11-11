@@ -26,12 +26,12 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHolder>{
+public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDetailAdapter.MyHolder> {
 
     ArrayList Name;
     Context context;
 
-    public MyNetworkAdapter(ArrayList name, Context context) {
+    public HiddedPostDetailAdapter(ArrayList name, Context context) {
         Name = name;
         this.context = context;
     }
@@ -40,7 +40,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_caterory_post_adapter, parent, false);
-        MyNetworkAdapter.MyHolder myHolder = new MyNetworkAdapter.MyHolder(view);
+        HiddedPostDetailAdapter.MyHolder myHolder = new HiddedPostDetailAdapter.MyHolder(view);
         return myHolder;
     }
 
@@ -117,7 +117,6 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
                 view.getContext().startActivity(in);
             }
         });
-
     }
 
     @Override
@@ -125,7 +124,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
         return Name.size();
     }
 
-    public static class MyHolder extends RecyclerView.ViewHolder {
+    public static class MyHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.txt_name)
         TextView txt_name;
@@ -149,8 +148,13 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             super(itemView);
             ButterKnife.bind(this, itemView);
 
+            txt_name = itemView.findViewById(R.id.txt_name);
+            img_popup = itemView.findViewById(R.id.img_popup);
+            constraint_popup = itemView.findViewById(R.id.constraint_popup);
+            layout_share = itemView.findViewById(R.id.layout_share);
+            layout_comment = itemView.findViewById(R.id.layout_comment);
+            layout_star = itemView.findViewById(R.id.layout_star);
+
         }
     }
-
-
 }
