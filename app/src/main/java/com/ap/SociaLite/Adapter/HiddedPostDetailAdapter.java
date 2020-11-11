@@ -56,7 +56,7 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
                 PopupMenu popup = new PopupMenu(context, holder.img_popup);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
-                        .inflate(R.menu.popup_menu, popup.getMenu());
+                        .inflate(R.menu.hidden_popup_menu, popup.getMenu());
 
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -64,13 +64,13 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
                     public boolean onMenuItemClick(MenuItem item) {
 
                         switch (item.getItemId()) {
-                            case R.id.hide:
-                                Toast.makeText(view.getContext(), "Clicked hide", Toast.LENGTH_SHORT).show();
+                            case R.id.unhide:
+                                Toast.makeText(view.getContext(), "Clicked Unhide", Toast.LENGTH_SHORT).show();
                                 //startActivity(new Intent(App.this, App_Main.class));
                                 break;
 
-                            case R.id.help:
-                                Toast.makeText(view.getContext(), "Clicked help", Toast.LENGTH_SHORT).show();
+                            case R.id.save:
+                                Toast.makeText(view.getContext(), "Clicked save", Toast.LENGTH_SHORT).show();
                                 break;
 
                             case R.id.report:
@@ -90,7 +90,6 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
                     }
                 });
                 popup.show(); //showing popup menu
-                //  context.startActivity(new Intent(context, LoginActivity.class));
             }
         });
 
@@ -117,6 +116,7 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
                 view.getContext().startActivity(in);
             }
         });
+
     }
 
     @Override
@@ -147,14 +147,8 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
-            txt_name = itemView.findViewById(R.id.txt_name);
-            img_popup = itemView.findViewById(R.id.img_popup);
-            constraint_popup = itemView.findViewById(R.id.constraint_popup);
-            layout_share = itemView.findViewById(R.id.layout_share);
-            layout_comment = itemView.findViewById(R.id.layout_comment);
-            layout_star = itemView.findViewById(R.id.layout_star);
-
         }
     }
+
+
 }

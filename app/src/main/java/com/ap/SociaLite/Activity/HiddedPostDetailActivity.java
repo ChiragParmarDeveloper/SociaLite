@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 public class HiddedPostDetailActivity extends AppCompatActivity {
 
-    RecyclerView rec_hidedpost_detail;
+    private RecyclerView rec_hidedpost_detail;
 
     ImageView img_back;
 
@@ -41,10 +41,10 @@ public class HiddedPostDetailActivity extends AppCompatActivity {
         });
 
         rec_hidedpost_detail = findViewById(R.id.rec_hidedpost_detail);
-        layoutManager = new GridLayoutManager(getApplicationContext(), 1);
+        layoutManager = new GridLayoutManager(HiddedPostDetailActivity.this, 1);
         //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         rec_hidedpost_detail.setLayoutManager(layoutManager);
-        hiddedPostDetailAdapter = new HiddedPostDetailAdapter(Name,getApplicationContext());
+        hiddedPostDetailAdapter = new HiddedPostDetailAdapter(Name,HiddedPostDetailActivity.this);
         rec_hidedpost_detail.setAdapter(hiddedPostDetailAdapter);
 
     }

@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.HiddedPostDetailActivity"></activity>
+        <activity android:name=".Activity.AddCardActivity"></activity>
+        <activity android:name=".Activity.PostNetwork" />
+        <activity android:name=".Activity.PostBusiness" />
+        <activity android:name=".Activity.HiddedPostDetailActivity" />
         <activity android:name=".Activity.ViewCardActivity" />
         <activity android:name=".Activity.HiddenMessageChatActivity" />
         <activity android:name=".Activity.MessageChatActivity" />
@@ -77,14 +80,14 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
