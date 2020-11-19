@@ -280,6 +280,7 @@ public class HomeActivity extends AppCompatActivity {
                 txt_logout.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_logout.setImageResource(R.drawable.ic_logout);
 
+                startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
             }
         });
 
