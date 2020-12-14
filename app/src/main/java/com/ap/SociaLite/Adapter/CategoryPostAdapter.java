@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,8 @@ import butterknife.ButterKnife;
 
 public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapter.MyHolder> {
 
+    Boolean click = true;
+    String rating = "";
 
     ArrayList Name;
     Context context;
@@ -109,9 +112,69 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             @Override
             public void onClick(View view) {
 
+                if(click == true)
+                {
+                    holder.rating_bar.setVisibility(View.VISIBLE);
+                    click = false;
+                }
+                else
+                {
+                    holder.rating_bar.setVisibility(View.GONE);
+                    click = true;
+                }
+
             }
         });
 
+        holder.rating_star1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rating = "1";
+                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                holder.rating_bar.setVisibility(View.GONE);
+                click = true;
+            }
+        });
+
+        holder.rating_star2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rating = "2";
+                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                holder.rating_bar.setVisibility(View.GONE);
+                click = true;
+            }
+        });
+
+        holder.rating_star3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rating = "3";
+                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                holder.rating_bar.setVisibility(View.GONE);
+                click = true;
+            }
+        });
+
+        holder.rating_star4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rating = "4";
+                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                holder.rating_bar.setVisibility(View.GONE);
+                click = true;
+            }
+        });
+
+        holder.rating_star5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rating = "5";
+                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                holder.rating_bar.setVisibility(View.GONE);
+                click = true;
+            }
+        });
 
         holder.layout_comment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +209,24 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
         @BindView(R.id.layout_star)
         LinearLayout layout_star;
+
+        @BindView(R.id.rating_bar)
+        CardView rating_bar;
+
+        @BindView(R.id.rating_star1)
+        ImageView rating_star1;
+
+        @BindView(R.id.rating_star2)
+        ImageView rating_star2;
+
+        @BindView(R.id.rating_star3)
+        ImageView rating_star3;
+
+        @BindView(R.id.rating_star4)
+        ImageView rating_star4;
+
+        @BindView(R.id.rating_star5)
+        ImageView rating_star5;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

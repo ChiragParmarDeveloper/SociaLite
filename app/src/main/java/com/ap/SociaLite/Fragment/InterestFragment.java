@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,11 +23,14 @@ import com.ap.SociaLite.Activity.InterestActivity;
 import com.ap.SociaLite.Activity.LoginActivity;
 import com.ap.SociaLite.Activity.OtpActivity;
 import com.ap.SociaLite.Adapter.CategoryListAdapter;
+import com.ap.SociaLite.Adapter.CategoryPostAdapter;
+import com.ap.SociaLite.Adapter.InterestPostAdapter;
 import com.ap.SociaLite.R;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,19 +42,27 @@ public class InterestFragment extends Fragment {
     @BindView(R.id.recyclerview_categorylist)
     RecyclerView recyclerview_categorylist;
 
-    @BindView(R.id.indicator)
-    CirclePageIndicator indicator;
-
     @BindView(R.id.camera)
     ImageView camera;
 
+    @BindView(R.id.intrest_post_recycler)
+    RecyclerView intrest_post_recycler;
+
+    @BindView(R.id.camera_constrain)
+    ConstraintLayout camera_constrain;
 
     CategoryListAdapter categoryListAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
 
-    ArrayList CategoryNames = new ArrayList<>(Arrays.asList("Photography", "Sports", "Photography", "Sports", "Photography"));
+    ArrayList CategoryNames = new ArrayList<>(Arrays.asList("Photography", "Sports", "Games", "Fun", "Laugh"));
     ArrayList CategoryImages = new ArrayList<>(Arrays.asList(R.drawable.photography, R.drawable.sport, R.drawable.photography, R.drawable.sport, R.drawable.photography));
+
+
+    private InterestPostAdapter interestPostAdapter;
+    private RecyclerView.LayoutManager layoutManager_post;
+
+    ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name", "Name", "Name", "Name"));
 
 
     @Override
@@ -59,7 +72,14 @@ public class InterestFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_interest, container, false);
         ButterKnife.bind(this, view);
 
-//
+        //-----------------------------for post----------------------------------------
+        intrest_post_recycler = view.findViewById(R.id.intrest_post_recycler);
+        layoutManager = new GridLayoutManager(getActivity(), 1);
+        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        intrest_post_recycler.setLayoutManager(layoutManager);
+        interestPostAdapter = new InterestPostAdapter(Name,getActivity());
+        intrest_post_recycler.setAdapter(interestPostAdapter);
+
 //        LinearSnapHelper snapHelper = new LinearSnapHelper();
 //        snapHelper.attachToRecyclerView(recyclerview_categorylist);
 
@@ -88,6 +108,9 @@ public class InterestFragment extends Fragment {
 
 
 
+
+        //----------------------------------------------for category------------------------------------------------
+//        Objects.requireNonNull(recyclerview_categorylist.getLayoutManager()).scrollToPosition(Integer.MAX_VALUE / 2);
         recyclerview_categorylist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
         // recycler_brand_icon.addItemDecoration(new CenterZoomLayoutManager());
         categoryListAdapter = new CategoryListAdapter(getActivity(), CategoryNames, CategoryImages);
@@ -103,12 +126,13 @@ public class InterestFragment extends Fragment {
         return view;
     }
 
-    @OnClick({R.id.camera})
+    @OnClick({R.id.camera_constrain})
     public void OnClick(View view) {
         switch (view.getId()) {
-            case R.id.camera:
+            case R.id.camera_constrain:
                 startActivity(new Intent(getActivity(), CameraActivity.class));
                 break;
+
         }
     }
 

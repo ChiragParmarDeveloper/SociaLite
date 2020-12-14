@@ -13,7 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.ProfileActivity"></activity>
+        <activity android:name=".Activity.SpotlightActivityForUser"></activity>
+        <activity android:name=".Activity.ProfileConnectionsActivity" />
+        <activity android:name=".Activity.ProfileConnectionActivity" />
+        <activity android:name=".Activity.EditProfileActivity" />
+        <activity android:name=".Activity.SchedulePostSettingActivity" />
+        <activity android:name=".Activity.SavedPostDetailActivity" />
+        <activity android:name=".Activity.SavedPostActivity" />
+        <activity android:name=".Activity.ProfileActivity" />
         <activity android:name=".Activity.AddCardActivity" />
         <activity android:name=".Activity.PostNetwork" />
         <activity android:name=".Activity.PostBusiness" />
@@ -81,14 +88,14 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

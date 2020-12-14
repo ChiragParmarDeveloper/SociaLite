@@ -21,7 +21,6 @@ import java.util.Arrays;
 public class SpotLightActivity extends AppCompatActivity {
 
     ImageView img_back;
-    ImageView add_spotlight;
     LinearLayout linearLayout_user_story;
 
     RecyclerView friends_spotlight;
@@ -37,7 +36,6 @@ public class SpotLightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spot_light);
 
         img_back = findViewById(R.id.img_back);
-        add_spotlight = findViewById(R.id.add_spotlight);
         linearLayout_user_story = findViewById(R.id.linearLayout_user_story);
 
         friends_spotlight = findViewById(R.id.friends_spotlight);
@@ -57,16 +55,20 @@ public class SpotLightActivity extends AppCompatActivity {
         linearLayout_user_story.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SpotLightActivity.this,UserSpotlightViewActivity.class));
+               // startActivity(new Intent(SpotLightActivity.this,UserSpotlightViewActivity.class));
+                startActivity(new Intent(SpotLightActivity.this,AddSpotlightActivity.class));
             }
         });
 
-        add_spotlight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent add = new Intent(SpotLightActivity.this,AddSpotlightActivity.class);
-                startActivity(add);
-            }
-        });
+
+
+
+//        add_spotlight.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent add = new Intent(SpotLightActivity.this,AddSpotlightActivity.class);
+//                startActivity(add);
+//            }
+//        });
     }
 }

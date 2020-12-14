@@ -424,10 +424,10 @@
                             android:layout_width="0dp"
                             android:layout_height="35dp"
                             android:layout_weight="1"
-                            android:background="@drawable/button_5dp_corner_rs"
+                            android:background="@drawable/border_rs"
                             android:text="Intrested"
                             android:textAllCaps="false"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="#263238"
                             android:textSize="15dp" />
 
                         <Button

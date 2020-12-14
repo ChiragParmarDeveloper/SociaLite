@@ -4,8 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,6 +41,9 @@ public class HomeActivity extends AppCompatActivity {
 
     @BindView(R.id.txt_category)
     TextView txt_category;
+
+    @BindView(R.id.txt_categorylist)
+    TextView txt_categorylist;
 
     @BindView(R.id.layout_interest)
     LinearLayout layout_interest;
@@ -88,6 +94,9 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.imgsearch)
     ImageView imgsearch;
 
+    @BindView(R.id.imgnotification)
+    ImageView imgnotification;
+
 
     ConstraintLayout category, Notification, Profile, help, faq, setting, logout;
     TextView txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
@@ -137,7 +146,39 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                CustomDialog();
+//                CustomDialog();
+                final Dialog dialog = new Dialog(HomeActivity.this);
+                dialog.setContentView(R.layout.custom_dailog);
+
+                Button yes, no;
+                TextView text;
+                text = dialog.findViewById(R.id.dailog_text);
+                yes = dialog.findViewById(R.id.dailog_yes);
+                no = dialog.findViewById(R.id.dailog_no);
+
+                dialog.setCancelable(false);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent logout = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        finish();
+                        dialog.dismiss();
+                    }
+                });
+
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
 
                 txt_logout.setTextColor(getResources().getColor(R.color.colorBlack));
                 img_logout.setImageResource(R.drawable.ic_logout_black);
@@ -355,6 +396,11 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.layout_category:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
 
+                txt_categorylist.setText("Dance and Singing");
+
+                imgsearch.setVisibility(View.VISIBLE);
+                imgnotification.setVisibility(View.GONE);
+
                 img_category.setImageResource(R.drawable.ic_img_category);
                 txt_category.setTextColor(getResources().getColor(R.color.colororange));
 
@@ -374,6 +420,11 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.layout_interest:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new InterestFragment()).commit();
 
+                txt_categorylist.setText("News & Politics");
+
+                imgsearch.setVisibility(View.VISIBLE);
+                imgnotification.setVisibility(View.GONE);
+
                 img_interest.setImageResource(R.drawable.interest_png);
                 txt_interest.setTextColor(getResources().getColor(R.color.colororange));
 
@@ -392,6 +443,12 @@ public class HomeActivity extends AppCompatActivity {
 
             case R.id.layout_network:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new NetworkFragment()).commit();
+
+                txt_categorylist.setText("My Network");
+
+                imgsearch.setVisibility(View.VISIBLE);
+                imgnotification.setVisibility(View.GONE);
+
                 img_network.setImageResource(R.drawable.network_png);
                 txt_network.setTextColor(getResources().getColor(R.color.colororange));
 
@@ -411,6 +468,12 @@ public class HomeActivity extends AppCompatActivity {
 
             case R.id.layout_share:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new ShareFragment()).commit();
+
+                txt_categorylist.setText("Share & Care");
+
+                imgsearch.setVisibility(View.GONE);
+                imgnotification.setVisibility(View.VISIBLE);
+
                 img_share.setImageResource(R.drawable.share_png);
                 txt_share.setTextColor(getResources().getColor(R.color.colororange));
 
@@ -430,6 +493,12 @@ public class HomeActivity extends AppCompatActivity {
 
             case R.id.layout_business:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new BusinessFragment()).commit();
+
+                txt_categorylist.setText("Business Interaction");
+
+                imgsearch.setVisibility(View.VISIBLE);
+                imgnotification.setVisibility(View.GONE);
+
                 img_business.setImageResource(R.drawable.business_png);
                 txt_business.setTextColor(getResources().getColor(R.color.colororange));
 
@@ -465,25 +534,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void CustomDialog() {
 
-        final Dialog dialog = new Dialog(context);
-
-        dialog.setContentView(R.layout.customdialog);
-        dialog.setTitle("Android Custom Dialog Box");
-
-        // TextView txt = (TextView) dialog.findViewById(R.id.txt);
-
-        //  txt.setText("Logout");
-
-        //   Button dialogButton = (Button) dialog.findViewById(R.id.dialogButton);
-
-//        dialogButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-
-        dialog.show();
     }
+
 
 }

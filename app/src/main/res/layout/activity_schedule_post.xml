@@ -153,129 +153,93 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout52"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#263238"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout46">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout46" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#263238"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:id="@+id/linear_text_date_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view4">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="Date"
+                    android:textSize="18dp" />
 
-
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:id="@+id/constraintLayout53"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/constraintLayout52">-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Share"-->
-<!--                    android:textSize="17sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:id="@+id/constraintLayout54"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="65dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/constraintLayout53">-->
-
-<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="0dp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent">-->
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="Time"
+                    android:textSize="18dp" />
 
 
-<!--                    <CheckBox-->
-<!--                        android:id="@+id/checkBox"-->
-<!--                        android:layout_width="40dp"-->
-<!--                        android:layout_height="40dp"-->
-<!--                        android:layout_marginStart="16dp"-->
-<!--                        android:background="?android:attr/listChoiceIndicatorMultiple"-->
-<!--                        android:button="@null"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+            </LinearLayout>
 
 
-<!--                    <com.mikhaellopez.circularimageview.CircularImageView-->
-<!--                        android:id="@+id/circularImageView2"-->
-<!--                        android:layout_width="45dp"-->
-<!--                        android:layout_height="45dp"-->
-<!--                        android:layout_marginStart="7dp"-->
-<!--                        android:src="@drawable/dummy1"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintStart_toEndOf="@+id/checkBox"-->
-<!--                        app:layout_constraintTop_toTopOf="parent">-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linear_text_date_time">
 
-<!--                    </com.mikhaellopez.circularimageview.CircularImageView>-->
-
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="16dp"-->
-<!--                        android:text="loreum ipsum"-->
-<!--                        android:textSize="14sp"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintHorizontal_bias="0.0"-->
-<!--                        app:layout_constraintStart_toEndOf="@+id/circularImageView2"-->
-<!--                        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+                <Button
+                    android:id="@+id/btn_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:text="Date"
+                    android:textSize="18dp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/button_style"
+                    android:textColor="@color/colorWhite"/>
 
 
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+                <Button
+                    android:id="@+id/btn_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:text="Time"
+                    android:textSize="18dp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/button_style"
+                    android:textColor="@color/colorWhite"/>
 
 
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/constraintLayout54"-->
-<!--                app:layout_constraintVertical_bias="0.0">-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="80dp"-->
-<!--                    android:text="View All Contacts"-->
-<!--                    android:textSize="14sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="0.0"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+            </LinearLayout>
 
 
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
     </ScrollView>
 
@@ -312,10 +276,11 @@
                     android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/btn_save"
+                    android:background="@drawable/button_style"
                     android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="16dp" />
+                    android:text="Save"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -332,10 +297,11 @@
                     android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/btn_next"
+                    android:background="@drawable/button_style"
                     android:textAllCaps="false"
+                    android:text="Next"
                     android:textColor="@android:color/white"
-                    android:textSize="16dp" />
+                    android:textSize="20dp" />
 
             </LinearLayout>
         </LinearLayout>

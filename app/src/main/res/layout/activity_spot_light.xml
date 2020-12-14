@@ -41,29 +41,132 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
+        android:id="@+id/imageView16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
+        android:scaleType="fitXY"
         android:src="@drawable/ic_spotlight_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:scaleType="fitXY"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_spotlight_circle"
-        android:scaleType="fitXY"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout63"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView16">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/img1"
+                android:scaleType="fitXY" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="25dp"
+            app:cardBackgroundColor="#99000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout55"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="9dp"
+                    android:textSize="15dp"
+                    android:background="@null"
+                    android:singleLine="false"
+                    android:hint="Enter Message here.."
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/view"
+                    app:layout_constraintStart_toEndOf="@+id/ing_camera"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/img_send"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="0.45"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_send_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ing_camera"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_chat_camera"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/img_send"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout63"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +174,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout_user_story"
-            android:layout_width="75dp"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:orientation="vertical"
@@ -82,8 +185,8 @@
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/user_profile"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/dummy1">
 
@@ -101,24 +204,14 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/add_spotlight"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginBottom="12dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_spotlight_addstory"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <View
             android:id="@+id/view3"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:background="#EE6851"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/linearLayout_user_story"
@@ -128,6 +221,7 @@
             android:id="@+id/friends_spotlight"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

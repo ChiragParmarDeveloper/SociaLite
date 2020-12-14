@@ -143,6 +143,8 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             public void onClick(View view) {
                 rating = "1";
                 Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                holder.rating_bar.setVisibility(View.GONE);
+                click = true;
             }
         });
 
@@ -151,6 +153,8 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             public void onClick(View view) {
                 rating = "2";
                 Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                holder.rating_bar.setVisibility(View.GONE);
+                click = true;
             }
         });
 
@@ -159,6 +163,8 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             public void onClick(View view) {
                 rating = "3";
                 Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                holder.rating_bar.setVisibility(View.GONE);
+                click = true;
             }
         });
 
@@ -167,6 +173,8 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             public void onClick(View view) {
                 rating = "4";
                 Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                holder.rating_bar.setVisibility(View.GONE);
+                click = true;
             }
         });
 
@@ -175,6 +183,8 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             public void onClick(View view) {
                 rating = "5";
                 Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                holder.rating_bar.setVisibility(View.GONE);
+                click = true;
             }
         });
 

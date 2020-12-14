@@ -45,14 +45,17 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 
-        holder.txt_iconname.setText((CharSequence) CategoryNames.get(position));
-        holder.img_category.setImageResource((Integer) CategoryImages.get(position));
+        int realposition = position % CategoryNames.size();
+
+        holder.txt_iconname.setText((CharSequence) CategoryNames.get(realposition));
+        holder.img_category.setImageResource((Integer) CategoryImages.get(realposition));
 
     }
 
     @Override
     public int getItemCount() {
-        return CategoryNames.size();
+//        return CategoryNames.size();
+        return Integer.MAX_VALUE;
     }
 
     public class Holder extends RecyclerView.ViewHolder {

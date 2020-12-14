@@ -30,6 +30,12 @@ public class Setting extends AppCompatActivity {
     @BindView(R.id.constraintLayout42)
     ConstraintLayout constraintLayout42;
 
+    @BindView(R.id.constraintLayout_saved)
+    ConstraintLayout constraintLayout_saved;
+
+    @BindView(R.id.constraintLayout_schedulepost)
+    ConstraintLayout constraintLayout_schedulepost;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +60,7 @@ public class Setting extends AppCompatActivity {
         });
 
     }
-    @OnClick({R.id.img_back,R.id.constraintLayout42})
+    @OnClick({R.id.img_back,R.id.constraintLayout42, R.id.constraintLayout_saved, R.id.constraintLayout_schedulepost})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -63,6 +69,14 @@ public class Setting extends AppCompatActivity {
 
             case R.id.constraintLayout42:
                 startActivity(new Intent(Setting.this,Privacy.class));
+                break;
+
+            case R.id.constraintLayout_saved:
+                startActivity(new Intent(Setting.this,SavedPostActivity.class));
+                break;
+
+            case R.id.constraintLayout_schedulepost:
+                startActivity(new Intent(Setting.this,SchedulePostSettingActivity.class));
                 break;
         }
     }
