@@ -90,9 +90,9 @@
                                 app:civ_border_color="#EEEEEE"
                                 app:civ_border_width="1dp"
                                 app:civ_shadow="true"
-                                app:civ_shadow_radius="7dp"
                                 app:civ_shadow_color="#8BC34A"
                                 app:civ_shadow_gravity="center"
+                                app:civ_shadow_radius="7dp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -139,12 +139,13 @@
                                 android:layout_marginStart="8dp"
                                 android:layout_marginLeft="8dp"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/ic_user"
+                                android:src="@drawable/ic_user_orange"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <EditText
+                                android:id="@+id/user_name"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
                                 android:layout_marginStart="8dp"
@@ -152,9 +153,10 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@null"
-                                android:hint="UserName"
+                                android:hint="@string/UserName"
                                 android:maxLines="1"
                                 android:singleLine="true"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/img_user"
@@ -185,6 +187,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <EditText
+                                android:id="@+id/email"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
                                 android:layout_marginStart="8dp"
@@ -192,9 +195,10 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@null"
-                                android:hint="Email"
+                                android:hint="@string/Email"
                                 android:maxLines="1"
                                 android:singleLine="true"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/img_mail"
@@ -225,22 +229,39 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
+                            <com.hbb20.CountryCodePicker
+                                android:id="@+id/code_picker"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:ccp_autoDetectCountry="true"
+                                app:ccp_showFlag="false"
+                                app:ccp_textSize="14sp"
+                                app:ccp_showFullName="false"
+                                app:ccp_showNameCode="false"
+                                app:ccp_showPhoneCode="true"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/img_phon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
                             <EditText
+                                android:id="@+id/phone_no"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginLeft="8dp"
+                                android:layout_marginStart="5dp"
                                 android:layout_marginEnd="8dp"
-                                android:layout_marginRight="8dp"
                                 android:background="@null"
-                                android:hint="Mobile"
+                                android:hint="@string/Mobile"
                                 android:inputType="number"
                                 android:maxLength="10"
                                 android:maxLines="1"
                                 android:singleLine="true"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/img_phon"
+                                app:layout_constraintStart_toEndOf="@+id/code_picker"
                                 app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -267,6 +288,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <EditText
+                                android:id="@+id/bio"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
                                 android:layout_marginStart="8dp"
@@ -274,9 +296,10 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@null"
-                                android:hint="Bio"
+                                android:hint="@string/Bio"
                                 android:maxLines="1"
                                 android:singleLine="true"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/img_bio"
@@ -306,7 +329,8 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <EditText
+                            <Button
+                                android:id="@+id/dob"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
                                 android:layout_marginStart="8dp"
@@ -314,10 +338,12 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@null"
-                                android:hint="D.O.B"
+                                android:hint="@string/D.O.B"
                                 android:inputType="date"
                                 android:maxLines="1"
                                 android:singleLine="true"
+                                android:textAlignment="textStart"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/img_birthday"
@@ -349,6 +375,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <EditText
+                                android:id="@+id/location"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
                                 android:layout_marginStart="8dp"
@@ -356,9 +383,10 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@null"
-                                android:hint="Location"
+                                android:hint="@string/Location"
                                 android:maxLines="1"
                                 android:singleLine="true"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/img_location"
@@ -388,23 +416,24 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <EditText
-                                android:id="@+id/editText"
+                                android:id="@+id/password"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
                                 android:layout_marginStart="8dp"
-                                android:layout_marginLeft="8dp"
                                 android:layout_marginEnd="8dp"
-                                android:layout_marginRight="8dp"
                                 android:background="@null"
-                                android:hint="Password"
+                                android:hint="@string/Password"
                                 android:inputType="textPassword"
                                 android:maxLength="8"
                                 android:maxLines="1"
                                 android:singleLine="true"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
                                 app:layout_constraintStart_toEndOf="@+id/img_pwd"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.4" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -422,7 +451,11 @@
                                 android:id="@+id/btn_register"
                                 android:layout_width="130dp"
                                 android:layout_height="45dp"
-                                android:background="@drawable/btn_register"
+                                android:background="@drawable/button_style"
+                                android:text="Register"
+                                android:textAllCaps="false"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
