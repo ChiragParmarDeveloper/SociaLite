@@ -75,8 +75,8 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
     @BindView(R.id.password)
     EditText password;
 
-    @BindView(R.id.code_picker)
-    CountryCodePicker code_picker;
+//    @BindView(R.id.code_picker)
+//    CountryCodePicker code_picker;
 
     private GoogleApiClient mGoogleApiClient;
     private static final int RESOLVE_HINT = 1000;
@@ -135,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
      //   if (new RegisterPresenter(this, this).validate(user_name, email, phone_no, bio, dob, location, password)) {
 
             Intent in = new Intent(RegisterActivity.this, RegistrationVerificationActivity.class);
-            in.putExtra("country_code", code_picker.getTextView_selectedCountry().getText().toString());
+            in.putExtra("phone_no", phone_no.getText().toString().trim());
             startActivity(in);
 
      //   }

@@ -229,39 +229,21 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <com.hbb20.CountryCodePicker
-                                android:id="@+id/code_picker"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="5dp"
-                                app:ccp_autoDetectCountry="true"
-                                app:ccp_showFlag="false"
-                                app:ccp_textSize="14sp"
-                                app:ccp_showFullName="false"
-                                app:ccp_showNameCode="false"
-                                app:ccp_showPhoneCode="true"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/img_phon"
-                                app:layout_constraintTop_toTopOf="parent" />
-
                             <EditText
                                 android:id="@+id/phone_no"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
-                                android:layout_marginStart="5dp"
+                                android:layout_marginStart="8dp"
                                 android:layout_marginEnd="8dp"
                                 android:background="@null"
                                 android:hint="@string/Mobile"
                                 android:inputType="number"
-                                android:maxLength="10"
                                 android:maxLines="1"
                                 android:singleLine="true"
                                 android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/code_picker"
+                                app:layout_constraintStart_toEndOf="@+id/img_phon"
                                 app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -488,7 +470,7 @@
                                     android:paddingBottom="10dp"
                                     android:text="Already have an account? "
                                     android:textColor="@color/colorBlack"
-                                    android:textSize="14sp" />
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/txt_login"
@@ -500,7 +482,7 @@
                                     android:paddingTop="10dp"
                                     android:paddingBottom="10dp"
                                     android:text="Login"
-                                    android:textSize="14sp"
+                                    android:textSize="16sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
