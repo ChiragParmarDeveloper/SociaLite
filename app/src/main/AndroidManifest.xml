@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ap.SociaLite">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -13,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.SpotlightActivityForUser"></activity>
+        <activity android:name=".Activity.SpotlightActivityForUser"/>
         <activity android:name=".Activity.ProfileConnectionsActivity" />
         <activity android:name=".Activity.ProfileConnectionActivity" />
         <activity android:name=".Activity.EditProfileActivity" />

@@ -229,11 +229,36 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
+                            <com.hbb20.CountryCodePicker
+                                android:id="@+id/code_picker"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                app:ccp_autoDetectCountry="true"
+                                app:ccp_showArrow="false"
+                                app:ccp_showFlag="false"
+                                app:ccp_showNameCode="false"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <TextView
+                                android:id="@+id/txt_code"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text=""
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/img_phon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
                             <EditText
                                 android:id="@+id/phone_no"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
-                                android:layout_marginStart="8dp"
+                                android:layout_marginStart="5dp"
                                 android:layout_marginEnd="8dp"
                                 android:background="@null"
                                 android:hint="@string/Mobile"
@@ -243,7 +268,7 @@
                                 android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/img_phon"
+                                app:layout_constraintStart_toEndOf="@+id/txt_code"
                                 app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ap.SociaLite.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +24,8 @@ public class OtpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
         ButterKnife.bind(this);
+
+
     }
     @OnClick({R.id.btn_submit})
     public void OnClick(View view) {

@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Activity.LoginActivity">
 
-    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -83,21 +79,6 @@
                                 app:layout_constraintVertical_bias="0.0" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-                        <!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
-                        <!--                            android:id="@+id/constraintLayout7"-->
-                        <!--                            android:layout_width="0dp"-->
-                        <!--                            android:layout_height="0dp"-->
-                        <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-                        <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--                            app:layout_constraintHorizontal_bias="0.0"-->
-                        <!--                            app:layout_constraintStart_toStartOf="parent"-->
-                        <!--                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"-->
-                        <!--                            app:layout_constraintVertical_bias="0.0">-->
-
-                        <!--                          -->
-                        <!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/constraintLayout9"
                             android:layout_width="0dp"
@@ -142,7 +123,6 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
                             <EditText
                                 android:id="@+id/edt_email"
                                 android:layout_width="0dp"
@@ -154,6 +134,7 @@
                                 android:background="@null"
                                 android:hint="@string/edittext_email"
                                 android:maxLines="1"
+                                android:textSize="14sp"
                                 android:singleLine="true"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -184,6 +165,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <EditText
+                                android:id="@+id/password"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
                                 android:layout_marginStart="8dp"
@@ -191,7 +173,9 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@null"
+                                android:textSize="14sp"
                                 android:hint="@string/edittext_pwd"
+                                android:inputType="textPassword"
                                 android:maxLines="1"
                                 android:singleLine="true"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -216,7 +200,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Remember Me"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/txt_forgot"
                                 app:layout_constraintHorizontal_bias="0.0"
@@ -230,7 +214,7 @@
                                 android:layout_marginEnd="16dp"
                                 android:layout_marginRight="16dp"
                                 android:text="Forgot Password ?"
-                                android:textSize="10sp"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -254,7 +238,11 @@
                                 android:id="@+id/btn_login"
                                 android:layout_width="115dp"
                                 android:layout_height="45dp"
-                                android:background="@drawable/btn_login"
+                                android:background="@drawable/button_style"
+                                android:text="Login"
+                                android:textAllCaps="false"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -286,14 +274,14 @@
                                     android:layout_height="wrap_content"
                                     android:text="Don't have an account?"
                                     android:textColor="@color/colorBlack"
-                                    android:textSize="14sp" />
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/txt_Register"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text=" Register"
-                                    android:textSize="14sp"
+                                    android:textSize="16sp"
                                     android:textStyle="bold" />
 
                             </LinearLayout>

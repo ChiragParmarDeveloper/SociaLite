@@ -25,32 +25,41 @@ public class RegisterPresenter implements RegisterContract {
         if (user_name.getText().toString().isEmpty()) {
             user_name.setError("Please enter username");
             return false;
-        }        if (email.getText().toString().isEmpty()) {
+        }
+        if (email.getText().toString().isEmpty()) {
             email.setError("Please enter email");
             return false;
-        }        if (!AppUtils.isEmailValid(AppUtils.getText(email))) {
+        }
+        if (!AppUtils.isEmailValid(AppUtils.getText(email))) {
             email.setError("Please enter valid email");
             return false;
-        }        if (phone_no.getText().toString().isEmpty()) {
+        }
+        if (phone_no.getText().toString().isEmpty()) {
             phone_no.setError("Please enter phone number");
             return false;
-        }        if (!AppUtils.isValidMobile(AppUtils.getText(phone_no))) {
+        }
+        if (!AppUtils.isValidMobile(AppUtils.getText(phone_no))) {
             phone_no.setError("Please enter valid phone number");
             return false;
-        }        if (bio.getText().toString().isEmpty()) {
+        }
+        if (bio.getText().toString().isEmpty()) {
             bio.setError("Please enter bio");
             return false;
-        }        if (dob.getText().toString().isEmpty()) {
+        }
+        if (dob.getText().toString().isEmpty()) {
             dob.setError("Please enter valid dob");
             return false;
         } else {
             dob.setError(null);
-        }        if (location.getText().toString().isEmpty()) {
+        }
+        if (location.getText().toString().isEmpty()) {
             location.setError("Please enter location");
             return false;
-        }        if (password.getText().toString().isEmpty()) {
+        }
+        if (password.getText().toString().isEmpty()) {
             password.setError("Please enter password");
             return false;
-        }        return true;
+        }
+        return true;
     }
 }

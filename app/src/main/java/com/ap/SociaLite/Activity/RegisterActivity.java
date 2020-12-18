@@ -3,19 +3,16 @@ package com.ap.SociaLite.Activity;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-         GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener {
 
     @BindView(R.id.btn_img)
     Button btn_img;
@@ -75,8 +72,12 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
     @BindView(R.id.password)
     EditText password;
 
-//    @BindView(R.id.code_picker)
-//    CountryCodePicker code_picker;
+    @BindView(R.id.code_picker)
+    CountryCodePicker code_picker;
+
+    @BindView(R.id.txt_code)
+    TextView txt_code;
+
 
     private GoogleApiClient mGoogleApiClient;
     private static final int RESOLVE_HINT = 1000;
@@ -90,7 +91,6 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
 
-
         //set google api client for hint request
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -98,7 +98,8 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
                 .addApi(Auth.CREDENTIALS_API)
                 .build();
 
-
+        txt_code.setText(code_picker.getTextView_selectedCountry().getText().toString().trim());
+        getHintPhoneNumber();
 
     }
 
@@ -115,33 +116,20 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //Result if we want hint number
-        if (requestCode == RESOLVE_HINT) {
-            if (resultCode == Activity.RESULT_OK) {
-
-                Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
-                // credential.getId();  <-- will need to process phone number string
-                phone_no.setText(credential.getId());
-            }
-        }
-    }
 
 
 
     private void Register() {
-     //   if (new RegisterPresenter(this, this).validate(user_name, email, phone_no, bio, dob, location, password)) {
+        if (new RegisterPresenter(this, this).validate(user_name, email, phone_no, bio, dob, location, password)) {
 
             Intent in = new Intent(RegisterActivity.this, RegistrationVerificationActivity.class);
+            in.putExtra("country_code", code_picker.getTextView_selectedCountry().getText().toString().trim());
             in.putExtra("phone_no", phone_no.getText().toString().trim());
             startActivity(in);
-
-     //   }
+        }
     }
 
-    @OnClick({R.id.btn_img, R.id.btn_register, R.id.txt_login, R.id.dob,R.id.phone_no})
+    @OnClick({R.id.btn_img, R.id.btn_register, R.id.txt_login, R.id.dob, R.id.phone_no})
     public void OnClick(View view) {
         switch (view.getId()) {
 
@@ -156,6 +144,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
             case R.id.txt_login:
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 break;
+
             case R.id.dob:
                 DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -166,16 +155,10 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
                 break;
 
             case R.id.phone_no:
-                getHintPhoneNumber();
+                // getHintPhoneNumber();
                 break;
-
-
-
-
         }
     }
-
-
 
 
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -195,7 +178,6 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         dob.setText(sdf.format(myCalendar.getTime()));
     }
-
 
     private void openGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -217,12 +199,37 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
 
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-//            imageUri = data.getData();
-//            upload_img.setImageURI(imageUri);
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //Result if we want hint number
+        if (requestCode == RESOLVE_HINT) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
+                if (credential.getId().startsWith("+")) {
+
+                    if (credential.getId().length() == 12) {
+                        phone_no.setText(credential.getId().substring(3));
+                    } else if (credential.getId().length() == 13) {
+                        phone_no.setText(credential.getId().substring(3));
+                    } else if (credential.getId().length() == 14) {
+                        phone_no.setText(credential.getId().substring(4));
+                    }
+                } else {
+                    phone_no.setText(credential.getId());
+                }
+            }
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            imageUri = data.getData();
+            upload_img.setImageURI(imageUri);
+        }
+        else
+        {
+
+        }
+    }
+
 }
