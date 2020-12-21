@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -78,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
     @BindView(R.id.txt_code)
     TextView txt_code;
 
-
+    String profile_pic;
     private GoogleApiClient mGoogleApiClient;
     private static final int RESOLVE_HINT = 1000;
     private static final int PICK_IMAGE = 100;
@@ -116,20 +118,26 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
         }
     }
 
-
-
-
     private void Register() {
         if (new RegisterPresenter(this, this).validate(user_name, email, phone_no, bio, dob, location, password)) {
 
             Intent in = new Intent(RegisterActivity.this, RegistrationVerificationActivity.class);
+
+            in.putExtra("profile_pic", profile_pic);
+            in.putExtra("user_name", user_name.getText().toString().trim());
+            in.putExtra("email", email.getText().toString().trim());
             in.putExtra("country_code", code_picker.getTextView_selectedCountry().getText().toString().trim());
             in.putExtra("phone_no", phone_no.getText().toString().trim());
+            in.putExtra("bio", bio.getText().toString().trim());
+            in.putExtra("dob", dob.getText().toString().trim());
+            in.putExtra("location", location.getText().toString().trim());
+            in.putExtra("password", password.getText().toString().trim());
+
             startActivity(in);
         }
     }
 
-    @OnClick({R.id.btn_img, R.id.btn_register, R.id.txt_login, R.id.dob, R.id.phone_no})
+    @OnClick({R.id.btn_img, R.id.btn_register, R.id.txt_login, R.id.dob})
     public void OnClick(View view) {
         switch (view.getId()) {
 
@@ -152,10 +160,6 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
 
                 datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                 datePickerDialog.show();
-                break;
-
-            case R.id.phone_no:
-                // getHintPhoneNumber();
                 break;
         }
     }
@@ -220,16 +224,26 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
                     phone_no.setText(credential.getId());
                 }
             }
-        }
-
-        else if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+        } else if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
             upload_img.setImageURI(imageUri);
-        }
-        else
-        {
+            profile_pic = getRealPathFromURI(imageUri);
+
+            Toast.makeText(getApplicationContext(), profile_pic, Toast.LENGTH_SHORT).show();
+        } else {
 
         }
     }
+
+    public String getRealPathFromURI(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        @SuppressWarnings("deprecation")
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
 
 }

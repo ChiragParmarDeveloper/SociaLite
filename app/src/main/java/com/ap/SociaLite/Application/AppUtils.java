@@ -1,6 +1,10 @@
 package com.ap.SociaLite.Application;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,8 +37,6 @@ public class AppUtils {
         return textView.getText().toString().trim();
     }
 
-
-
     public static RequestBody getRequestBody(String value) {
         return RequestBody.create(MediaType.parse("multipart/form-data"), value);
     }
@@ -55,4 +57,9 @@ public class AppUtils {
         return check;
     }
 
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 }

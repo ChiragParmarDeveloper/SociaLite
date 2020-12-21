@@ -54,6 +54,8 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
     implementation 'com.hbb20:ccp:2.4.2'//country_code picker
 
     implementation 'com.google.android.gms:play-services-auth:19.0.0'

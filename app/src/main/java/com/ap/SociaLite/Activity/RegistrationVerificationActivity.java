@@ -2,6 +2,7 @@ package com.ap.SociaLite.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
     @BindView(R.id.txt_no)
     TextView txt_no;
     public boolean isVarificationCompleted = false;
-    String phoneNumber, otp,country_code,phone;
+    String profile_pic,user_name,email,bio,dob,location,password,phoneNumber, otp,country_code,phone;
     FirebaseAuth auth;
     private String verificationCode;
     private PhoneAuthProvider.ForceResendingToken token;
@@ -55,8 +56,26 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         auth = FirebaseAuth.getInstance();
 
-        phoneNumber = getIntent().getStringExtra("phone_no");
+        profile_pic = getIntent().getStringExtra("profile_pic");
+        user_name = getIntent().getStringExtra("user_name");
+        email = getIntent().getStringExtra("email");
         country_code = getIntent().getStringExtra("country_code");
+        phoneNumber = getIntent().getStringExtra("phone_no");
+        bio = getIntent().getStringExtra("bio");
+        dob = getIntent().getStringExtra("dob");
+        location = getIntent().getStringExtra("location");
+        password = getIntent().getStringExtra("password");
+
+        Log.d("profile_pic", profile_pic);
+        Log.d("user_name", user_name);
+        Log.d("email", email);
+        Log.d("country_code", country_code);
+        Log.d("phoneNumber", phoneNumber);
+        Log.d("bio", bio);
+        Log.d("dob", dob);
+        Log.d("location", location);
+        Log.d("password", password);
+
         String mask = phoneNumber.replaceAll("\\w(?=\\w{4})", "X");
 
         String code = country_code + " " + mask;

@@ -59,8 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.btn_login:
 
                 if (new LoginPresenter(this, this).validate(edt_email, password)) {
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                    finish();
+                    new LoginPresenter(this, this).login(edt_email.getText().toString().trim(), password.getText().toString().trim());
                 }
                 break;
 

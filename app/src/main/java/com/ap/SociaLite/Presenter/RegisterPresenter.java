@@ -18,7 +18,6 @@ public class RegisterPresenter implements RegisterContract {
         this.registerActivity = registerActivity;
     }
 
-
     @Override
     public boolean validate(EditText user_name, EditText email, EditText phone_no, EditText bio, Button dob, EditText location, EditText password) {
 
@@ -40,10 +39,6 @@ public class RegisterPresenter implements RegisterContract {
         }
         if (!AppUtils.isValidMobile(AppUtils.getText(phone_no))) {
             phone_no.setError("Please enter valid phone number");
-            return false;
-        }
-        if (bio.getText().toString().isEmpty()) {
-            bio.setError("Please enter bio");
             return false;
         }
         if (dob.getText().toString().isEmpty()) {

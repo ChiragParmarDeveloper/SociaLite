@@ -7,5 +7,6 @@ public interface LoginContract {
 
     boolean validate(EditText edt_email, EditText password);
 
+    void login(String edt_email, String password);
 
 }
