@@ -66,15 +66,15 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
         location = getIntent().getStringExtra("location");
         password = getIntent().getStringExtra("password");
 
-        Log.d("profile_pic", profile_pic);
-        Log.d("user_name", user_name);
-        Log.d("email", email);
-        Log.d("country_code", country_code);
-        Log.d("phoneNumber", phoneNumber);
-        Log.d("bio", bio);
-        Log.d("dob", dob);
-        Log.d("location", location);
-        Log.d("password", password);
+//        Log.d("profile_pic", profile_pic);
+//        Log.d("user_name", user_name);
+//        Log.d("email", email);
+//        Log.d("country_code", country_code);
+//        Log.d("phoneNumber", phoneNumber);
+//        Log.d("bio", bio);
+//        Log.d("dob", dob);
+//        Log.d("location", location);
+//        Log.d("password", password);
 
         String mask = phoneNumber.replaceAll("\\w(?=\\w{4})", "X");
 
