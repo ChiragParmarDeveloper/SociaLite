@@ -151,6 +151,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
 
             case R.id.txt_login:
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
                 break;
 
             case R.id.dob:

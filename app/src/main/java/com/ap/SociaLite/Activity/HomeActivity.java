@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Fragment.BusinessFragment;
 import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Fragment.InterestFragment;
@@ -25,6 +27,8 @@ import com.ap.SociaLite.Fragment.NetworkFragment;
 import com.ap.SociaLite.Fragment.ShareFragment;
 import com.ap.SociaLite.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,12 +107,14 @@ public class HomeActivity extends AppCompatActivity {
     ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout;
 
     final Context context = this;
-
+    FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+
+        Log.d("token_Socialite", FirebaseInstanceId.getInstance().getToken());
 
         getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
         View headerView = navigation_view.getHeaderView(0);
@@ -165,10 +171,12 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
+                        new Session(HomeActivity.this).removeuser();
                         Intent logout = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivity(logout);
                         finish();
                         dialog.dismiss();
+
                     }
                 });
 
