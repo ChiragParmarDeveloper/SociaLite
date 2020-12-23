@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.password)
     EditText password;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
