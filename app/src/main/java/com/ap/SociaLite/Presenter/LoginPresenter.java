@@ -2,13 +2,13 @@ package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ap.SociaLite.Activity.HomeActivity;
 import com.ap.SociaLite.Activity.LoginActivity;
 import com.ap.SociaLite.Application.RService;
+import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.LoginContract;
 
@@ -45,21 +45,26 @@ public class LoginPresenter implements LoginContract {
         new RService.api().call(mContext).login(edt_email, password).enqueue(new Callback<json>() {
             @Override
             public void onResponse(Call<json> call, Response<json> response) {
-                if (response.body().message.equals("Login Successfully")) {
-                    loginActivity.startActivity(new Intent(mContext, HomeActivity.class));
-                    loginActivity.finish();
+
+                if (response.body().status.equals("1")) {
+                    if (response.body().user_details != null) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+
+                        Session session = new Session(mContext);
+                        Intent in = new Intent(mContext, HomeActivity.class);
+                        session.setEmail_or_mobile(loginActivity.edt_email.getText().toString().trim());
+                        mContext.startActivity(in);
+                        loginActivity.finish();
+                    }
                 } else {
-                    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<json> call, Throwable t) {
-           //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("error", String.valueOf(t.getMessage()));
+                //   Log.d("error", String.valueOf(t.getMessage()));
             }
         });
-
-
     }
 }

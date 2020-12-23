@@ -33,10 +33,9 @@ import retrofit2.http.POST;
 public interface RService {
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("login.php")
     Call<json> login(@Field("email_or_mobile") String email_or_mobile,
                      @Field("password") String password);
-
 
     @POST("faq.php")
     Call<json> faq();

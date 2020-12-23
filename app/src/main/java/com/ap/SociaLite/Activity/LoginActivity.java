@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Presenter.LoginPresenter;
 import com.ap.SociaLite.R;
 
@@ -35,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox checkbox;
 
     @BindView(R.id.edt_email)
-    EditText edt_email;
+    public EditText edt_email;
 
     @BindView(R.id.password)
     EditText password;
@@ -58,16 +57,8 @@ public class LoginActivity extends AppCompatActivity {
                 break;
 
             case R.id.btn_login:
-
                 if (new LoginPresenter(this, this).validate(edt_email, password)) {
-                    Session session = new Session(LoginActivity.this);
-
-                    Intent in = new Intent(LoginActivity.this, HomeActivity.class);
-                    session.setEmail_or_mobile(edt_email.getText().toString().trim());
-                    startActivity(in);
-                    finish();
-
-                    //   new LoginPresenter(this, this).login(edt_email.getText().toString().trim(), password.getText().toString().trim());
+                    new LoginPresenter(this, this).login(edt_email.getText().toString().trim(), password.getText().toString().trim());
                 }
                 break;
 

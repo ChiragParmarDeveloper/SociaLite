@@ -16,5 +16,6 @@ public class json {
     @SerializedName("faq_list")
     public List<com.ap.SociaLite.Pojo.faq_list> faq_list;
 
-
+    @SerializedName("user_details")
+    public com.ap.SociaLite.Pojo.user_details user_details;
 }
