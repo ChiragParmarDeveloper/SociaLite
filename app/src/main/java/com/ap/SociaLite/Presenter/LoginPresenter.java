@@ -45,11 +45,11 @@ public class LoginPresenter implements LoginContract {
         new RService.api().call(mContext).login(edt_email, password).enqueue(new Callback<json>() {
             @Override
             public void onResponse(Call<json> call, Response<json> response) {
-                if (response.body().Message.equals("Login Successfully")) {
+                if (response.body().message.equals("Login Successfully")) {
                     loginActivity.startActivity(new Intent(mContext, HomeActivity.class));
                     loginActivity.finish();
                 } else {
-                    Toast.makeText(mContext, response.body().Message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
             }
 

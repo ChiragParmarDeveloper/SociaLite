@@ -7,7 +7,9 @@ public class Session {
 
     SharedPreferences sharedPreferences;
     Context context;
+
     String email_or_mobile;
+
     public Session(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences("Socialite_Info", Context.MODE_PRIVATE);

@@ -1,14 +1,20 @@
 package com.ap.SociaLite.Application;
 
+import com.ap.SociaLite.Pojo.faq_list;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class json {
 
+    @SerializedName("status")
+    public String status;
 
-    @SerializedName("Code")
-    public String Code;
+    @SerializedName("message")
+    public String message;
 
-    @SerializedName("Message")
-    public String Message;
+    @SerializedName("faq_list")
+    public List<com.ap.SociaLite.Pojo.faq_list> faq_list;
+
 
 }

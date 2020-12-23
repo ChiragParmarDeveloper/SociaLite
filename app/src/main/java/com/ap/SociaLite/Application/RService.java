@@ -38,6 +38,9 @@ public interface RService {
                      @Field("password") String password);
 
 
+    @POST("faq.php")
+    Call<json> faq();
+
     public class api {
         static Retrofit retrofit = null;
 

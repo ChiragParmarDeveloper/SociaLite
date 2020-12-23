@@ -366,6 +366,9 @@ public class HomeActivity extends AppCompatActivity {
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 startActivity(new Intent(getApplicationContext(), InterestActivity.class));
 
                 txt_category1.setTextColor(getResources().getColor(R.color.colorBlack));
