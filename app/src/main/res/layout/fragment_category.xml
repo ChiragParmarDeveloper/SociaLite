@@ -42,7 +42,7 @@
 
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_categorylist"
+                    android:id="@+id/rv_interestlist"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_gravity="center_horizontal"

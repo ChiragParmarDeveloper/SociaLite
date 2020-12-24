@@ -46,7 +46,5 @@ public class FaqPresenter implements FaqContract {
                 //    Log.d("error", String.valueOf(t.getMessage()));
             }
         });
-
-
     }
 }

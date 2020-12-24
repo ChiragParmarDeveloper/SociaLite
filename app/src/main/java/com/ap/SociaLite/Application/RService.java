@@ -44,7 +44,8 @@ public interface RService {
     @POST("view_hided_post.php")
     Call<json> hidepost(@Field("user_id") String user_id);
 
-
+    @POST("interest_list.php")
+    Call<json> interest_list();
 
 
 

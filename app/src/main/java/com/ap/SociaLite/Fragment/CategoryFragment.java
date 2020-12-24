@@ -30,6 +30,8 @@ import com.ap.SociaLite.Activity.LoginActivity;
 import com.ap.SociaLite.Activity.RegisterActivity;
 import com.ap.SociaLite.Adapter.CategoryListAdapter;
 import com.ap.SociaLite.Adapter.CategoryPostAdapter;
+import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
+import com.ap.SociaLite.Presenter.FaqPresenter;
 import com.ap.SociaLite.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -48,13 +50,8 @@ public class CategoryFragment extends Fragment {
     @BindView(R.id.camera_constrain)
     ConstraintLayout camera_constrain;
 
-    @BindView(R.id.recyclerview_categorylist)
-    RecyclerView recyclerview_categorylist;
-
-
-
-//    @BindView(R.id.floating_action_button)
-//    ImageView floating_action_button;
+    @BindView(R.id.rv_interestlist)
+    RecyclerView rv_interestlist;
 
     private CategoryPostAdapter categoryPostAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -64,17 +61,8 @@ public class CategoryFragment extends Fragment {
     CategoryListAdapter categoryListAdapter;
     private RecyclerView.LayoutManager layoutManager_list;
 
-    ArrayList CategoryNames = new ArrayList<>(Arrays.asList("Photography", "Sports", "Games", "Fun", "Laugh"));
-    ArrayList CategoryImages = new ArrayList<>(Arrays.asList(R.drawable.photography, R.drawable.sport, R.drawable.photography, R.drawable.sport, R.drawable.photography));
-
-//    navigationView = (NavigationView) findViewById(R.id.navigation_view);
-
-
-//    View hView =  navigationView.inflateHeaderView(R.layout.abc);
-//    ImageView imgvw = (ImageView)hView.findViewById(R.id.profile_image);
-//    TextView tv = (TextView)hView.findViewById(R.id.username);
-//    imgvw .setImageResource(R.drawable.logo);
-//    tv.setText("UserName");
+    ArrayList CategoryNames = new ArrayList<>(Arrays.asList( "Sports", "Games", "Fun", "Laugh"));
+    ArrayList CategoryImages = new ArrayList<>(Arrays.asList(R.drawable.sport, R.drawable.photography, R.drawable.sport, R.drawable.photography));
 
 
     @Override
@@ -94,12 +82,10 @@ public class CategoryFragment extends Fragment {
 
 
         //------------------------------------for category----------------------------------------
-        recyclerview_categorylist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        rv_interestlist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
         // recycler_brand_icon.addItemDecoration(new CenterZoomLayoutManager());
         categoryListAdapter = new CategoryListAdapter(getActivity(), CategoryNames, CategoryImages);
-        recyclerview_categorylist.setAdapter(categoryListAdapter); // set the Adapter to RecyclerVie
-
-
+        rv_interestlist.setAdapter(categoryListAdapter); // set the Adapter to RecyclerVie
 
         camera_constrain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +93,8 @@ public class CategoryFragment extends Fragment {
                 startActivity(new Intent(getActivity(), CameraActivity.class));
             }
         });
+
+        new CategoryFragmentPresenter(getActivity(),this).interest();
 
         return view;
     }
