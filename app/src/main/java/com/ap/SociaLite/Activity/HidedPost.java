@@ -1,16 +1,17 @@
 package com.ap.SociaLite.Activity;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
-import com.ap.SociaLite.Adapter.CategoryPostAdapter;
 import com.ap.SociaLite.Adapter.HiddenPostAdapter;
+import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Presenter.HidedPostPresenter;
 import com.ap.SociaLite.R;
 
 import java.util.ArrayList;
@@ -25,14 +26,15 @@ public class HidedPost extends AppCompatActivity {
     @BindView(R.id.img_back)
     ImageView img_back;
 
-    @BindView(R.id.rec_hidedpost)
-    RecyclerView rec_hidedpost;
+    @BindView(R.id.rv_hidedpost)
+    public RecyclerView rv_hidedpost;
 
     private HiddenPostAdapter hiddenPostAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    ArrayList images =new ArrayList<>(Arrays.asList(R.drawable.dummyimage, R.drawable.dummyimage, R.drawable.dummyimage));
+    ArrayList images = new ArrayList<>(Arrays.asList(R.drawable.dummyimage, R.drawable.dummyimage, R.drawable.dummyimage));
 
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +42,12 @@ public class HidedPost extends AppCompatActivity {
         setContentView(R.layout.activity_hided_post);
         ButterKnife.bind(this);
 
+        Session session = new Session(HidedPost.this);
+        user_id = session.getUser_id();
 
-        layoutManager = new GridLayoutManager(getApplicationContext(), 3);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        rec_hidedpost.setLayoutManager(layoutManager);
-
-
-        hiddenPostAdapter = new HiddenPostAdapter(getApplicationContext(),images);
-        rec_hidedpost.setAdapter(hiddenPostAdapter);
-
+        new HidedPostPresenter(this, this).view_hided_post(user_id);
     }
+
     @OnClick({R.id.img_back})
     public void OnClick(View view) {
         switch (view.getId()) {

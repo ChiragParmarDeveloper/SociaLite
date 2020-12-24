@@ -68,8 +68,8 @@ public class CategoryFragment extends Fragment {
     ArrayList CategoryImages = new ArrayList<>(Arrays.asList(R.drawable.photography, R.drawable.sport, R.drawable.photography, R.drawable.sport, R.drawable.photography));
 
 //    navigationView = (NavigationView) findViewById(R.id.navigation_view);
-//
-//
+
+
 //    View hView =  navigationView.inflateHeaderView(R.layout.abc);
 //    ImageView imgvw = (ImageView)hView.findViewById(R.id.profile_image);
 //    TextView tv = (TextView)hView.findViewById(R.id.username);

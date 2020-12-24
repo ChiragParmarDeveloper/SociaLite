@@ -53,6 +53,7 @@ public class LoginPresenter implements LoginContract {
                         Session session = new Session(mContext);
                         Intent in = new Intent(mContext, HomeActivity.class);
                         session.setEmail_or_mobile(loginActivity.edt_email.getText().toString().trim());
+                        session.setUser_id(response.body().user_details.user_id);
                         mContext.startActivity(in);
                         loginActivity.finish();
                     }

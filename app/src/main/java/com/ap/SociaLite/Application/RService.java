@@ -40,6 +40,14 @@ public interface RService {
     @POST("faq.php")
     Call<json> faq();
 
+    @FormUrlEncoded
+    @POST("view_hided_post.php")
+    Call<json> hidepost(@Field("user_id") String user_id);
+
+
+
+
+
     public class api {
         static Retrofit retrofit = null;
 

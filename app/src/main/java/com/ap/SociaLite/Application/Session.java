@@ -9,6 +9,7 @@ public class Session {
     Context context;
 
     String email_or_mobile;
+    String user_id;
 
     public Session(Context context) {
         this.context = context;
@@ -27,6 +28,17 @@ public class Session {
     public void setEmail_or_mobile(String email_or_mobile) {
         this.email_or_mobile = email_or_mobile;
         sharedPreferences.edit().putString("email_or_mobile", email_or_mobile).commit();
+    }
+
+
+    public String getUser_id() {
+        user_id = sharedPreferences.getString("user_id", "");
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+        sharedPreferences.edit().putString("user_id", user_id).commit();
     }
 
 

@@ -18,4 +18,9 @@ public class json {
 
     @SerializedName("user_details")
     public com.ap.SociaLite.Pojo.user_details user_details;
+
+    @SerializedName("hide_post")
+    public com.ap.SociaLite.Pojo.hide_post hide_post;
+
+
 }
