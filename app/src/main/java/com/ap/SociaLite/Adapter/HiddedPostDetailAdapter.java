@@ -18,11 +18,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.Comment;
+import com.ap.SociaLite.Activity.HiddedPostDetailActivity;
+import com.ap.SociaLite.Activity.HidedPost;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,13 +36,19 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
     Boolean click = true;
     String rating = "";
 
-    ArrayList Name;
-    Context context;
+    Context mContext;
+    HiddedPostDetailActivity hiddedPostDetailActivity;
+    List<String> mList;
+    List<String> mList_post_description;
 
-    public HiddedPostDetailAdapter(ArrayList name, Context context) {
-        Name = name;
-        this.context = context;
+
+    public HiddedPostDetailAdapter(Context context, List<String> post_image,List <String>post_description, HiddedPostDetailActivity fragment) {
+        this.mContext = context;
+        this.mList = post_image;
+        this.mList_post_description = post_description;
+        this.hiddedPostDetailActivity = fragment;
     }
+
 
     @NonNull
     @Override
@@ -51,13 +61,15 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
-        holder.txt_name.setText((CharSequence) Name.get(position));
+        Picasso.get().load(mList.get(position)).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+
+        holder.txt_description.setText(mList_post_description.get(position));
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                PopupMenu popup = new PopupMenu(context, holder.img_popup);
+                PopupMenu popup = new PopupMenu(mContext, holder.img_popup);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
                         .inflate(R.menu.hidden_popup_menu, popup.getMenu());
@@ -127,7 +139,7 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
             @Override
             public void onClick(View view) {
                 rating = "1";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -137,7 +149,7 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
             @Override
             public void onClick(View view) {
                 rating = "2";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -147,7 +159,7 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
             @Override
             public void onClick(View view) {
                 rating = "3";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -157,7 +169,7 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
             @Override
             public void onClick(View view) {
                 rating = "4";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -167,7 +179,7 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
             @Override
             public void onClick(View view) {
                 rating = "5";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -180,12 +192,15 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
                 view.getContext().startActivity(in);
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return Name.size();
+        if (mList == null) {
+            return 0;
+        } else {
+            return mList.size();
+        }
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder{
@@ -225,6 +240,12 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
 
         @BindView(R.id.rating_star5)
         ImageView rating_star5;
+
+        @BindView(R.id.img_category)
+        ImageView img_category;
+
+        @BindView(R.id.txt_description)
+        TextView txt_description;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

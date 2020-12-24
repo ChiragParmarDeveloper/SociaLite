@@ -46,10 +46,7 @@ public class HiddenPostAdapter extends RecyclerView.Adapter<HiddenPostAdapter.Ho
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 
-      //  mList.get(position)
         Picasso.get().load(mList.get(position)).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
-
-    //    holder.img_category.setImageResource((Integer) images.get(position));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

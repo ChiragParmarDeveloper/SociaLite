@@ -29,11 +29,6 @@ public class HidedPost extends AppCompatActivity {
     @BindView(R.id.rv_hidedpost)
     public RecyclerView rv_hidedpost;
 
-    private HiddenPostAdapter hiddenPostAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-
-    ArrayList images = new ArrayList<>(Arrays.asList(R.drawable.dummyimage, R.drawable.dummyimage, R.drawable.dummyimage));
-
     String user_id;
 
     @Override

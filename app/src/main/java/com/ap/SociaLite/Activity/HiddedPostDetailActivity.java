@@ -10,42 +10,47 @@ import android.widget.ImageView;
 
 import com.ap.SociaLite.Adapter.HiddedPostDetailAdapter;
 import com.ap.SociaLite.Adapter.MyNetworkAdapter;
+import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Presenter.HiddedPostDetailPresenter;
+import com.ap.SociaLite.Presenter.HidedPostPresenter;
 import com.ap.SociaLite.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class HiddedPostDetailActivity extends AppCompatActivity {
 
-    private RecyclerView rec_hidedpost_detail;
-
+    @BindView(R.id.img_back)
     ImageView img_back;
 
-    private HiddedPostDetailAdapter hiddedPostDetailAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    @BindView(R.id.rec_hidedpost_detail)
+    public RecyclerView rec_hidedpost_detail;
 
-    ArrayList Name = new ArrayList<>(Arrays.asList("Name 1", "Name 2", "Name 3", "Name 4", "Name 5"));
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hidded_post_detail);
+        ButterKnife.bind(this);
 
-        img_back = findViewById(R.id.img_back);
+        Session session = new Session(HiddedPostDetailActivity.this);
+        user_id = session.getUser_id();
 
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        rec_hidedpost_detail = findViewById(R.id.rec_hidedpost_detail);
-        layoutManager = new GridLayoutManager(HiddedPostDetailActivity.this, 1);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        rec_hidedpost_detail.setLayoutManager(layoutManager);
-        hiddedPostDetailAdapter = new HiddedPostDetailAdapter(Name,HiddedPostDetailActivity.this);
-        rec_hidedpost_detail.setAdapter(hiddedPostDetailAdapter);
-
+        new HiddedPostDetailPresenter(this, this).view_hided_post(user_id);
     }
+
+    @OnClick({R.id.img_back})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
+                onBackPressed();
+                break;
+        }
+    }
+
 }
