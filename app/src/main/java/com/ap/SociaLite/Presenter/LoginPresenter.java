@@ -60,20 +60,19 @@ public class LoginPresenter implements LoginContract {
                             loginActivity.finish();
                         }
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
 
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "Login failed invalid username & password", Toast.LENGTH_SHORT).show();
+
                     //   Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
 
         }
     }

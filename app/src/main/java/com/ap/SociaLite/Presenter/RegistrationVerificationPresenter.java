@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.ap.SociaLite.Activity.InterestActivity;
+import com.ap.SociaLite.Activity.LoginActivity;
 import com.ap.SociaLite.Activity.RegistrationVerificationActivity;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
@@ -17,7 +18,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegistrationVerificationPresenter implements RegistrationVerificationContract {
-
 
     public Context mContext;
     public RegistrationVerificationActivity registrationVerificationActivity;
@@ -44,12 +44,15 @@ public class RegistrationVerificationPresenter implements RegistrationVerificati
 
                 } else {
                     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    Intent in = new Intent(mContext, LoginActivity.class);
+                    mContext.startActivity(in);
+                    registrationVerificationActivity.finish();
                 }
             }
 
             @Override
             public void onFailure(Call<json> call, Throwable t) {
-                //       Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
                 //      Log.d("error", String.valueOf(t.getMessage()));
             }
         });

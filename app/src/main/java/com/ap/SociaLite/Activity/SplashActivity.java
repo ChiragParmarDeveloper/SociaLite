@@ -19,7 +19,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
     }
 
@@ -31,21 +31,14 @@ public class SplashActivity extends BaseActivity {
 
                 Session session = new Session(SplashActivity.this);
 
-                if (session.getEmail_or_mobile() != ""){
+                if (session.getEmail_or_mobile() != "") {
                     Intent in = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(in);
                     finish();
-                }
-                else {
+                } else {
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
                 }
-
-
-
-
-
-
             }
         }, 2000);
     }

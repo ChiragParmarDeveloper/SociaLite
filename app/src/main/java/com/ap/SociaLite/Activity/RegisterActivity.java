@@ -134,6 +134,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
             in.putExtra("password", password.getText().toString().trim());
 
             startActivity(in);
+            finish();
         }
     }
 
@@ -230,7 +231,6 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
             upload_img.setImageURI(imageUri);
             profile_pic = getRealPathFromURI(imageUri);
 
-            Toast.makeText(getApplicationContext(), profile_pic, Toast.LENGTH_SHORT).show();
         } else {
 
         }
@@ -245,6 +245,4 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
-
-
 }
