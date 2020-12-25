@@ -74,7 +74,7 @@ public class LoginPresenter implements LoginContract {
         }
         catch(Exception e)
         {
-            
+
         }
     }
 }
