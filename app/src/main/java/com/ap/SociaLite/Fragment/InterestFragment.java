@@ -25,6 +25,8 @@ import com.ap.SociaLite.Activity.OtpActivity;
 import com.ap.SociaLite.Adapter.CategoryListAdapter;
 import com.ap.SociaLite.Adapter.CategoryPostAdapter;
 import com.ap.SociaLite.Adapter.InterestPostAdapter;
+import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
+import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -38,9 +40,8 @@ import butterknife.OnClick;
 
 public class InterestFragment extends Fragment {
 
-
-    @BindView(R.id.recyclerview_categorylist)
-    RecyclerView recyclerview_categorylist;
+    @BindView(R.id.rv_interestlist)
+   public RecyclerView rv_interestlist;
 
     @BindView(R.id.camera)
     ImageView camera;
@@ -51,16 +52,9 @@ public class InterestFragment extends Fragment {
     @BindView(R.id.camera_constrain)
     ConstraintLayout camera_constrain;
 
-    CategoryListAdapter categoryListAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-
-    ArrayList CategoryNames = new ArrayList<>(Arrays.asList("Photography", "Sports", "Games", "Fun", "Laugh"));
-    ArrayList CategoryImages = new ArrayList<>(Arrays.asList(R.drawable.photography, R.drawable.sport, R.drawable.photography, R.drawable.sport, R.drawable.photography));
-
-
     private InterestPostAdapter interestPostAdapter;
-    private RecyclerView.LayoutManager layoutManager_post;
 
     ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name", "Name", "Name", "Name"));
 
@@ -111,18 +105,18 @@ public class InterestFragment extends Fragment {
 
         //----------------------------------------------for category------------------------------------------------
 //        Objects.requireNonNull(recyclerview_categorylist.getLayoutManager()).scrollToPosition(Integer.MAX_VALUE / 2);
-        recyclerview_categorylist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-        // recycler_brand_icon.addItemDecoration(new CenterZoomLayoutManager());
-        categoryListAdapter = new CategoryListAdapter(getActivity(), CategoryNames, CategoryImages);
-        recyclerview_categorylist.setAdapter(categoryListAdapter); // set the Adapter to RecyclerVie
-
+//        recyclerview_categorylist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+//        // recycler_brand_icon.addItemDecoration(new CenterZoomLayoutManager());
+//        categoryListAdapter = new CategoryListAdapter(getActivity(), CategoryNames, CategoryImages);
+//        recyclerview_categorylist.setAdapter(categoryListAdapter); // set the Adapter to RecyclerVie
+//
 
 
         //indicator.addOnAttachStateChangeListener(recyclerview_categorylist);
         // ScrollingPagerIndicator recyclerIndicator = findViewById(R.id.indicator);
         // indicator.addOnAttachStateChangeListener((View.OnAttachStateChangeListener) recyclerview_categorylist);
 
-
+        new InterestFragmentPresenter(getActivity(),this).interest();
         return view;
     }
 
@@ -132,7 +126,6 @@ public class InterestFragment extends Fragment {
             case R.id.camera_constrain:
                 startActivity(new Intent(getActivity(), CameraActivity.class));
                 break;
-
         }
     }
 

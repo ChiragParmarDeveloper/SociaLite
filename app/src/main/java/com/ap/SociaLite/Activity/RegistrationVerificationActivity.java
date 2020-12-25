@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ap.SociaLite.Presenter.LoginPresenter;
+import com.ap.SociaLite.Presenter.RegistrationVerificationPresenter;
 import com.ap.SociaLite.R;
 import com.chaos.view.PinView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,11 +24,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class RegistrationVerificationActivity extends AppCompatActivity {
 
@@ -42,11 +48,13 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
     @BindView(R.id.txt_no)
     TextView txt_no;
     public boolean isVarificationCompleted = false;
-    String profile_pic,user_name,email,bio,dob,location,password,phoneNumber, otp,country_code,phone;
+    String image,name,mail,detail,date_birth,loc,pwd,phoneNumber, otp,country_code,phone;
     FirebaseAuth auth;
     private String verificationCode;
     private PhoneAuthProvider.ForceResendingToken token;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallback;
+
+    MultipartBody.Part profile_pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +64,15 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         auth = FirebaseAuth.getInstance();
 
-        profile_pic = getIntent().getStringExtra("profile_pic");
-        user_name = getIntent().getStringExtra("user_name");
-        email = getIntent().getStringExtra("email");
+        image = getIntent().getStringExtra("profile_pic");
+        name = getIntent().getStringExtra("user_name");
+        mail = getIntent().getStringExtra("email");
         country_code = getIntent().getStringExtra("country_code");
         phoneNumber = getIntent().getStringExtra("phone_no");
-        bio = getIntent().getStringExtra("bio");
-        dob = getIntent().getStringExtra("dob");
-        location = getIntent().getStringExtra("location");
-        password = getIntent().getStringExtra("password");
+        detail = getIntent().getStringExtra("bio");
+        date_birth = getIntent().getStringExtra("dob");
+        loc = getIntent().getStringExtra("location");
+        pwd = getIntent().getStringExtra("password");
 
 //        Log.d("profile_pic", profile_pic);
 //        Log.d("user_name", user_name);
@@ -125,9 +133,25 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            Intent in = new Intent(RegistrationVerificationActivity.this, InterestActivity.class);
-                            startActivity(in);
-                            finish();
+                            if (image != null) {
+                                File idfile = new File(image);
+                                RequestBody idcardfile = RequestBody.create(MediaType.parse("image/*"), idfile);
+                                profile_pic = MultipartBody.Part.createFormData("profile_pic", idfile.getPath(), idcardfile);
+                            } else {
+                                RequestBody idcardfile = RequestBody.create(MediaType.parse("image/*"), "");
+                                profile_pic = MultipartBody.Part.createFormData("profile_pic", "", idcardfile);
+                            }
+
+                            RequestBody user_name = RequestBody.create(MediaType.parse("text/plain"), name);
+                            RequestBody email = RequestBody.create(MediaType.parse("text/plain"), mail);
+                            RequestBody no = RequestBody.create(MediaType.parse("text/plain"), phoneNumber);
+                            RequestBody bio = RequestBody.create(MediaType.parse("text/plain"), detail);
+                            RequestBody dob = RequestBody.create(MediaType.parse("text/plain"), date_birth);
+                            RequestBody location = RequestBody.create(MediaType.parse("text/plain"), loc);
+                            RequestBody passoword = RequestBody.create(MediaType.parse("text/plain"), pwd);
+
+                            new RegistrationVerificationPresenter(RegistrationVerificationActivity.this, RegistrationVerificationActivity.this)
+                                    .register(profile_pic,user_name,email,no,bio,dob,location,passoword);
 
                         } else {
                             Toast.makeText(RegistrationVerificationActivity.this, "Incorrect OTP", Toast.LENGTH_SHORT).show();

@@ -11,52 +11,38 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Fragment.CategoryFragment;
-import com.ap.SociaLite.Pojo.interest_list;
+import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.R;
 
 import java.util.List;
 
-public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.Holder> {
+public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapter.Holder> {
 
     Context mContext;
-    CategoryFragment categoryFragment;
+    InterestFragment interestFragment;
     List<String> mList;
 
-    public CategoryListAdapter(Context context, List<String> interest_name, CategoryFragment fragment) {
+    public InterestListAdapter(Context context, List<String> interest_name, InterestFragment fragment) {
         this.mContext = context;
         this.mList = interest_name;
-        this.categoryFragment = fragment;
+        this.interestFragment = fragment;
     }
-
-//    ArrayList CategoryNames;
-//    ArrayList CategoryImages;
-//    Context context;
-//
-//    public CategoryListAdapter(Context context, ArrayList CategoryNames, ArrayList CategoryImages) {
-//        this.context = context;
-//        this.CategoryNames = CategoryNames;
-//        this.CategoryImages = CategoryImages;
-//    }
-
 
     @NonNull
     @Override
-    public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
+    public InterestListAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_category_list_adapter, parent, false);
         Holder holder = new Holder(view);
         return holder;
-
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Holder holder, int position) {
+    public void onBindViewHolder(@NonNull InterestListAdapter.Holder holder, int position) {
         int realposition = position % mList.size();
 
         holder.txt_iconname.setText((CharSequence) mList.get(realposition));
 //        holder.img_category.setImageResource((Integer) CategoryImages.get(realposition));
         //   Picasso.get().load(item.).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
-
     }
 
     @Override
@@ -65,15 +51,12 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-
         ImageView img_category;
         TextView txt_iconname;
-
         public Holder(@NonNull View itemView) {
             super(itemView);
             img_category = itemView.findViewById(R.id.img_category);
             txt_iconname = itemView.findViewById(R.id.txt_iconname);
-
         }
     }
 }

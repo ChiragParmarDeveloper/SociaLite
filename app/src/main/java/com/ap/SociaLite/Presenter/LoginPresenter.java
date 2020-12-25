@@ -42,30 +42,39 @@ public class LoginPresenter implements LoginContract {
 
     @Override
     public void login(String edt_email, String password) {
-        new RService.api().call(mContext).login(edt_email, password).enqueue(new Callback<json>() {
-            @Override
-            public void onResponse(Call<json> call, Response<json> response) {
 
-                if (response.body().status.equals("1")) {
-                    if (response.body().user_details != null) {
+        try {
+            new RService.api().call(mContext).login(edt_email, password).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+
+                    if (response.body().status.equals("1")) {
+                        if (response.body().user_details != null) {
+                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+
+                            Session session = new Session(mContext);
+                            Intent in = new Intent(mContext, HomeActivity.class);
+                            session.setEmail_or_mobile(loginActivity.edt_email.getText().toString().trim());
+                            session.setUser_id(response.body().user_details.user_id);
+                            mContext.startActivity(in);
+                            loginActivity.finish();
+                        }
+                    } else {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-
-                        Session session = new Session(mContext);
-                        Intent in = new Intent(mContext, HomeActivity.class);
-                        session.setEmail_or_mobile(loginActivity.edt_email.getText().toString().trim());
-                        session.setUser_id(response.body().user_details.user_id);
-                        mContext.startActivity(in);
-                        loginActivity.finish();
                     }
-                } else {
-                    //Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<json> call, Throwable t) {
-                //   Log.d("error", String.valueOf(t.getMessage()));
-            }
-        });
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                    //   Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
 }

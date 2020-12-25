@@ -51,19 +51,12 @@ public class CategoryFragment extends Fragment {
     ConstraintLayout camera_constrain;
 
     @BindView(R.id.rv_interestlist)
-    RecyclerView rv_interestlist;
+   public RecyclerView rv_interestlist;
 
     private CategoryPostAdapter categoryPostAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name", "Name", "Name", "Name"));
-
-    CategoryListAdapter categoryListAdapter;
-    private RecyclerView.LayoutManager layoutManager_list;
-
-    ArrayList CategoryNames = new ArrayList<>(Arrays.asList( "Sports", "Games", "Fun", "Laugh"));
-    ArrayList CategoryImages = new ArrayList<>(Arrays.asList(R.drawable.sport, R.drawable.photography, R.drawable.sport, R.drawable.photography));
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,33 +73,18 @@ public class CategoryFragment extends Fragment {
         categoryPostAdapter = new CategoryPostAdapter(getActivity(),Name);
         recycleview_categorypost.setAdapter(categoryPostAdapter);
 
-
-        //------------------------------------for category----------------------------------------
-        rv_interestlist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-        // recycler_brand_icon.addItemDecoration(new CenterZoomLayoutManager());
-        categoryListAdapter = new CategoryListAdapter(getActivity(), CategoryNames, CategoryImages);
-        rv_interestlist.setAdapter(categoryListAdapter); // set the Adapter to RecyclerVie
-
-        camera_constrain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CameraActivity.class));
-            }
-        });
-
         new CategoryFragmentPresenter(getActivity(),this).interest();
 
         return view;
     }
 
-//    @OnClick({R.id.floating_action_button})
-//    public void OnClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.floating_action_button:
-//                startActivity(new Intent(getActivity(), CreatePostActivity.class));
-//
-//                break;
-//        }
-//    }
+    @OnClick({R.id.camera_constrain})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.camera_constrain:
+                startActivity(new Intent(getActivity(), CameraActivity.class));
+                break;
+        }
+    }
 
 }

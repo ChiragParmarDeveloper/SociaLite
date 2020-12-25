@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.lang.annotation.Annotation;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -19,16 +18,19 @@ import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.ResponseBody;
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface RService {
 
@@ -47,7 +49,16 @@ public interface RService {
     @POST("interest_list.php")
     Call<json> interest_list();
 
-
+    @Multipart
+    @POST("registration.php")
+    Call<json> register(@Part("username") RequestBody username,
+                        @Part("mobile_number") RequestBody mobile_number,
+                        @Part("email") RequestBody email,
+                        @Part("bio") RequestBody bio,
+                        @Part("dob") RequestBody dob,
+                        @Part("location") RequestBody location,
+                        @Part("password") RequestBody password,
+                        @Part MultipartBody.Part profile_pic);
 
     public class api {
         static Retrofit retrofit = null;
@@ -94,7 +105,7 @@ public interface RService {
             SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
             if (AppUtils.isNetworkAvailable(mContext)) {
-             //   Utils.showProgressDialog(mContext, true);
+                //   Utils.showProgressDialog(mContext, true);
                 okHttpClient = new OkHttpClient.Builder()
                         .sslSocketFactory(sslSocketFactory, trustManager)
                         .connectTimeout(35, TimeUnit.SECONDS)
@@ -119,13 +130,13 @@ public interface RService {
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(Constant.MainURL)
-                        .client(okHttpClient != null ? okHttpClient : null)
+                    .client(okHttpClient != null ? okHttpClient : null)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             return retrofit.create(RService.class);
 
 
-      //       Parsing error
+            //       Parsing error
 //        public static Errors parseError(Response response) {
 //            Converter<ResponseBody, Errors> converter = retrofit.responseBodyConverter(Errors.class, new Annotation[0]);
 //            Errors error;

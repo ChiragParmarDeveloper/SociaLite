@@ -1,5 +1,7 @@
 package com.ap.SociaLite.Application;
 
+import android.widget.Toast;
+
 import com.ap.SociaLite.Pojo.faq_list;
 import com.google.gson.annotations.SerializedName;
 
@@ -22,5 +24,7 @@ public class json {
     @SerializedName("hide_post")
     public com.ap.SociaLite.Pojo.hide_post hide_post;
 
+    @SerializedName("interest_list")
+    public List<com.ap.SociaLite.Pojo.interest_list> interest_list;
 
 }
