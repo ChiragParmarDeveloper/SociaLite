@@ -44,7 +44,7 @@ public class AppUtils {
     public static boolean isValidMobile(String phone) {
         boolean check = false;
         if (!Pattern.matches("[a-zA-Z]+", phone)) {
-            if (phone.length() < 10 || phone.length() > 13) {
+            if (phone.length() < 7 || phone.length() > 13) {
                 // if(phone.length() != 10) {
                 check = false;
                 //txtPhone.setError("Not Valid Number");

@@ -19,4 +19,19 @@ public class user_details {
     @SerializedName("is_private_account")
     public String is_private_account;
 
+    @SerializedName("profile_pic")
+    public String profile_pic;
+
+    @SerializedName("bio")
+    public String bio;
+
+    @SerializedName("dob")
+    public String dob;
+
+    @SerializedName("location")
+    public String location;
+
+    @SerializedName("password")
+    public String password;
+
 }

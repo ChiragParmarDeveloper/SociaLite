@@ -30,7 +30,6 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
         this.businessFragment = fragment;
     }
 
-
     @Override
     public void interest() {
         new RService.api().call(mContext).interest_list().enqueue(new Callback<json>() {

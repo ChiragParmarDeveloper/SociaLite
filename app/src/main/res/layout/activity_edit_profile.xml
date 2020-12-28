@@ -129,6 +129,7 @@
 
 
                     <EditText
+                        android:id="@+id/edt_username"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -167,6 +168,7 @@
                     android:background="@drawable/field">
 
                     <EditText
+                        android:id="@+id/edt_email"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -207,6 +209,7 @@
                     android:background="@drawable/field">
 
                     <EditText
+                        android:id="@+id/edt_no"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -248,6 +251,7 @@
                     android:background="@drawable/field">
 
                     <EditText
+                        android:id="@+id/edt_bio"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -256,8 +260,6 @@
                         android:layout_marginRight="10dp"
                         android:background="@null"
                         android:hint="Bio"
-                        android:maxLines="1"
-                        android:singleLine="true"
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -286,7 +288,8 @@
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/field">
 
-                    <EditText
+                    <Button
+                        android:id="@+id/edt_dob"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -296,6 +299,7 @@
                         android:background="@null"
                         android:hint="D.O.B"
                         android:inputType="date"
+                        android:textAlignment="textStart"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="15dp"
@@ -330,6 +334,7 @@
                     android:background="@drawable/field">
 
                     <EditText
+                        android:id="@+id/edt_location"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -369,7 +374,7 @@
                     android:background="@drawable/field">
 
                     <EditText
-                        android:id="@+id/editText"
+                        android:id="@+id/edt_pwd"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -401,7 +406,6 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
             </LinearLayout>
 

@@ -28,7 +28,7 @@
                     android:id="@+id/tv_faq_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
+                    android:textSize="16sp"
                     android:layout_centerVertical="true"
                     android:textColor="#707070"
                     android:text="Lorem Ipsum Lorem Ipsum" />
@@ -61,7 +61,7 @@
                 android:id="@+id/tv_faq_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
+                android:textSize="16sp"
                 android:layout_below="@id/view1"
                 android:textColor="#707070"
                 android:visibility="gone"

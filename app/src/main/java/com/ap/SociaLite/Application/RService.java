@@ -3,6 +3,9 @@ package com.ap.SociaLite.Application;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
@@ -59,6 +62,26 @@ public interface RService {
                         @Part("location") RequestBody location,
                         @Part("password") RequestBody password,
                         @Part MultipartBody.Part profile_pic);
+
+
+    @FormUrlEncoded
+    @POST("fetch_profile.php")
+    Call<json> profile(@Field("user_id") String user_id);
+
+    @Multipart
+    @POST("edit_profile.php")
+    Call<json> editprofile(@Part("user_id") RequestBody user_id,
+                           @Part("username") RequestBody username,
+                           @Part("email") RequestBody email,
+                           @Part("mobile_number") RequestBody mobile_number,
+                           @Part("password") RequestBody password,
+                           @Part("location") RequestBody location,
+                           @Part("bio") RequestBody bio,
+                           @Part("dob") RequestBody dob,
+                           @Part MultipartBody.Part profile_pic);
+
+
+
 
     public class api {
         static Retrofit retrofit = null;
@@ -127,11 +150,14 @@ public interface RService {
                 Toast.makeText(mContext, " No internet connection!! try again.", Toast.LENGTH_SHORT).show();
             }
 
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(Constant.MainURL)
-                    .client(okHttpClient != null ? okHttpClient : null)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    //    .client(okHttpClient != null ? okHttpClient : null)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
             return retrofit.create(RService.class);
 

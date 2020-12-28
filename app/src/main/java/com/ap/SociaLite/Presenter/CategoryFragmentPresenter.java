@@ -32,32 +32,39 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
 
     @Override
     public void interest() {
-        new RService.api().call(mContext).interest_list().enqueue(new Callback<json>() {
-            @Override
-            public void onResponse(Call<json> call, Response<json> response) {
-                if (response.body().status.equals("1")) {
 
-                    if (response.body().interest_list != null && response.body().interest_list.size() > 0) {
+        try {
+            new RService.api().call(mContext).interest_list().enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
 
-                        List<String> interest_name = new ArrayList<>();
-                        for (int i = 0; i < response.body().interest_list.size(); i++) {
-                            interest_name.add(response.body().interest_list.get(i).interest_name);
+                        if (response.body().interest_list != null && response.body().interest_list.size() > 0) {
+
+                            List<String> interest_name = new ArrayList<>();
+                            for (int i = 0; i < response.body().interest_list.size(); i++) {
+                                interest_name.add(response.body().interest_list.get(i).interest_name);
+                            }
+
+                            categoryFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
+                            categoryFragment.rv_interestlist.setAdapter(new CategoryListAdapter(mContext, interest_name, categoryFragment));
                         }
-
-                        categoryFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
-                        categoryFragment.rv_interestlist.setAdapter(new CategoryListAdapter(mContext, interest_name, categoryFragment));
+                    } else {
+                        //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
-                } else {
-               //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<json> call, Throwable t) {
-             //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-             //   Log.d("error", String.valueOf(t.getMessage()));
-            }
-        });
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //   Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 }
 
