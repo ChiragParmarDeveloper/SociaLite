@@ -10,6 +10,7 @@ import com.ap.SociaLite.Application.AppUtils;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.EditProfileContract;
+import com.ap.SociaLite.R;
 import com.squareup.picasso.Picasso;
 
 import okhttp3.MultipartBody;
@@ -22,7 +23,7 @@ public class EditProfilePresenter implements EditProfileContract {
 
     public Context mContext;
     public EditProfileActivity editProfileActivity;
-
+    public static String path;
     public EditProfilePresenter(Context context, EditProfileActivity fragment) {
         this.mContext = context;
         this.editProfileActivity = fragment;
@@ -38,7 +39,13 @@ public class EditProfilePresenter implements EditProfileContract {
                     if (response.body().status.equals("1")) {
                         if (response.body().user_details != null) {
 
-                            Picasso.get().load(response.body().user_details.profile_pic).into(editProfileActivity.schedule_post_image);
+                            path = response.body().user_details.profile_pic;
+                            if(response.body().user_details.profile_pic.length() > 0)
+                            {
+                                Picasso.get().load(response.body().user_details.profile_pic).placeholder(R.mipmap.ic_launcher).into(editProfileActivity.schedule_post_image);
+                            }
+
+
                             editProfileActivity.edt_username.setText(response.body().user_details.username);
                             editProfileActivity.edt_email.setText(response.body().user_details.email);
                             editProfileActivity.edt_no.setText(response.body().user_details.mobile_number);

@@ -7,7 +7,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.ap.SociaLite.Presenter.InterestActivityPresenter;
 import com.ap.SociaLite.R;
 
 import butterknife.BindView;
@@ -22,14 +24,21 @@ public class InterestActivity extends AppCompatActivity {
     @BindView(R.id.img_back)
     ImageView img_back;
 
+    @BindView(R.id.rv_interest)
+    public RecyclerView rv_interest;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest);
         ButterKnife.bind(this);
+
+        new InterestActivityPresenter(this, this).interest();
+
     }
 
-    @OnClick({R.id.btn_done,R.id.img_back})
+    @OnClick({R.id.btn_done, R.id.img_back})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.btn_done:
@@ -38,7 +47,7 @@ public class InterestActivity extends AppCompatActivity {
                 break;
 
             case R.id.img_back:
-               onBackPressed();
+                onBackPressed();
                 break;
         }
     }

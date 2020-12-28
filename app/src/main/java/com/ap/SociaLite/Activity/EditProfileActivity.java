@@ -17,12 +17,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Pojo.user_details;
 import com.ap.SociaLite.Presenter.EditProfilePresenter;
 import com.ap.SociaLite.R;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -69,9 +72,10 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
-    String image,id;
+    String image, id, path;
     Calendar myCalendar = Calendar.getInstance();
     MultipartBody.Part profile_pic;
+    public List<user_details> mList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +86,12 @@ public class EditProfileActivity extends AppCompatActivity {
         Session session = new Session(EditProfileActivity.this);
         id = session.getUser_id();
 
+        path = EditProfilePresenter.path;
+
+     //   Toast.makeText(getApplicationContext(), path, Toast.LENGTH_LONG).show();
         new EditProfilePresenter(this, this).fetch_profile(id);
+
+
     }
 
     @OnClick({R.id.img_back, R.id.edit_profile_save, R.id.edit_profile_change_profile, R.id.edt_dob})
@@ -100,25 +109,27 @@ public class EditProfileActivity extends AppCompatActivity {
                         File idfile = new File(image);
                         RequestBody idcardfile = RequestBody.create(MediaType.parse("image/*"), idfile);
                         profile_pic = MultipartBody.Part.createFormData("profile_pic", idfile.getPath(), idcardfile);
-                    } else {
+                    }
+
+                    else {
                         RequestBody idcardfile = RequestBody.create(MediaType.parse("image/*"), "");
                         profile_pic = MultipartBody.Part.createFormData("profile_pic", "", idcardfile);
                     }
 
                     RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), id);
                     RequestBody username = RequestBody.create(MediaType.parse("text/plain"), edt_username.getText().toString().trim());
-                    RequestBody email = RequestBody.create(MediaType.parse("text/plain"),  edt_email.getText().toString().trim());
-                    RequestBody mobile_number = RequestBody.create(MediaType.parse("text/plain"),  edt_no.getText().toString().trim());
-                    RequestBody bio = RequestBody.create(MediaType.parse("text/plain"),  edt_bio.getText().toString().trim());
-                    RequestBody dob = RequestBody.create(MediaType.parse("text/plain"),  edt_dob.getText().toString().trim());
-                    RequestBody location = RequestBody.create(MediaType.parse("text/plain"),  edt_location.getText().toString().trim());
-                    RequestBody password = RequestBody.create(MediaType.parse("text/plain"),  edt_pwd.getText().toString().trim());
+                    RequestBody email = RequestBody.create(MediaType.parse("text/plain"), edt_email.getText().toString().trim());
+                    RequestBody mobile_number = RequestBody.create(MediaType.parse("text/plain"), edt_no.getText().toString().trim());
+                    RequestBody bio = RequestBody.create(MediaType.parse("text/plain"), edt_bio.getText().toString().trim());
+                    RequestBody dob = RequestBody.create(MediaType.parse("text/plain"), edt_dob.getText().toString().trim());
+                    RequestBody location = RequestBody.create(MediaType.parse("text/plain"), edt_location.getText().toString().trim());
+                    RequestBody password = RequestBody.create(MediaType.parse("text/plain"), edt_pwd.getText().toString().trim());
 
-                    new EditProfilePresenter(this,this).edit_profile(user_id,username,email,mobile_number,password,location,
-                            bio,dob,profile_pic);
+                    new EditProfilePresenter(this, this).edit_profile(user_id, username, email, mobile_number, password, location,
+                            bio, dob, profile_pic);
 
                 }
-                
+
                 break;
             case R.id.edit_profile_change_profile:
                 openGallery();
@@ -146,7 +157,6 @@ public class EditProfileActivity extends AppCompatActivity {
             imageUri = data.getData();
             schedule_post_image.setImageURI(imageUri);
             image = getRealPathFromURI(imageUri);
-            Toast.makeText(getApplicationContext(), image, Toast.LENGTH_SHORT).show();
         } else {
 
         }
