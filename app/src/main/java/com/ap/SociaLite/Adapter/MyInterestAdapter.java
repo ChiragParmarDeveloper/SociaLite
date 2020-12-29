@@ -79,7 +79,7 @@ public class MyInterestAdapter extends RecyclerView.Adapter<MyInterestAdapter.Ho
 //            @Override
 //            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 //
-//                
+//
 //                if (holder.checkbox_interest.isChecked()) {
 //                   id = interest_lists.get(position).interest_id;
 //                    interest_ids.add(id);
