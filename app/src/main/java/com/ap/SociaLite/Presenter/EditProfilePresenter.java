@@ -24,6 +24,7 @@ public class EditProfilePresenter implements EditProfileContract {
     public Context mContext;
     public EditProfileActivity editProfileActivity;
     public static String path;
+
     public EditProfilePresenter(Context context, EditProfileActivity fragment) {
         this.mContext = context;
         this.editProfileActivity = fragment;

@@ -42,7 +42,7 @@
 
 
                     <com.mikhaellopez.circularimageview.CircularImageView
-                        android:id="@+id/imageView3"
+                        android:id="@+id/img_dp"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="15dp"

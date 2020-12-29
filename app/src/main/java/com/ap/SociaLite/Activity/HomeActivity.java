@@ -2,7 +2,6 @@ package com.ap.SociaLite.Activity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,10 +24,11 @@ import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.Fragment.NetworkFragment;
 import com.ap.SociaLite.Fragment.ShareFragment;
+import com.ap.SociaLite.Presenter.HomeActivityPresenter;
 import com.ap.SociaLite.R;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,25 +94,27 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.navigation_view)
     NavigationView navigation_view;
 
-
     @BindView(R.id.imgsearch)
     ImageView imgsearch;
 
     @BindView(R.id.imgnotification)
     ImageView imgnotification;
 
-
     ConstraintLayout category, Notification, Profile, help, faq, setting, logout;
-    TextView txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
+    public TextView txt_name, txt_email, txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
     ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout;
+    public CircularImageView img_dp;
 
-    final Context context = this;
-    FirebaseAuth auth;
+    String user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+
+        Session session = new Session(HomeActivity.this);
+        user_id = session.getUser_id();
 
         Log.d("token_Socialite", FirebaseInstanceId.getInstance().getToken());
 
@@ -146,6 +148,11 @@ public class HomeActivity extends AppCompatActivity {
         logout = (ConstraintLayout) headerView.findViewById(R.id.logout);
         txt_logout = (TextView) headerView.findViewById(R.id.txt_logout);
         img_logout = (ImageView) headerView.findViewById(R.id.img_logout);
+
+
+        txt_name = (TextView) headerView.findViewById(R.id.txt_name);
+        txt_email = (TextView) headerView.findViewById(R.id.txt_email);
+        img_dp = (CircularImageView) headerView.findViewById(R.id.img_dp);
 
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +245,7 @@ public class HomeActivity extends AppCompatActivity {
                 txt_help.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_help.setImageResource(R.drawable.ic_help);
 
-                startActivity(new Intent(HomeActivity.this,Setting.class));
+                startActivity(new Intent(HomeActivity.this, Setting.class));
 
 
             }
@@ -270,7 +277,7 @@ public class HomeActivity extends AppCompatActivity {
                 txt_help.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_help.setImageResource(R.drawable.ic_help);
 
-                startActivity(new Intent(HomeActivity.this,Faq.class));
+                startActivity(new Intent(HomeActivity.this, Faq.class));
 
             }
         });
@@ -329,7 +336,7 @@ public class HomeActivity extends AppCompatActivity {
                 txt_logout.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_logout.setImageResource(R.drawable.ic_logout);
 
-                startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
+                startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
             }
         });
 
@@ -358,7 +365,7 @@ public class HomeActivity extends AppCompatActivity {
                 txt_setting.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_setting.setImageResource(R.drawable.ic_setting_white);
 
-                startActivity(new Intent(HomeActivity.this,Notification.class));
+                startActivity(new Intent(HomeActivity.this, Notification.class));
 
             }
         });
@@ -366,7 +373,6 @@ public class HomeActivity extends AppCompatActivity {
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
 
                 startActivity(new Intent(getApplicationContext(), InterestActivity.class));
@@ -396,11 +402,13 @@ public class HomeActivity extends AppCompatActivity {
                 //    Toast.makeText(getApplicationContext(), "nice work", Toast.LENGTH_LONG).show();
             }
         });
+
+
+        new HomeActivityPresenter(this, this).fetch_profile(user_id);
     }
 
     @SuppressLint("ResourceAsColor")
     @OnClick({R.id.layout_category, R.id.layout_interest, R.id.layout_network, R.id.layout_share, R.id.layout_business, R.id.img_leftmenu,
-
             R.id.imgsearch})
     public void OnClick(View view) {
         switch (view.getId()) {
@@ -534,7 +542,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
             case R.id.imgsearch:
-                startActivity(new Intent(HomeActivity.this,Search.class));
+                startActivity(new Intent(HomeActivity.this, Search.class));
 
                 break;
 
