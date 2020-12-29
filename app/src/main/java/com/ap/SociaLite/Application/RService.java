@@ -11,6 +11,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
@@ -81,7 +82,10 @@ public interface RService {
                            @Part MultipartBody.Part profile_pic);
 
 
-
+    @FormUrlEncoded
+    @POST("add_user_interest.php")
+    Call<json> addinterest(@Field("interest_ids[]") ArrayList<String> interest_ids,
+                           @Field("user_id") String user_id);
 
     public class api {
         static Retrofit retrofit = null;

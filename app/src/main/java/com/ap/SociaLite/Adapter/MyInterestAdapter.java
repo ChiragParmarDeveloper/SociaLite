@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.InterestActivity;
 import com.ap.SociaLite.Fragment.InterestFragment;
+import com.ap.SociaLite.Pojo.interest_list;
 import com.ap.SociaLite.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,11 +26,18 @@ public class MyInterestAdapter  extends RecyclerView.Adapter<MyInterestAdapter.H
 
     Context mContext;
     InterestActivity interestActivity;
-    List<String> mList;
+   // List<String> mList;
 
-    public MyInterestAdapter(Context context, List<String> interest_name, InterestActivity fragment) {
+    List<interest_list> interest_lists = new ArrayList<>();
+    interest_list item;
+
+
+    public static ArrayList<String> interest_ids = new ArrayList<>();
+
+
+    public MyInterestAdapter(Context context, List<interest_list> list, InterestActivity fragment) {
         this.mContext = context;
-        this.mList = interest_name;
+        this.interest_lists = list;
         this.interestActivity = fragment;
     }
 
@@ -41,18 +51,23 @@ public class MyInterestAdapter  extends RecyclerView.Adapter<MyInterestAdapter.H
 
     @Override
     public void onBindViewHolder(@NonNull MyInterestAdapter.Holder holder, int position) {
+        item = interest_lists.get(position);
 
-        holder.checkbox_interest.setText(mList.get(position));
+        String id = interest_lists.get(position).interest_id;
+        holder.checkbox_interest.setText(item.interest_name);
+
+        interest_ids.add(id);
+        Log.d("interest_ID++-------", String.valueOf(interest_ids));
 
     }
 
     @Override
     public int getItemCount() {
-        if (mList == null) {
-            return 0;
-        } else {
-            return mList.size();
-        }
+//        if (mList == null) {
+            return interest_lists.size();
+//        } else {
+//            return mList.size();
+//        }
     }
 
     public class Holder extends RecyclerView.ViewHolder {
