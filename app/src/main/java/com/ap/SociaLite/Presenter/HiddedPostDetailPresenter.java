@@ -1,8 +1,6 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -31,38 +29,42 @@ public class HiddedPostDetailPresenter implements HiddedPostDetailContract {
 
     @Override
     public void view_hided_post(String user_id) {
-        new RService.api().call(mContext).hidepost(user_id).enqueue(new Callback<json>() {
-            @Override
-            public void onResponse(Call<json> call, Response<json> response) {
+        try {
+            new RService.api().call(mContext).hidepost(user_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
 
-                if (response.body().status.equals("1")) {
-                    if (response.body().hide_post != null ) {
+                    if (response.body().status.equals("1")) {
+                        if (response.body().hide_post != null) {
 
-                        List<String> post_image = new ArrayList<>();
-                        for (int i = 0; i < response.body().hide_post.post_hide.size(); i++) {
-                            post_image.add(response.body().hide_post.post_hide.get(i).image);
+                            List<String> post_image = new ArrayList<>();
+                            for (int i = 0; i < response.body().hide_post.post_hide.size(); i++) {
+                                post_image.add(response.body().hide_post.post_hide.get(i).image);
+                            }
+
+                            List<String> post_description = new ArrayList<>();
+                            for (int i = 0; i < response.body().hide_post.post_hide.size(); i++) {
+                                post_description.add(response.body().hide_post.post_hide.get(i).description);
+                            }
+
+                            hiddedPostDetailActivity.rec_hidedpost_detail.setLayoutManager(new GridLayoutManager(mContext, 1));
+                            hiddedPostDetailActivity.rec_hidedpost_detail.setAdapter(new HiddedPostDetailAdapter(mContext, post_image, post_description, hiddedPostDetailActivity));
+
                         }
-
-                        List<String> post_description = new ArrayList<>();
-                        for (int i = 0; i < response.body().hide_post.post_hide.size(); i++) {
-                            post_description.add(response.body().hide_post.post_hide.get(i).description);
-                        }
-
-                        hiddedPostDetailActivity.rec_hidedpost_detail.setLayoutManager(new GridLayoutManager(mContext, 1));
-                        hiddedPostDetailActivity.rec_hidedpost_detail.setAdapter(new HiddedPostDetailAdapter(mContext, post_image, post_description, hiddedPostDetailActivity));
-
+                    } else {
+                        //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
-                } else {
-               //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<json> call, Throwable t) {
-            //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
-              //  Log.d("error", String.valueOf(t.getMessage()));
-            }
-        });
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                    //  Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
     }
 }
 

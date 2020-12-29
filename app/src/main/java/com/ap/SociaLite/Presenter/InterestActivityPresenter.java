@@ -45,8 +45,11 @@ public class InterestActivityPresenter implements InterestActivityContract {
                             for (int i = 0; i < response.body().interest_list.size(); i++) {
                                 interest_name.add(response.body().interest_list.get(i).interest_name);
                             }
+
                             interestActivity.rv_interest.setLayoutManager(new GridLayoutManager(mContext, 1));
                             interestActivity.rv_interest.setAdapter(new MyInterestAdapter(mContext, response.body().interest_list, interestActivity));
+
+                            MyInterestAdapter.interest_ids.clear();
                         }
                     } else {
                         //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
@@ -87,18 +90,17 @@ public class InterestActivityPresenter implements InterestActivityContract {
 
                         //          }
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                  //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("error", String.valueOf(t.getMessage()));
+                  //  Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                  //  Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {
-
 
         }
     }

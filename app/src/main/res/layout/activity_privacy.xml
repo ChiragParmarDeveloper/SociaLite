@@ -98,7 +98,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ToggleButton
-                    android:id="@+id/togglenotification"
+                    android:id="@+id/toggle_account"
                     android:layout_width="50dp"
                     android:layout_height="35dp"
                     android:layout_centerHorizontal="true"

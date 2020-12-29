@@ -6,13 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageView;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.InterestActivity;
-import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.Pojo.interest_list;
 import com.ap.SociaLite.R;
 
@@ -22,18 +21,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyInterestAdapter  extends RecyclerView.Adapter<MyInterestAdapter.Holder> {
+public class MyInterestAdapter extends RecyclerView.Adapter<MyInterestAdapter.Holder> {
 
     Context mContext;
     InterestActivity interestActivity;
-   // List<String> mList;
+    // List<String> mList;
 
     List<interest_list> interest_lists = new ArrayList<>();
     interest_list item;
-
+    String id;
 
     public static ArrayList<String> interest_ids = new ArrayList<>();
-
 
     public MyInterestAdapter(Context context, List<interest_list> list, InterestActivity fragment) {
         this.mContext = context;
@@ -53,21 +51,59 @@ public class MyInterestAdapter  extends RecyclerView.Adapter<MyInterestAdapter.H
     public void onBindViewHolder(@NonNull MyInterestAdapter.Holder holder, int position) {
         item = interest_lists.get(position);
 
-        String id = interest_lists.get(position).interest_id;
         holder.checkbox_interest.setText(item.interest_name);
 
-        interest_ids.add(id);
-        Log.d("interest_ID++-------", String.valueOf(interest_ids));
+        holder.checkbox_interest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(holder.checkbox_interest.isChecked())
+                {
+                    String id = interest_lists.get(position).interest_id;
+                    interest_ids.add(id);
+                    Log.d("interest_check-------", String.valueOf(interest_ids));
+
+               //     holder.checkbox_interest.setChecked(true);
+                  }
+                else
+                {
+                    Log.d("interest_uncheck-------", String.valueOf(interest_ids));
+                    interest_ids.clear();
+                }
+
+            }
+        });
+
+
+//        holder.checkbox_interest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//
+//                
+//                if (holder.checkbox_interest.isChecked()) {
+//                   id = interest_lists.get(position).interest_id;
+//                    interest_ids.add(id);
+//                    Log.d("interest_check-------", String.valueOf(interest_ids));
+//
+//                    holder.checkbox_interest.setChecked(true);
+//
+//                } else {
+//
+//                    holder.checkbox_interest.
+////                    holder.checkbox_interest.setChecked(false);
+////                    String id = interest_lists.get(0).interest_id;
+////                    interest_ids.add(id);
+//                    Log.d("interest_uncheck-------", String.valueOf(interest_ids));
+//                    new InterestActivityPresenter(mContext, interestActivity).interest();
+//                }
+//            }
+//        });
 
     }
 
     @Override
     public int getItemCount() {
-//        if (mList == null) {
-            return interest_lists.size();
-//        } else {
-//            return mList.size();
-//        }
+        return interest_lists.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {

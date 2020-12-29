@@ -52,6 +52,8 @@ public class LoginPresenter implements LoginContract {
                         if (response.body().user_details != null) {
                             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
 
+                        //    LoginActivity.account =response.body().user_details.is_private_account;
+
                             Session session = new Session(mContext);
                             Intent in = new Intent(mContext, HomeActivity.class);
                             session.setEmail_or_mobile(loginActivity.edt_email.getText().toString().trim());
