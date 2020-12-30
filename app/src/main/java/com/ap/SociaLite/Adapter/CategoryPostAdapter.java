@@ -18,11 +18,17 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.Comment;
+import com.ap.SociaLite.Activity.InterestActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
+import com.ap.SociaLite.Fragment.CategoryFragment;
+import com.ap.SociaLite.Pojo.interest_list;
+import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,13 +38,15 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
     Boolean click = true;
     String rating = "";
 
-    ArrayList Name;
-    Context context;
+    Context mContext;
+    CategoryFragment categoryFragment;
+    List<post_list> post_lists = new ArrayList<>();
+    post_list item;
 
-
-    public CategoryPostAdapter(Context context, ArrayList Name) {
-        this.context = context;
-        this.Name = Name;
+    public CategoryPostAdapter(Context context, List<post_list> list, CategoryFragment fragment) {
+        this.mContext = context;
+        this.post_lists = list;
+        this.categoryFragment = fragment;
     }
 
     @NonNull
@@ -52,14 +60,16 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CategoryPostAdapter.MyHolder holder, int position) {
+        item = post_lists.get(position);
 
-        holder.txt_name.setText((CharSequence) Name.get(position));
+    //    holder.txt_name.setText((CharSequence) Name.get(position));
+        Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                PopupMenu popup = new PopupMenu(context, holder.img_popup);
+                PopupMenu popup = new PopupMenu(mContext, holder.img_popup);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
                         .inflate(R.menu.popup_menu, popup.getMenu());
@@ -130,7 +140,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             @Override
             public void onClick(View view) {
                 rating = "1";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -140,7 +150,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             @Override
             public void onClick(View view) {
                 rating = "2";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -150,7 +160,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             @Override
             public void onClick(View view) {
                 rating = "3";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -160,7 +170,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             @Override
             public void onClick(View view) {
                 rating = "4";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -170,7 +180,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             @Override
             public void onClick(View view) {
                 rating = "5";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -187,7 +197,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
     @Override
     public int getItemCount() {
-        return Name.size();
+        return post_lists.size();
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
@@ -227,6 +237,11 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
         @BindView(R.id.rating_star5)
         ImageView rating_star5;
+
+
+        @BindView(R.id.img_category)
+        ImageView img_category;
+
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

@@ -27,4 +27,11 @@ public class json {
     @SerializedName("interest_list")
     public List<com.ap.SociaLite.Pojo.interest_list> interest_list;
 
+    @SerializedName("interest_details")
+    public List<com.ap.SociaLite.Pojo.interest_details> interest_details;
+
+    @SerializedName("post_list")
+    public List<com.ap.SociaLite.Pojo.post_list> post_list;
+
+
 }

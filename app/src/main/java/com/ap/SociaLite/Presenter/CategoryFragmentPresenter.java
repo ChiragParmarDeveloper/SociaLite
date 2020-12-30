@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ap.SociaLite.Adapter.CategoryListAdapter;
+import com.ap.SociaLite.Adapter.CategoryPostAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.CategoryFragmentContract;
@@ -60,11 +61,46 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                     //   Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 
         }
     }
+
+    @Override
+    public void Category_post_fragment(String user_id) {
+        try {
+            new RService.api().call(mContext).category_post(user_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+
+                        if (response.body().post_list != null && response.body().post_list.size() > 0) {
+                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+
+//                            List<String> interest_name = new ArrayList<>();
+//                            for (int i = 0; i < response.body().interest_list.size(); i++) {
+//                                interest_name.add(response.body().interest_list.get(i).interest_name);
+//                            }
+//
+                            categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
+                            categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext,response.body().post_list, categoryFragment));
+                        }
+                    } else {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+
 }
 

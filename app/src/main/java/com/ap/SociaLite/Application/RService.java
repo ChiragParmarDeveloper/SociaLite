@@ -30,6 +30,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
@@ -87,11 +88,22 @@ public interface RService {
     Call<json> addinterest(@Field("interest_ids[]") ArrayList<String> interest_ids,
                            @Field("user_id") String user_id);
 
-
     @FormUrlEncoded
     @POST("private_account.php")
     Call<json> account(@Field("user_id") String user_id,
                        @Field("is_private_account") String is_private_account);
+
+    @FormUrlEncoded
+    @POST("interest_list_post_page.php")
+    Call<json> interest_list_post(@Field("user_id") String user_id);
+
+
+    @FormUrlEncoded
+    @POST("post_list.php")
+    Call<json> category_post(@Field("user_id") String user_id);
+
+
+
 
 
     public class api {

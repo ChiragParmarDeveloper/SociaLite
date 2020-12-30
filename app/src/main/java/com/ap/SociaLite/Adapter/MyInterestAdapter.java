@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,8 +24,6 @@ public class MyInterestAdapter extends RecyclerView.Adapter<MyInterestAdapter.Ho
 
     Context mContext;
     InterestActivity interestActivity;
-    // List<String> mList;
-
     List<interest_list> interest_lists = new ArrayList<>();
     interest_list item;
     String id;
@@ -57,16 +54,13 @@ public class MyInterestAdapter extends RecyclerView.Adapter<MyInterestAdapter.Ho
             @Override
             public void onClick(View view) {
 
-                if(holder.checkbox_interest.isChecked())
-                {
+                if (holder.checkbox_interest.isChecked()) {
                     String id = interest_lists.get(position).interest_id;
                     interest_ids.add(id);
                     Log.d("interest_check-------", String.valueOf(interest_ids));
 
-               //     holder.checkbox_interest.setChecked(true);
-                  }
-                else
-                {
+                    //     holder.checkbox_interest.setChecked(true);
+                } else {
                     Log.d("interest_uncheck-------", String.valueOf(interest_ids));
                     interest_ids.clear();
                 }
