@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -65,6 +66,8 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.imageView)
     ImageView imageView;
 
+    String my_network;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,21 +77,23 @@ public class CameraActivity extends AppCompatActivity {
 //        TextView textView=(TextView) findViewById(R.id.textView);
 //        textView.setTextColor(Color.RED);
 //        textView.setTextSize(20);
-     //   ImageView mimageView=(ImageView) findViewById(R.id.imageView);
-        Bitmap mbitmap=((BitmapDrawable) getResources().getDrawable(R.drawable.dummy1)).getBitmap();
-        Bitmap imageRounded=Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
-        Canvas canvas=new Canvas(imageRounded);
-        Paint mpaint=new Paint();
+        //   ImageView mimageView=(ImageView) findViewById(R.id.imageView);
+        Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.dummy1)).getBitmap();
+        Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
+        Canvas canvas = new Canvas(imageRounded);
+        Paint mpaint = new Paint();
         mpaint.setAntiAlias(true);
         mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
         canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 100, 100, mpaint); // Round Image Corner 100 100 100 100
         imageView.setImageBitmap(imageRounded);
 
 
+        my_network = getIntent().getStringExtra("network_fragment");
+        Toast.makeText(getApplicationContext(), my_network, Toast.LENGTH_LONG).show();
 
     }
 
-    @OnClick({R.id.img_back,R.id.next,R.id.layout_edit,R.id.layout_lock,R.id.layout_clock,R.id.layout_filter,R.id.layout_drama})
+    @OnClick({R.id.img_back, R.id.next, R.id.layout_edit, R.id.layout_lock, R.id.layout_clock, R.id.layout_filter, R.id.layout_drama})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -97,28 +102,30 @@ public class CameraActivity extends AppCompatActivity {
                 break;
 
             case R.id.next:
-                startActivity(new Intent(CameraActivity.this,Post.class));
+                Intent in = new Intent(CameraActivity.this, Post.class);
+                in.putExtra("network_fragment", my_network);
+                startActivity(in);
                 break;
 
 
             case R.id.layout_edit:
-                startActivity(new Intent(CameraActivity.this,Text.class));
+                startActivity(new Intent(CameraActivity.this, Text.class));
                 break;
 
             case R.id.layout_lock:
-                startActivity(new Intent(CameraActivity.this,SharePost.class));
+                startActivity(new Intent(CameraActivity.this, SharePost.class));
                 break;
 
             case R.id.layout_clock:
-                startActivity(new Intent(CameraActivity.this,SchedulePost.class));
+                startActivity(new Intent(CameraActivity.this, SchedulePost.class));
                 break;
 
             case R.id.layout_filter:
-                startActivity(new Intent(CameraActivity.this,Edit.class));
+                startActivity(new Intent(CameraActivity.this, Edit.class));
                 break;
 
             case R.id.layout_drama:
-                startActivity(new Intent(CameraActivity.this,ShapeCut.class));
+                startActivity(new Intent(CameraActivity.this, ShapeCut.class));
                 break;
         }
     }

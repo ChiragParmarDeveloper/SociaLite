@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ap.SociaLite.Activity.CameraActivity;
+import com.ap.SociaLite.Activity.RegisterActivity;
+import com.ap.SociaLite.Activity.RegistrationVerificationActivity;
 import com.ap.SociaLite.Activity.SpotLightActivity;
 import com.ap.SociaLite.Adapter.CategoryPostAdapter;
 import com.ap.SociaLite.Adapter.MyNetworkAdapter;
@@ -65,7 +67,10 @@ public class NetworkFragment extends Fragment {
         network_image_constrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CameraActivity.class));
+
+                Intent in = new Intent(getActivity(), CameraActivity.class);
+                in.putExtra("network_fragment", "my_network");
+                startActivity(in);
             }
         });
 

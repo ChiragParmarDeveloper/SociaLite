@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.Session;
@@ -38,7 +39,10 @@ public class Post extends AppCompatActivity {
     @BindView(R.id.spinner)
     Spinner spinner;
 
-    String user_id;
+    @BindView(R.id.constraintLayout37)
+    ConstraintLayout constraintLayout37;
+
+    String user_id,my_network;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,14 @@ public class Post extends AppCompatActivity {
         Session session = new Session(Post.this);
         user_id = session.getUser_id();
         //     new PostPresenter(this,this).fetch_all_intrest(user_id);
+
+        my_network = getIntent().getStringExtra("network_fragment");
+        Toast.makeText(getApplicationContext(), my_network, Toast.LENGTH_LONG).show();
+
+        if(my_network !=null)
+        {
+            constraintLayout37.setVisibility(View.GONE);
+        }
 
     }
 
