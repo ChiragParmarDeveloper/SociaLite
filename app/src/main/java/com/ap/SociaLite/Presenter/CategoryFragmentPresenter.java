@@ -83,7 +83,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
 //                            }
 //
                             categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
-                            categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext,response.body().post_list, categoryFragment));
+                            categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
                         }
                     } else {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
@@ -100,7 +100,5 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
 
         }
     }
-
-
 }
 

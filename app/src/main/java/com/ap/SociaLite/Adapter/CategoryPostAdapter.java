@@ -18,11 +18,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.Comment;
-import com.ap.SociaLite.Activity.InterestActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Fragment.CategoryFragment;
-import com.ap.SociaLite.Pojo.interest_list;
 import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.R;
 import com.squareup.picasso.Picasso;
@@ -52,7 +50,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
     @NonNull
     @Override
     public CategoryPostAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_caterory_post_adapter, parent, false);
         MyHolder myHolder = new MyHolder(view);
         return myHolder;
@@ -62,8 +59,11 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
     public void onBindViewHolder(@NonNull CategoryPostAdapter.MyHolder holder, int position) {
         item = post_lists.get(position);
 
-    //    holder.txt_name.setText((CharSequence) Name.get(position));
+        //    holder.txt_name.setText((CharSequence) Name.get(position));
         Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+        holder.txt_description.setText(item.description);
+        holder.txt_rating.setText(item.rate);
+     //   String rating = item.rate;
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +81,9 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
                         switch (item.getItemId()) {
                             case R.id.hide:
-                                Toast.makeText(view.getContext(), "Clicked hide", Toast.LENGTH_SHORT).show();
+
+                                String id = post_lists.get(position).post_id;
+                                Toast.makeText(view.getContext(), id, Toast.LENGTH_SHORT).show();
                                 //startActivity(new Intent(App.this, App_Main.class));
                                 break;
 
@@ -122,17 +124,13 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             @Override
             public void onClick(View view) {
 
-                if(click == true)
-                {
+                if (click == true) {
                     holder.rating_bar.setVisibility(View.VISIBLE);
                     click = false;
-                }
-                else
-                {
+                } else {
                     holder.rating_bar.setVisibility(View.GONE);
                     click = true;
                 }
-
             }
         });
 
@@ -238,10 +236,14 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         @BindView(R.id.rating_star5)
         ImageView rating_star5;
 
-
         @BindView(R.id.img_category)
         ImageView img_category;
 
+        @BindView(R.id.txt_description)
+        TextView txt_description;
+
+        @BindView(R.id.txt_rating)
+        TextView txt_rating;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
