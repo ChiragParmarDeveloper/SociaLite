@@ -70,7 +70,7 @@ public class PostBusiness extends AppCompatActivity {
                 break;
 
             case R.id.business_create_your_card:
-//                startActivity(new Intent(PostBusiness.this,HomeActivity.class));
+                startActivity(new Intent(PostBusiness.this,AddCardActivity.class));
                 break;
 
             case R.id.business_upload_your_card:

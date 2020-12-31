@@ -75,9 +75,11 @@
             <EditText
                 android:id="@+id/card_name"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:hint="Name"
+                android:singleLine="true"
+                android:background="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -87,8 +89,8 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
                 android:src="@drawable/ic_email_orange"
-                app:layout_constraintBottom_toTopOf="@+id/email_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/name_view" />
 
@@ -96,12 +98,12 @@
             <EditText
                 android:id="@+id/card_email"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="15dp"
-                android:drawableLeft="@drawable/ic_email_orange"
-                android:drawablePadding="10dp"
+                android:background="@null"
                 android:hint="Website"
+                android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView10"
                 app:layout_constraintTop_toBottomOf="@+id/name_view" />
@@ -111,18 +113,20 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
                 android:src="@drawable/ic_mobile_orange"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/email_view" />
 
             <EditText
                 android:id="@+id/mobile_view"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="15dp"
-                android:text="Email / Mobile"
+                android:singleLine="true"
+                android:hint="Email / Mobile"
+                android:background="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView11"
                 app:layout_constraintTop_toBottomOf="@+id/email_view" />
@@ -174,8 +178,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/btn_save"

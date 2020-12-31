@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import com.ap.SociaLite.R;
 
+import butterknife.ButterKnife;
+
 public class AddCardActivity extends AppCompatActivity {
 
     ImageView img_back;
@@ -18,6 +20,9 @@ public class AddCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
+        ButterKnife.bind(this);
+
+
 
         img_back = findViewById(R.id.img_back);
         btn_cancel = findViewById(R.id.btn_cancel);

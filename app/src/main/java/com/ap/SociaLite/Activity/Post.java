@@ -30,11 +30,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Post extends AppCompatActivity {
 
-    @BindView(R.id.btn_share)
-    Button btn_share;
-
-    @BindView(R.id.img_back)
-    ImageView img_back;
+//    @BindView(R.id.btn_share)
+//    Button btn_share;
+//
+//    @BindView(R.id.img_back)
+//    ImageView img_back;
 
     @BindView(R.id.spinner)
     Spinner spinner;
@@ -42,7 +42,7 @@ public class Post extends AppCompatActivity {
     @BindView(R.id.constraintLayout37)
     ConstraintLayout constraintLayout37;
 
-    String user_id,my_network;;
+    String user_id,my_network,business_interaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,9 @@ public class Post extends AppCompatActivity {
         //     new PostPresenter(this,this).fetch_all_intrest(user_id);
 
         my_network = getIntent().getStringExtra("network_fragment");
-        Toast.makeText(getApplicationContext(), my_network, Toast.LENGTH_LONG).show();
+        business_interaction= getIntent().getStringExtra("business_fragment");
+        Toast.makeText(getApplicationContext(), business_interaction, Toast.LENGTH_LONG).show();
+
 
         if(my_network !=null)
         {

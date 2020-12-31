@@ -108,6 +108,18 @@ public interface RService {
                                   @Field("post_id") String post_id);
 
 
+    @FormUrlEncoded
+    @POST("save_post.php")
+    Call<json> dashboard_savepost(@Field("user_id") String user_id,
+                                  @Field("post_id") String post_id);
+
+    @FormUrlEncoded
+    @POST("view_card.php")
+    Call<json> card_view(@Field("user_id") String user_id);
+
+
+
+
     public class api {
         static Retrofit retrofit = null;
 

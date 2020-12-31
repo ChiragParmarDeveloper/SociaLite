@@ -73,7 +73,9 @@ public class BusinessFragment extends Fragment {
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.post_constraint:
-                startActivity(new Intent(getActivity(), CameraActivity.class));
+                Intent in = new Intent(getActivity(), CameraActivity.class);
+                in.putExtra("business_fragment", "business_interaction");
+                startActivity(in);
                 break;
         }
     }

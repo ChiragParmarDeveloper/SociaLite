@@ -66,7 +66,7 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.imageView)
     ImageView imageView;
 
-    String my_network;
+    String my_network, business_interaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +89,8 @@ public class CameraActivity extends AppCompatActivity {
 
 
         my_network = getIntent().getStringExtra("network_fragment");
-        Toast.makeText(getApplicationContext(), my_network, Toast.LENGTH_LONG).show();
+        business_interaction = getIntent().getStringExtra("business_fragment");
+        Toast.makeText(getApplicationContext(), business_interaction, Toast.LENGTH_LONG).show();
 
     }
 
@@ -102,9 +103,23 @@ public class CameraActivity extends AppCompatActivity {
                 break;
 
             case R.id.next:
-                Intent in = new Intent(CameraActivity.this, Post.class);
-                in.putExtra("network_fragment", my_network);
-                startActivity(in);
+
+                if (my_network != null) {
+                    Intent in = new Intent(CameraActivity.this, PostNetwork.class);
+                 //   in.putExtra("network_fragment", my_network);
+                    startActivity(in);
+                } else if (business_interaction != null) {
+                    Intent in = new Intent(CameraActivity.this, PostBusiness.class);
+                   // in.putExtra("network_fragment", my_network);
+                    startActivity(in);
+                } else {
+                    Intent in = new Intent(CameraActivity.this, Post.class);
+              //      in.putExtra("network_fragment", my_network);
+                    startActivity(in);
+                }
+
+           //     in.putExtra("business_fragment", business_interaction);
+
                 break;
 
 

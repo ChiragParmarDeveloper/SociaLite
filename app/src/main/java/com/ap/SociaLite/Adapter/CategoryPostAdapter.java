@@ -64,7 +64,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
         holder.txt_description.setText(item.description);
         holder.txt_rating.setText(item.rate);
-     //   String rating = item.rate;
+        //   String rating = item.rate;
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,20 +79,16 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
+                        String id = post_lists.get(position).post_id;
 
                         switch (item.getItemId()) {
                             case R.id.hide:
-
-                                String id = post_lists.get(position).post_id;
-                               // Toast.makeText(view.getContext(), categoryFragment.user_id, Toast.LENGTH_SHORT).show();
-                             //   Toast.makeText(view.getContext(), id, Toast.LENGTH_SHORT).show();
-
-                                new CategoryFragmentPresenter(mContext,categoryFragment).hide_post(categoryFragment.user_id,id);
+                                new CategoryFragmentPresenter(mContext, categoryFragment).hide_post(categoryFragment.user_id, id);
                                 new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
                                 break;
 
-                            case R.id.help:
-                                Toast.makeText(view.getContext(), "Clicked help", Toast.LENGTH_SHORT).show();
+                            case R.id.save:
+                                new CategoryFragmentPresenter(mContext, categoryFragment).category_save_post(categoryFragment.user_id, id);
                                 break;
 
                             case R.id.report:
