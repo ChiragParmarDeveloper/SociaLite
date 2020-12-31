@@ -22,6 +22,7 @@ import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Pojo.post_list;
+import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.squareup.picasso.Picasso;
 
@@ -83,8 +84,11 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                             case R.id.hide:
 
                                 String id = post_lists.get(position).post_id;
-                                Toast.makeText(view.getContext(), id, Toast.LENGTH_SHORT).show();
-                                //startActivity(new Intent(App.this, App_Main.class));
+                               // Toast.makeText(view.getContext(), categoryFragment.user_id, Toast.LENGTH_SHORT).show();
+                             //   Toast.makeText(view.getContext(), id, Toast.LENGTH_SHORT).show();
+
+                                new CategoryFragmentPresenter(mContext,categoryFragment).hide_post(categoryFragment.user_id,id);
+                                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
                                 break;
 
                             case R.id.help:

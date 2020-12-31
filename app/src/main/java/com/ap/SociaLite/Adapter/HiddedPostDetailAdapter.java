@@ -65,6 +65,9 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
 
         holder.txt_description.setText(mList_post_description.get(position));
 
+//        holder.txt_rating.setText(mList.get(position).);
+
+
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -246,6 +249,11 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
 
         @BindView(R.id.txt_description)
         TextView txt_description;
+
+        @BindView(R.id.txt_rating)
+        TextView txt_rating;
+
+
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

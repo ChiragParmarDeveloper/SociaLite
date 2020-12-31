@@ -80,19 +80,45 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                             categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
                         }
                     } else {
-                 //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-               //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-               //     Log.d("error", String.valueOf(t.getMessage()));
+                    //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {
 
         }
     }
-}
 
+    @Override
+    public void hide_post(String user_id, String post_id) {
+
+        try {
+            new RService.api().call(mContext).dashboard_hidepost(user_id, post_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+
+                    } else {
+                     //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                   // Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                   // Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+}

@@ -6,4 +6,5 @@ public interface CategoryFragmentContract {
 
     void Category_post_fragment(String user_id);
 
+    void hide_post(String user_id,String post_id);
 }

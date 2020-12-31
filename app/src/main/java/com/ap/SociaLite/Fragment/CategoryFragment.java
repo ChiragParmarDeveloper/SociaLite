@@ -35,7 +35,7 @@ public class CategoryFragment extends Fragment {
     @BindView(R.id.rv_interestlist)
     public RecyclerView rv_interestlist;
 
-    String user_id;
+    public String user_id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

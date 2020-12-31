@@ -28,25 +28,12 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         this.categoryFragment = fragment;
     }
 
-//    ArrayList CategoryNames;
-//    ArrayList CategoryImages;
-//    Context context;
-//
-//    public CategoryListAdapter(Context context, ArrayList CategoryNames, ArrayList CategoryImages) {
-//        this.context = context;
-//        this.CategoryNames = CategoryNames;
-//        this.CategoryImages = CategoryImages;
-//    }
-
-
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_category_list_adapter, parent, false);
         Holder holder = new Holder(view);
         return holder;
-
     }
 
     @Override
