@@ -59,10 +59,10 @@ public class Post extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), business_interaction, Toast.LENGTH_LONG).show();
 
 
-        if(my_network !=null)
-        {
-            constraintLayout37.setVisibility(View.GONE);
-        }
+//        if(my_network !=null)
+//        {
+//            constraintLayout37.setVisibility(View.GONE);
+//        }
 
     }
 

@@ -37,7 +37,6 @@ public class PostBusiness extends AppCompatActivity {
 
     boolean click = true;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

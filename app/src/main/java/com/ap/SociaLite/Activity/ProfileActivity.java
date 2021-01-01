@@ -1,8 +1,5 @@
 package com.ap.SociaLite.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,62 +8,79 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.ap.SociaLite.Fragment.BusinessFragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Fragment.Profile_fragments.BusinessInteractionFragment;
 import com.ap.SociaLite.Fragment.Profile_fragments.TimeLineFragment;
+import com.ap.SociaLite.Presenter.ProfileActivityPresenter;
 import com.ap.SociaLite.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    @BindView(R.id.img_back)
     ImageView img_back;
-    Button timeline_btn,business_btn,spotlight_btn;
-    FrameLayout frame_profile;
-    ConstraintLayout constraint_setting,connections;
+
+    @BindView(R.id.constraint_setting)
+    ConstraintLayout constraint_setting;
+
+    @BindView(R.id.connections)
+    ConstraintLayout connections;
+
+    @BindView(R.id.profile_add_cover)
     ImageView profile_add_cover;
+
+    @BindView(R.id.timeline_btn)
+    Button timeline_btn;
+
+    @BindView(R.id.business_btn)
+    Button  business_btn;
+
+    @BindView(R.id.spotlight_btn)
+    Button spotlight_btn;
+
+    @BindView(R.id.frame_profile)
+    FrameLayout frame_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        ButterKnife.bind(this);
 
+        Session session = new Session(ProfileActivity.this);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new TimeLineFragment()).commit();
 
-        img_back = findViewById(R.id.img_back);
-        timeline_btn = findViewById(R.id.timeline_btn);
-        business_btn = findViewById(R.id.business_btn);
-        spotlight_btn = findViewById(R.id.spotlight_btn);
-        frame_profile = findViewById(R.id.frame_profile);
-        constraint_setting = findViewById(R.id.constraint_setting);
-        profile_add_cover = findViewById(R.id.profile_add_cover);
-        connections = findViewById(R.id.connections);
+        new ProfileActivityPresenter(this,this).profile_my_profile(session.getUser_id());
+    }
 
-
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @OnClick({R.id.img_back, R.id.constraint_setting, R.id.connections,R.id.profile_add_cover,R.id.timeline_btn,R.id.business_btn,R.id.spotlight_btn})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
                 onBackPressed();
-            }
-        });
+                break;
 
-        constraint_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent edit = new Intent(ProfileActivity.this,EditProfileActivity.class);
+            case R.id.constraint_setting:
+                Intent edit = new Intent(ProfileActivity.this, EditProfileActivity.class);
                 startActivity(edit);
-            }
-        });
+                break;
 
-        connections.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent connection = new Intent(ProfileActivity.this,ProfileConnectionsActivity.class);
+            case R.id.connections:
+                Intent connection = new Intent(ProfileActivity.this, ProfileConnectionsActivity.class);
                 startActivity(connection);
-            }
-        });
+                break;
 
-        timeline_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            case R.id.profile_add_cover:
+                startActivity(new Intent(ProfileActivity.this, ProfileConnectionActivity.class));
+                break;
+
+            case R.id.timeline_btn:
                 timeline_btn.setBackgroundColor(Color.parseColor("#EE6851"));
                 timeline_btn.setTextColor(Color.WHITE);
                 business_btn.setBackground(getResources().getDrawable(R.drawable.border_square_rs));
@@ -75,12 +89,9 @@ public class ProfileActivity extends AppCompatActivity {
                 spotlight_btn.setTextColor(Color.BLACK);
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new TimeLineFragment()).commit();
-            }
-        });
+                break;
 
-        business_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            case R.id.business_btn:
                 business_btn.setBackgroundColor(Color.parseColor("#EE6851"));
                 business_btn.setTextColor(Color.WHITE);
                 timeline_btn.setBackground(getResources().getDrawable(R.drawable.border_square_rs));
@@ -89,13 +100,9 @@ public class ProfileActivity extends AppCompatActivity {
                 spotlight_btn.setTextColor(Color.BLACK);
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new BusinessInteractionFragment()).commit();
-            }
-        });
+                break;
 
-        spotlight_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+            case R.id.spotlight_btn:
                 spotlight_btn.setBackgroundColor(Color.parseColor("#EE6851"));
                 spotlight_btn.setTextColor(Color.WHITE);
                 timeline_btn.setBackground(getResources().getDrawable(R.drawable.border_square_rs));
@@ -103,17 +110,11 @@ public class ProfileActivity extends AppCompatActivity {
                 business_btn.setBackground(getResources().getDrawable(R.drawable.border_square_rs));
                 business_btn.setTextColor(Color.BLACK);
 
-                Intent spotlight = new Intent(ProfileActivity.this,SpotlightActivityForUser.class);
+                Intent spotlight = new Intent(ProfileActivity.this, SpotlightActivityForUser.class);
                 startActivity(spotlight);
-            }
-        });
+                break;
 
-        profile_add_cover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,ProfileConnectionActivity.class));
-            }
-        });
-
+        }
     }
+
 }

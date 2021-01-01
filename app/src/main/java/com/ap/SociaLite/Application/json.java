@@ -36,6 +36,4 @@ public class json {
     @SerializedName("user_card")
     public List<com.ap.SociaLite.Pojo.user_card> user_card;
 
-
-
 }

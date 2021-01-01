@@ -117,7 +117,16 @@ public interface RService {
     @POST("view_card.php")
     Call<json> card_view(@Field("user_id") String user_id);
 
+    @FormUrlEncoded
+    @POST("create_card.php")
+    Call<json> create_card(@Field("user_id") String user_id,
+                                    @Field("name") String name,
+                                    @Field("website") String website,
+                                    @Field("mobile") String mobile);
 
+    @FormUrlEncoded
+    @POST("my_profile.php")
+    Call<json> my_profileActivity(@Field("user_id") String user_id);
 
 
     public class api {

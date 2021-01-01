@@ -34,4 +34,12 @@ public class user_details {
     @SerializedName("password")
     public String password;
 
+    @SerializedName("cover_photo")
+    public String cover_photo;
+
+    @SerializedName("connection")
+    public String connection;
+
+
+
 }
