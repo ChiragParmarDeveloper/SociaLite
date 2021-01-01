@@ -17,7 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Activity.Comment;
+import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.R;
@@ -178,7 +178,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
         holder.layout_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(view.getContext(), Comment.class);
+                Intent in = new Intent(view.getContext(), CommentActivity.class);
                 view.getContext().startActivity(in);
             }
         });

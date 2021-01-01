@@ -36,4 +36,12 @@ public class json {
     @SerializedName("user_card")
     public List<com.ap.SociaLite.Pojo.user_card> user_card;
 
+    @SerializedName("my_profile_user_details")
+    public List<com.ap.SociaLite.Pojo.my_profile_user_details> my_profile_user_details;
+
+    @SerializedName("comments")
+    public com.ap.SociaLite.Pojo.comments comments;
+
+
+
 }

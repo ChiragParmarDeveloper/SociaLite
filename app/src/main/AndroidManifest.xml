@@ -44,7 +44,7 @@
         <activity android:name=".Activity.Notification" />
         <activity android:name=".Activity.Report_Status" />
         <activity android:name=".Activity.Report" />
-        <activity android:name=".Activity.Comment" />
+        <activity android:name=".Activity.CommentActivity" />
         <activity android:name=".Activity.ShareToFriend" />
         <activity android:name=".Activity.ShapeCut" />
         <activity android:name=".Activity.PropDrama" />

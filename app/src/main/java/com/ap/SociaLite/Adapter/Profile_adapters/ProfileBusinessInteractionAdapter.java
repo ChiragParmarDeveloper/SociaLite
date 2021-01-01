@@ -19,11 +19,10 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Activity.Comment;
+import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Activity.ViewCardActivity;
-import com.ap.SociaLite.Adapter.BusinessInteractionAdapter;
 import com.ap.SociaLite.R;
 
 import java.util.ArrayList;
@@ -131,7 +130,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
         holder.layout_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(view.getContext(), Comment.class);
+                Intent in = new Intent(view.getContext(), CommentActivity.class);
                 view.getContext().startActivity(in);
             }
         });

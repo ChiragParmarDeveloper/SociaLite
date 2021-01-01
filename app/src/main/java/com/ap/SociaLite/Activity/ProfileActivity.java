@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -16,6 +17,7 @@ import com.ap.SociaLite.Fragment.Profile_fragments.BusinessInteractionFragment;
 import com.ap.SociaLite.Fragment.Profile_fragments.TimeLineFragment;
 import com.ap.SociaLite.Presenter.ProfileActivityPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,13 +41,28 @@ public class ProfileActivity extends AppCompatActivity {
     Button timeline_btn;
 
     @BindView(R.id.business_btn)
-    Button  business_btn;
+    Button business_btn;
 
     @BindView(R.id.spotlight_btn)
     Button spotlight_btn;
 
     @BindView(R.id.frame_profile)
     FrameLayout frame_profile;
+
+    @BindView(R.id.circularImageView6)
+    public CircularImageView circularImageView6;
+
+    @BindView(R.id.imageView12)
+    public ImageView imageView12;
+
+    @BindView(R.id.user_name)
+    public TextView user_name;
+
+    @BindView(R.id.textView16)
+    public TextView textView16;
+
+    @BindView(R.id.textView10)
+    public TextView textView10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +73,10 @@ public class ProfileActivity extends AppCompatActivity {
         Session session = new Session(ProfileActivity.this);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new TimeLineFragment()).commit();
 
-        new ProfileActivityPresenter(this,this).profile_my_profile(session.getUser_id());
+        new ProfileActivityPresenter(this, this).profile_my_profile(session.getUser_id());
     }
 
-    @OnClick({R.id.img_back, R.id.constraint_setting, R.id.connections,R.id.profile_add_cover,R.id.timeline_btn,R.id.business_btn,R.id.spotlight_btn})
+    @OnClick({R.id.img_back, R.id.constraint_setting, R.id.connections, R.id.profile_add_cover, R.id.timeline_btn, R.id.business_btn, R.id.spotlight_btn})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:

@@ -426,14 +426,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    android:src="@drawable/dummy1" />
+                    android:src="@drawable/ic_user_icon" />
 
             </androidx.cardview.widget.CardView>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

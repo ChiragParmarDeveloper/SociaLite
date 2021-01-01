@@ -120,13 +120,31 @@ public interface RService {
     @FormUrlEncoded
     @POST("create_card.php")
     Call<json> create_card(@Field("user_id") String user_id,
-                                    @Field("name") String name,
-                                    @Field("website") String website,
-                                    @Field("mobile") String mobile);
+                           @Field("name") String name,
+                           @Field("website") String website,
+                           @Field("mobile") String mobile);
 
     @FormUrlEncoded
     @POST("my_profile.php")
     Call<json> my_profileActivity(@Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("add_post_rating.php")
+    Call<json> give_rating(@Field("user_id") String user_id,
+                           @Field("post_id") String post_id,
+                           @Field("rate") String rate);
+
+    @FormUrlEncoded
+    @POST("add_post_comment.php")
+    Call<json> add_comment_post(@Field("user_id") String user_id,
+                                @Field("post_id") String post_id,
+                                @Field("comment") String comment);
+
+
+    @FormUrlEncoded
+    @POST("fetch_comments.php")
+    Call<json> fetch_comments( @Field("post_id") String post_id);
+
 
 
     public class api {

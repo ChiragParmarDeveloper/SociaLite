@@ -17,7 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Activity.Comment;
+import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Fragment.CategoryFragment;
@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
 public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapter.MyHolder> {
 
     Boolean click = true;
-    String rating = "";
+    String rate = "";
 
     Context mContext;
     CategoryFragment categoryFragment;
@@ -59,7 +59,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
     @Override
     public void onBindViewHolder(@NonNull CategoryPostAdapter.MyHolder holder, int position) {
         item = post_lists.get(position);
-
+        String id = post_lists.get(position).post_id;
         //    holder.txt_name.setText((CharSequence) Name.get(position));
         Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
         holder.txt_description.setText(item.description);
@@ -79,7 +79,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        String id = post_lists.get(position).post_id;
+
 
                         switch (item.getItemId()) {
                             case R.id.hide:
@@ -137,8 +137,9 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "1";
-                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "1";
+                new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id,id,rate);
+                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -147,8 +148,9 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         holder.rating_star2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "2";
-                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "2";
+                new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id,id,rate);
+                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -157,8 +159,10 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         holder.rating_star3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "3";
-                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "3";
+                new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id,id,rate);
+                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
+
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -167,8 +171,10 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         holder.rating_star4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "4";
-                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "4";
+                new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id,id,rate);
+                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
+
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -177,8 +183,9 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         holder.rating_star5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "5";
-                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "5";
+                new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id,id,rate);
+                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -187,7 +194,8 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         holder.layout_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(view.getContext(), Comment.class);
+                Intent in = new Intent(view.getContext(), CommentActivity.class);
+                in.putExtra("post_id",id);
                 view.getContext().startActivity(in);
             }
         });

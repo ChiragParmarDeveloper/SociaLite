@@ -46,7 +46,6 @@ public class EditProfilePresenter implements EditProfileContract {
                                 Picasso.get().load(response.body().user_details.profile_pic).placeholder(R.mipmap.ic_launcher).into(editProfileActivity.schedule_post_image);
                             }
 
-
                             editProfileActivity.edt_username.setText(response.body().user_details.username);
                             editProfileActivity.edt_email.setText(response.body().user_details.email);
                             editProfileActivity.edt_no.setText(response.body().user_details.mobile_number);

@@ -9,4 +9,6 @@ public interface CategoryFragmentContract {
     void hide_post(String user_id,String post_id);
 
     void category_save_post(String user_id,String post_id);
+
+    void rating_post(String user_id,String post_id,String rate);
 }
