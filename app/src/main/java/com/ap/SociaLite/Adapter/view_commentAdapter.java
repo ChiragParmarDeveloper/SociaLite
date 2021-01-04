@@ -29,6 +29,7 @@ public class view_commentAdapter extends RecyclerView.Adapter<view_commentAdapte
     CommentActivity commentActivity;
     List<comments> comments;
     comments item;
+  //  List<String> mList;
 
     public view_commentAdapter(Context context, List<comments> list, CommentActivity fragment) {
         this.mContext = context;
@@ -48,14 +49,25 @@ public class view_commentAdapter extends RecyclerView.Adapter<view_commentAdapte
     public void onBindViewHolder(@NonNull view_commentAdapter.Holder holder, int position) {
         item = comments.get(position);
 
+//        holder.viewer_name.setText(item.comment);
+//        Log.d("comment",item.comment);
+
+        Log.d("service",item.comment);
         holder.viewer_name.setText(item.comment);
-        Log.d("comment",item.comment);
+
+      //  holder.viewer_name.setText(comments.get(0).comment);
+
+
 
     }
 
     @Override
     public int getItemCount() {
-        return comments.size();
+        if (comments == null) {
+            return 0;
+        } else {
+            return comments.size();
+        }
     }
 
     public class Holder extends RecyclerView.ViewHolder {

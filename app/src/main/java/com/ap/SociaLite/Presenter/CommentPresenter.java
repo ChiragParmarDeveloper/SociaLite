@@ -13,6 +13,9 @@ import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.CommentContract;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,10 +69,16 @@ public class CommentPresenter implements CommentContract {
                         if(response.body().comments.comments !=null && response.body().comments.comments.size() > 0 )
 
                         {
-                            commentActivity.rv_view_comment.setLayoutManager(new GridLayoutManager(mContext, 1));
-                            commentActivity.rv_view_comment.setAdapter(new view_commentAdapter(mContext, response.body().comments.comments, commentActivity));
 
-                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+//                            List<String> comments_list = new ArrayList<>();
+//                            for (int i = 0; i < response.body().comments.comments.size(); i++) {
+//                                comments_list.add(response.body().comments.comments.get(i).comment);
+//                                Log.d("service_activity", response.body().comments.comments.get(i).comment);
+//                            }
+
+                            commentActivity.rv_view_comment.setLayoutManager(new GridLayoutManager(mContext, 1));
+                            commentActivity.rv_view_comment.setAdapter(new view_commentAdapter(mContext,response.body().comments.comments, commentActivity));
+
                         }
 
                     } else {

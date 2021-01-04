@@ -412,7 +412,7 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/img_upload" />
+                            app:srcCompat="@drawable/ic_user_icon" />
 
 
                         <TextView
@@ -444,12 +444,11 @@
                         android:orientation="horizontal"
                         app:layout_constraintTop_toBottomOf="@+id/layout">
 
-
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/img_upload" />
+                            app:srcCompat="@drawable/ic_user_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -480,11 +479,12 @@
                         app:layout_constraintTop_toBottomOf="@+id/layout1" />
 
                     <TextView
+                        android:id="@+id/txt_allcomment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="View All 5 Comments"
-                        android:textSize="9sp"
+                        android:text="View All Comments"
+                        android:textSize="11sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/layout1" />
 
@@ -499,7 +499,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/img_upload"
+                    android:src="@drawable/ic_user_icon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.50"
                     app:layout_constraintStart_toStartOf="parent"

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ap.SociaLite.Adapter.CategoryListAdapter;
 import com.ap.SociaLite.Adapter.CategoryPostAdapter;
+import com.ap.SociaLite.Adapter.view_commentAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.CategoryFragmentContract;
@@ -168,4 +169,6 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
 
         }
     }
+
+
 }
