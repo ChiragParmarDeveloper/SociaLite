@@ -2,6 +2,7 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -213,10 +214,55 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             }
         });
 
-        view_comment(id);
-     //   new CategoryFragmentPresenter(mContext, categoryFragment).view_comment(id);
+        try {
+            new RService.api().call(mContext).fetch_comments(id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
 
+                    if (response.body().status.equals("1")) {
+
+                        if (response.body().comments.comments != null && response.body().comments.comments.size() > 0) {
+
+                            Log.d("commnet_new", String.valueOf(response.body().comments.comments.size()));
+                            holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).user_name);
+
+                            holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).comment);
+
+                         //   holder.txt_comment_pos_0.setText(response.body().comments.comments.get(0).comment);
+
+                        }
+                        else
+                        {
+                            holder.layout.setVisibility(View.GONE);
+                        }
+
+                        if (response.body().comments.comments != null && response.body().comments.comments.size() > 1) {
+
+                            holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).user_name);
+                            holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).comment);
+
+                        }
+                        else
+                        {
+                            holder.layout1.setVisibility(View.GONE);
+                        }
+
+                    } else {
+                        //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //  Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
     }
+
 
     @Override
     public int getItemCount() {
@@ -271,7 +317,30 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         TextView txt_rating;
 
         @BindView(R.id.txt_allcomment)
-        public TextView txt_allcomment;
+        TextView txt_allcomment;
+
+        @BindView(R.id.txt_name_position_0)
+        TextView txt_name_position_0;
+
+        @BindView(R.id.txt_comment_pos_0)
+        TextView txt_comment_pos_0;
+
+
+        @BindView(R.id.txt_name_pos_1)
+        TextView txt_name_pos_1;
+
+        @BindView(R.id.txt_comment_pos_1)
+        TextView txt_comment_pos_1;
+
+
+        @BindView(R.id.layout)
+        LinearLayout layout;
+
+        @BindView(R.id.layout1)
+        LinearLayout layout1;
+
+
+
 
 
         public MyHolder(@NonNull View itemView) {
@@ -279,46 +348,4 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             ButterKnife.bind(this, itemView);
         }
     }
-
-    public void view_comment(String post_id) {
-        try {
-            new RService.api().call(mContext).fetch_comments(post_id).enqueue(new Callback<json>() {
-                @Override
-                public void onResponse(Call<json> call, Response<json> response) {
-
-                    if (response.body().status.equals("1")) {
-
-                        if(response.body().comments.comments !=null && response.body().comments.comments.size() > 0 )
-
-                        {
-                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-//                            List<String> comments_list = new ArrayList<>();
-//                            for (int i = 0; i < response.body().comments.comments.size(); i++) {
-//                                comments_list.add(response.body().comments.comments.get(i).comment);
-//                                Log.d("service_activity", response.body().comments.comments.get(i).comment);
-//                            }
-
-
-                            //    commentActivity.rv_view_comment.setLayoutManager(new GridLayoutManager(mContext, 1));
-                            //   commentActivity.rv_view_comment.setAdapter(new view_commentAdapter(mContext,comments_list, commentActivity));
-
-                        }
-
-                    } else {
-                        //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<json> call, Throwable t) {
-                    //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    //  Log.d("error", String.valueOf(t.getMessage()));
-                }
-            });
-        } catch (Exception e) {
-
-        }
-    }
-
-
 }
