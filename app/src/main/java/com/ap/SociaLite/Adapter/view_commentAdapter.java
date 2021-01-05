@@ -40,7 +40,7 @@ public class view_commentAdapter extends RecyclerView.Adapter<view_commentAdapte
     @NonNull
     @Override
     public view_commentAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewes_rs, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.comment_rs, parent, false);
         Holder holder = new Holder(view);
         return holder;
     }
@@ -53,8 +53,8 @@ public class view_commentAdapter extends RecyclerView.Adapter<view_commentAdapte
 //        Log.d("comment",item.comment);
 
         Log.d("service",item.comment);
-        holder.viewer_name.setText(item.comment);
-
+        holder.viewer_name.setText(item.user_name);
+        holder.viewer_comment.setText(item.comment);
       //  holder.viewer_name.setText(comments.get(0).comment);
 
 
@@ -77,6 +77,11 @@ public class view_commentAdapter extends RecyclerView.Adapter<view_commentAdapte
 
         @BindView(R.id.viewer_profile)
         CircularImageView viewer_profile;
+
+        @BindView(R.id.viewer_comment)
+        TextView viewer_comment;
+
+
 
         public Holder(@NonNull View itemView) {
             super(itemView);

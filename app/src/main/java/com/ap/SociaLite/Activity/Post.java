@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Presenter.PostPresenter;
 import com.ap.SociaLite.R;
 
 import butterknife.BindView;
@@ -27,13 +28,12 @@ public class Post extends AppCompatActivity {
     ImageView imageView;
 
     @BindView(R.id.spinner)
-    Spinner spinner;
+    public Spinner spinner;
 
     @BindView(R.id.constraintLayout37)
     ConstraintLayout constraintLayout37;
 
     String user_id, my_network, business_interaction;
-    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +43,15 @@ public class Post extends AppCompatActivity {
 
         Session session = new Session(Post.this);
         user_id = session.getUser_id();
-        //     new PostPresenter(this,this).fetch_all_intrest(user_id);
 
-        if(getIntent().hasExtra("byteArray"))
-        {
-          //  ImageView previewThumbnail = new ImageView(this);
+        if (getIntent().hasExtra("byteArray")) {
             Bitmap b = BitmapFactory.decodeByteArray(
-                    getIntent().getByteArrayExtra("byteArray"),0,getIntent().getByteArrayExtra("byteArray").length);
+                    getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
             imageView.setImageBitmap(b);
         }
+
+        new PostPresenter(this, this).fetch_my_intrest(user_id);
+
     }
 
     @OnClick({R.id.img_back, R.id.btn_share})

@@ -38,7 +38,6 @@ public class CommentPresenter implements CommentContract {
                 public void onResponse(Call<json> call, Response<json> response) {
 
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         commentActivity.edt_comment.getText().clear();
                     } else {
                         //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
@@ -69,13 +68,6 @@ public class CommentPresenter implements CommentContract {
                         if(response.body().comments.comments !=null && response.body().comments.comments.size() > 0 )
 
                         {
-
-//                            List<String> comments_list = new ArrayList<>();
-//                            for (int i = 0; i < response.body().comments.comments.size(); i++) {
-//                                comments_list.add(response.body().comments.comments.get(i).comment);
-//                                Log.d("service_activity", response.body().comments.comments.get(i).comment);
-//                            }
-
                             commentActivity.rv_view_comment.setLayoutManager(new GridLayoutManager(mContext, 1));
                             commentActivity.rv_view_comment.setAdapter(new view_commentAdapter(mContext,response.body().comments.comments, commentActivity));
 

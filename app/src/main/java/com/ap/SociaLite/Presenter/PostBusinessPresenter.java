@@ -5,9 +5,10 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import com.ap.SociaLite.Activity.Post;
+import com.ap.SociaLite.Activity.PostBusiness;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
-import com.ap.SociaLite.Contract.PostContract;
+import com.ap.SociaLite.Contract.PostBusinessContract;
 import com.ap.SociaLite.R;
 
 import java.util.ArrayList;
@@ -17,15 +18,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostPresenter implements PostContract {
+public class PostBusinessPresenter implements PostBusinessContract {
+
 
     public Context mContext;
-    public Post post;
+    public PostBusiness postBusiness;
 
-    public PostPresenter(Context context, Post fragment) {
+    public PostBusinessPresenter(Context context, PostBusiness fragment) {
         this.mContext = context;
-        this.post = fragment;
+        this.postBusiness = fragment;
     }
+
+
+
+
 
     @Override
     public void fetch_my_intrest(String user_id) {
@@ -44,9 +50,10 @@ public class PostPresenter implements PostContract {
                                 category.add(response.body().interest_details.get(i).interest_name);
                             }
 
+
                             ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(mContext, R.layout.spinner_style, category);
                             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            post.spinner.setAdapter(spinnerAdapter);
+                            postBusiness.spinner.setAdapter(spinnerAdapter);
 
                         }
                     } else {
@@ -65,4 +72,3 @@ public class PostPresenter implements PostContract {
         }
     }
 }
-

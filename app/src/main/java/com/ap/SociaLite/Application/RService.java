@@ -93,8 +93,8 @@ public interface RService {
                        @Field("is_private_account") String is_private_account);
 
     @FormUrlEncoded
-    @POST("interest_list_post_page.php")
-    Call<json> interest_list_post(@Field("user_id") String user_id);
+    @POST("my_interest_list.php")
+    Call<json> my_interest_list(@Field("user_id") String user_id);
 
 
     @FormUrlEncoded
@@ -145,6 +145,10 @@ public interface RService {
     @POST("fetch_comments.php")
     Call<json> fetch_comments( @Field("post_id") String post_id);
 
+
+    @FormUrlEncoded
+    @POST("my_post.php")
+    Call<json> timeline_my_post(@Field("user_id") String user_id);
 
 
     public class api {

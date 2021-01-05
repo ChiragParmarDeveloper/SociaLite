@@ -24,10 +24,6 @@ public class post_list {
     @SerializedName("in_bussiness_interaction")
     public String in_bussiness_interaction;
 
-
-    @SerializedName("comments")
-    public List<String> comments;
-
-
-
+//    @SerializedName("comments")
+//    public List<String> comments;
 }
