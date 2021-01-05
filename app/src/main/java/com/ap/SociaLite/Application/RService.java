@@ -151,6 +151,13 @@ public interface RService {
     Call<json> timeline_my_post(@Field("user_id") String user_id);
 
 
+
+    @FormUrlEncoded
+    @POST("my_bussiness_post.php")
+    Call<json> my_bussiness_post(@Field("user_id") String user_id);
+
+
+
     public class api {
         static Retrofit retrofit = null;
 
