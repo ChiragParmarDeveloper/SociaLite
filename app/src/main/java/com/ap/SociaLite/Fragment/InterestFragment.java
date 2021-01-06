@@ -44,7 +44,7 @@ public class InterestFragment extends Fragment {
     private InterestPostAdapter interestPostAdapter;
 
     ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name", "Name", "Name", "Name"));
-
+public String user_id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +53,7 @@ public class InterestFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_interest, container, false);
         ButterKnife.bind(this, view);
         Session session = new Session(getActivity());
+        user_id=session.getUser_id();
         //-----------------------------for post----------------------------------------
         intrest_post_recycler = view.findViewById(R.id.intrest_post_recycler);
         layoutManager = new GridLayoutManager(getActivity(), 1);
@@ -101,7 +102,10 @@ public class InterestFragment extends Fragment {
         // ScrollingPagerIndicator recyclerIndicator = findViewById(R.id.indicator);
         // indicator.addOnAttachStateChangeListener((View.OnAttachStateChangeListener) recyclerview_categorylist);
 
-        new InterestFragmentPresenter(getActivity(), this).fetch_all_intrest(session.getUser_id());
+     //   new InterestFragmentPresenter(getActivity(), this).fetch_all_intrest(user_id);
+
+        new InterestFragmentPresenter(getActivity(), this).fetch_my_intrest(user_id);
+
         return view;
     }
 

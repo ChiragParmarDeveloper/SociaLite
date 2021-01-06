@@ -15,6 +15,8 @@ import com.ap.SociaLite.Fragment.BusinessFragment;
 import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.Pojo.interest_details;
+import com.ap.SociaLite.Presenter.BusinessFragmentPresenter;
+import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -59,6 +61,14 @@ public class BusinessListAdapter  extends RecyclerView.Adapter<BusinessListAdapt
         } else {
             holder.img_right.setImageDrawable(plus_favorite);
         }
+
+        holder.img_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new BusinessFragmentPresenter(mContext,businessFragment).update_new_intrests(businessFragment.user_id,id);
+                new BusinessFragmentPresenter(mContext,businessFragment).fetch_all_intrest(businessFragment.user_id);
+            }
+        });
 
         //   int realposition = position % mList.size();
 

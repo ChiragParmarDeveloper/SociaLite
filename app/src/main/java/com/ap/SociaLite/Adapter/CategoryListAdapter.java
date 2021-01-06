@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Pojo.interest_details;
+import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -57,6 +58,14 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         } else {
             holder.img_right.setImageDrawable(plus_favorite);
         }
+        holder.img_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CategoryFragmentPresenter(mContext,categoryFragment).update_new_intrests(categoryFragment.user_id,id);
+                new CategoryFragmentPresenter(mContext, categoryFragment).fetch_all_intrest(categoryFragment.user_id);
+            }
+        });
+
 
         //   int realposition = position % mList.size();
 

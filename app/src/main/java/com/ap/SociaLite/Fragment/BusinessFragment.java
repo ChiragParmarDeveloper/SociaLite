@@ -48,7 +48,7 @@ public class BusinessFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
 
     ArrayList Name = new ArrayList<>(Arrays.asList("Name 1", "Name 2", "Name 3", "Name 4", "Name 5"));
-
+    public String user_id;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,6 +56,7 @@ public class BusinessFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business, container, false);
         ButterKnife.bind(this, view);
         Session session = new Session(getActivity());
+        user_id=session.getUser_id();
      //   post_constraint = view.findViewById(R.id.post_constraint);
 
         //---------------------------------------------for post-----------------------------------------

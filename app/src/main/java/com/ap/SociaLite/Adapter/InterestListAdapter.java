@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.Pojo.interest_details;
+import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
+import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -51,14 +53,27 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
         holder.txt_iconname.setText(item.interest_name);
         Picasso.get().load(item.interest_image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
 
-        Drawable plus_favorite = mContext.getDrawable(R.drawable.ic_category_plus);
-        Drawable right_favorite = mContext.getDrawable(R.drawable.ic_category_right);
+//        Drawable plus_favorite = mContext.getDrawable(R.drawable.ic_category_plus);
+//        Drawable right_favorite = mContext.getDrawable(R.drawable.ic_category_right);
 
-        if (item.flag.equals("1")) {
-            holder.img_right.setVisibility(View.VISIBLE);
-        } else {
-            holder.img_right.setImageDrawable(plus_favorite);
-        }
+//        if (item.flag.equals("1")) {
+//            holder.img_right.setVisibility(View.VISIBLE);
+//        } else {
+//            holder.img_right.setImageDrawable(plus_favorite);
+//        }
+
+//        holder.img_right.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                new InterestFragmentPresenter(mContext,interestFragment).update_new_intrests(interestFragment.user_id,id);
+//                new InterestFragmentPresenter(mContext, interestFragment).fetch_all_intrest(interestFragment.user_id);
+//            }
+//        });
+
+
+
+
+
 
         //   int realposition = position % mList.size();
 
