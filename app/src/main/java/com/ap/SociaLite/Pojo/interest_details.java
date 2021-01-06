@@ -17,6 +17,4 @@ public class interest_details {
     @SerializedName("flag")
     public String flag;
 
-
-
 }

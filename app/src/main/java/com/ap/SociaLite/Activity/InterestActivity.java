@@ -49,10 +49,7 @@ public class InterestActivity extends AppCompatActivity {
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.btn_done:
-
-
                 new InterestActivityPresenter(this, this).add_user_intrest(user_id,MyInterestAdapter.interest_ids);
-
                 break;
 
             case R.id.img_back:

@@ -17,6 +17,7 @@ import com.ap.SociaLite.Activity.CameraActivity;
 import com.ap.SociaLite.Adapter.BusinessInteractionAdapter;
 import com.ap.SociaLite.Adapter.CategoryListAdapter;
 import com.ap.SociaLite.Adapter.MyNetworkAdapter;
+import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Presenter.BusinessFragmentPresenter;
 import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
@@ -31,9 +32,9 @@ import butterknife.OnClick;
 
 public class BusinessFragment extends Fragment {
 
-    public BusinessFragment() {
-        // Required empty public constructor
-    }
+//    public BusinessFragment() {
+//        // Required empty public constructor
+//    }
     @BindView(R.id.post_constraint)
     ConstraintLayout post_constraint;
 
@@ -54,6 +55,7 @@ public class BusinessFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_business, container, false);
         ButterKnife.bind(this, view);
+        Session session = new Session(getActivity());
      //   post_constraint = view.findViewById(R.id.post_constraint);
 
         //---------------------------------------------for post-----------------------------------------
@@ -64,7 +66,7 @@ public class BusinessFragment extends Fragment {
         businessInteractionAdapter = new BusinessInteractionAdapter(Name,getActivity());
         recycleview_business_post.setAdapter(businessInteractionAdapter);
 
-        new BusinessFragmentPresenter(getActivity(),this).interest();
+        new BusinessFragmentPresenter(getActivity(),this).fetch_all_intrest(session.getUser_id());
 
         return view;
     }

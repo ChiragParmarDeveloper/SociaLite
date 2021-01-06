@@ -2,7 +2,8 @@ package com.ap.SociaLite.Contract;
 
 public interface CategoryFragmentContract {
 
-    void interest();
+    void fetch_all_intrest(String user_id);
+    //post page dashboard category + icon
 
     void Category_post_fragment(String user_id);
 

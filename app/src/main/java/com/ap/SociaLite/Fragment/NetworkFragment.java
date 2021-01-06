@@ -29,9 +29,9 @@ import butterknife.ButterKnife;
 public class NetworkFragment extends Fragment {
 
 
-    public NetworkFragment() {
-        // Required empty public constructor
-    }
+//    public NetworkFragment() {
+//        // Required empty public constructor
+//    }
 
     @BindView(R.id.recycleview_network_post)
     RecyclerView recycleview_network_post;

@@ -1,17 +1,13 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.ap.SociaLite.Adapter.CategoryListAdapter;
 import com.ap.SociaLite.Adapter.InterestListAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
-import com.ap.SociaLite.Contract.CategoryFragmentContract;
 import com.ap.SociaLite.Contract.InterestFragmentContract;
-import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Fragment.InterestFragment;
 
 import java.util.ArrayList;
@@ -32,32 +28,44 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
     }
 
     @Override
-    public void interest() {
-        new RService.api().call(mContext).interest_list().enqueue(new Callback<json>() {
-            @Override
-            public void onResponse(Call<json> call, Response<json> response) {
-                if (response.body().status.equals("1")) {
+    public void fetch_all_intrest(String user_id) {
+        try {
+            new RService.api().call(mContext).interest_list_post_page(user_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
 
-                    if (response.body().interest_list != null && response.body().interest_list.size() > 0) {
-                        List<String> interest_name = new ArrayList<>();
-                        for (int i = 0; i < response.body().interest_list.size(); i++) {
-                            interest_name.add(response.body().interest_list.get(i).interest_name);
+                        if (response.body().interest_details != null && response.body().interest_details.size() > 0) {
+                            //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+
+//                            List<String> interest_name = new ArrayList<>();
+//                            for (int i = 0; i < response.body().interest_details.size(); i++) {
+//                                interest_name.add(response.body().interest_details.get(i).interest_name);
+//                            }
+//
+//                            List<String> interest_img = new ArrayList<>();
+//                            for (int i = 0; i < response.body().interest_details.size(); i++) {
+//                                interest_img.add(response.body().interest_details.get(i).interest_image);
+//                            }
+
+                            interestFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
+                            interestFragment.rv_interestlist.setAdapter(new InterestListAdapter(mContext, response.body().interest_details, interestFragment));
+
                         }
-
-                        interestFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
-                        interestFragment.rv_interestlist.setAdapter(new InterestListAdapter(mContext, interest_name, interestFragment));
+                    } else {
+                        //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<json> call, Throwable t) {
-                //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                //   Log.d("error", String.valueOf(t.getMessage()));
-            }
-        });
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
     }
 }
 

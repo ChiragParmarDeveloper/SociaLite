@@ -157,6 +157,10 @@ public interface RService {
     Call<json> my_bussiness_post(@Field("user_id") String user_id);
 
 
+    @FormUrlEncoded
+    @POST("interest_list_post_page.php")
+    Call<json> interest_list_post_page(@Field("user_id") String user_id);
+
 
     public class api {
         static Retrofit retrofit = null;

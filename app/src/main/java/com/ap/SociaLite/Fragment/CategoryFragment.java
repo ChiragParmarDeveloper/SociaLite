@@ -46,7 +46,7 @@ public class CategoryFragment extends Fragment {
         Session session = new Session(getActivity());
         user_id = session.getUser_id();
 
-        new CategoryFragmentPresenter(getActivity(), this).interest();
+        new CategoryFragmentPresenter(getActivity(), this).fetch_all_intrest(user_id);
         new CategoryFragmentPresenter(getActivity(), this).Category_post_fragment(user_id);
 
         return view;

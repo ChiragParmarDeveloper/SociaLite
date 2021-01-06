@@ -1,9 +1,6 @@
 package com.ap.SociaLite.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,26 +10,16 @@ import android.widget.ImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.CameraActivity;
-import com.ap.SociaLite.Activity.Forgot_Activity;
-import com.ap.SociaLite.Activity.InterestActivity;
-import com.ap.SociaLite.Activity.LoginActivity;
-import com.ap.SociaLite.Activity.OtpActivity;
-import com.ap.SociaLite.Adapter.CategoryListAdapter;
-import com.ap.SociaLite.Adapter.CategoryPostAdapter;
 import com.ap.SociaLite.Adapter.InterestPostAdapter;
-import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
+import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
-import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +28,7 @@ import butterknife.OnClick;
 public class InterestFragment extends Fragment {
 
     @BindView(R.id.rv_interestlist)
-   public RecyclerView rv_interestlist;
+    public RecyclerView rv_interestlist;
 
     @BindView(R.id.camera)
     ImageView camera;
@@ -65,13 +52,13 @@ public class InterestFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_interest, container, false);
         ButterKnife.bind(this, view);
-
+        Session session = new Session(getActivity());
         //-----------------------------for post----------------------------------------
         intrest_post_recycler = view.findViewById(R.id.intrest_post_recycler);
         layoutManager = new GridLayoutManager(getActivity(), 1);
         //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         intrest_post_recycler.setLayoutManager(layoutManager);
-        interestPostAdapter = new InterestPostAdapter(Name,getActivity());
+        interestPostAdapter = new InterestPostAdapter(Name, getActivity());
         intrest_post_recycler.setAdapter(interestPostAdapter);
 
 //        LinearSnapHelper snapHelper = new LinearSnapHelper();
@@ -101,8 +88,6 @@ public class InterestFragment extends Fragment {
 //        });
 
 
-
-
         //----------------------------------------------for category------------------------------------------------
 //        Objects.requireNonNull(recyclerview_categorylist.getLayoutManager()).scrollToPosition(Integer.MAX_VALUE / 2);
 //        recyclerview_categorylist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
@@ -116,7 +101,7 @@ public class InterestFragment extends Fragment {
         // ScrollingPagerIndicator recyclerIndicator = findViewById(R.id.indicator);
         // indicator.addOnAttachStateChangeListener((View.OnAttachStateChangeListener) recyclerview_categorylist);
 
-        new InterestFragmentPresenter(getActivity(),this).interest();
+        new InterestFragmentPresenter(getActivity(), this).fetch_all_intrest(session.getUser_id());
         return view;
     }
 
@@ -128,9 +113,6 @@ public class InterestFragment extends Fragment {
                 break;
         }
     }
-
-
-
 
 
 //    public class CenterZoomLayoutManager extends LinearLayoutManager
