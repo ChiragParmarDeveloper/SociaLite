@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +53,14 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
 
         holder.txt_iconname.setText(item.interest_name);
         Picasso.get().load(item.interest_image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+
+
+        holder.img_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext,id,Toast.LENGTH_LONG).show();
+            }
+        });
 
 //        Drawable plus_favorite = mContext.getDrawable(R.drawable.ic_category_plus);
 //        Drawable right_favorite = mContext.getDrawable(R.drawable.ic_category_right);
