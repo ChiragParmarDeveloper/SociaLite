@@ -1,7 +1,6 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.Pojo.interest_details;
-import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -25,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapter.Holder> {
-
 
     Context mContext;
     InterestFragment interestFragment;
@@ -54,11 +50,10 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
         holder.txt_iconname.setText(item.interest_name);
         Picasso.get().load(item.interest_image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
 
-
         holder.img_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,id,Toast.LENGTH_LONG).show();
+                new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.user_id,id);
             }
         });
 
@@ -78,10 +73,6 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
 //                new InterestFragmentPresenter(mContext, interestFragment).fetch_all_intrest(interestFragment.user_id);
 //            }
 //        });
-
-
-
-
 
 
         //   int realposition = position % mList.size();
@@ -104,6 +95,7 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
         CircularImageView img_category;
         TextView txt_iconname;
         ImageView img_right;
+
         public Holder(@NonNull View itemView) {
             super(itemView);
             img_category = itemView.findViewById(R.id.img_category);

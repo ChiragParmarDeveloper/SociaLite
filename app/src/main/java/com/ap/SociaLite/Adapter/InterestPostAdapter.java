@@ -20,9 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
+import com.ap.SociaLite.Fragment.CategoryFragment;
+import com.ap.SociaLite.Fragment.InterestFragment;
+import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,14 +35,17 @@ import butterknife.ButterKnife;
 public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapter.MyHolder> {
 
     Boolean click = true;
-    String rating = "";
+    String rate = "";
 
-    ArrayList Name;
-    Context context;
+    Context mContext;
+    InterestFragment interestFragment;
+    List<post_list> post_lists = new ArrayList<>();
+    post_list item;
 
-    public InterestPostAdapter(ArrayList name, Context context) {
-        Name = name;
-        this.context = context;
+    public InterestPostAdapter(Context context, List<post_list> list, InterestFragment fragment) {
+        this.mContext = context;
+        this.post_lists = list;
+        this.interestFragment = fragment;
     }
 
     @NonNull
@@ -50,14 +58,17 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-
-        holder.txt_name.setText((CharSequence) Name.get(position));
+        item = post_lists.get(position);
+        String id = post_lists.get(position).post_id;
+//        Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+//        holder.txt_description.setText(item.description);
+        holder.txt_rating.setText(item.rate);
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                PopupMenu popup = new PopupMenu(context, holder.img_popup);
+                PopupMenu popup = new PopupMenu(mContext, holder.img_popup);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
                         .inflate(R.menu.popup_menu, popup.getMenu());
@@ -127,8 +138,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "1";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "1";
+                Toast.makeText(mContext, "rating : " + rate, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -137,8 +148,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         holder.rating_star2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "2";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "2";
+                Toast.makeText(mContext, "rating : " + rate, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -147,8 +158,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         holder.rating_star3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "3";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "3";
+                Toast.makeText(mContext, "rating : " + rate, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -157,8 +168,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         holder.rating_star4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "4";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "4";
+                Toast.makeText(mContext, "rating : " + rate, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -167,8 +178,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         holder.rating_star5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "5";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "5";
+                Toast.makeText(mContext, "rating : " + rate, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -186,7 +197,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
 
     @Override
     public int getItemCount() {
-        return Name.size();
+        return post_lists.size();
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder{
@@ -226,6 +237,38 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
 
         @BindView(R.id.rating_star5)
         ImageView rating_star5;
+
+        @BindView(R.id.img_category)
+        ImageView img_category;
+
+        @BindView(R.id.txt_description)
+        TextView txt_description;
+
+        @BindView(R.id.txt_rating)
+        TextView txt_rating;
+
+        @BindView(R.id.txt_allcomment)
+        TextView txt_allcomment;
+
+        @BindView(R.id.txt_name_position_0)
+        TextView txt_name_position_0;
+
+        @BindView(R.id.txt_comment_pos_0)
+        TextView txt_comment_pos_0;
+
+
+        @BindView(R.id.txt_name_pos_1)
+        TextView txt_name_pos_1;
+
+        @BindView(R.id.txt_comment_pos_1)
+        TextView txt_comment_pos_1;
+
+
+        @BindView(R.id.layout)
+        LinearLayout layout;
+
+        @BindView(R.id.layout1)
+        LinearLayout layout1;
 
 
         public MyHolder(@NonNull View itemView) {

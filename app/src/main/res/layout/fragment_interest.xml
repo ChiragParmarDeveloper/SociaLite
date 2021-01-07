@@ -55,7 +55,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/intrest_post_recycler"
+        android:id="@+id/rv_post_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

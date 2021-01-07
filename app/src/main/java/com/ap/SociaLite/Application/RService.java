@@ -166,6 +166,14 @@ public interface RService {
     Call<json> plus_add_interest(@Field("user_id") String user_id,
                                 @Field("interest_id") String interest_id);
 
+
+    @FormUrlEncoded
+    @POST("interest_wise_post.php")
+    Call<json> interest_wise_post(@Field("user_id") String user_id,
+                                 @Field("interest_id") String interest_id);
+
+
+
     public class api {
         static Retrofit retrofit = null;
 
