@@ -40,6 +40,4 @@ public class user_details {
     @SerializedName("connection")
     public String connection;
 
-
-
 }

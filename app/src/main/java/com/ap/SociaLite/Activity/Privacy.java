@@ -31,7 +31,7 @@ public class Privacy extends AppCompatActivity {
     ConstraintLayout hidedpost;
 
     @BindView(R.id.toggle_account)
-    ToggleButton toggle_account;
+   public ToggleButton toggle_account;
     String user_id, account;
 
 
@@ -44,8 +44,7 @@ public class Privacy extends AppCompatActivity {
         Session session = new Session(Privacy.this);
         user_id = session.getUser_id();
 
-//        account =  LoginActivity.account;
-//        Toast.makeText(getApplicationContext(), account, Toast.LENGTH_LONG).show();
+        new PrivacyPresenter(this, this).fetch_profile(user_id);
 
     }
 
