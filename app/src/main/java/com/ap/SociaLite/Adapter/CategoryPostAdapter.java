@@ -248,6 +248,8 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                         }
 
                     } else {
+                        holder.layout.setVisibility(View.GONE);
+                        holder.layout1.setVisibility(View.GONE);
                         //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }

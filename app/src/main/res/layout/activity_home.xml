@@ -50,7 +50,7 @@
                     android:id="@+id/txt_categorylist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dance and Singing"
+                    android:text="Dashboard"
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
