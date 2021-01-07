@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar"
             android:layout_width="0dp"
@@ -68,7 +67,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rec_schedulepost"
+            android:id="@+id/rv_schedulepost"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

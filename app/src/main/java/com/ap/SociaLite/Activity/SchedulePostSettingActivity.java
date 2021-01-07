@@ -1,56 +1,43 @@
 package com.ap.SociaLite.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.ap.SociaLite.Adapter.HiddenPostAdapter;
-import com.ap.SociaLite.Adapter.SchedulePostAdapter.SchedulePostSettingAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Presenter.SchedulePostSettingPresenter;
 import com.ap.SociaLite.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SchedulePostSettingActivity extends AppCompatActivity {
 
-    @BindView(R.id.img_back)
-    ImageView img_back;
+    @BindView(R.id.rv_schedulepost)
+    public RecyclerView rv_schedulepost;
 
-    @BindView(R.id.rec_schedulepost)
-    RecyclerView rec_schedulepost;
-
-    private SchedulePostSettingAdapter schedulePostSettingAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-
-    ArrayList images =new ArrayList<>(Arrays.asList(R.drawable.dummyimage, R.drawable.dummyimage, R.drawable.dummyimage));
+    public String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_post_setting);
         ButterKnife.bind(this);
+        Session session = new Session(this);
+        user_id = session.getUser_id();
 
-        layoutManager = new GridLayoutManager(SchedulePostSettingActivity.this, 1);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        rec_schedulepost.setLayoutManager(layoutManager);
+        new SchedulePostSettingPresenter(this, this).schedule_posts(user_id);
+    }
 
-
-        schedulePostSettingAdapter = new SchedulePostSettingAdapter(images,SchedulePostSettingActivity.this);
-        rec_schedulepost.setAdapter(schedulePostSettingAdapter);
-
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @OnClick({R.id.img_back})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
                 onBackPressed();
-            }
-        });
-
+                break;
+        }
     }
 }

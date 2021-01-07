@@ -173,6 +173,13 @@ public interface RService {
                                  @Field("interest_id") String interest_id);
 
 
+    @FormUrlEncoded
+    @POST("my_schedule_post.php")
+    Call<json> my_schedule_post(@Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("delete_post.php")
+    Call<json> delete_post( @Field("post_id") String post_id);
 
     public class api {
         static Retrofit retrofit = null;
