@@ -1,75 +1,80 @@
 package com.ap.SociaLite.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.widget.NestedScrollView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Adapter.SpotlightViewerAdapter;
+import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Presenter.SpotlightActivityForUserPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class SpotlightActivityForUser extends AppCompatActivity {
 
-    ImageView img_back;
+    @BindView(R.id.views_nested_scr)
     NestedScrollView views_nested_scr;
-    ImageView views_back;
-    CardView views_cardview;
 
-    RecyclerView views_recycler;
+    @BindView(R.id.rv_mystory)
+    public RecyclerView rv_mystory;
 
-    private SpotlightViewerAdapter myspotlightadapter;
-    private RecyclerView.LayoutManager layoutManager;
+    @BindView(R.id.views_recycler)
+    public RecyclerView views_recycler;
 
-    ArrayList Name = new ArrayList<>(Arrays.asList("User 1", "User 2", "User 3", "User 4", "User 5"));
+    @BindView(R.id.user_profile)
+    public CircularImageView user_profile;
+
+    @BindView(R.id.user_name)
+    public TextView user_name;
+
+    public String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotlight_for_user);
+        ButterKnife.bind(this);
 
-        img_back = findViewById(R.id.img_back);
+        Session session = new Session(SpotlightActivityForUser.this);
+        user_id = session.getUser_id();
 
-        views_nested_scr = findViewById(R.id.views_nested_scr);
-        views_back = findViewById(R.id.img_back_views);
-        views_recycler = findViewById(R.id.views_recycler);
+        new SpotlightActivityForUserPresenter(this, this).fetch_profile(user_id);
+        new SpotlightActivityForUserPresenter(this, this).my_all_storys(user_id);
 
-        views_cardview = findViewById(R.id.views_cardview);
+    }
 
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @OnClick({R.id.img_back, R.id.linearLayout_user_story, R.id.views_cardview, R.id.img_back_views})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
                 onBackPressed();
-            }
-        });
+                break;
 
-        views_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                views_nested_scr.setVisibility(View.GONE);
-            }
-        });
+            case R.id.linearLayout_user_story:
+                startActivity(new Intent(SpotlightActivityForUser.this, AddSpotlightActivity.class));
+                break;
 
-        views_cardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            case R.id.views_cardview:
                 views_nested_scr.setVisibility(View.VISIBLE);
-            }
-        });
-
-        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        views_recycler.setLayoutManager(layoutManager);
-        myspotlightadapter = new SpotlightViewerAdapter(Name,getApplicationContext());
-        views_recycler.setAdapter(myspotlightadapter);
+                break;
+            case R.id.img_back_views:
+                views_nested_scr.setVisibility(View.GONE);
+                break;
 
 
+        }
     }
 }

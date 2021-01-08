@@ -144,8 +144,8 @@ public class AddSpotlightActivity extends AppCompatActivity {
 //                img_two.setVideoURI(imageUri);
 //                img_two.seekTo( 1 );
                 // img_two.start();
-                picture_path = getRealPathFromURI(imageUri);
-                Toast.makeText(getApplicationContext(), picture_path, Toast.LENGTH_SHORT).show();
+              //  picture_path = getRealPathFromURI(imageUri);
+                //Toast.makeText(getApplicationContext(), picture_path, Toast.LENGTH_SHORT).show();
 
 
 //                MediaController mediaController = new MediaController(this);

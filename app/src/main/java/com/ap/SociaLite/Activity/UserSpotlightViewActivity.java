@@ -65,11 +65,11 @@ public class UserSpotlightViewActivity extends AppCompatActivity {
             }
         });
 
-        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        views_recycler.setLayoutManager(layoutManager);
-        myspotlightadapter = new SpotlightViewerAdapter(Name,getApplicationContext());
-        views_recycler.setAdapter(myspotlightadapter);
+//        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+//        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+//        views_recycler.setLayoutManager(layoutManager);
+//        myspotlightadapter = new SpotlightViewerAdapter(Name,getApplicationContext());
+//        views_recycler.setAdapter(myspotlightadapter);
 
 
     }

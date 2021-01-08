@@ -11,19 +11,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ap.SociaLite.Activity.SpotlightActivityForUser;
 import com.ap.SociaLite.Activity.UserFriendSpotlightViewActivity;
+import com.ap.SociaLite.Fragment.CategoryFragment;
+import com.ap.SociaLite.Pojo.post_list;
+import com.ap.SociaLite.Pojo.story_view;
 import com.ap.SociaLite.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SpotlightViewerAdapter extends RecyclerView.Adapter<SpotlightViewerAdapter.MyHolder> {
 
-    ArrayList Name;
-    Context context;
+    Context mContext;
+    SpotlightActivityForUser spotlightActivityForUser;
+    List<story_view> views;
+    story_view item;
 
-    public SpotlightViewerAdapter(ArrayList name, Context context) {
-        Name = name;
-        this.context = context;
+    public SpotlightViewerAdapter(Context context, List<story_view> list, SpotlightActivityForUser fragment) {
+        this.mContext = context;
+        this.views = list;
+        this.spotlightActivityForUser = fragment;
     }
 
     @NonNull
@@ -36,13 +45,15 @@ public class SpotlightViewerAdapter extends RecyclerView.Adapter<SpotlightViewer
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-
-        holder.name.setText((CharSequence)Name.get(position));
-    }
+        item = views.get(position);
+        String id = views.get(position).user_id;
+        Picasso.get().load(item.profile_pic).placeholder(R.mipmap.ic_launcher).into(holder.profile);
+        holder.name.setText(item.username);
+     }
 
     @Override
     public int getItemCount() {
-        return Name.size();
+        return views.size();
     }
 
 

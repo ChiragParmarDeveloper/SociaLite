@@ -185,6 +185,18 @@ public interface RService {
     @POST("delete_post.php")
     Call<json> delete_post(@Field("post_id") String post_id);
 
+
+    @FormUrlEncoded
+    @POST("my_all_story.php")
+    Call<json> my_all_story(@Field("user_id") String user_id);
+
+
+    @FormUrlEncoded
+    @POST("story_viewers.php")
+    Call<json> story_viewers(@Field("user_id") String user_id,
+                             @Field("story_id") String story_id);
+
+
     public class api {
         static Retrofit retrofit = null;
 

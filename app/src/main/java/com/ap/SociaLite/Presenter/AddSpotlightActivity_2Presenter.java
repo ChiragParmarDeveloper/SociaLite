@@ -1,12 +1,10 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.ap.SociaLite.Activity.AddSpotlightActivity_2;
-import com.ap.SociaLite.Activity.SpotLightActivity;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.AddSpotlightActivity_2Contract;
@@ -37,19 +35,19 @@ public class AddSpotlightActivity_2Presenter implements AddSpotlightActivity_2Co
 
                             if (response.body().status.equals("1")) {
                                 Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-
-                                Intent in = new Intent(mContext, SpotLightActivity.class);
-                                mContext.startActivity(in);
-                                addSpotlightActivity_2.finish();
+                                addSpotlightActivity_2.onBackPressed();
+//                                Intent in = new Intent(mContext, SpotLightActivity.class);
+//                                mContext.startActivity(in);
+//                                addSpotlightActivity_2.finish();
                             } else {
-                                Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                          //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<json> call, Throwable t) {
-                            Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
-                            Log.d("error", String.valueOf(t.getMessage()));
+                        //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                       //     Log.d("error", String.valueOf(t.getMessage()));
                         }
                     });
         } catch (Exception e) {
