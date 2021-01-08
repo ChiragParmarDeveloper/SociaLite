@@ -81,6 +81,11 @@ public interface RService {
                            @Part("dob") RequestBody dob,
                            @Part MultipartBody.Part profile_pic);
 
+    @Multipart
+    @POST("put_story.php")
+    Call<json> put_story(@Part("user_id") RequestBody user_id,
+                         @Part MultipartBody.Part story_image);
+
 
     @FormUrlEncoded
     @POST("add_user_interest.php")
@@ -143,13 +148,12 @@ public interface RService {
 
     @FormUrlEncoded
     @POST("fetch_comments.php")
-    Call<json> fetch_comments( @Field("post_id") String post_id);
+    Call<json> fetch_comments(@Field("post_id") String post_id);
 
 
     @FormUrlEncoded
     @POST("my_post.php")
     Call<json> timeline_my_post(@Field("user_id") String user_id);
-
 
 
     @FormUrlEncoded
@@ -164,13 +168,13 @@ public interface RService {
     @FormUrlEncoded
     @POST("add_interest.php")
     Call<json> plus_add_interest(@Field("user_id") String user_id,
-                                @Field("interest_id") String interest_id);
+                                 @Field("interest_id") String interest_id);
 
 
     @FormUrlEncoded
     @POST("interest_wise_post.php")
     Call<json> interest_wise_post(@Field("user_id") String user_id,
-                                 @Field("interest_id") String interest_id);
+                                  @Field("interest_id") String interest_id);
 
 
     @FormUrlEncoded
@@ -179,7 +183,7 @@ public interface RService {
 
     @FormUrlEncoded
     @POST("delete_post.php")
-    Call<json> delete_post( @Field("post_id") String post_id);
+    Call<json> delete_post(@Field("post_id") String post_id);
 
     public class api {
         static Retrofit retrofit = null;

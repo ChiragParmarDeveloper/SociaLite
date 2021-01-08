@@ -207,7 +207,6 @@ public class CameraActivity extends AppCompatActivity {
                 picture_path = getRealPathFromURI(imageUri);
                 Toast.makeText(getApplicationContext(), picture_path, Toast.LENGTH_SHORT).show();
 
-
 //                MediaController mediaController = new MediaController(this);
 //// initiate a video view
 //          //      VideoView simpleVideoView = (VideoView) findViewById(R.id.simpleVideoView);

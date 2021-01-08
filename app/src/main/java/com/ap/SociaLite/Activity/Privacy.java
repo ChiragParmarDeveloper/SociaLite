@@ -24,15 +24,16 @@ import butterknife.OnClick;
 
 public class Privacy extends AppCompatActivity {
 
-    @BindView(R.id.img_back)
-    ImageView img_back;
+//    @BindView(R.id.img_back)
+//    ImageView img_back;
 
     @BindView(R.id.hidedpost)
     ConstraintLayout hidedpost;
 
     @BindView(R.id.toggle_account)
    public ToggleButton toggle_account;
-    String user_id, account;
+
+    String user_id;
 
 
     @Override
