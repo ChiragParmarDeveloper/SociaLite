@@ -1,14 +1,19 @@
 package com.ap.SociaLite.Activity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -64,6 +69,10 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.textView10)
     public TextView textView10;
 
+    private static final int PICK_IMAGE = 100;
+    Uri imageUri;
+    String image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
                 break;
 
             case R.id.profile_add_cover:
-                startActivity(new Intent(ProfileActivity.this, ProfileConnectionActivity.class));
+                openGallery();
                 break;
 
             case R.id.timeline_btn:
@@ -130,8 +139,34 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent spotlight = new Intent(ProfileActivity.this, SpotlightActivityForUser.class);
                 startActivity(spotlight);
                 break;
+        }
+    }
+
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            imageUri = data.getData();
+            imageView12.setImageURI(imageUri);
+            image = getRealPathFromURI(imageUri);
+        } else {
 
         }
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        @SuppressWarnings("deprecation")
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 
 }
