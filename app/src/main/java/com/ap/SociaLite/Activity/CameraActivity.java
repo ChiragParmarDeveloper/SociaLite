@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -96,7 +94,7 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         ButterKnife.bind(this);
 
-        Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.dummy1)).getBitmap();
+        Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.img_plus)).getBitmap();
         Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
         Canvas canvas = new Canvas(imageRounded);
         Paint mpaint = new Paint();
@@ -128,16 +126,18 @@ public class CameraActivity extends AppCompatActivity {
                     startActivity(in);
                 } else {
 
-                    if(bitmap !=null)
-                    {
+                    if (bitmap != null) {
                         Intent in = new Intent(CameraActivity.this, Post.class);
                         // your bitmap
                         ByteArrayOutputStream bs = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
                         in.putExtra("byteArray", bs.toByteArray());
                         startActivity(in);
-                    }
-                    else{
+                    } else if (picture_path != null) {
+
+                        Intent in = new Intent(CameraActivity.this, Post.class);
+                        in.putExtra("path", picture_path);
+                        startActivity(in);
 
                     }
 
@@ -195,15 +195,18 @@ public class CameraActivity extends AppCompatActivity {
             imageUri = data.getData();
             if (imageUri.toString().contains("image")) {
 
-                img_one.setImageURI(imageUri);
+                //  imageView.setImageBitmap(bitmap);
+                imageView.setImageURI(imageUri);
+//                imageView.buildDrawingCache();
+//                bitmap = imageView.getDrawingCache();
                 picture_path = getRealPathFromURI(imageUri);
-                Toast.makeText(getApplicationContext(), picture_path, Toast.LENGTH_SHORT).show();
+
 
             } else if (imageUri.toString().contains("video")) {
 
                 img_two.setVideoURI(imageUri);
-                img_two.seekTo( 1 );
-               // img_two.start();
+                img_two.seekTo(1);
+                // img_two.start();
                 picture_path = getRealPathFromURI(imageUri);
                 Toast.makeText(getApplicationContext(), picture_path, Toast.LENGTH_SHORT).show();
 

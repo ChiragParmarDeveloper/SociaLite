@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Presenter.PostPresenter;
 import com.ap.SociaLite.R;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +36,7 @@ public class Post extends AppCompatActivity {
     @BindView(R.id.constraintLayout37)
     ConstraintLayout constraintLayout37;
 
-    String user_id, my_network, business_interaction;
+    String user_id, picture_path, business_interaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +46,31 @@ public class Post extends AppCompatActivity {
 
         Session session = new Session(Post.this);
         user_id = session.getUser_id();
+        picture_path = getIntent().getStringExtra("path");
 
         if (getIntent().hasExtra("byteArray")) {
             Bitmap b = BitmapFactory.decodeByteArray(
                     getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
             imageView.setImageBitmap(b);
+        } else {
+
+            File imgFile = new File(picture_path);
+
+            if (imgFile.exists()) {
+
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+                imageView.setImageBitmap(myBitmap);
+                imageView.setTag(imgFile.toString());
+            }
+
         }
+
+
+
+
+
+
 
         new PostPresenter(this, this).fetch_my_intrest(user_id);
 
@@ -62,7 +84,7 @@ public class Post extends AppCompatActivity {
                 break;
 
             case R.id.btn_share:
-                startActivity(new Intent(Post.this, HomeActivity.class));
+             //   startActivity(new Intent(Post.this, HomeActivity.class));
                 break;
         }
     }

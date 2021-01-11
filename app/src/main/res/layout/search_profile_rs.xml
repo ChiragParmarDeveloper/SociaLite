@@ -7,9 +7,9 @@
 
     <LinearLayout
         android:id="@+id/ll_container"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="4dp"
@@ -22,15 +22,15 @@
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:scaleType="centerInside"
-            android:src="@drawable/photography" />
+            android:src="@drawable/ic_user_icon" />
 
         <TextView
             android:id="@+id/user_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:gravity="center_horizontal"
-            android:text="User Name 1"
+            android:text="Name"
             android:textAlignment="center"
             android:textColor="@color/colorBlack"
             android:textSize="11dp" />

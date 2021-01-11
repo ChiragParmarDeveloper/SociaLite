@@ -10,14 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Adapter.SpotlightViewerAdapter;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Presenter.SpotlightActivityForUserPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +35,10 @@ public class SpotlightActivityForUser extends AppCompatActivity {
 
     @BindView(R.id.user_name)
     public TextView user_name;
+
+    @BindView(R.id.img_status)
+    public ImageView img_status;
+
 
     public String user_id;
 

@@ -168,7 +168,7 @@
                         android:layout_weight="1">
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/search_profile_recyclerview"
+                            android:id="@+id/rv_search_profile"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -195,7 +195,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="10dp"
-                            android:text="User name 3"
+                            android:text="User name"
                             android:textColor="@color/colorBlack"
                             android:textSize="15dp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -208,7 +208,7 @@
                             android:layout_height="130dp"
                             android:layout_marginTop="20dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/dummy1"
+                            android:src="@drawable/ic_user_icon"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/search_profile_user_name" />
@@ -224,6 +224,7 @@
 
 
                             <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/search_connect"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1">
@@ -253,6 +254,7 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/search_msg"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1">
@@ -281,6 +283,7 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/search_share"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1">

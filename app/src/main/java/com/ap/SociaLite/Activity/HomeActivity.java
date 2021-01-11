@@ -415,7 +415,7 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.layout_category:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
 
-                txt_categorylist.setText("Dance and Singing");
+                txt_categorylist.setText("Dashboard");
 
                 imgsearch.setVisibility(View.VISIBLE);
                 imgnotification.setVisibility(View.GONE);
@@ -439,7 +439,7 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.layout_interest:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new InterestFragment()).commit();
 
-                txt_categorylist.setText("News & Politics");
+                txt_categorylist.setText("My Interest");
 
                 imgsearch.setVisibility(View.VISIBLE);
                 imgnotification.setVisibility(View.GONE);

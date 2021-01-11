@@ -135,6 +135,7 @@ public class AddSpotlightActivity extends AppCompatActivity {
             imageUri = data.getData();
             if (imageUri.toString().contains("image")) {
                 picture_path = getRealPathFromURI(imageUri);
+
                 Intent capture = new Intent(AddSpotlightActivity.this,AddSpotlightActivity_2.class);
                 capture.putExtra("path",picture_path);
                 startActivity(capture);

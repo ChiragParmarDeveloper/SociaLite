@@ -35,7 +35,6 @@ public class MyAllStoryAdapter extends RecyclerView.Adapter<MyAllStoryAdapter.Ho
         this.spotlightActivityForUser = fragment;
     }
 
-
     @NonNull
     @Override
     public MyAllStoryAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -57,10 +56,14 @@ public class MyAllStoryAdapter extends RecyclerView.Adapter<MyAllStoryAdapter.Ho
         holder.spotlight_linearLayout_user_story.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (item.story_image.length() > 0) {
+                    Picasso.get().load(item.story_image).placeholder(R.mipmap.ic_launcher).into(spotlightActivityForUser.img_status);
+                }
+
                 new SpotlightActivityForUserPresenter(mContext, spotlightActivityForUser).view_story_viewer(spotlightActivityForUser.user_id,id);
             }
         });
-
     }
 
     @Override

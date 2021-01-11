@@ -1,20 +1,18 @@
 package com.ap.SociaLite.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Adapter.SearchProfileAdapter;
-import com.ap.SociaLite.Adapter.SpotlightViewerAdapter;
+import com.ap.SociaLite.Presenter.SearchPresenter;
 import com.ap.SociaLite.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,16 +20,25 @@ import butterknife.OnClick;
 
 public class Search extends AppCompatActivity {
 
-    @BindView(R.id.img_back)
-    ImageView img_back;
+    @BindView(R.id.rv_search_profile)
+    public RecyclerView rv_search_profile;
 
-    @BindView(R.id.search_profile_recyclerview)
-    RecyclerView search_profile_recyclerview;
+    @BindView(R.id.search_profile_user_name)
+    public TextView search_profile_user_name;
 
-    private SearchProfileAdapter searchProfileAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    @BindView(R.id.search_profile_image)
+    public ImageView search_profile_image;
 
-    ArrayList Name = new ArrayList<>(Arrays.asList("User 1", "User 2", "User 3", "User 4", "User 5"));
+    @BindView(R.id.search_connect)
+    public ConstraintLayout search_connect;
+
+    @BindView(R.id.search_msg)
+    public ConstraintLayout search_msg;
+
+    @BindView(R.id.search_share)
+    public ConstraintLayout search_share;
+
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +46,29 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
-        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        search_profile_recyclerview.setLayoutManager(layoutManager);
-        searchProfileAdapter = new SearchProfileAdapter(Name,getApplicationContext());
-        search_profile_recyclerview.setAdapter(searchProfileAdapter);
-        
+        new SearchPresenter(this, this).all_user();
     }
-    @OnClick({R.id.img_back})
+
+    @OnClick({R.id.img_back, R.id.search_connect,R.id.search_msg,R.id.search_share})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
                 onBackPressed();
+                break;
+
+            case R.id.search_connect:
+                id = SearchProfileAdapter.User_id;
+                Toast.makeText(getApplicationContext(),id,Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.search_msg:
+                id = SearchProfileAdapter.User_id;
+                Toast.makeText(getApplicationContext(),id,Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.search_share:
+                id = SearchProfileAdapter.User_id;
+                Toast.makeText(getApplicationContext(),id,Toast.LENGTH_LONG).show();
                 break;
         }
     }
