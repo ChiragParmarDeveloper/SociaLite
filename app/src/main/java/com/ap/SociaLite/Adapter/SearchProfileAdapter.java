@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,16 @@ import com.ap.SociaLite.Pojo.user_list;
 import com.ap.SociaLite.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdapter.MyHolder> {
 
     Context mContext;
     Search search;
     List<user_list> user_lists;
+    List<user_list> allUser_List;
     user_list item;
     public static String User_id;
     String id;
@@ -31,7 +35,10 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
     public SearchProfileAdapter(Context context, List<user_list> list, Search fragment) {
         this.mContext = context;
         this.user_lists = list;
+        this.allUser_List= new ArrayList<>();
+        this.allUser_List.addAll(user_lists);
         this.search = fragment;
+        selectedItem = 0;
     }
 
     @NonNull
@@ -47,8 +54,12 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         item = user_lists.get(position);
         id = user_lists.get(position).id;
 
-        if(position == 0){
-            holder.name.setText(user_lists.get(0).username);
+        if (selectedItem == position) {
+            User_id = user_lists.get(position).id;
+            search.search_profile_user_name.setText(user_lists.get(position).username);
+            if (item.profile_pic.length() > 0) {
+                Picasso.get().load(user_lists.get(position).profile_pic).placeholder(R.mipmap.ic_launcher).into(search.search_profile_image);
+            }
         }
 
         if (item.profile_pic.length() > 0) {
@@ -88,6 +99,22 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
             name = itemView.findViewById(R.id.user_name);
 
         }
+    }
+
+
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        user_lists.clear();
+        if (charText.length() == 0) {
+            user_lists.addAll(allUser_List);
+        } else {
+            for (user_list  wp : allUser_List) {
+                if (wp.username.toLowerCase(Locale.getDefault()).contains(charText)) {
+                    user_lists.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
 }

@@ -3,7 +3,10 @@ package com.ap.SociaLite.Presenter;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.EditProfileActivity;
 import com.ap.SociaLite.Activity.Search;
@@ -36,8 +39,27 @@ public class SearchPresenter implements SearchContract {
             public void onResponse(Call<json> call, Response<json> response) {
                 if (response.body().status.equals("1")) {
                     if (response.body().user_list != null && response.body().user_list.size() > 0) {
+                     //
+
+
+                        search.user_lists = response.body().user_list;
+                        search.searchProfileAdapter = new SearchProfileAdapter(mContext,search.user_lists,search);
                         search.rv_search_profile.setLayoutManager(new GridLayoutManager(mContext, 1));
-                        search.rv_search_profile.setAdapter(new SearchProfileAdapter(mContext, response.body().user_list, search));
+                   //     layoutManager = new GridLayoutManager(getApplicationContext(), 1);
+                     //   search.rv_search_profile.setLayoutManager(layoutManager);
+                        /*rcycl_search_view.setAdapter(new DoctorAdapter(getApplicationContext(), response.body().data));*/
+                        search.rv_search_profile.setAdapter(search.searchProfileAdapter);
+
+
+
+//                         = new (, search.searchProfileAdapter,SearchPresenter.this ::onClickDeleteSearchHistory, mContext::onClickSearchHisttory);
+//                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
+//                        search.rv_search_profile.setLayoutManager(mLayoutManager);
+//                        search.rv_search_profile.setItemAnimator(new DefaultItemAnimator());
+//                        search.rv_search_profile.setAdapter(search.searchProfileAdapter);
+
+
+               //         search.rv_search_profile.setAdapter(new SearchProfileAdapter(mContext, response.body().user_list, search));
                     }
                 } else {
                //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
