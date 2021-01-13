@@ -35,8 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class HomeActivity extends AppCompatActivity {
-
-
+    
     @BindView(R.id.layout_category)
     LinearLayout layout_category;
 
