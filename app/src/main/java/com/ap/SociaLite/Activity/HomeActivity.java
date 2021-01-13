@@ -100,11 +100,14 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.imgnotification)
     ImageView imgnotification;
 
-    ConstraintLayout category, Notification, Profile, help, faq, setting, logout;
+
+
+
     public TextView txt_name, txt_email, txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
-    ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout;
+    ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout,img_arrow;
     public CircularImageView img_dp;
 
+    LinearLayout Notification,category, Profile, help, faq, setting, logout;
     String user_id;
 
     @Override
@@ -121,31 +124,31 @@ public class HomeActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
         View headerView = navigation_view.getHeaderView(0);
 
-        category = (ConstraintLayout) headerView.findViewById(R.id.category);
+        category = (LinearLayout) headerView.findViewById(R.id.category);
         txt_category1 = (TextView) headerView.findViewById(R.id.txt_category1);
         img_category1 = (ImageView) headerView.findViewById(R.id.img_category1);
 
-        Notification = (ConstraintLayout) headerView.findViewById(R.id.Notification);
+        Notification = (LinearLayout) headerView.findViewById(R.id.Notification);
         txt_notification = (TextView) headerView.findViewById(R.id.txt_notification);
         img_notification = (ImageView) headerView.findViewById(R.id.img_notification);
 
-        Profile = (ConstraintLayout) headerView.findViewById(R.id.Profile);
+        Profile = (LinearLayout) headerView.findViewById(R.id.Profile);
         txt_profile = (TextView) headerView.findViewById(R.id.txt_profile);
         img_profile = (ImageView) headerView.findViewById(R.id.img_profile);
 
-        help = (ConstraintLayout) headerView.findViewById(R.id.help);
+        help = (LinearLayout) headerView.findViewById(R.id.help);
         txt_help = (TextView) headerView.findViewById(R.id.txt_help);
         img_help = (ImageView) headerView.findViewById(R.id.img_help);
 
-        faq = (ConstraintLayout) headerView.findViewById(R.id.faq);
+        faq = (LinearLayout) headerView.findViewById(R.id.faq);
         txt_faq = (TextView) headerView.findViewById(R.id.txt_faq);
         img_faq = (ImageView) headerView.findViewById(R.id.img_faq);
 
-        setting = (ConstraintLayout) headerView.findViewById(R.id.setting);
+        setting = (LinearLayout) headerView.findViewById(R.id.setting);
         txt_setting = (TextView) headerView.findViewById(R.id.txt_setting);
         img_setting = (ImageView) headerView.findViewById(R.id.img_setting);
 
-        logout = (ConstraintLayout) headerView.findViewById(R.id.logout);
+        logout = (LinearLayout) headerView.findViewById(R.id.logout);
         txt_logout = (TextView) headerView.findViewById(R.id.txt_logout);
         img_logout = (ImageView) headerView.findViewById(R.id.img_logout);
 
@@ -153,6 +156,8 @@ public class HomeActivity extends AppCompatActivity {
         txt_name = (TextView) headerView.findViewById(R.id.txt_name);
         txt_email = (TextView) headerView.findViewById(R.id.txt_email);
         img_dp = (CircularImageView) headerView.findViewById(R.id.img_dp);
+
+        img_arrow = (ImageView) headerView.findViewById(R.id.img_arrow);
 
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -367,6 +372,16 @@ public class HomeActivity extends AppCompatActivity {
 
                 startActivity(new Intent(HomeActivity.this, Notification.class));
 
+            }
+        });
+
+        img_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                if (!drawer_layout.isDrawerOpen(GravityCompat.START))
+//                    drawer_layout.openDrawer(GravityCompat.START);
+                //else
+                    drawer_layout.closeDrawers();
             }
         });
 

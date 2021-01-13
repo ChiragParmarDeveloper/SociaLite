@@ -283,7 +283,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@drawable/drawer_red"
+            android:background="#F47E6A"
             android:fitsSystemWindows="false"
             app:headerLayout="@layout/drawer"
             tools:ignore="MissingConstraints">
