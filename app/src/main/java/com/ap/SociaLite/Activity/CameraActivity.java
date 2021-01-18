@@ -79,14 +79,10 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.img_three)
     ImageView img_three;
 
-    @BindView(R.id.img_two)
-    VideoView img_two;
-
     Bitmap bitmap;
     String my_network, business_interaction, picture_path;
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,11 +200,11 @@ public class CameraActivity extends AppCompatActivity {
 
             } else if (imageUri.toString().contains("video")) {
 
-                img_two.setVideoURI(imageUri);
-                img_two.seekTo(1);
+//                img_two.setVideoURI(imageUri);
+//                img_two.seekTo(1);
                 // img_two.start();
-                picture_path = getRealPathFromURI(imageUri);
-                Toast.makeText(getApplicationContext(), picture_path, Toast.LENGTH_SHORT).show();
+               picture_path = getRealPathFromURI(imageUri);
+           //     Toast.makeText(getApplicationContext(), picture_path, Toast.LENGTH_SHORT).show();
 
 //                MediaController mediaController = new MediaController(this);
 //// initiate a video view

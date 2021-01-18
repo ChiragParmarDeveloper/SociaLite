@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class HomeActivity extends AppCompatActivity {
-    
+
     @BindView(R.id.layout_category)
     LinearLayout layout_category;
 
@@ -98,9 +98,6 @@ public class HomeActivity extends AppCompatActivity {
 
     @BindView(R.id.imgnotification)
     ImageView imgnotification;
-
-
-
 
     public TextView txt_name, txt_email, txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
     ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout,img_arrow;
