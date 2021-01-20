@@ -28,8 +28,10 @@ public class Edit extends AppCompatActivity {
     @BindView(R.id.btn_save)
     Button btn_save;
 
-    SeekBar seekBar, contrast_seekBar;
+    @BindView(R.id.imageView)
     ImageView imageView;
+
+    SeekBar seekBar, contrast_seekBar;
     private Bitmap bitmap;
     private PictureThread thread;
     ImageView contrast, brightness;
@@ -42,33 +44,31 @@ public class Edit extends AppCompatActivity {
         ButterKnife.bind(this);
 
         image = getIntent().getStringExtra("img2");
-        if(image !=null)
-        {
+        if (image != null) {
             File imgFile = new File(image);
 
             if (imgFile.exists()) {
 
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(myBitmap);
+                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imageView.setImageBitmap(bitmap);
                 imageView.setTag(imgFile.toString());
 
+                thread = new PictureThread(imageView, bitmap);
+                thread.start();
             }
         }
 
 
         seekBar = findViewById(R.id.brightness_seekBar);
         contrast_seekBar = findViewById(R.id.contrast_seekBar);
-        imageView = findViewById(R.id.imageView);
-
         contrast = findViewById(R.id.contrast);
         brightness = findViewById(R.id.brightness);
 
 
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.dummy1);
-        imageView.setImageBitmap(bitmap);
+        //  bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.dummy1);
+        // imageView.setImageBitmap(bitmap);
 
-        thread = new PictureThread(imageView, bitmap);
-        thread.start();
+
 
         brightness.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +131,6 @@ public class Edit extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.img_cross:
                 finish();
-                ///     startActivity(new Intent(CameraActivity.this,LoginActivity.class));
                 break;
             case R.id.btn_save:
                 startActivity(new Intent(Edit.this, CameraActivity.class));
