@@ -32,7 +32,6 @@ import butterknife.OnClick;
 
 public class CameraActivity extends AppCompatActivity {
 
-
     @BindView(R.id.layout_edit)
     LinearLayout layout_edit;
 

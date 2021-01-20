@@ -114,9 +114,12 @@
             <LinearLayout
                 android:id="@+id/layout"
                 android:layout_width="match_parent"
-                android:layout_height="190dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="24dp"
+                android:paddingTop="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:paddingStart="@dimen/_50sdp"
+                android:paddingEnd="@dimen/_50sdp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -128,13 +131,14 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card1"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_70sdp"
                         android:layout_gravity="center_horizontal"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="5dp">
@@ -158,11 +162,12 @@
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="26dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="13dp"
                         android:background="@drawable/border_round"
                         android:text="Upload"
+                        android:textAllCaps="false"
                         android:textColor="#EE6851" />
 
                 </LinearLayout>
@@ -173,13 +178,14 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card2"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_70sdp"
                         android:layout_gravity="center_horizontal"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="5dp">
@@ -203,11 +209,12 @@
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="13dp"
                         android:background="@drawable/border_round"
                         android:text="Upload"
+                        android:textAllCaps="false"
                         android:textColor="#EE6851" />
 
 
@@ -224,8 +231,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card3"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_70sdp"
                         android:layout_gravity="center_horizontal"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="5dp">
@@ -249,11 +256,12 @@
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="13dp"
                         android:background="@drawable/border_round"
                         android:text="Upload"
+                        android:textAllCaps="false"
                         android:textColor="#EE6851" />
 
                 </LinearLayout>

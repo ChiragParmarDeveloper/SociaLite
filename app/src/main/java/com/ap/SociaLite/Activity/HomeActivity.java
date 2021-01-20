@@ -148,19 +148,16 @@ public class HomeActivity extends AppCompatActivity {
         txt_logout = (TextView) headerView.findViewById(R.id.txt_logout);
         img_logout = (ImageView) headerView.findViewById(R.id.img_logout);
 
-
         txt_name = (TextView) headerView.findViewById(R.id.txt_name);
         txt_email = (TextView) headerView.findViewById(R.id.txt_email);
         img_dp = (CircularImageView) headerView.findViewById(R.id.img_dp);
 
         img_arrow = (ImageView) headerView.findViewById(R.id.img_arrow);
 
-
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-//                CustomDialog();
                 final Dialog dialog = new Dialog(HomeActivity.this);
                 dialog.setContentView(R.layout.custom_dailog);
 
@@ -219,7 +216,6 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-
 
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -374,9 +370,6 @@ public class HomeActivity extends AppCompatActivity {
         img_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (!drawer_layout.isDrawerOpen(GravityCompat.START))
-//                    drawer_layout.openDrawer(GravityCompat.START);
-                //else
                     drawer_layout.closeDrawers();
             }
         });
@@ -413,7 +406,6 @@ public class HomeActivity extends AppCompatActivity {
                 //    Toast.makeText(getApplicationContext(), "nice work", Toast.LENGTH_LONG).show();
             }
         });
-
 
         new HomeActivityPresenter(this, this).fetch_profile(user_id);
     }
@@ -551,20 +543,12 @@ public class HomeActivity extends AppCompatActivity {
                 else drawer_layout.closeDrawer(GravityCompat.END);
                 break;
 
-
             case R.id.imgsearch:
                 startActivity(new Intent(HomeActivity.this, Search.class));
-
                 break;
-
-
         }
     }
-
-
     public void CustomDialog() {
 
     }
-
-
 }
