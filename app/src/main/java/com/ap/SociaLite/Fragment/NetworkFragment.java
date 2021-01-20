@@ -28,11 +28,6 @@ import butterknife.ButterKnife;
 
 public class NetworkFragment extends Fragment {
 
-
-//    public NetworkFragment() {
-//        // Required empty public constructor
-//    }
-
     @BindView(R.id.recycleview_network_post)
     RecyclerView recycleview_network_post;
 
@@ -61,7 +56,6 @@ public class NetworkFragment extends Fragment {
         recycleview_network_post.setLayoutManager(layoutManager);
         myNetworkAdapter = new MyNetworkAdapter(Name,getActivity());
         recycleview_network_post.setAdapter(myNetworkAdapter);
-
 
         network_image_constrain.setOnClickListener(new View.OnClickListener() {
             @Override

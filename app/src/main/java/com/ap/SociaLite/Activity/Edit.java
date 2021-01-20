@@ -1,7 +1,5 @@
 package com.ap.SociaLite.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,8 +9,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ap.SociaLite.PictureThread;
 import com.ap.SociaLite.R;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,17 +28,33 @@ public class Edit extends AppCompatActivity {
     @BindView(R.id.btn_save)
     Button btn_save;
 
-    SeekBar seekBar,contrast_seekBar;
+    SeekBar seekBar, contrast_seekBar;
     ImageView imageView;
     private Bitmap bitmap;
     private PictureThread thread;
-    ImageView contrast,brightness;
+    ImageView contrast, brightness;
+    String image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         ButterKnife.bind(this);
+
+        image = getIntent().getStringExtra("img2");
+        if(image !=null)
+        {
+            File imgFile = new File(image);
+
+            if (imgFile.exists()) {
+
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imageView.setImageBitmap(myBitmap);
+                imageView.setTag(imgFile.toString());
+
+            }
+        }
+
 
         seekBar = findViewById(R.id.brightness_seekBar);
         contrast_seekBar = findViewById(R.id.contrast_seekBar);
@@ -46,10 +64,10 @@ public class Edit extends AppCompatActivity {
         brightness = findViewById(R.id.brightness);
 
 
-        bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.dummy1);
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.dummy1);
         imageView.setImageBitmap(bitmap);
 
-        thread = new PictureThread(imageView,bitmap);
+        thread = new PictureThread(imageView, bitmap);
         thread.start();
 
         brightness.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +90,7 @@ public class Edit extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-                thread.adjustBrightness(seekBar.getProgress()-100);
+                thread.adjustBrightness(seekBar.getProgress() - 100);
 
             }
 
@@ -106,10 +124,9 @@ public class Edit extends AppCompatActivity {
         });
 
 
-
-
     }
-    @OnClick({R.id.img_cross,R.id.btn_save})
+
+    @OnClick({R.id.img_cross, R.id.btn_save})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_cross:
@@ -117,7 +134,7 @@ public class Edit extends AppCompatActivity {
                 ///     startActivity(new Intent(CameraActivity.this,LoginActivity.class));
                 break;
             case R.id.btn_save:
-                startActivity(new Intent(Edit.this,CameraActivity.class));
+                startActivity(new Intent(Edit.this, CameraActivity.class));
                 break;
         }
     }

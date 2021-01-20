@@ -3,6 +3,7 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -97,6 +99,7 @@ public class CameraActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_two = 110;
     private static final int PICK_IMAGE_three = 120;
     Uri imageUri;
+    String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,14 +107,14 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         ButterKnife.bind(this);
 
-        Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.img_plus)).getBitmap();
-        Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
-        Canvas canvas = new Canvas(imageRounded);
-        Paint mpaint = new Paint();
-        mpaint.setAntiAlias(true);
-        mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
-        canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 100, 100, mpaint); // Round Image Corner 100 100 100 100
-        imageView.setImageBitmap(imageRounded);
+//        Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.img_plus)).getBitmap();
+//        Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
+//        Canvas canvas = new Canvas(imageRounded);
+//        Paint mpaint = new Paint();
+//        mpaint.setAntiAlias(true);
+//        mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+//        canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 100, 100, mpaint); // Round Image Corner 100 100 100 100
+//        imageView.setImageBitmap(imageRounded);
 
         my_network = getIntent().getStringExtra("network_fragment");
         business_interaction = getIntent().getStringExtra("business_fragment");
@@ -154,7 +157,11 @@ public class CameraActivity extends AppCompatActivity {
                 break;
 
             case R.id.layout_edit:
-                startActivity(new Intent(CameraActivity.this, Text.class));
+                Intent in = new Intent(CameraActivity.this, Text.class);
+              //  in.putExtra("img1", path_one);
+                in.putExtra("img2", path);
+                startActivity(in);
+
                 break;
 
             case R.id.layout_lock:
@@ -166,7 +173,10 @@ public class CameraActivity extends AppCompatActivity {
                 break;
 
             case R.id.layout_filter:
-                startActivity(new Intent(CameraActivity.this, Edit.class));
+                Intent edit = new Intent(CameraActivity.this, Edit.class);
+                edit.putExtra("img2", path);
+                startActivity(edit);
+
                 break;
 
             case R.id.layout_drama:
@@ -174,30 +184,53 @@ public class CameraActivity extends AppCompatActivity {
                 break;
 
             case R.id.img_one:
-                File imgone = new File(path_one);
-                if (imgone.exists()) {
-                    imageView.setImageURI(Uri.fromFile(imgone));
+                if(path_one != null)
+                {
+                    File imgone = new File(path_one);
+                    if (imgone.exists()) {
+                //        imageView.setImageURI(Uri.fromFile(imgone));
+
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgone.getAbsolutePath());
+                        imageView.setImageBitmap(myBitmap);
+
+                        imageView.setTag(imgone.toString());
+                        path = imageView.getTag().toString();
+                    }
                 }
+
                 break;
 
             case R.id.img_two:
-                File imgtwo = new File(path_two);
-                if (imgtwo.exists()) {
-                    imageView.setImageURI(Uri.fromFile(imgtwo));
+
+                if(path_two !=null)
+                {
+                    File imgtwo = new File(path_two);
+                    if (imgtwo.exists()) {
+                     //   imageView.setImageURI(Uri.fromFile(imgtwo));
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgtwo.getAbsolutePath());
+                        imageView.setImageBitmap(myBitmap);
+
+                        imageView.setTag(imgtwo.toString());
+                        path = imageView.getTag().toString();
+
+                    }
                 }
                 break;
 
             case R.id.img_three:
 
-                File imgthree = new File(path_three);
-                if (imgthree.exists()) {
-                    imageView.setImageURI(Uri.fromFile(imgthree));
+                if(path_three !=null)
+                {
+                    File imgthree = new File(path_three);
+                    if (imgthree.exists()) {
+                 //       imageView.setImageURI(Uri.fromFile(imgthree));
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgthree.getAbsolutePath());
+                        imageView.setImageBitmap(myBitmap);
+
+                        imageView.setTag(imgthree.toString());
+                        path = imageView.getTag().toString();
+                    }
                 }
-
-//                img_three.buildDrawingCache();
-//                bitmap = img_three.getDrawingCache();
-//                imageView.setImageBitmap(bitmap);
-
                 break;
 
             case R.id.btn_one:
@@ -240,37 +273,29 @@ public class CameraActivity extends AppCompatActivity {
                 if (requestCode == PICK_IMAGE_one && resultCode == RESULT_OK && null != data) {
                     imageUri = data.getData();
                     if (imageUri.toString().contains("image")) {
-
-                        //  imageView.setImageBitmap(bitmap);
                         imageView.setImageURI(imageUri);
                         img_one.setImageURI(imageUri);
-
-                        video.setVideoURI(null);
-                        video_one.setVideoURI(null);
-//                imageView.buildDrawingCache();
-//                bitmap = imageView.getDrawingCache();
                         path_one = getRealPathFromURI(imageUri);
-
-
-                    } else if (imageUri.toString().contains("video")) {
-                        imageView.setImageURI(null);
-                        img_one.setImageURI(null);
-
-                        video.setVisibility(View.VISIBLE);
-                        video_one.setVisibility(View.VISIBLE);
-                        video_one.setVideoURI(imageUri);
-                        video.setVideoURI(imageUri);
-                        video.seekTo(1);
-                        video_one.seekTo(1);
-                        // img_two.start();
-                        path_one = getRealPathFromURI(imageUri);
+                    }
+//                    else if (imageUri.toString().contains("video")) {
+//                        imageView.setImageURI(null);
+//                        img_one.setImageURI(null);
+//
+//                        video.setVisibility(View.VISIBLE);
+//                        video_one.setVisibility(View.VISIBLE);
+//                        video_one.setVideoURI(imageUri);
+//                        video.setVideoURI(imageUri);
+//                        video.seekTo(1);
+//                        video_one.seekTo(1);
+//                        // img_two.start();
+//                        path_one = getRealPathFromURI(imageUri);
 
 //                MediaController mediaController = new MediaController(this);
 //// initiate a video view
 //          //      VideoView simpleVideoView = (VideoView) findViewById(R.id.simpleVideoView);
 //// set media controller object for a video view
 //                img_two.setMediaController(mediaController);
-                    }
+       //             }
 
 
                 }
@@ -282,28 +307,25 @@ public class CameraActivity extends AppCompatActivity {
                     if (imageUri.toString().contains("image")) {
                         img_two.setImageURI(imageUri);
                         path_two = getRealPathFromURI(imageUri);
-                        //     video.setVideoURI(null);
-                        //      video_two.setVideoURI(null);
-//                imageView.buildDrawingCache();
-//                bitmap = imageView.getDrawingCache();
+                    }
 
 
-                    } else if (imageUri.toString().contains("video")) {
-                        imageView.setImageURI(null);
-                        img_two.setImageURI(null);
-
-                        video_two.setVisibility(View.VISIBLE);
-                        video_two.setVideoURI(imageUri);
-                        video_two.seekTo(1);
+//                    else if (imageUri.toString().contains("video")) {
+//                        imageView.setImageURI(null);
+//                        img_two.setImageURI(null);
+//
+//                        video_two.setVisibility(View.VISIBLE);
+//                        video_two.setVideoURI(imageUri);
+//                        video_two.seekTo(1);
                         // img_two.start();
-                        path_two = getRealPathFromURI(imageUri);
+                   //     path_two = getRealPathFromURI(imageUri);
 
 //                MediaController mediaController = new MediaController(this);
 //// initiate a video view
 //          //      VideoView simpleVideoView = (VideoView) findViewById(R.id.simpleVideoView);
 //// set media controller object for a video view
 //                img_two.setMediaController(mediaController);
-                    }
+          //          }
 
                 }
                 break;
@@ -314,28 +336,21 @@ public class CameraActivity extends AppCompatActivity {
                     if (imageUri.toString().contains("image")) {
                         img_three.setImageURI(imageUri);
                         path_three = getRealPathFromURI(imageUri);
-                        //    video.setVideoURI(null);
-                        //    video_three.setVideoURI(null);
-//                imageView.buildDrawingCache();
-//                bitmap = imageView.getDrawingCache();
-
-
-                    } else if (imageUri.toString().contains("video")) {
-                        //   imageView.setImageURI(null);
-                        //   img_three.setImageURI(null);
-
-                        video_three.setVisibility(View.VISIBLE);
-                        video_three.setVideoURI(imageUri);
-                        video_three.seekTo(1);
+                    }
+//                    else if (imageUri.toString().contains("video")) {
+//
+//                        video_three.setVisibility(View.VISIBLE);
+//                        video_three.setVideoURI(imageUri);
+//                        video_three.seekTo(1);
                         // img_two.start();
-                        path_three = getRealPathFromURI(imageUri);
+                 //       path_three = getRealPathFromURI(imageUri);
 
 //                MediaController mediaController = new MediaController(this);
 //// initiate a video view
 //          //      VideoView simpleVideoView = (VideoView) findViewById(R.id.simpleVideoView);
 //// set media controller object for a video view
 //                img_two.setMediaController(mediaController);
-                    }
+        //            }
                 }
                 break;
         }

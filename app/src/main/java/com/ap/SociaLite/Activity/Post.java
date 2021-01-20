@@ -57,23 +57,12 @@ public class Post extends AppCompatActivity {
             File imgFile = new File(picture_path);
 
             if (imgFile.exists()) {
-
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
                 imageView.setImageBitmap(myBitmap);
                 imageView.setTag(imgFile.toString());
             }
-
         }
-
-
-
-
-
-
-
         new PostPresenter(this, this).fetch_my_intrest(user_id);
-
     }
 
     @OnClick({R.id.img_back, R.id.btn_share})

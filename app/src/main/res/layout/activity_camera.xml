@@ -121,11 +121,9 @@
                 android:id="@+id/layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:padding="25dp"
                 android:layout_alignParentBottom="true"
-                android:paddingTop="@dimen/_15sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:paddingStart="@dimen/_50sdp"
-                android:paddingEnd="@dimen/_50sdp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,7 +135,6 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:layout_marginEnd="@dimen/_10sdp"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
@@ -185,7 +182,6 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:layout_marginEnd="@dimen/_10sdp"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
@@ -343,7 +339,6 @@
                         android:layout_height="25dp"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/ic_filter_icon" />
-
 
                 </LinearLayout>
 
