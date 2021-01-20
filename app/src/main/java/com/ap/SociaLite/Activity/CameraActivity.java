@@ -51,7 +51,6 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.img_clock)
     ImageView img_clock;
 
-
     @BindView(R.id.layout_filter)
     LinearLayout layout_filter;
 
