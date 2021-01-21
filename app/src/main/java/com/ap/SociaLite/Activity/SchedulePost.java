@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -139,7 +138,7 @@ public class SchedulePost extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.img_cross:
                 finish();
-               break;
+                break;
 
             case R.id.btn_next:
                 startActivity(new Intent(SchedulePost.this, Post.class));
@@ -148,6 +147,7 @@ public class SchedulePost extends AppCompatActivity {
             case R.id.btn_save:
                 startActivity(new Intent(SchedulePost.this, CameraActivity.class));
                 break;
+
             case R.id.imageView:
                 // startActivity(new Intent(SchedulePost.this,CameraActivity.class));
                 break;
