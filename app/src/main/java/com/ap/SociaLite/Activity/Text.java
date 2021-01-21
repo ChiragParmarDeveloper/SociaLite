@@ -107,6 +107,7 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 //                getIntent().removeExtra("img1");
 //            }
 //        }
+
         if(imageone !=null)
         {
             File imgFile = new File(imageone);

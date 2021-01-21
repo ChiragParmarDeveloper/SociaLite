@@ -4,12 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -98,7 +91,7 @@ public class CameraActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_one = 100;
     private static final int PICK_IMAGE_two = 110;
     private static final int PICK_IMAGE_three = 120;
-    Uri imageUri;
+    Uri imageUri1,imageUri2,imageUri3;
     String path;
 
     @Override
@@ -158,18 +151,24 @@ public class CameraActivity extends AppCompatActivity {
 
             case R.id.layout_edit:
                 Intent in = new Intent(CameraActivity.this, Text.class);
-              //  in.putExtra("img1", path_one);
+                //  in.putExtra("img1", path_one);
                 in.putExtra("img2", path);
                 startActivity(in);
-
                 break;
 
             case R.id.layout_lock:
-                startActivity(new Intent(CameraActivity.this, SharePost.class));
+                Intent sharepost = new Intent(CameraActivity.this, SharePost.class);
+                sharepost.putExtra("img2", path);
+                startActivity(sharepost);
                 break;
 
             case R.id.layout_clock:
-                startActivity(new Intent(CameraActivity.this, SchedulePost.class));
+                Intent post = new Intent(CameraActivity.this, SchedulePost.class);
+                post.putExtra("img1", path_one);
+                post.putExtra("img2", path_two);
+                post.putExtra("img3", path_three);
+                startActivity(post);
+
                 break;
 
             case R.id.layout_filter:
@@ -184,11 +183,10 @@ public class CameraActivity extends AppCompatActivity {
                 break;
 
             case R.id.img_one:
-                if(path_one != null)
-                {
+                if (path_one != null) {
                     File imgone = new File(path_one);
                     if (imgone.exists()) {
-                //        imageView.setImageURI(Uri.fromFile(imgone));
+                        //        imageView.setImageURI(Uri.fromFile(imgone));
 
                         Bitmap myBitmap = BitmapFactory.decodeFile(imgone.getAbsolutePath());
                         imageView.setImageBitmap(myBitmap);
@@ -202,11 +200,10 @@ public class CameraActivity extends AppCompatActivity {
 
             case R.id.img_two:
 
-                if(path_two !=null)
-                {
+                if (path_two != null) {
                     File imgtwo = new File(path_two);
                     if (imgtwo.exists()) {
-                     //   imageView.setImageURI(Uri.fromFile(imgtwo));
+                        //   imageView.setImageURI(Uri.fromFile(imgtwo));
                         Bitmap myBitmap = BitmapFactory.decodeFile(imgtwo.getAbsolutePath());
                         imageView.setImageBitmap(myBitmap);
 
@@ -219,11 +216,10 @@ public class CameraActivity extends AppCompatActivity {
 
             case R.id.img_three:
 
-                if(path_three !=null)
-                {
+                if (path_three != null) {
                     File imgthree = new File(path_three);
                     if (imgthree.exists()) {
-                 //       imageView.setImageURI(Uri.fromFile(imgthree));
+                        //       imageView.setImageURI(Uri.fromFile(imgthree));
                         Bitmap myBitmap = BitmapFactory.decodeFile(imgthree.getAbsolutePath());
                         imageView.setImageBitmap(myBitmap);
 
@@ -271,11 +267,11 @@ public class CameraActivity extends AppCompatActivity {
         switch (requestCode) {
             case PICK_IMAGE_one:
                 if (requestCode == PICK_IMAGE_one && resultCode == RESULT_OK && null != data) {
-                    imageUri = data.getData();
-                    if (imageUri.toString().contains("image")) {
-                        imageView.setImageURI(imageUri);
-                        img_one.setImageURI(imageUri);
-                        path_one = getRealPathFromURI(imageUri);
+                    imageUri1 = data.getData();
+                    if (imageUri1.toString().contains("image")) {
+                        imageView.setImageURI(imageUri1);
+                        img_one.setImageURI(imageUri1);
+                        path_one = getRealPathFromURI(imageUri1);
                     }
 //                    else if (imageUri.toString().contains("video")) {
 //                        imageView.setImageURI(null);
@@ -295,7 +291,7 @@ public class CameraActivity extends AppCompatActivity {
 //          //      VideoView simpleVideoView = (VideoView) findViewById(R.id.simpleVideoView);
 //// set media controller object for a video view
 //                img_two.setMediaController(mediaController);
-       //             }
+                    //             }
 
 
                 }
@@ -303,12 +299,11 @@ public class CameraActivity extends AppCompatActivity {
 
             case PICK_IMAGE_two:
                 if (requestCode == PICK_IMAGE_two && resultCode == RESULT_OK && null != data) {
-                    imageUri = data.getData();
-                    if (imageUri.toString().contains("image")) {
-                        img_two.setImageURI(imageUri);
-                        path_two = getRealPathFromURI(imageUri);
+                    imageUri2 = data.getData();
+                    if (imageUri2.toString().contains("image")) {
+                        img_two.setImageURI(imageUri2);
+                        path_two = getRealPathFromURI(imageUri2);
                     }
-
 
 //                    else if (imageUri.toString().contains("video")) {
 //                        imageView.setImageURI(null);
@@ -317,40 +312,38 @@ public class CameraActivity extends AppCompatActivity {
 //                        video_two.setVisibility(View.VISIBLE);
 //                        video_two.setVideoURI(imageUri);
 //                        video_two.seekTo(1);
-                        // img_two.start();
-                   //     path_two = getRealPathFromURI(imageUri);
+                    // img_two.start();
+                    //     path_two = getRealPathFromURI(imageUri);
 
 //                MediaController mediaController = new MediaController(this);
 //// initiate a video view
 //          //      VideoView simpleVideoView = (VideoView) findViewById(R.id.simpleVideoView);
 //// set media controller object for a video view
 //                img_two.setMediaController(mediaController);
-          //          }
-
+                    //          }
                 }
                 break;
 
             case PICK_IMAGE_three:
                 if (requestCode == PICK_IMAGE_three && resultCode == RESULT_OK && null != data) {
-                    imageUri = data.getData();
-                    if (imageUri.toString().contains("image")) {
-                        img_three.setImageURI(imageUri);
-                        path_three = getRealPathFromURI(imageUri);
+                    imageUri3 = data.getData();
+                    if (imageUri3.toString().contains("image")) {
+                        img_three.setImageURI(imageUri3);
+                        path_three = getRealPathFromURI(imageUri3);
                     }
 //                    else if (imageUri.toString().contains("video")) {
-//
 //                        video_three.setVisibility(View.VISIBLE);
 //                        video_three.setVideoURI(imageUri);
 //                        video_three.seekTo(1);
-                        // img_two.start();
-                 //       path_three = getRealPathFromURI(imageUri);
+                    // img_two.start();
+                    //       path_three = getRealPathFromURI(imageUri);
 
 //                MediaController mediaController = new MediaController(this);
 //// initiate a video view
 //          //      VideoView simpleVideoView = (VideoView) findViewById(R.id.simpleVideoView);
 //// set media controller object for a video view
 //                img_two.setMediaController(mediaController);
-        //            }
+                    //            }
                 }
                 break;
         }

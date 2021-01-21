@@ -31,10 +31,16 @@ public class Edit extends AppCompatActivity {
     @BindView(R.id.imageView)
     ImageView imageView;
 
+    @BindView(R.id.brightness)
+    ImageView brightness;
+
+    @BindView(R.id.contrast)
+    ImageView contrast;
+
     SeekBar seekBar, contrast_seekBar;
     private Bitmap bitmap;
     private PictureThread thread;
-    ImageView contrast, brightness;
+
     String image;
 
     @Override
@@ -52,22 +58,21 @@ public class Edit extends AppCompatActivity {
                 bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 imageView.setImageBitmap(bitmap);
                 imageView.setTag(imgFile.toString());
-
                 thread = new PictureThread(imageView, bitmap);
                 thread.start();
+
             }
         }
 
 
         seekBar = findViewById(R.id.brightness_seekBar);
         contrast_seekBar = findViewById(R.id.contrast_seekBar);
-        contrast = findViewById(R.id.contrast);
-        brightness = findViewById(R.id.brightness);
+     //   contrast = findViewById(R.id.contrast);
+//        brightness = findViewById(R.id.brightness);
 
 
-        //  bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.dummy1);
-        // imageView.setImageBitmap(bitmap);
-
+//        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_upload);
+//        imageView.setImageBitmap(bitmap);
 
 
         brightness.setOnClickListener(new View.OnClickListener() {
