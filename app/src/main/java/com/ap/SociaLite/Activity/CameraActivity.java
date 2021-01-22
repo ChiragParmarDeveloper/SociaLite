@@ -59,8 +59,8 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.img_back)
     ImageView img_back;
 
-    @BindView(R.id.next)
-    Button next;
+//    @BindView(R.id.next)
+//    Button next;
 
     @BindView(R.id.imageView)
     ImageView imageView;
@@ -168,18 +168,21 @@ public class CameraActivity extends AppCompatActivity {
                 post.putExtra("img2", path_two);
                 post.putExtra("img3", path_three);
                 startActivity(post);
-
                 break;
 
             case R.id.layout_filter:
                 Intent edit = new Intent(CameraActivity.this, Edit.class);
                 edit.putExtra("img2", path);
                 startActivity(edit);
-
                 break;
 
             case R.id.layout_drama:
-                startActivity(new Intent(CameraActivity.this, ShapeCut.class));
+
+                Intent shape = new Intent(CameraActivity.this, ShapeCut.class);
+                shape.putExtra("img1", path_one);
+                shape.putExtra("img2", path_two);
+                shape.putExtra("img3", path_three);
+                startActivity(shape);
                 break;
 
             case R.id.img_one:
