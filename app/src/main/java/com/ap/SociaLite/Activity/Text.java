@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.ap.SociaLite.R;
 
@@ -64,7 +65,6 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
     @BindView(R.id.imageView)
     ImageView imageView;
 
-
     @BindView(R.id.edt_text)
     EditText edt_text;
 
@@ -77,9 +77,9 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
     private int lastAction;
 
     private Bitmap bitmap;
-    String image,imageone;
+    String image, imageone;
 
-    RelativeLayout constraintLayout48;
+  //  RelativeLayout constraintLayout48;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +89,10 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 
         edt_text.setTextSize(ratio + 15);
 
-        constraintLayout48 = findViewById(R.id.constraintLayout48);
+     //   constraintLayout48 = findViewById(R.id.constraintLayout48);
         edt_text.setOnTouchListener(this);
 
-     //   image = getIntent().getStringExtra("img1");
+        //   image = getIntent().getStringExtra("img1");
         imageone = getIntent().getStringExtra("img2");
 
 //        if(image !=null)
@@ -108,8 +108,7 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 //            }
 //        }
 
-        if(imageone !=null)
-        {
+        if (imageone != null) {
             File imgFile = new File(imageone);
 
             if (imgFile.exists()) {

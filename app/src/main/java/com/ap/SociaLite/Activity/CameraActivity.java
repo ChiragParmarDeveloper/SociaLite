@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.VideoView;
@@ -17,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ap.SociaLite.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import butterknife.BindView;
@@ -91,7 +89,7 @@ public class CameraActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_one = 100;
     private static final int PICK_IMAGE_two = 110;
     private static final int PICK_IMAGE_three = 120;
-    Uri imageUri1,imageUri2,imageUri3;
+    Uri imageUri1, imageUri2, imageUri3;
     String path;
 
     @Override
@@ -125,27 +123,23 @@ public class CameraActivity extends AppCompatActivity {
             case R.id.next:
 
                 if (my_network != null) {
+
                     Intent in = new Intent(CameraActivity.this, PostNetwork.class);
+                    in.putExtra("img1", path_one);
+                    in.putExtra("img2", path_two);
+                    in.putExtra("img3", path_three);
                     startActivity(in);
+
+
                 } else if (business_interaction != null) {
                     Intent in = new Intent(CameraActivity.this, PostBusiness.class);
                     startActivity(in);
                 } else {
-
-                    if (bitmap != null) {
-                        Intent in = new Intent(CameraActivity.this, Post.class);
-                        // your bitmap
-                        ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
-                        in.putExtra("byteArray", bs.toByteArray());
-                        startActivity(in);
-                    } else if (path_one != null) {
-
-                        Intent in = new Intent(CameraActivity.this, Post.class);
-                        in.putExtra("path", path_one);
-                        startActivity(in);
-
-                    }
+                    Intent in = new Intent(CameraActivity.this, Post.class);
+                    in.putExtra("img1", path_one);
+                    in.putExtra("img2", path_two);
+                    in.putExtra("img3", path_three);
+                    startActivity(in);
                 }
                 break;
 
