@@ -47,7 +47,6 @@ public class PostBusiness extends AppCompatActivity {
     @BindView(R.id.spinner)
     public Spinner spinner;
 
-
     @BindView(R.id.img_one)
     ImageView img_one;
 
@@ -80,7 +79,7 @@ public class PostBusiness extends AppCompatActivity {
 
     @BindView(R.id.imageView)
     ImageView imageView;
-    
+
     boolean click = true;
     String imagetwo, imageone, imagethree;
     @Override
@@ -130,8 +129,6 @@ public class PostBusiness extends AppCompatActivity {
                 img_three.setImageBitmap(myBitmap);
             }
         }
-
-
         new PostBusinessPresenter(this,this).fetch_my_intrest(session.getUser_id());
     }
 

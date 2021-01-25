@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,11 +27,11 @@ import butterknife.OnClick;
 
 public class Text extends AppCompatActivity implements View.OnTouchListener {
 
-    @BindView(R.id.img_cross)
-    ImageView img_cross;
-
-    @BindView(R.id.btn_save)
-    Button btn_save;
+//    @BindView(R.id.img_cross)
+//    ImageView img_cross;
+//
+//    @BindView(R.id.btn_save)
+//    Button btn_save;
 
     @BindView(R.id.white)
     ImageView white;
@@ -79,34 +80,17 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
     private Bitmap bitmap;
     String image, imageone;
 
-  //  RelativeLayout constraintLayout48;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text);
         ButterKnife.bind(this);
 
-        edt_text.setTextSize(ratio + 15);
+        edt_text.setTextSize(ratio + 20);
 
-     //   constraintLayout48 = findViewById(R.id.constraintLayout48);
         edt_text.setOnTouchListener(this);
 
-        //   image = getIntent().getStringExtra("img1");
         imageone = getIntent().getStringExtra("img2");
-
-//        if(image !=null)
-//        {
-//            File imgFile = new File(image);
-//
-//            if (imgFile.exists()) {
-//
-//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-//                imageView.setImageBitmap(myBitmap);
-//                imageView.setTag(imgFile.toString());
-//                getIntent().removeExtra("img1");
-//            }
-//        }
 
         if (imageone != null) {
             File imgFile = new File(imageone);
@@ -130,7 +114,18 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
                 ///     startActivity(new Intent(CameraActivity.this,LoginActivity.class));
                 break;
             case R.id.btn_save:
-                startActivity(new Intent(Text.this, CameraActivity.class));
+           //     startActivity(new Intent(Text.this, CameraActivity.class));
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                shareIntent.putExtra(Intent.EXTRA_STREAM, imageone);
+                shareIntent.setType("image/png");
+                shareIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Here is my IMAGE");
+                startActivity(Intent.createChooser(shareIntent, "Share IMAGE Using..."));
+
+
+
                 break;
 
             case R.id.white:

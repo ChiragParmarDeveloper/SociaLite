@@ -123,16 +123,16 @@ public class CameraActivity extends AppCompatActivity {
             case R.id.next:
 
                 if (my_network != null) {
-
                     Intent in = new Intent(CameraActivity.this, PostNetwork.class);
                     in.putExtra("img1", path_one);
                     in.putExtra("img2", path_two);
                     in.putExtra("img3", path_three);
                     startActivity(in);
-
-
                 } else if (business_interaction != null) {
                     Intent in = new Intent(CameraActivity.this, PostBusiness.class);
+                    in.putExtra("img1", path_one);
+                    in.putExtra("img2", path_two);
+                    in.putExtra("img3", path_three);
                     startActivity(in);
                 } else {
                     Intent in = new Intent(CameraActivity.this, Post.class);

@@ -334,6 +334,7 @@
                     android:layout_marginEnd="8dp"
                     android:hint="Location"
                     android:textSize="15sp"
+                    android:background="@null"
                     android:textColor="@color/colorBlack"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -435,7 +436,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout39">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout39"
+                app:layout_constraintVertical_bias="0.0">
 
                 <Button
                     android:id="@+id/btn_share"

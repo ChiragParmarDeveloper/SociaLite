@@ -1,6 +1,5 @@
 package com.ap.SociaLite.Activity;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -120,7 +118,7 @@ public class Post extends AppCompatActivity {
         new PostPresenter(this, this).fetch_my_intrest(user_id);
     }
 
-    @OnClick({R.id.img_back, R.id.btn_share,R.id.img_one,R.id.img_two,R.id.img_three})
+    @OnClick({R.id.img_back, R.id.btn_share, R.id.img_one, R.id.img_two, R.id.img_three})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -128,7 +126,6 @@ public class Post extends AppCompatActivity {
                 break;
 
             case R.id.btn_share:
-             //   startActivity(new Intent(Post.this, HomeActivity.class));
                 break;
             case R.id.img_one:
                 if (imageone != null) {
@@ -173,10 +170,6 @@ public class Post extends AppCompatActivity {
                         //    path = imageView.getTag().toString();
                     }
                 }
-
-
         }
     }
-
-
 }
