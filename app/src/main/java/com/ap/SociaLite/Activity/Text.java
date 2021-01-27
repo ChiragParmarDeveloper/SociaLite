@@ -27,12 +27,6 @@ import butterknife.OnClick;
 
 public class Text extends AppCompatActivity implements View.OnTouchListener {
 
-//    @BindView(R.id.img_cross)
-//    ImageView img_cross;
-//
-//    @BindView(R.id.btn_save)
-//    Button btn_save;
-
     @BindView(R.id.white)
     ImageView white;
 
@@ -103,7 +97,6 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 
             }
         }
-
     }
 
     @OnClick({R.id.img_cross, R.id.btn_save, R.id.white, R.id.red, R.id.yellow, R.id.green, R.id.orange, R.id.aqua, R.id.blue, R.id.violet, R.id.pink, R.id.black})
@@ -111,21 +104,9 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
         switch (view.getId()) {
             case R.id.img_cross:
                 finish();
-                ///     startActivity(new Intent(CameraActivity.this,LoginActivity.class));
                 break;
             case R.id.btn_save:
-           //     startActivity(new Intent(Text.this, CameraActivity.class));
-
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                shareIntent.putExtra(Intent.EXTRA_STREAM, imageone);
-                shareIntent.setType("image/png");
-                shareIntent.putExtra(Intent.EXTRA_TEXT,
-                        "Here is my IMAGE");
-                startActivity(Intent.createChooser(shareIntent, "Share IMAGE Using..."));
-
-
-
+                startActivity(new Intent(Text.this, CameraActivity.class));
                 break;
 
             case R.id.white:
