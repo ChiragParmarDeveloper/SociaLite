@@ -31,15 +31,13 @@ public class LoginActivity extends AppCompatActivity {
     TextView txt_forgot;
 
     @BindView(R.id.checkbox)
-    CheckBox checkbox;
+    public CheckBox checkbox;
 
     @BindView(R.id.edt_email)
     public EditText edt_email;
 
     @BindView(R.id.password)
     EditText password;
-
-    //public static String account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick({R.id.txt_Register, R.id.btn_login, R.id.txt_forgot, R.id.checkbox})
     public void OnClick(View view) {
         switch (view.getId()) {
+
             case R.id.txt_Register:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
