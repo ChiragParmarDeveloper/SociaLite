@@ -58,41 +58,14 @@ public class MyInterestAdapter extends RecyclerView.Adapter<MyInterestAdapter.Ho
                     String id = interest_lists.get(position).interest_id;
                     interest_ids.add(id);
                     Log.d("interest_check-------", String.valueOf(interest_ids));
-
-                    //     holder.checkbox_interest.setChecked(true);
                 } else {
+                    String id = interest_lists.get(position).interest_id;
+                    interest_ids.remove(id);
                     Log.d("interest_uncheck-------", String.valueOf(interest_ids));
-                    interest_ids.clear();
-                }
 
+                }
             }
         });
-
-
-//        holder.checkbox_interest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//
-//
-//                if (holder.checkbox_interest.isChecked()) {
-//                   id = interest_lists.get(position).interest_id;
-//                    interest_ids.add(id);
-//                    Log.d("interest_check-------", String.valueOf(interest_ids));
-//
-//                    holder.checkbox_interest.setChecked(true);
-//
-//                } else {
-//
-//                    holder.checkbox_interest.
-////                    holder.checkbox_interest.setChecked(false);
-////                    String id = interest_lists.get(0).interest_id;
-////                    interest_ids.add(id);
-//                    Log.d("interest_uncheck-------", String.valueOf(interest_ids));
-//                    new InterestActivityPresenter(mContext, interestActivity).interest();
-//                }
-//            }
-//        });
-
     }
 
     @Override

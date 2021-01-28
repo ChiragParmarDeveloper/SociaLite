@@ -23,14 +23,9 @@ import butterknife.OnClick;
 
 public class InterestActivity extends AppCompatActivity {
 
-    @BindView(R.id.btn_done)
-    Button btn_done;
-
-    @BindView(R.id.img_back)
-    ImageView img_back;
-
     @BindView(R.id.rv_interest)
     public RecyclerView rv_interest;
+
     String user_id;
 
     @Override
