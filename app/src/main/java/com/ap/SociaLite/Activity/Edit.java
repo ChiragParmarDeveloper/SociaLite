@@ -12,7 +12,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
@@ -32,11 +31,23 @@ public class Edit extends AppCompatActivity {
     @BindView(R.id.imageView)
     ImageView imageView;
 
+    @BindView(R.id.exposure)
+    ImageView exposure;
+
     @BindView(R.id.brightness)
     ImageView brightness;
 
     @BindView(R.id.contrast)
     ImageView contrast;
+
+    @BindView(R.id.saturation)
+    ImageView saturation;
+
+    @BindView(R.id.exposure_seekBar)
+    SeekBar exposure_seekBar;
+
+    @BindView(R.id.saturation_seekBar)
+    SeekBar saturation_seekBar;
 
     SeekBar seekBar, contrast_seekBar;
     private Bitmap bitmap;
@@ -71,6 +82,8 @@ public class Edit extends AppCompatActivity {
         brightness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                exposure_seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.GONE);
                 seekBar.setVisibility(View.VISIBLE);
                 contrast_seekBar.setVisibility(View.GONE);
             }
@@ -79,8 +92,44 @@ public class Edit extends AppCompatActivity {
         contrast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                exposure_seekBar.setVisibility(View.GONE);
                 seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.GONE);
                 contrast_seekBar.setVisibility(View.VISIBLE);
+            }
+        });
+
+        exposure_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        saturation_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                loadBitmapSat();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                loadBitmapSat();
             }
         });
 
@@ -88,7 +137,7 @@ public class Edit extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-            //    thread.adjustBrightness(seekBar.getProgress() - 100);
+                //    thread.adjustBrightness(seekBar.getProgress() - 100);
 
                 imageView.setColorFilter(setBrightness(i));
 
@@ -110,7 +159,7 @@ public class Edit extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 imageView.setImageBitmap(changeBitmapContrastBrightness(bitmap, (float) i / 100f, 1));
 
-          //      thread.adjustContrast(seekBar.getProgress());
+                //      thread.adjustContrast(seekBar.getProgress());
             }
 
             @Override
@@ -127,16 +176,13 @@ public class Edit extends AppCompatActivity {
 
     //Brightness
     public static PorterDuffColorFilter setBrightness(int progress) {
-        if (progress >=    100)
-        {
-            int value = (int) (progress-100) * 255 / 100;
+        if (progress >= 100) {
+            int value = (int) (progress - 100) * 255 / 100;
 
             return new PorterDuffColorFilter(Color.argb(value, 255, 255, 255), PorterDuff.Mode.SRC_OVER);
 
-        }
-        else
-        {
-            int value = (int) (100-progress) * 255 / 100;
+        } else {
+            int value = (int) (100 - progress) * 255 / 100;
             return new PorterDuffColorFilter(Color.argb(value, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
         }
     }
@@ -162,7 +208,39 @@ public class Edit extends AppCompatActivity {
         return ret;
     }
 
-    @OnClick({R.id.img_cross, R.id.btn_save})
+    //Saturation
+    private void loadBitmapSat() {
+        if (bitmap != null) {
+
+            int progressSat = saturation_seekBar.getProgress();
+
+            //Saturation, 0=gray-scale. 1=identity
+            float sat = (float) progressSat / 256;
+            imageView.setImageBitmap(updateSat(bitmap, sat));
+        }
+    }
+
+    private Bitmap updateSat(Bitmap src, float settingSat) {
+
+        int w = src.getWidth();
+        int h = src.getHeight();
+
+        Bitmap bitmapResult =
+                Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        Canvas canvasResult = new Canvas(bitmapResult);
+        Paint paint = new Paint();
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(settingSat);
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
+        paint.setColorFilter(filter);
+        canvasResult.drawBitmap(src, 0, 0, paint);
+
+        return bitmapResult;
+    }
+
+
+
+    @OnClick({R.id.img_cross, R.id.btn_save, R.id.exposure,R.id.saturation})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_cross:
@@ -170,6 +248,20 @@ public class Edit extends AppCompatActivity {
                 break;
             case R.id.btn_save:
                 startActivity(new Intent(Edit.this, CameraActivity.class));
+                break;
+
+            case R.id.exposure:
+                seekBar.setVisibility(View.GONE);
+                contrast_seekBar.setVisibility(View.GONE);
+                exposure_seekBar.setVisibility(View.VISIBLE);
+                saturation_seekBar.setVisibility(View.GONE);
+                break;
+
+            case R.id.saturation:
+                seekBar.setVisibility(View.GONE);
+                contrast_seekBar.setVisibility(View.GONE);
+                exposure_seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.VISIBLE);
                 break;
         }
     }
