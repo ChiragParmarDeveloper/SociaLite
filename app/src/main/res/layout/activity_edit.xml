@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Activity.Edit">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -189,7 +188,6 @@
                                 android:src="@drawable/ic_e2" />
 
                             <ImageView
-                                android:id="@+id/contrast"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -197,6 +195,7 @@
                                 android:src="@drawable/ic_e3" />
 
                             <ImageView
+                                android:id="@+id/contrast"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"

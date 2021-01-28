@@ -3,6 +3,13 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,12 +28,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Edit extends AppCompatActivity {
-
-    @BindView(R.id.img_cross)
-    ImageView img_cross;
-
-    @BindView(R.id.btn_save)
-    Button btn_save;
 
     @BindView(R.id.imageView)
     ImageView imageView;
@@ -64,16 +65,8 @@ public class Edit extends AppCompatActivity {
             }
         }
 
-
         seekBar = findViewById(R.id.brightness_seekBar);
         contrast_seekBar = findViewById(R.id.contrast_seekBar);
-     //   contrast = findViewById(R.id.contrast);
-//        brightness = findViewById(R.id.brightness);
-
-
-//        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_upload);
-//        imageView.setImageBitmap(bitmap);
-
 
         brightness.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +88,9 @@ public class Edit extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-                thread.adjustBrightness(seekBar.getProgress() - 100);
+            //    thread.adjustBrightness(seekBar.getProgress() - 100);
+
+                imageView.setColorFilter(setBrightness(i));
 
             }
 
@@ -109,12 +104,13 @@ public class Edit extends AppCompatActivity {
 
             }
         });
-
 
         contrast_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                thread.adjustContrast(seekBar.getProgress());
+                imageView.setImageBitmap(changeBitmapContrastBrightness(bitmap, (float) i / 100f, 1));
+
+          //      thread.adjustContrast(seekBar.getProgress());
             }
 
             @Override
@@ -127,8 +123,43 @@ public class Edit extends AppCompatActivity {
 
             }
         });
+    }
 
+    //Brightness
+    public static PorterDuffColorFilter setBrightness(int progress) {
+        if (progress >=    100)
+        {
+            int value = (int) (progress-100) * 255 / 100;
 
+            return new PorterDuffColorFilter(Color.argb(value, 255, 255, 255), PorterDuff.Mode.SRC_OVER);
+
+        }
+        else
+        {
+            int value = (int) (100-progress) * 255 / 100;
+            return new PorterDuffColorFilter(Color.argb(value, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
+        }
+    }
+
+    //contrast
+    public static Bitmap changeBitmapContrastBrightness(Bitmap bmp, float contrast, float brightness) {
+        ColorMatrix cm = new ColorMatrix(new float[]
+                {
+                        contrast, 0, 0, 0, brightness,
+                        0, contrast, 0, 0, brightness,
+                        0, 0, contrast, 0, brightness,
+                        0, 0, 0, 1, 0
+                });
+
+        Bitmap ret = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), bmp.getConfig());
+
+        Canvas canvas = new Canvas(ret);
+
+        Paint paint = new Paint();
+        paint.setColorFilter(new ColorMatrixColorFilter(cm));
+        canvas.drawBitmap(bmp, 0, 0, paint);
+
+        return ret;
     }
 
     @OnClick({R.id.img_cross, R.id.btn_save})
