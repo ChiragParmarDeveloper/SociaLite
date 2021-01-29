@@ -17,6 +17,7 @@ import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ap.SociaLite.Application.ConvolutionMatrix;
 import com.ap.SociaLite.PictureThread;
 import com.ap.SociaLite.R;
 
@@ -48,6 +49,12 @@ public class Edit extends AppCompatActivity {
 
     @BindView(R.id.saturation_seekBar)
     SeekBar saturation_seekBar;
+
+    @BindView(R.id.sharpness)
+    ImageView sharpness;
+
+    @BindView(R.id.sharpness_seekBar)
+    SeekBar sharpness_seekBar;
 
     SeekBar seekBar, contrast_seekBar;
     private Bitmap bitmap;
@@ -86,6 +93,8 @@ public class Edit extends AppCompatActivity {
                 saturation_seekBar.setVisibility(View.GONE);
                 seekBar.setVisibility(View.VISIBLE);
                 contrast_seekBar.setVisibility(View.GONE);
+                sharpness_seekBar.setVisibility(View.GONE);
+
             }
         });
 
@@ -96,6 +105,8 @@ public class Edit extends AppCompatActivity {
                 seekBar.setVisibility(View.GONE);
                 saturation_seekBar.setVisibility(View.GONE);
                 contrast_seekBar.setVisibility(View.VISIBLE);
+                sharpness_seekBar.setVisibility(View.GONE);
+
             }
         });
 
@@ -160,6 +171,24 @@ public class Edit extends AppCompatActivity {
                 imageView.setImageBitmap(changeBitmapContrastBrightness(bitmap, (float) i / 100f, 1));
 
                 //      thread.adjustContrast(seekBar.getProgress());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+        sharpness_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                imageView.setImageBitmap(sharpenImage(bitmap,12));
             }
 
             @Override
@@ -238,9 +267,24 @@ public class Edit extends AppCompatActivity {
         return bitmapResult;
     }
 
+    //Sharpness
+    public  Bitmap sharpenImage(Bitmap src, double weight) {
+        // set sharpness configuration
+        double[][] SharpConfig = new double[][] {
+                { 0 , -2    , 0  },
+                { -2, weight, -2 },
+                { 0 , -2    , 0  }
+        };
+        //create convolution matrix instance
+        ConvolutionMatrix convMatrix = new ConvolutionMatrix(3);
+        //apply configuration
+        convMatrix.applyConfig(SharpConfig);
+        //set weight according to factor
+        convMatrix.Factor = weight - 8;
+        return ConvolutionMatrix.computeConvolution3x3(src, convMatrix);
+    }
 
-
-    @OnClick({R.id.img_cross, R.id.btn_save, R.id.exposure,R.id.saturation})
+    @OnClick({R.id.img_cross, R.id.btn_save, R.id.exposure,R.id.saturation,R.id.sharpness})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_cross:
@@ -255,6 +299,8 @@ public class Edit extends AppCompatActivity {
                 contrast_seekBar.setVisibility(View.GONE);
                 exposure_seekBar.setVisibility(View.VISIBLE);
                 saturation_seekBar.setVisibility(View.GONE);
+                sharpness_seekBar.setVisibility(View.GONE);
+
                 break;
 
             case R.id.saturation:
@@ -262,7 +308,17 @@ public class Edit extends AppCompatActivity {
                 contrast_seekBar.setVisibility(View.GONE);
                 exposure_seekBar.setVisibility(View.GONE);
                 saturation_seekBar.setVisibility(View.VISIBLE);
+                sharpness_seekBar.setVisibility(View.GONE);
                 break;
+            case R.id.sharpness:
+                seekBar.setVisibility(View.GONE);
+                contrast_seekBar.setVisibility(View.GONE);
+                exposure_seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.GONE);
+                sharpness_seekBar.setVisibility(View.VISIBLE);
+
+                break;
+
         }
     }
 }

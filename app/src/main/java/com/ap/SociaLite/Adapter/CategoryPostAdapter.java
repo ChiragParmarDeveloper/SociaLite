@@ -98,6 +98,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
                             case R.id.report:
                                 Intent in = new Intent(view.getContext(), Report.class);
+                                in.putExtra("post_id",id);
                                 view.getContext().startActivity(in);
                                 break;
 
@@ -340,10 +341,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
         @BindView(R.id.layout1)
         LinearLayout layout1;
-
-
-
-
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

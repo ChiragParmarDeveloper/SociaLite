@@ -46,6 +46,9 @@ public interface RService {
     @POST("faq.php")
     Call<json> faq();
 
+    @POST("report.php")
+    Call<json> report();
+
     @POST("fetch_user.php")
     Call<json> fetch_user();
 
@@ -198,6 +201,12 @@ public interface RService {
     @POST("story_viewers.php")
     Call<json> story_viewers(@Field("user_id") String user_id,
                              @Field("story_id") String story_id);
+
+    @FormUrlEncoded
+    @POST("report_post.php")
+    Call<json> post_report(@Field("user_id") String user_id,
+                           @Field("post_id") String post_id,
+                           @Field("reason") String reason);
 
 
     public class api {
