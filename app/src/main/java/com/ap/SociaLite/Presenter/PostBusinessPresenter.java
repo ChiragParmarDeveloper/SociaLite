@@ -3,8 +3,8 @@ package com.ap.SociaLite.Presenter;
 import android.content.Context;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
-import com.ap.SociaLite.Activity.Post;
 import com.ap.SociaLite.Activity.PostBusiness;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
@@ -14,12 +14,13 @@ import com.ap.SociaLite.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PostBusinessPresenter implements PostBusinessContract {
-
 
     public Context mContext;
     public PostBusiness postBusiness;
@@ -28,9 +29,6 @@ public class PostBusinessPresenter implements PostBusinessContract {
         this.mContext = context;
         this.postBusiness = fragment;
     }
-
-
-
 
 
     @Override
@@ -56,6 +54,31 @@ public class PostBusinessPresenter implements PostBusinessContract {
                             postBusiness.spinner.setAdapter(spinnerAdapter);
 
                         }
+                    } else {
+                        //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                    //     Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void upload_card(MultipartBody.Part[] image, RequestBody user_id) {
+        try {
+            new RService.api().call(mContext).card_upload(image, user_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }

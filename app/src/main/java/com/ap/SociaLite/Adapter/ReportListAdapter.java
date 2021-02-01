@@ -51,6 +51,10 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Ho
 
         holder.txt_description.setText(item.description);
 
+        if(position == report_details.size()-1){
+            holder.view.setVisibility(View.GONE);
+        }
+
         holder.txt_description.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +72,10 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Ho
 
         @BindView(R.id.txt_description)
         TextView txt_description;
+
+        @BindView(R.id.view)
+        View view;
+
 
         public Holder(@NonNull View itemView) {
             super(itemView);

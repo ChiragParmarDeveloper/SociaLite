@@ -98,7 +98,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
                             case R.id.report:
                                 Intent in = new Intent(view.getContext(), Report.class);
-                                in.putExtra("post_id",id);
+                                in.putExtra("post_id", id);
                                 view.getContext().startActivity(in);
                                 break;
 
@@ -225,26 +225,22 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                         if (response.body().comments.comments != null && response.body().comments.comments.size() > 0) {
 
                             Log.d("commnet_new", String.valueOf(response.body().comments.comments.size()));
-                            holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).user_name);
+                            holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name);
 
-                            holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).comment);
+                            holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
 
-                         //   holder.txt_comment_pos_0.setText(response.body().comments.comments.get(0).comment);
+                            //   holder.txt_comment_pos_0.setText(response.body().comments.comments.get(0).comment);
 
-                        }
-                        else
-                        {
+                        } else {
                             holder.layout.setVisibility(View.GONE);
                         }
 
                         if (response.body().comments.comments != null && response.body().comments.comments.size() > 1) {
 
-                            holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).user_name);
-                            holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).comment);
+                            holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
+                            holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
 
-                        }
-                        else
-                        {
+                        } else {
                             holder.layout1.setVisibility(View.GONE);
                         }
 
