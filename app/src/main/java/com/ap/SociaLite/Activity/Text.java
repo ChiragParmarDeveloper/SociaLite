@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -60,6 +63,11 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
     @BindView(R.id.imageView)
     ImageView imageView;
 
+    @BindView(R.id.blackimg)
+    ImageView blackimg;
+
+
+
     @BindView(R.id.edt_text)
     EditText edt_text;
 
@@ -73,6 +81,8 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 
     private Bitmap bitmap;
     String image, imageone;
+    Bitmap myBitmap;
+    Matrix matrix;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +101,7 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 
             if (imgFile.exists()) {
 
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+               myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 imageView.setImageBitmap(myBitmap);
                 imageView.setTag(imgFile.toString());
 
@@ -105,8 +115,16 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
             case R.id.img_cross:
                 finish();
                 break;
+
             case R.id.btn_save:
-                startActivity(new Intent(Text.this, CameraActivity.class));
+
+              //  startActivity(new Intent(Text.this, CameraActivity.class));
+                edt_text.buildDrawingCache();
+                Bitmap bmp = Bitmap.createBitmap(edt_text.getDrawingCache());
+                System.out.println("ashish"+edt_text.getText().toString());
+                Bitmap bmw=combineImages1( myBitmap,bmp);
+                blackimg.setImageBitmap(bmw);
+
                 break;
 
             case R.id.white:
@@ -177,9 +195,7 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
                     imm.showSoftInput(edt_text, InputMethodManager.SHOW_FORCED);
 //                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
                 }
-
         }
-
         return true;
     }
 
@@ -208,4 +224,51 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 
         return (int) (Math.sqrt(dx * dx + dy * dy));
     }
+//
+//    public Bitmap combineImages(Bitmap background, Bitmap foreground) {
+//
+//        int width = 0, height = 0;
+//        Bitmap cs;
+//
+//        width = getWindowManager().getDefaultDisplay().getWidth();
+//        height = getWindowManager().getDefaultDisplay().getHeight();
+//
+//        cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+//        Canvas comboImage = new Canvas(cs);
+//        background = Bitmap.createScaledBitmap(background, width, height, true);
+//        comboImage.drawBitmap(background, 0, 0, null);
+//        comboImage.drawBitmap(foreground, matrix, null);
+//
+//        return cs;
+//
+//    }
+    public Bitmap combineImages1(Bitmap c, Bitmap s) { // can add a 3rd parameter 'String loc' if you want to save the new image - left some code to do that at the bottom
+        Bitmap cs = null;
+
+        int width, height = 0;
+
+        width = getWindowManager().getDefaultDisplay().getWidth();
+        height = getWindowManager().getDefaultDisplay().getHeight();
+
+        cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        Canvas comboImage = new Canvas(cs);
+
+        comboImage.drawBitmap(c, 0f, 0f, null);
+        comboImage.drawBitmap(s, ratio, ratio, null);
+
+        // this is an extra bit I added, just incase you want to save the new image somewhere and then return the location
+        /*String tmpImg = String.valueOf(System.currentTimeMillis()) + ".png";
+
+        OutputStream os = null;
+        try {
+          os = new FileOutputStream(loc + tmpImg);
+          cs.compress(CompressFormat.PNG, 100, os);
+        } catch(IOException e) {
+          Log.e("combineImages", "problem combining images", e);
+        }*/
+
+        return cs;
+    }
+
 }

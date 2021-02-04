@@ -57,9 +57,6 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.img_back)
     ImageView img_back;
 
-//    @BindView(R.id.next)
-//    Button next;
-
     @BindView(R.id.imageView)
     ImageView imageView;
 
