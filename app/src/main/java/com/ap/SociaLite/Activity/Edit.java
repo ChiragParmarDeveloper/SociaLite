@@ -14,12 +14,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ap.SociaLite.Application.BitmapUtils;
 import com.ap.SociaLite.Application.ConvolutionMatrix;
+import com.ap.SociaLite.Contract.EditImageFragmentListener;
 import com.ap.SociaLite.PictureThread;
 import com.ap.SociaLite.R;
+import com.zomato.photofilters.imageprocessors.Filter;
+import com.zomato.photofilters.imageprocessors.subfilters.BrightnessSubFilter;
+import com.zomato.photofilters.imageprocessors.subfilters.ContrastSubFilter;
+import com.zomato.photofilters.imageprocessors.subfilters.SaturationSubfilter;
 
 import java.io.File;
 
@@ -27,7 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Edit extends AppCompatActivity {
+public class Edit extends AppCompatActivity implements EditImageFragmentListener {
 
     @BindView(R.id.imageView)
     ImageView imageView;
@@ -66,29 +73,63 @@ public class Edit extends AppCompatActivity {
     private Bitmap bitmap;
     private PictureThread thread;
 
+    Bitmap finalImage,filteredImage,originalImage;
+    int brightnessFinal = 0;
+    float saturationFinal = 1.0f;
+    float contrastFinal = 1.0f;
+
+    public EditImageFragmentListener listener;
     String image;
 
+    public void setListener(EditImageFragmentListener listener) {
+        this.listener = listener;
+    }
+
+    static {
+        System.loadLibrary("NativeImageProcessor");
+    }
+
+    public static final String IMAGE_NAME = "dummy1.png";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         ButterKnife.bind(this);
 
-        image = getIntent().getStringExtra("img2");
-        if (image != null) {
-            File imgFile = new File(image);
+//        image = getIntent().getStringExtra("img2");
+//        if (image != null) {
+//            File imgFile = new File(image);
+//
+//            if (imgFile.exists()) {
+//
+//                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(bitmap);
+//                imageView.setTag(imgFile.toString());
+//
+//                thread = new PictureThread(imageView, bitmap);
+//                thread.start();
+//
+//            }
+//        }
 
-            if (imgFile.exists()) {
 
-                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(bitmap);
-                imageView.setTag(imgFile.toString());
 
-                thread = new PictureThread(imageView, bitmap);
-                thread.start();
+        originalImage = BitmapUtils.getBitmapFromAssets(this, IMAGE_NAME, 300, 300);
+        filteredImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
+        finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
+        imageView.setImageBitmap(originalImage);
 
-            }
-        }
+        brightness_seekBar.setMax(200);
+        brightness_seekBar.setProgress(100);
+
+//        // keeping contrast value b/w 1.0 - 3.0
+//        contrast_seekBar.setMax(20);
+//        contrast_seekBar.setProgress(0);
+//
+//        // keeping saturation value b/w 0.0 - 3.0
+//        saturation_seekBar.setMax(30);
+//        saturation_seekBar.setProgress(10);
+
 
         contrast_seekBar = findViewById(R.id.contrast_seekBar);
 
@@ -141,10 +182,21 @@ public class Edit extends AppCompatActivity {
 
         brightness_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
 
-                //     thread.adjustBrightness(seekBar.getProgress() - 100);
-                imageView.setColorFilter(setBrightness(i));
+//                //     thread.adjustBrightness(seekBar.getProgress() - 100);
+//                imageView.setColorFilter(setBrightness(i));
+                if (listener != null) {
+
+                    if (seekBar.getId() == R.id.brightness_seekBar) {
+                        // brightness values are b/w -100 to +100
+                        listener.onBrightnessChanged(progress - 100);
+                    }
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"null",Toast.LENGTH_LONG).show();
+                }
 
 
 
@@ -152,12 +204,14 @@ public class Edit extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                if (listener != null)
+                    listener.onEditStarted();
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                if (listener != null)
+                    listener.onEditCompleted();
             }
         });
 
@@ -387,4 +441,47 @@ public class Edit extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    public void onBrightnessChanged(int brightness) {
+        brightnessFinal = brightness;
+        Filter myFilter = new Filter();
+        myFilter.addSubFilter(new BrightnessSubFilter(brightness));
+        imageView.setImageBitmap(myFilter.processFilter(finalImage.copy(Bitmap.Config.ARGB_8888, true)));
+    }
+
+    @Override
+    public void onSaturationChanged(float saturation) {
+        saturationFinal = saturation;
+        Filter myFilter = new Filter();
+        myFilter.addSubFilter(new SaturationSubfilter(saturation));
+        imageView.setImageBitmap(myFilter.processFilter(finalImage.copy(Bitmap.Config.ARGB_8888, true)));
+    }
+
+    @Override
+    public void onContrastChanged(float contrast) {
+        contrastFinal = contrast;
+        Filter myFilter = new Filter();
+        myFilter.addSubFilter(new ContrastSubFilter(contrast));
+        imageView.setImageBitmap(myFilter.processFilter(finalImage.copy(Bitmap.Config.ARGB_8888, true)));
+    }
+
+    @Override
+    public void onEditStarted() {
+
+    }
+
+    @Override
+    public void onEditCompleted() {
+// once the editing is done i.e seekbar is drag is completed,
+        // apply the values on to filtered image
+        final Bitmap bitmap = filteredImage.copy(Bitmap.Config.ARGB_8888, true);
+
+        Filter myFilter = new Filter();
+        myFilter.addSubFilter(new BrightnessSubFilter(brightnessFinal));
+        myFilter.addSubFilter(new ContrastSubFilter(contrastFinal));
+        myFilter.addSubFilter(new SaturationSubfilter(saturationFinal));
+        finalImage = myFilter.processFilter(bitmap);
+    }
+
 }
