@@ -10,10 +10,12 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ap.SociaLite.PictureThread;
 import com.ap.SociaLite.R;
 
 import java.io.File;
@@ -87,7 +89,7 @@ public class CameraActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_two = 110;
     private static final int PICK_IMAGE_three = 120;
     Uri imageUri1, imageUri2, imageUri3;
-    String path;
+    String path,Brightness_path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +108,21 @@ public class CameraActivity extends AppCompatActivity {
 
         my_network = getIntent().getStringExtra("network_fragment");
         business_interaction = getIntent().getStringExtra("business_fragment");
+
+        Brightness_path = getIntent().getStringExtra("Brightness_path");
+        Toast.makeText(getApplicationContext(),Brightness_path,Toast.LENGTH_LONG).show();
+        if(Brightness_path !=null)
+        {
+            File imgFile = new File(Brightness_path);
+
+            if (imgFile.exists()) {
+
+                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imageView.setImageBitmap(bitmap);
+                imageView.setTag(imgFile.toString());
+
+            }
+        }
 
     }
 

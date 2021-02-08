@@ -224,24 +224,24 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 
         return (int) (Math.sqrt(dx * dx + dy * dy));
     }
-//
-//    public Bitmap combineImages(Bitmap background, Bitmap foreground) {
-//
-//        int width = 0, height = 0;
-//        Bitmap cs;
-//
-//        width = getWindowManager().getDefaultDisplay().getWidth();
-//        height = getWindowManager().getDefaultDisplay().getHeight();
-//
-//        cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-//        Canvas comboImage = new Canvas(cs);
-//        background = Bitmap.createScaledBitmap(background, width, height, true);
-//        comboImage.drawBitmap(background, 0, 0, null);
-//        comboImage.drawBitmap(foreground, matrix, null);
-//
-//        return cs;
-//
-//    }
+
+    public Bitmap combineImages(Bitmap background, Bitmap foreground) {
+
+        int width = 0, height = 0;
+        Bitmap cs;
+
+        width = getWindowManager().getDefaultDisplay().getWidth();
+        height = getWindowManager().getDefaultDisplay().getHeight();
+
+        cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas comboImage = new Canvas(cs);
+        background = Bitmap.createScaledBitmap(background, width, height, true);
+        comboImage.drawBitmap(background, 0, 0, null);
+        comboImage.drawBitmap(foreground, matrix, null);
+
+        return cs;
+    }
+
     public Bitmap combineImages1(Bitmap c, Bitmap s) { // can add a 3rd parameter 'String loc' if you want to save the new image - left some code to do that at the bottom
         Bitmap cs = null;
 
@@ -255,7 +255,7 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
         Canvas comboImage = new Canvas(cs);
 
         comboImage.drawBitmap(c, 0f, 0f, null);
-        comboImage.drawBitmap(s, ratio, ratio, null);
+        comboImage.drawBitmap(s, 0f, 0f, null);
 
         // this is an extra bit I added, just incase you want to save the new image somewhere and then return the location
         /*String tmpImg = String.valueOf(System.currentTimeMillis()) + ".png";

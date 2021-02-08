@@ -67,6 +67,6 @@ dependencies {
 
 
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    implementation 'info.androidhive:imagefilters:1.0.7'//zomaoto
 }
 apply plugin: 'com.google.gms.google-services'
