@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -87,6 +88,7 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
     }
 
     public static final String IMAGE_NAME = "dummy1.png";
+    Uri imgUri1, imgUri2, imgUri3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,28 +96,70 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
         setContentView(R.layout.activity_edit);
         ButterKnife.bind(this);
 
-        ///    image = getIntent().getStringExtra("img2");
-        Uri myUri = Uri.parse(getIntent().getStringExtra("imageUri"));
+        imgUri1 = Uri.parse(getIntent().getStringExtra("imageUri1"));
+  //      imgUri2 = Uri.parse(getIntent().getStringExtra("imageUri2"));
+      //  imgUri3 = Uri.parse(getIntent().getStringExtra("imageUri3"));
+
+        if (imgUri1 != null) {
+
+            bitmap = BitmapUtils.getBitmapFromGallery(this, imgUri1, 800, 800);
+
+            originalImage = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+            filteredImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
+            finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
+            imageView.setImageBitmap(originalImage);
+        }
+        else if(imgUri2 != null)
+        {
+            bitmap = BitmapUtils.getBitmapFromGallery(this, imgUri2, 800, 800);
+
+            originalImage = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+            filteredImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
+            finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
+            imageView.setImageBitmap(originalImage);
+        }else
+        {
+            Toast.makeText(getApplicationContext(),"null",Toast.LENGTH_LONG).show();
+        }
+//        else if(imgUri3 !=null)
+//        {
+//            bitmap = BitmapUtils.getBitmapFromGallery(this, imgUri3, 800, 800);
+//
+//            originalImage = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+//            filteredImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
+//            finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
+//            imageView.setImageBitmap(originalImage);
+//        }
+        // image = getIntent().getStringExtra("img2");
+
+   //     imgUri1 = Uri.parse(getIntent().getStringExtra("img2"));
+        // File imgFile = new File(image);
+        //Uri imgURI = Uri.fromFile(imgFile);
+
+        //     imageView.setImageURI(imgURI);
+
+        //   Uri myUri = Uri.parse(Uri.decode(image));
+//        bitmap = BitmapUtils.getBitmapFromGallery(this, imgUri1, 800, 800);
+//
+//        originalImage = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+//        filteredImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
+//        finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
+//        imageView.setImageBitmap(originalImage);
+
+
 //        if (image != null) {
 //            File imgFile = new File(image);
 //
 //            if (imgFile.exists()) {
-
-        //bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//
+//                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 //                imageView.setImageBitmap(bitmap);
 //                imageView.setTag(imgFile.toString());
-        bitmap = BitmapUtils.getBitmapFromGallery(this, myUri, 800, 800);
-
-        originalImage = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-        filteredImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
-        finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
-        imageView.setImageBitmap(originalImage);
-
+//
 //                thread = new PictureThread(imageView, bitmap);
 //                thread.start();
-
-        //        }
-        //     }
+//            }
+//        }
 
         contrast_seekBar = findViewById(R.id.contrast_seekBar);
 
@@ -373,7 +417,9 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
                 break;
 
             case R.id.btn_save:
-                final String path = BitmapUtils.insertImage(getContentResolver(), finalImage, System.currentTimeMillis() + "_profile.jpg", null);
+                // final String path = BitmapUtils.insertImage(getContentResolver(), finalImage, System.currentTimeMillis() + "_profile.jpg", null);
+
+                final String path = finalImage.toString();
                 if (!TextUtils.isEmpty(path)) {
                     Intent shape = new Intent(Edit.this, CameraActivity.class);
                     shape.putExtra("Brightness_path", path);
