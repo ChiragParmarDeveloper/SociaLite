@@ -3,7 +3,6 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ap.SociaLite.R;
 import com.squareup.picasso.Picasso;
-
-import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,6 +88,7 @@ public class CameraActivity extends AppCompatActivity {
     String path, Brightness_path;
     Uri imgURI;
     Uri imageuri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,27 +178,18 @@ public class CameraActivity extends AppCompatActivity {
 
             case R.id.layout_filter:
 
-               // if (imageUri1 != null) {
+                if(imageUri !=null)
+                {
                     Intent edit = new Intent(CameraActivity.this, Edit.class);
                     edit.putExtra("imageUri1", imageuri.toString());
                     startActivity(edit);
-              //  }else if(imageUri2 !=null)
-             //   {
-           //         Intent edit = new Intent(CameraActivity.this, Edit.class);
-            //        edit.putExtra("imageUri2", imageuri.toString());
-            //        startActivity(edit);
-            //    }
-//                else if(imageUri3 !=null)
-//                {
-//                    Intent edit = new Intent(CameraActivity.this, Edit.class);
-//                    edit.putExtra("imageUri3", imageUri3.toString());
-//                    startActivity(edit);
-//                }
+                }
+                else
+                {
+                    Intent edit = new Intent(CameraActivity.this, Edit.class);
+                    startActivity(edit);
+                }
 
-//                Intent edit = new Intent(CameraActivity.this, Edit.class);
-//                edit.putExtra("imageUri1", imageUri1.toString());
-//                edit.putExtra("imageUri2", imageUri2.toString());
-//                startActivity(edit);
 
                 break;
 

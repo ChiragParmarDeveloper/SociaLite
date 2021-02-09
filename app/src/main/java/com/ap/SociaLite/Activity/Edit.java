@@ -14,13 +14,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ap.SociaLite.Application.BitmapUtils;
 import com.ap.SociaLite.Application.ConvolutionMatrix;
-import com.ap.SociaLite.Contract.EditImageFragmentListener;
 import com.ap.SociaLite.PictureThread;
 import com.ap.SociaLite.R;
 import com.zomato.photofilters.imageprocessors.Filter;
@@ -32,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Edit extends AppCompatActivity implements EditImageFragmentListener {
+public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
     @BindView(R.id.imageView)
     ImageView imageView;
@@ -67,10 +65,12 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
     @BindView(R.id.brightness_seekBar)
     SeekBar brightness_seekBar;
 
+    @BindView(R.id.contrast_seekBar)
+    SeekBar contrast_seekBar;
+
     @BindView(R.id.filter_name)
     TextView filter_name;
 
-    SeekBar contrast_seekBar;
     private Bitmap bitmap;
     private PictureThread thread;
 
@@ -79,16 +79,11 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
     float saturationFinal = 1.0f;
     float contrastFinal = 1.0f;
 
-    public EditImageFragmentListener listener;
-    String image;
-
-
     static {
         System.loadLibrary("NativeImageProcessor");
     }
 
-    public static final String IMAGE_NAME = "dummy1.png";
-    Uri imgUri1, imgUri2, imgUri3;
+    Uri imgUri1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,55 +92,18 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
         ButterKnife.bind(this);
 
         imgUri1 = Uri.parse(getIntent().getStringExtra("imageUri1"));
-  //      imgUri2 = Uri.parse(getIntent().getStringExtra("imageUri2"));
-      //  imgUri3 = Uri.parse(getIntent().getStringExtra("imageUri3"));
 
         if (imgUri1 != null) {
-
             bitmap = BitmapUtils.getBitmapFromGallery(this, imgUri1, 800, 800);
-
             originalImage = bitmap.copy(Bitmap.Config.ARGB_8888, true);
             filteredImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
             finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
             imageView.setImageBitmap(originalImage);
-        }
-        else if(imgUri2 != null)
-        {
-            bitmap = BitmapUtils.getBitmapFromGallery(this, imgUri2, 800, 800);
 
-            originalImage = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-            filteredImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
-            finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
-            imageView.setImageBitmap(originalImage);
-        }else
-        {
-            Toast.makeText(getApplicationContext(),"null",Toast.LENGTH_LONG).show();
+            brightness_seekBar.setOnSeekBarChangeListener(this);
         }
-//        else if(imgUri3 !=null)
-//        {
-//            bitmap = BitmapUtils.getBitmapFromGallery(this, imgUri3, 800, 800);
-//
-//            originalImage = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-//            filteredImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
-//            finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
-//            imageView.setImageBitmap(originalImage);
-//        }
+
         // image = getIntent().getStringExtra("img2");
-
-   //     imgUri1 = Uri.parse(getIntent().getStringExtra("img2"));
-        // File imgFile = new File(image);
-        //Uri imgURI = Uri.fromFile(imgFile);
-
-        //     imageView.setImageURI(imgURI);
-
-        //   Uri myUri = Uri.parse(Uri.decode(image));
-//        bitmap = BitmapUtils.getBitmapFromGallery(this, imgUri1, 800, 800);
-//
-//        originalImage = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-//        filteredImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
-//        finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
-//        imageView.setImageBitmap(originalImage);
-
 
 //        if (image != null) {
 //            File imgFile = new File(image);
@@ -161,7 +119,7 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
 //            }
 //        }
 
-        contrast_seekBar = findViewById(R.id.contrast_seekBar);
+        //   contrast_seekBar = findViewById(R.id.contrast_seekBar);
 
         contrast.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,19 +169,16 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
             }
         });
 
-        brightness_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-
-                onBrightnessChanged(progress - 100);
+//        brightness_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+//
+//                onBrightnessChanged(progress - 100);
 //                //     thread.adjustBrightness(seekBar.getProgress() - 100);
 //                imageView.setColorFilter(setBrightness(i));
 //                if (listener != null) {
 //
-//                    if (seekBar.getId() == R.id.brightness_seekBar) {
-//                        // brightness values are b/w -100 to +100
-//                        listener.onBrightnessChanged(progress - 100);
-//                    }
+//
 //
 //                }
 //                else
@@ -232,23 +187,14 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
 //                }
 
 
-            }
+        //    }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                onEditStarted();
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                onEditCompleted();
-            }
-        });
+//
 
         contrast_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                imageView.setImageBitmap(changeBitmapContrastBrightness(bitmap, (float) i / 100f, 1));
+                //      imageView.setImageBitmap(changeBitmapContrastBrightness(bitmap, (float) i / 100f, 1));
 
                 //      thread.adjustContrast(seekBar.getProgress());
             }
@@ -316,25 +262,25 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
 //    }
 
     //contrast
-    public static Bitmap changeBitmapContrastBrightness(Bitmap bmp, float contrast, float brightness) {
-        ColorMatrix cm = new ColorMatrix(new float[]
-                {
-                        contrast, 0, 0, 0, brightness,
-                        0, contrast, 0, 0, brightness,
-                        0, 0, contrast, 0, brightness,
-                        0, 0, 0, 1, 0
-                });
-
-        Bitmap ret = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), bmp.getConfig());
-
-        Canvas canvas = new Canvas(ret);
-
-        Paint paint = new Paint();
-        paint.setColorFilter(new ColorMatrixColorFilter(cm));
-        canvas.drawBitmap(bmp, 0, 0, paint);
-
-        return ret;
-    }
+//    public static Bitmap changeBitmapContrastBrightness(Bitmap bmp, float contrast, float brightness) {
+//        ColorMatrix cm = new ColorMatrix(new float[]
+//                {
+//                        contrast, 0, 0, 0, brightness,
+//                        0, contrast, 0, 0, brightness,
+//                        0, 0, contrast, 0, brightness,
+//                        0, 0, 0, 1, 0
+//                });
+//
+//        Bitmap ret = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), bmp.getConfig());
+//
+//        Canvas canvas = new Canvas(ret);
+//
+//        Paint paint = new Paint();
+//        paint.setColorFilter(new ColorMatrixColorFilter(cm));
+//        canvas.drawBitmap(bmp, 0, 0, paint);
+//
+//        return ret;
+//    }
 
     //Saturation
     private void loadBitmapSat() {
@@ -435,7 +381,6 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
                 saturation_seekBar.setVisibility(View.GONE);
                 sharpness_seekBar.setVisibility(View.GONE);
                 shadow_seekBar.setVisibility(View.GONE);
-
                 break;
 
             case R.id.saturation:
@@ -465,6 +410,7 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
                 sharpness_seekBar.setVisibility(View.GONE);
                 shadow_seekBar.setVisibility(View.VISIBLE);
                 break;
+
             case R.id.brightness:
 
                 filter_name.setText("Brightness");
@@ -485,7 +431,6 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
         imageView.setImageBitmap(myFilter.processFilter(finalImage.copy(Bitmap.Config.ARGB_8888, true)));
     }
 
-
     public void onSaturationChanged(float saturation) {
         saturationFinal = saturation;
         Filter myFilter = new Filter();
@@ -493,7 +438,6 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
         imageView.setImageBitmap(myFilter.processFilter(finalImage.copy(Bitmap.Config.ARGB_8888, true)));
     }
 
-    @Override
     public void onContrastChanged(float contrast) {
         contrastFinal = contrast;
         Filter myFilter = new Filter();
@@ -518,4 +462,20 @@ public class Edit extends AppCompatActivity implements EditImageFragmentListener
         finalImage = myFilter.processFilter(bitmap);
     }
 
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+        if (seekBar.getId() == R.id.brightness_seekBar) {
+            onBrightnessChanged(progress - 100);
+        }
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        onEditStarted();
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        onEditCompleted();
+    }
 }
