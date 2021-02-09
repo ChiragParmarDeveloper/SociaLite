@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ap.SociaLite.PictureThread;
 import com.ap.SociaLite.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -88,7 +89,7 @@ public class CameraActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_one = 100;
     private static final int PICK_IMAGE_two = 110;
     private static final int PICK_IMAGE_three = 120;
-    Uri imageUri1, imageUri2, imageUri3;
+    Uri imageUri1, imageUri2, imageUri3,imageUri;
     String path,Brightness_path;
 
     @Override
@@ -110,18 +111,19 @@ public class CameraActivity extends AppCompatActivity {
         business_interaction = getIntent().getStringExtra("business_fragment");
 
         Brightness_path = getIntent().getStringExtra("Brightness_path");
-        Toast.makeText(getApplicationContext(),Brightness_path,Toast.LENGTH_LONG).show();
+
         if(Brightness_path !=null)
         {
-            File imgFile = new File(Brightness_path);
-
-            if (imgFile.exists()) {
-
-                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(bitmap);
-                imageView.setTag(imgFile.toString());
-
-            }
+            Picasso.get().load(Brightness_path).into(imageView);
+//            File imgFile = new File(Brightness_path);
+//
+//            if (imgFile.exists()) {
+//
+//                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(bitmap);
+//                imageView.setTag(imgFile.toString());
+//
+//            }
         }
 
     }
@@ -180,7 +182,10 @@ public class CameraActivity extends AppCompatActivity {
 
             case R.id.layout_filter:
                 Intent edit = new Intent(CameraActivity.this, Edit.class);
-                edit.putExtra("img2", path);
+                edit.putExtra("imageUri", imageUri1.toString());
+                edit.putExtra("imageUri", imageUri2.toString());
+                edit.putExtra("imageUri", imageUri3.toString());
+              //  edit.putExtra("img2", path);
                 startActivity(edit);
                 break;
 
@@ -194,49 +199,64 @@ public class CameraActivity extends AppCompatActivity {
                 break;
 
             case R.id.img_one:
-                if (path_one != null) {
-                    File imgone = new File(path_one);
-                    if (imgone.exists()) {
-                        //        imageView.setImageURI(Uri.fromFile(imgone));
+//                if (path_one != null) {
+//                    File imgone = new File(path_one);
+//                    if (imgone.exists()) {
+//                        //        imageView.setImageURI(Uri.fromFile(imgone));
+//                        imageUri =  Uri.fromFile(imgone);
+//                        Bitmap myBitmap = BitmapFactory.decodeFile(imgone.getAbsolutePath());
+//                        imageView.setImageBitmap(myBitmap);
+//
+//                        imageView.setTag(imgone.toString());
+//                        path = imageView.getTag().toString();
+//
+//
+//                    }
+  //              }
 
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgone.getAbsolutePath());
-                        imageView.setImageBitmap(myBitmap);
-
-                        imageView.setTag(imgone.toString());
-                        path = imageView.getTag().toString();
-                    }
+                if(imageUri1!=null)
+                {
+                    imageView.setImageURI(imageUri1);
                 }
-
                 break;
 
             case R.id.img_two:
 
-                if (path_two != null) {
-                    File imgtwo = new File(path_two);
-                    if (imgtwo.exists()) {
-                        //   imageView.setImageURI(Uri.fromFile(imgtwo));
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgtwo.getAbsolutePath());
-                        imageView.setImageBitmap(myBitmap);
-
-                        imageView.setTag(imgtwo.toString());
-                        path = imageView.getTag().toString();
-
-                    }
+//                if (path_two != null) {
+//                    File imgtwo = new File(path_two);
+//                    if (imgtwo.exists()) {
+//                        //   imageView.setImageURI(Uri.fromFile(imgtwo));
+//                        Bitmap myBitmap = BitmapFactory.decodeFile(imgtwo.getAbsolutePath());
+//                        imageView.setImageBitmap(myBitmap);
+//
+//                        imageView.setTag(imgtwo.toString());
+//                        path = imageView.getTag().toString();
+//                        imageUri =  Uri.fromFile(imgtwo);
+//                    }
+//                }
+                if(imageUri2!=null)
+                {
+                    imageView.setImageURI(imageUri2);
                 }
                 break;
 
             case R.id.img_three:
 
-                if (path_three != null) {
-                    File imgthree = new File(path_three);
-                    if (imgthree.exists()) {
-                        //       imageView.setImageURI(Uri.fromFile(imgthree));
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgthree.getAbsolutePath());
-                        imageView.setImageBitmap(myBitmap);
-
-                        imageView.setTag(imgthree.toString());
-                        path = imageView.getTag().toString();
-                    }
+//                if (path_three != null) {
+//                    File imgthree = new File(path_three);
+//                    if (imgthree.exists()) {
+//                        //       imageView.setImageURI(Uri.fromFile(imgthree));
+//                        Bitmap myBitmap = BitmapFactory.decodeFile(imgthree.getAbsolutePath());
+//                        imageView.setImageBitmap(myBitmap);
+//
+//                        imageView.setTag(imgthree.toString());
+//                        path = imageView.getTag().toString();
+//            ///            imageUri =  imageUri3.;
+//                    }
+          //      }
+                if(imageUri3!=null)
+                {
+                    imageView.setImageURI(imageUri3);
                 }
                 break;
 

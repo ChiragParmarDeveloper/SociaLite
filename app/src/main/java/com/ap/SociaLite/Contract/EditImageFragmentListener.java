@@ -11,6 +11,4 @@ public interface EditImageFragmentListener {
     void onEditStarted();
 
     void onEditCompleted();
-
-
 }
