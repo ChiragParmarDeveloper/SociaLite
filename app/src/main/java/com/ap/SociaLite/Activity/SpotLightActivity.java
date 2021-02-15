@@ -1,74 +1,73 @@
 package com.ap.SociaLite.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.ap.SociaLite.Adapter.MyNetworkAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.ap.SociaLite.Adapter.SpotlightAdapter;
+import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Presenter.SpotLightActivityPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class SpotLightActivity extends AppCompatActivity {
 
-    ImageView img_back;
-    LinearLayout linearLayout_user_story;
+    @BindView(R.id.user_profile)
+    public CircularImageView user_profile;
 
-    RecyclerView friends_spotlight;
+    @BindView(R.id.user_name)
+    public TextView user_name;
+
+    public RecyclerView friends_spotlight;
 
     private SpotlightAdapter myspotlightadapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name", "Name", "Name", "Name"));
+    ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name"));
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spot_light);
-
-        img_back = findViewById(R.id.img_back);
-        linearLayout_user_story = findViewById(R.id.linearLayout_user_story);
-
+        ButterKnife.bind(this);
+        Session session = new Session(SpotLightActivity.this);
+        user_id = session.getUser_id();
         friends_spotlight = findViewById(R.id.friends_spotlight);
-        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         friends_spotlight.setLayoutManager(layoutManager);
-        myspotlightadapter = new SpotlightAdapter(Name,getApplicationContext());
+        myspotlightadapter = new SpotlightAdapter(Name, getApplicationContext());
         friends_spotlight.setAdapter(myspotlightadapter);
 
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
 
-        linearLayout_user_story.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // startActivity(new Intent(SpotLightActivity.this,UserSpotlightViewActivity.class));
-                startActivity(new Intent(SpotLightActivity.this,AddSpotlightActivity.class));
-            }
-        });
+        new SpotLightActivityPresenter(this, this).fetch_profile(user_id);
 
-
-
-
-//        add_spotlight.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent add = new Intent(SpotLightActivity.this,AddSpotlightActivity.class);
-//                startActivity(add);
-//            }
-//        });
     }
+
+    @OnClick({R.id.img_back, R.id.linearLayout_user_story})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
+                onBackPressed();
+                break;
+
+            case R.id.linearLayout_user_story:
+                startActivity(new Intent(SpotLightActivity.this, AddSpotlightActivity.class));
+                break;
+        }
+    }
+
 }

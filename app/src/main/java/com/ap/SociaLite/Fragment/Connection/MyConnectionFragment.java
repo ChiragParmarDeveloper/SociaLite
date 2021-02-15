@@ -3,6 +3,7 @@ package com.ap.SociaLite.Fragment.Connection;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ap.SociaLite.Activity.MessageChatActivity;
 import com.ap.SociaLite.Activity.ProfileConnectionActivity;
 import com.ap.SociaLite.Adapter.ConnectionAdapter.ConnectionAdapter;
 import com.ap.SociaLite.Adapter.ConnectionAdapter.MyConnectionAdapter;
@@ -38,6 +40,8 @@ public class MyConnectionFragment extends Fragment {
     TextView search_profile_user_name;
     ImageView search_profile_image;
 
+   ConstraintLayout connection_msg;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class MyConnectionFragment extends Fragment {
 
         search_profile_user_name = view.findViewById(R.id.search_profile_user_name);
         search_profile_image = view.findViewById(R.id.search_profile_image);
+        connection_msg =view.findViewById(R.id.connection_msg);
 
         search_profile_user_name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +75,13 @@ public class MyConnectionFragment extends Fragment {
             }
         });
 
+        connection_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent con_pro = new Intent(getContext(), MessageChatActivity.class);
+                startActivity(con_pro);
+            }
+        });
         return view;
     }
 }

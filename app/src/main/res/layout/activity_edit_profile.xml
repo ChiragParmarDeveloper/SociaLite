@@ -129,6 +129,7 @@
 
 
                     <EditText
+                        android:id="@+id/edt_username"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -167,6 +168,7 @@
                     android:background="@drawable/field">
 
                     <EditText
+                        android:id="@+id/edt_email"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -207,6 +209,7 @@
                     android:background="@drawable/field">
 
                     <EditText
+                        android:id="@+id/edt_no"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -248,16 +251,17 @@
                     android:background="@drawable/field">
 
                     <EditText
+                        android:id="@+id/edt_bio"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
+                        android:singleLine="true"
+                        android:maxLines="1"
                         android:background="@null"
                         android:hint="Bio"
-                        android:maxLines="1"
-                        android:singleLine="true"
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -286,7 +290,8 @@
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/field">
 
-                    <EditText
+                    <Button
+                        android:id="@+id/edt_dob"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -296,6 +301,7 @@
                         android:background="@null"
                         android:hint="D.O.B"
                         android:inputType="date"
+                        android:textAlignment="textStart"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="15dp"
@@ -330,6 +336,7 @@
                     android:background="@drawable/field">
 
                     <EditText
+                        android:id="@+id/edt_location"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -369,7 +376,7 @@
                     android:background="@drawable/field">
 
                     <EditText
-                        android:id="@+id/editText"
+                        android:id="@+id/edt_pwd"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="10dp"
@@ -402,7 +409,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
@@ -420,14 +426,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    android:src="@drawable/dummy1" />
+                    android:src="@drawable/ic_user_icon" />
 
             </androidx.cardview.widget.CardView>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

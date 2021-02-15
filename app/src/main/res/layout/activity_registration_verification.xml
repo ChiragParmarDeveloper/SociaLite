@@ -53,12 +53,26 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:gravity="center"
-                android:text="Please type the verification code sent to +91 98XXXXXXXX"
+                android:text="Please type the verification code sent to"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_otp" />
+
+
+            <TextView
+                android:id="@+id/txt_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:text="XXXXXX"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout_pinview"
+                app:layout_constraintTop_toBottomOf="@+id/txt_sentno"
+                app:layout_constraintVertical_bias="0.0" />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout_pinview"
@@ -79,23 +93,17 @@
                     android:cursorVisible="true"
                     android:imeOptions="actionDone"
                     android:inputType="number"
-                    android:itemBackground="@drawable/pinview"
+                    android:itemBackground="#F47E6A"
                     android:textColor="@color/colorWhite"
-                    android:textSize="18sp"
                     app:cursorColor="@color/colorWhite"
-                    app:cursorWidth="2dp"
                     app:hideLineWhenFilled="false"
-                    app:itemCount="4"
-                    app:itemHeight="50dp"
-                    app:itemRadius="12dp"
-                    app:itemSpacing="12dp"
-                    app:itemWidth="50dp"
+                    app:itemCount="6"
+                    app:itemRadius="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:lineColor="@color/colorWhite"
-                    app:lineWidth="2dp"
                     app:viewType="rectangle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -134,7 +142,7 @@
                         tools:layout_editor_absoluteX="214dp" />
 
                     <TextView
-                        android:id="@+id/linkRegister"
+                        android:id="@+id/otp_resend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="start"
@@ -163,7 +171,11 @@
                     android:id="@+id/btn_submit"
                     android:layout_width="115dp"
                     android:layout_height="45dp"
-                    android:background="@drawable/btn_submit"
+                    android:background="@drawable/button_style"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -3,7 +3,6 @@ package com.ap.SociaLite.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,14 +19,13 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Activity.Comment;
+import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Activity.ViewCardActivity;
 import com.ap.SociaLite.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -133,7 +131,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         holder.layout_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(view.getContext(), Comment.class);
+                Intent in = new Intent(view.getContext(), CommentActivity.class);
                 view.getContext().startActivity(in);
             }
         });

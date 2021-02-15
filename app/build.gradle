@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId "com.ap.SociaLite"
-        minSdkVersion 23
+        minSdkVersion 22
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -52,6 +52,24 @@ dependencies {
     //ssp
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
+    implementation 'com.hbb20:ccp:2.4.2'//country_code picker
+
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.0'
+
+    implementation 'com.google.firebase:firebase-core:17.5.1'    //sms
+    implementation 'com.google.firebase:firebase-auth:19.4.0'   // sms
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.karumi:dexter:4.1.0'//filter
+    implementation 'info.androidhive:imagefilters:1.0.7'//filter
 
 }
+apply plugin: 'com.google.gms.google-services'

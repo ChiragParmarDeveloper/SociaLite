@@ -2,11 +2,11 @@ package com.ap.SociaLite.Activity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,20 +18,23 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Fragment.BusinessFragment;
 import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.Fragment.NetworkFragment;
 import com.ap.SociaLite.Fragment.ShareFragment;
+import com.ap.SociaLite.Presenter.HomeActivityPresenter;
 import com.ap.SociaLite.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class HomeActivity extends AppCompatActivity {
-
 
     @BindView(R.id.layout_category)
     LinearLayout layout_category;
@@ -90,19 +93,18 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.navigation_view)
     NavigationView navigation_view;
 
-
     @BindView(R.id.imgsearch)
     ImageView imgsearch;
 
     @BindView(R.id.imgnotification)
     ImageView imgnotification;
 
+    public TextView txt_name, txt_email, txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
+    ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout,img_arrow;
+    public CircularImageView img_dp;
 
-    ConstraintLayout category, Notification, Profile, help, faq, setting, logout;
-    TextView txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
-    ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout;
-
-    final Context context = this;
+    LinearLayout Notification,category, Profile, help, faq, setting, logout;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,43 +112,52 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
+        Session session = new Session(HomeActivity.this);
+        user_id = session.getUser_id();
+
+        Log.d("token_Socialite", FirebaseInstanceId.getInstance().getToken());
+
         getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
         View headerView = navigation_view.getHeaderView(0);
 
-        category = (ConstraintLayout) headerView.findViewById(R.id.category);
+        category = (LinearLayout) headerView.findViewById(R.id.category);
         txt_category1 = (TextView) headerView.findViewById(R.id.txt_category1);
         img_category1 = (ImageView) headerView.findViewById(R.id.img_category1);
 
-        Notification = (ConstraintLayout) headerView.findViewById(R.id.Notification);
+        Notification = (LinearLayout) headerView.findViewById(R.id.Notification);
         txt_notification = (TextView) headerView.findViewById(R.id.txt_notification);
         img_notification = (ImageView) headerView.findViewById(R.id.img_notification);
 
-        Profile = (ConstraintLayout) headerView.findViewById(R.id.Profile);
+        Profile = (LinearLayout) headerView.findViewById(R.id.Profile);
         txt_profile = (TextView) headerView.findViewById(R.id.txt_profile);
         img_profile = (ImageView) headerView.findViewById(R.id.img_profile);
 
-        help = (ConstraintLayout) headerView.findViewById(R.id.help);
+        help = (LinearLayout) headerView.findViewById(R.id.help);
         txt_help = (TextView) headerView.findViewById(R.id.txt_help);
         img_help = (ImageView) headerView.findViewById(R.id.img_help);
 
-        faq = (ConstraintLayout) headerView.findViewById(R.id.faq);
+        faq = (LinearLayout) headerView.findViewById(R.id.faq);
         txt_faq = (TextView) headerView.findViewById(R.id.txt_faq);
         img_faq = (ImageView) headerView.findViewById(R.id.img_faq);
 
-        setting = (ConstraintLayout) headerView.findViewById(R.id.setting);
+        setting = (LinearLayout) headerView.findViewById(R.id.setting);
         txt_setting = (TextView) headerView.findViewById(R.id.txt_setting);
         img_setting = (ImageView) headerView.findViewById(R.id.img_setting);
 
-        logout = (ConstraintLayout) headerView.findViewById(R.id.logout);
+        logout = (LinearLayout) headerView.findViewById(R.id.logout);
         txt_logout = (TextView) headerView.findViewById(R.id.txt_logout);
         img_logout = (ImageView) headerView.findViewById(R.id.img_logout);
 
+        txt_name = (TextView) headerView.findViewById(R.id.txt_name);
+        txt_email = (TextView) headerView.findViewById(R.id.txt_email);
+        img_dp = (CircularImageView) headerView.findViewById(R.id.img_dp);
+
+        img_arrow = (ImageView) headerView.findViewById(R.id.img_arrow);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-//                CustomDialog();
                 final Dialog dialog = new Dialog(HomeActivity.this);
                 dialog.setContentView(R.layout.custom_dailog);
 
@@ -165,10 +176,12 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
+                        new Session(HomeActivity.this).removeuser();
                         Intent logout = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivity(logout);
                         finish();
                         dialog.dismiss();
+
                     }
                 });
 
@@ -204,7 +217,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -230,7 +242,7 @@ public class HomeActivity extends AppCompatActivity {
                 txt_help.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_help.setImageResource(R.drawable.ic_help);
 
-                startActivity(new Intent(HomeActivity.this,Setting.class));
+                startActivity(new Intent(HomeActivity.this, Setting.class));
 
 
             }
@@ -262,7 +274,7 @@ public class HomeActivity extends AppCompatActivity {
                 txt_help.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_help.setImageResource(R.drawable.ic_help);
 
-                startActivity(new Intent(HomeActivity.this,Faq.class));
+                startActivity(new Intent(HomeActivity.this, Faq.class));
 
             }
         });
@@ -321,7 +333,7 @@ public class HomeActivity extends AppCompatActivity {
                 txt_logout.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_logout.setImageResource(R.drawable.ic_logout);
 
-                startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
+                startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
             }
         });
 
@@ -350,14 +362,23 @@ public class HomeActivity extends AppCompatActivity {
                 txt_setting.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_setting.setImageResource(R.drawable.ic_setting_white);
 
-                startActivity(new Intent(HomeActivity.this,Notification.class));
+                startActivity(new Intent(HomeActivity.this, Notification.class));
 
+            }
+        });
+
+        img_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    drawer_layout.closeDrawers();
             }
         });
 
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 startActivity(new Intent(getApplicationContext(), InterestActivity.class));
 
                 txt_category1.setTextColor(getResources().getColor(R.color.colorBlack));
@@ -385,18 +406,19 @@ public class HomeActivity extends AppCompatActivity {
                 //    Toast.makeText(getApplicationContext(), "nice work", Toast.LENGTH_LONG).show();
             }
         });
+
+        new HomeActivityPresenter(this, this).fetch_profile(user_id);
     }
 
     @SuppressLint("ResourceAsColor")
     @OnClick({R.id.layout_category, R.id.layout_interest, R.id.layout_network, R.id.layout_share, R.id.layout_business, R.id.img_leftmenu,
-
             R.id.imgsearch})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.layout_category:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
 
-                txt_categorylist.setText("Dance and Singing");
+                txt_categorylist.setText("Dashboard");
 
                 imgsearch.setVisibility(View.VISIBLE);
                 imgnotification.setVisibility(View.GONE);
@@ -420,7 +442,7 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.layout_interest:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new InterestFragment()).commit();
 
-                txt_categorylist.setText("News & Politics");
+                txt_categorylist.setText("My Interest");
 
                 imgsearch.setVisibility(View.VISIBLE);
                 imgnotification.setVisibility(View.GONE);
@@ -521,20 +543,12 @@ public class HomeActivity extends AppCompatActivity {
                 else drawer_layout.closeDrawer(GravityCompat.END);
                 break;
 
-
             case R.id.imgsearch:
-                startActivity(new Intent(HomeActivity.this,Search.class));
-
+                startActivity(new Intent(HomeActivity.this, Search.class));
                 break;
-
-
         }
     }
-
-
     public void CustomDialog() {
 
     }
-
-
 }

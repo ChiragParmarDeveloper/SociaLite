@@ -10,11 +10,30 @@
     <string name="edittext_email"><font size="12">Email/Mobile</font></string>
     <string name="edittext_pwd"><font size="12">Password</font></string>
 
+    <string name="UserName"><font size="12">UserName</font></string>
+
+    <string name="Email"><font size="12">Email</font></string>
+
+    <string name="Mobile"><font size="12">Mobile</font></string>
+
+    <string name="Bio"><font size="12">Bio</font></string>
+
+    <string name="D.O.B"><font size="12">D.O.B</font></string>
+    <string name="Location"><font size="12">Location</font></string>
+
+    <string name="Password"><font size="12">Password</font></string>
 
     <string-array name="Category">
         <item>Dance</item>
         <item>News</item>
         <item>science</item>
     </string-array>
+
+    <string name="msg_permission_required">Service Permissions are required for this app</string>
+    <string name="msg_need_permission">You need to give some mandatory permissions to continue. Do you want to go to app settings?</string>
+    <string name="l_ok">OK</string>
+    <string name="l_Cancel">Cancel</string>
+    <string name="l_yes">Yes</string>
+
 
 </resources>

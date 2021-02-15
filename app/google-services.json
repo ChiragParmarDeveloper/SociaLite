@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "264851423702",
+    "project_id": "socialite-f5a0d",
+    "storage_bucket": "socialite-f5a0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264851423702:android:11d7ce69d581e716de2477",
+        "android_client_info": {
+          "package_name": "com.ap.SociaLite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264851423702-arlatusiagb38hgibotktasj0j3htukm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ap.SociaLite",
+            "certificate_hash": "a3ede0ac0dfde96362ac3966c6e26646abcfa954"
+          }
+        },
+        {
+          "client_id": "264851423702-n58tm21lhf4gfv8eauv9qft7tc8p6te9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEEL9snnEyQ6rG0uzJUqui8_R1o8zEb8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264851423702-n58tm21lhf4gfv8eauv9qft7tc8p6te9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

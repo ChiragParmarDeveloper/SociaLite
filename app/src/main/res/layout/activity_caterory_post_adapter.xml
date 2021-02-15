@@ -44,10 +44,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginBottom="20dp"
+                    android:visibility="gone"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="2dp"
                     app:cardUseCompatPadding="true"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout34"
                     app:layout_constraintStart_toStartOf="parent">
 
@@ -95,8 +95,6 @@
 
 
                     </LinearLayout>
-
-
                 </androidx.cardview.widget.CardView>
 
 
@@ -178,8 +176,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout32">
 
-
                         <ImageView
+                            android:id="@+id/img_category"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginStart="16dp"
@@ -193,6 +191,20 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <androidx.constraintlayout.widget.Barrier
+                            android:id="@+id/barrier"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:barrierDirection="left"
+                            app:constraint_referenced_ids="img_category" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="20dp" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -205,8 +217,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout33">
 
-
                         <TextView
+                            android:id="@+id/txt_description"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -383,7 +395,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout34"
                     app:layout_constraintVertical_bias="0.0">
 
-
                     <LinearLayout
                         android:id="@+id/layout"
                         android:layout_width="match_parent"
@@ -400,10 +411,11 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/img_upload" />
+                            app:srcCompat="@drawable/ic_user_icon" />
 
 
                         <TextView
+                            android:id="@+id/txt_name_position_0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -413,6 +425,7 @@
                             android:textSize="9sp" />
 
                         <TextView
+                            android:id="@+id/txt_comment_pos_0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -432,14 +445,14 @@
                         android:orientation="horizontal"
                         app:layout_constraintTop_toBottomOf="@+id/layout">
 
-
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/img_upload" />
+                            app:srcCompat="@drawable/ic_user_icon" />
 
                         <TextView
+                            android:id="@+id/txt_name_pos_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -449,6 +462,7 @@
                             android:textSize="9sp" />
 
                         <TextView
+                            android:id="@+id/txt_comment_pos_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -468,11 +482,12 @@
                         app:layout_constraintTop_toBottomOf="@+id/layout1" />
 
                     <TextView
+                        android:id="@+id/txt_allcomment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="View All 5 Comments"
-                        android:textSize="9sp"
+                        android:text="View All Comments"
+                        android:textSize="11sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/layout1" />
 
@@ -487,7 +502,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/img_upload"
+                    android:src="@drawable/ic_user_icon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.50"
                     app:layout_constraintStart_toStartOf="parent"
@@ -497,4 +512,21 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
 </androidx.constraintlayout.widget.ConstraintLayout>

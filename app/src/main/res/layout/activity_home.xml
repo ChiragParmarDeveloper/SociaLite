@@ -50,7 +50,7 @@
                     android:id="@+id/txt_categorylist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dance and Singing"
+                    android:text="Dashboard"
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -277,13 +277,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@drawable/drawer_red"
+            android:background="#F47E6A"
             android:fitsSystemWindows="false"
             app:headerLayout="@layout/drawer"
             tools:ignore="MissingConstraints">

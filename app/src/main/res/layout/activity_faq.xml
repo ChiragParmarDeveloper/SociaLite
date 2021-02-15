@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".Activity.Faq">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -20,11 +19,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_backback"
+            android:src="@drawable/ic_left_arrow"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toStartOf="@+id/textView"
             app:layout_constraintHorizontal_bias="0.0"
@@ -37,21 +35,37 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FAQ"
+            android:text="FAQS"
             android:textColor="@color/colorBlack"
             android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/toolbar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout18"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout62"
+        android:id="@+id/constraint62"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,274 +88,30 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rv_faq"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        app:cardUseCompatPadding="true">
+        app:cardElevation="15dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout57">
 
-        <LinearLayout
-            android:id="@+id/li_list1"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_faq"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:weightSum="1">
-
-            <LinearLayout
-                android:id="@+id/li_faq_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_weight="0.1"
-                android:gravity="center_vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_faq_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="My order didn't delivered"
-                    android:textSize="@dimen/_12sdp" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9">
-
-                <ImageView
-                    android:id="@+id/img_next"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:src="@drawable/ic_forward_arrow" />
-
-                <ImageView
-                    android:id="@+id/img_down"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:src="@drawable/ic_faq_down"
-                    android:visibility="gone" />
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent">-->
-
-        <!--            <View-->
-        <!--                android:id="@+id/view"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="1dp"-->
-        <!--                android:layout_marginStart="20dp"-->
-        <!--                android:layout_marginEnd="20dp"-->
-        <!--                android:background="#DCDCDC"-->
-        <!--                app:layout_constraintEnd_toEndOf="parent"-->
-        <!--                app:layout_constraintStart_toStartOf="parent"-->
-        <!--                app:layout_constraintTop_toBottomOf="@+id/button3" />-->
-
-        <!--        </LinearLayout>-->
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout57" />
 
     </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_faq_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-5dp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:visibility="gone"
-        app:cardElevation="@dimen/_1sdp"
-        app:cardUseCompatPadding="true">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_faq_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:gravity="center_vertical"
-            android:text="Sociaite Faq"
-            android:textSize="@dimen/_11sdp" />
-    </androidx.cardview.widget.CardView>
-
-
-    <!--    <ScrollView-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:fillViewport="true"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout62">-->
-
-    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--            android:layout_width="fill_parent"-->
-    <!--            android:layout_height="fill_parent">-->
-
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="0dp"-->
-    <!--                android:layout_height="0dp"-->
-    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--                <androidx.cardview.widget.CardView-->
-    <!--                    android:id="@+id/cardView"-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    app:cardElevation="15dp"-->
-    <!--                    app:cardUseCompatPadding="true"-->
-    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                    app:layout_constraintStart_toStartOf="parent"-->
-    <!--                    app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--                        android:id="@+id/constraint_faq"-->
-    <!--                        android:layout_width="match_parent"-->
-    <!--                        android:layout_height="wrap_content">-->
-
-    <!--                        <LinearLayout-->
-    <!--                            android:id="@+id/li_list1"-->
-    <!--                            android:layout_width="match_parent"-->
-    <!--                            android:layout_height="match_parent"-->
-    <!--                            android:layout_marginStart="@dimen/_10sdp"-->
-    <!--                            android:layout_marginTop="@dimen/_3sdp"-->
-    <!--                            android:layout_marginEnd="@dimen/_5sdp"-->
-    <!--                            android:layout_marginBottom="@dimen/_3sdp"-->
-    <!--                            android:weightSum="1">-->
-
-    <!--                            <LinearLayout-->
-    <!--                                android:id="@+id/li_faq_title"-->
-    <!--                                android:layout_width="match_parent"-->
-    <!--                                android:layout_height="40dp"-->
-    <!--                                android:layout_weight="0.1"-->
-    <!--                                android:gravity="center_vertical">-->
-
-    <!--                                <com.google.android.material.textview.MaterialTextView-->
-    <!--                                    android:id="@+id/tv_faq_title"-->
-    <!--                                    android:layout_width="wrap_content"-->
-    <!--                                    android:layout_height="wrap_content"-->
-    <!--                                    android:text="My order didn't delivered"-->
-    <!--                                    android:textSize="@dimen/_12sdp" />-->
-    <!--                            </LinearLayout>-->
-
-    <!--                            <RelativeLayout-->
-    <!--                                android:layout_width="match_parent"-->
-    <!--                                android:layout_height="match_parent"-->
-    <!--                                android:layout_weight="0.9">-->
-
-    <!--                                <ImageView-->
-    <!--                                    android:id="@+id/img_next"-->
-    <!--                                    android:layout_width="match_parent"-->
-    <!--                                    android:layout_height="match_parent"-->
-    <!--                                    android:layout_marginStart="@dimen/_5sdp"-->
-    <!--                                    android:layout_marginTop="@dimen/_5sdp"-->
-    <!--                                    android:layout_marginEnd="@dimen/_5sdp"-->
-    <!--                                    android:layout_marginBottom="@dimen/_5sdp"-->
-    <!--                                    android:src="@drawable/ic_forward_arrow" />-->
-
-    <!--                                <ImageView-->
-    <!--                                    android:id="@+id/img_down"-->
-    <!--                                    android:layout_width="match_parent"-->
-    <!--                                    android:layout_height="match_parent"-->
-    <!--                                    android:layout_marginStart="@dimen/_5sdp"-->
-    <!--                                    android:layout_marginTop="@dimen/_5sdp"-->
-    <!--                                    android:layout_marginEnd="@dimen/_5sdp"-->
-    <!--                                    android:layout_marginBottom="@dimen/_5sdp"-->
-    <!--                                    android:src="@drawable/ic_faq_down"-->
-    <!--                                    android:visibility="gone" />-->
-    <!--                            </RelativeLayout>-->
-    <!--                        </LinearLayout>-->
-
-
-    <!--                        &lt;!&ndash;                        <Button&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:id="@+id/button3"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:layout_width="match_parent"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:background="@null"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:textColor="#707070"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:drawableRight="@drawable/ic_forward_arrow"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:gravity="start|center_vertical"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:paddingLeft="15dp"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:paddingRight="15dp"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:text="My order didn't delivered"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:textAllCaps="false"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
-
-    <!--                        &lt;!&ndash;                        <View&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:id="@+id/view"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:layout_width="match_parent"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:layout_height="1dp"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:layout_marginStart="20dp"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:layout_marginEnd="20dp"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:background="#DCDCDC"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            app:layout_constraintTop_toBottomOf="@+id/button3" />&ndash;&gt;-->
-
-    <!--                        &lt;!&ndash;                        <Button&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:id="@+id/button4"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:layout_width="match_parent"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:background="@null"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:drawableRight="@drawable/ic_forward_arrow"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:gravity="start|center_vertical"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:paddingLeft="15dp"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:paddingRight="15dp"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:text="It,s inappropriate"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            android:textAllCaps="false"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                            app:layout_constraintTop_toBottomOf="@+id/view" />&ndash;&gt;-->
-
-    <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    <!--                </androidx.cardview.widget.CardView>-->
-
-
-    <!--            </LinearLayout-->>-->
-
-    <!--&lt;!&ndash;            <androidx.cardview.widget.CardView&ndash;&gt;-->
-    <!--&lt;!&ndash;                android:id="@+id/cv_faq_description"&ndash;&gt;-->
-    <!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
-    <!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;                android:layout_marginStart="@dimen/_33sdp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                android:layout_marginTop="-16dp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                android:layout_marginEnd="@dimen/_33sdp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                android:visibility="gone"&ndash;&gt;-->
-    <!--&lt;!&ndash;                app:cardCornerRadius="@dimen/_7sdp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                app:cardUseCompatPadding="true">&ndash;&gt;-->
-
-    <!--&lt;!&ndash;                <com.google.android.material.textview.MaterialTextView&ndash;&gt;-->
-    <!--&lt;!&ndash;                    android:id="@+id/tv_faq_description"&ndash;&gt;-->
-    <!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;                    android:layout_marginStart="@dimen/_5sdp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                    android:layout_marginTop="@dimen/_10sdp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                    android:layout_marginEnd="@dimen/_5sdp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                    android:layout_marginBottom="@dimen/_5sdp"&ndash;&gt;-->
-    <!--&lt;!&ndash;                    android:gravity="start|top"&ndash;&gt;-->
-    <!--&lt;!&ndash;                    android:text=""&ndash;&gt;-->
-    <!--&lt;!&ndash;                    android:textSize="@dimen/_11sdp" />&ndash;&gt;-->
-    <!--&lt;!&ndash;            </androidx.cardview.widget.CardView>&ndash;&gt;-->
-    <!--&lt;!&ndash;            &ndash;&gt;-->
-    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-    <!--    </ScrollView>-->
 
 
 </LinearLayout>

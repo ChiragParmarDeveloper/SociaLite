@@ -8,5 +8,4 @@
             android:drawable="@drawable/toggle_off"
             android:state_checked="false"/>
 
-
 </selector>
