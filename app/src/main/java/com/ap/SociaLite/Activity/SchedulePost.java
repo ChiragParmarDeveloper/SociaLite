@@ -56,6 +56,7 @@ public class SchedulePost extends AppCompatActivity {
 
     int hour,minute;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

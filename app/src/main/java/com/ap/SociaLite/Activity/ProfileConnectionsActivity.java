@@ -16,7 +16,6 @@ public class ProfileConnectionsActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private TabaccssorAdapter_myconnection tabaccssorAdapter_myconnection;
 
-    TabLayout pharmacy_tabs;
     ViewPager pharmacy_tabs_pager;
 
     ImageView img_back;
