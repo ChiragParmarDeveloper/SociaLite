@@ -49,6 +49,10 @@ public class FaqListAdapter extends RecyclerView.Adapter<FaqListAdapter.Holder> 
 
         item = faq_lists.get(position);
 
+        if(position == faq_lists.size()-1){
+            holder.view1.setVisibility(View.GONE);
+        }
+
         holder.rlFaq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +95,9 @@ public class FaqListAdapter extends RecyclerView.Adapter<FaqListAdapter.Holder> 
 
         @BindView(R.id.rlFaq)
         RelativeLayout rlFaq;
+
+        @BindView(R.id.view1)
+        View view1;
 
         public Holder(@NonNull View itemView) {
             super(itemView);

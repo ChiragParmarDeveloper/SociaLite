@@ -18,9 +18,6 @@ import butterknife.OnClick;
 
 public class Faq extends AppCompatActivity {
 
-    @BindView(R.id.img_back)
-    ImageView img_back;
-
     @BindView(R.id.rv_faq)
     public RecyclerView rv_faq;
 

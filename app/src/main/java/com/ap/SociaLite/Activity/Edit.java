@@ -1,12 +1,9 @@
 package com.ap.SociaLite.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.Paint;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,13 +15,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ap.SociaLite.Application.BitmapUtils;
-import com.ap.SociaLite.Application.ConvolutionMatrix;
 import com.ap.SociaLite.PictureThread;
 import com.ap.SociaLite.R;
 import com.zomato.photofilters.imageprocessors.Filter;
 import com.zomato.photofilters.imageprocessors.subfilters.BrightnessSubFilter;
+import com.zomato.photofilters.imageprocessors.subfilters.ColorOverlaySubFilter;
 import com.zomato.photofilters.imageprocessors.subfilters.ContrastSubFilter;
 import com.zomato.photofilters.imageprocessors.subfilters.SaturationSubfilter;
+import com.zomato.photofilters.imageprocessors.subfilters.VignetteSubfilter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,26 +33,11 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
     @BindView(R.id.imageView)
     ImageView imageView;
 
-    @BindView(R.id.exposure)
-    ImageView exposure;
-
-    @BindView(R.id.contrast)
-    ImageView contrast;
-
-    @BindView(R.id.saturation)
-    ImageView saturation;
-
     @BindView(R.id.exposure_seekBar)
     SeekBar exposure_seekBar;
 
     @BindView(R.id.saturation_seekBar)
     SeekBar saturation_seekBar;
-
-    @BindView(R.id.sharpness)
-    ImageView sharpness;
-
-    @BindView(R.id.shadow)
-    ImageView shadow;
 
     @BindView(R.id.sharpness_seekBar)
     SeekBar sharpness_seekBar;
@@ -68,6 +51,12 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
     @BindView(R.id.contrast_seekBar)
     SeekBar contrast_seekBar;
 
+    @BindView(R.id.highlight_seekBar)
+    SeekBar highlight_seekBar;
+
+    @BindView(R.id.warmth_seekBar)
+    SeekBar warmth_seekBar;
+
     @BindView(R.id.filter_name)
     TextView filter_name;
 
@@ -78,6 +67,7 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
     int brightnessFinal = 0;
     float saturationFinal = 1.0f;
     float contrastFinal = 1.0f;
+    int exposureFinal = 0;
 
     static {
         System.loadLibrary("NativeImageProcessor");
@@ -100,7 +90,14 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
             finalImage = originalImage.copy(Bitmap.Config.ARGB_8888, true);
             imageView.setImageBitmap(originalImage);
 
+            exposure_seekBar.setOnSeekBarChangeListener(this);
+            highlight_seekBar.setOnSeekBarChangeListener(this);
+            shadow_seekBar.setOnSeekBarChangeListener(this);
+            contrast_seekBar.setOnSeekBarChangeListener(this);
             brightness_seekBar.setOnSeekBarChangeListener(this);
+            saturation_seekBar.setOnSeekBarChangeListener(this);
+            warmth_seekBar.setOnSeekBarChangeListener(this);
+            sharpness_seekBar.setOnSeekBarChangeListener(this);
         }
 
         // image = getIntent().getStringExtra("img2");
@@ -119,55 +116,23 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
 //            }
 //        }
 
-        //   contrast_seekBar = findViewById(R.id.contrast_seekBar);
 
-        contrast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filter_name.setText("Contrast");
-                exposure_seekBar.setVisibility(View.GONE);
-                brightness_seekBar.setVisibility(View.GONE);
-                saturation_seekBar.setVisibility(View.GONE);
-                contrast_seekBar.setVisibility(View.VISIBLE);
-                sharpness_seekBar.setVisibility(View.GONE);
-                shadow_seekBar.setVisibility(View.GONE);
-
-            }
-        });
-
-        exposure_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        saturation_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                loadBitmapSat();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                loadBitmapSat();
-            }
-        });
+//        saturation_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+//                loadBitmapSat();
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//                loadBitmapSat();
+//            }
+//        });
 
 //        brightness_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 //            @Override
@@ -177,75 +142,33 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
 //                //     thread.adjustBrightness(seekBar.getProgress() - 100);
 //                imageView.setColorFilter(setBrightness(i));
 //                if (listener != null) {
-//
-//
-//
+
 //                }
 //                else
 //                {
 //                    Toast.makeText(getApplicationContext(),"null",Toast.LENGTH_LONG).show();
 //                }
-
-
         //    }
 
+//        contrast_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+//                //      imageView.setImageBitmap(changeBitmapContrastBrightness(bitmap, (float) i / 100f, 1));
 //
+//                //      thread.adjustContrast(seekBar.getProgress());
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
 
-        contrast_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                //      imageView.setImageBitmap(changeBitmapContrastBrightness(bitmap, (float) i / 100f, 1));
-
-                //      thread.adjustContrast(seekBar.getProgress());
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        sharpness_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                imageView.setImageBitmap(sharpenImage(bitmap, 12));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        shadow_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-                imageView.setImageBitmap(applyShadingFilter(BitmapFactory.decodeResource(getResources(), R.drawable.dummy1), -180000));
-
-                //      imageView.setImageBitmap(applyShadingFilter(bitmap,12));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
     }
 
     //Brightness
@@ -259,6 +182,35 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
 //            int value = (int) (100 - progress) * 255 / 100;
 //            return new PorterDuffColorFilter(Color.argb(value, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
 //        }
+//    }
+
+    //Saturation
+//    private void loadBitmapSat() {
+//        if (bitmap != null) {
+//            int progressSat = saturation_seekBar.getProgress();
+//
+//            //Saturation, 0=gray-scale. 1=identity
+//            float sat = (float) progressSat / 256;
+//            imageView.setImageBitmap(updateSat(bitmap, sat));
+//        }
+//    }
+
+//    private Bitmap updateSat(Bitmap src, float settingSat) {
+//
+//        int w = src.getWidth();
+//        int h = src.getHeight();
+//
+//        Bitmap bitmapResult =
+//                Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+//        Canvas canvasResult = new Canvas(bitmapResult);
+//        Paint paint = new Paint();
+//        ColorMatrix colorMatrix = new ColorMatrix();
+//        colorMatrix.setSaturation(settingSat);
+//        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
+//        paint.setColorFilter(filter);
+//        canvasResult.drawBitmap(src, 0, 0, paint);
+//
+//        return bitmapResult;
 //    }
 
     //contrast
@@ -282,52 +234,6 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
 //        return ret;
 //    }
 
-    //Saturation
-    private void loadBitmapSat() {
-        if (bitmap != null) {
-
-            int progressSat = saturation_seekBar.getProgress();
-
-            //Saturation, 0=gray-scale. 1=identity
-            float sat = (float) progressSat / 256;
-            imageView.setImageBitmap(updateSat(bitmap, sat));
-        }
-    }
-
-    private Bitmap updateSat(Bitmap src, float settingSat) {
-
-        int w = src.getWidth();
-        int h = src.getHeight();
-
-        Bitmap bitmapResult =
-                Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        Canvas canvasResult = new Canvas(bitmapResult);
-        Paint paint = new Paint();
-        ColorMatrix colorMatrix = new ColorMatrix();
-        colorMatrix.setSaturation(settingSat);
-        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
-        paint.setColorFilter(filter);
-        canvasResult.drawBitmap(src, 0, 0, paint);
-
-        return bitmapResult;
-    }
-
-    //Sharpness
-    public Bitmap sharpenImage(Bitmap src, double weight) {
-        // set sharpness configuration
-        double[][] SharpConfig = new double[][]{
-                {0, -2, 0},
-                {-2, weight, -2},
-                {0, -2, 0}
-        };
-        //create convolution matrix instance
-        ConvolutionMatrix convMatrix = new ConvolutionMatrix(3);
-        //apply configuration
-        convMatrix.applyConfig(SharpConfig);
-        //set weight according to factor
-        convMatrix.Factor = weight - 8;
-        return ConvolutionMatrix.computeConvolution3x3(src, convMatrix);
-    }
 
     //shadow
     public Bitmap applyShadingFilter(Bitmap source, int shadingColor) {
@@ -354,8 +260,8 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
         return bmOut;
     }
 
-
-    @OnClick({R.id.img_cross, R.id.btn_save, R.id.exposure, R.id.saturation, R.id.sharpness, R.id.shadow, R.id.brightness})
+    @OnClick({R.id.img_cross, R.id.btn_save, R.id.exposure, R.id.highlights, R.id.saturation, R.id.sharpness,R.id.shadow,
+            R.id.brightness, R.id.contrast, R.id.warmth})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_cross:
@@ -363,65 +269,117 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
                 break;
 
             case R.id.btn_save:
-                // final String path = BitmapUtils.insertImage(getContentResolver(), finalImage, System.currentTimeMillis() + "_profile.jpg", null);
-
-                final String path = finalImage.toString();
+                final String path = BitmapUtils.insertImage(getContentResolver(), finalImage, System.currentTimeMillis() + "_profile.jpg", null);
                 if (!TextUtils.isEmpty(path)) {
                     Intent shape = new Intent(Edit.this, CameraActivity.class);
                     shape.putExtra("Brightness_path", path);
                     startActivity(shape);
                 }
-
                 break;
 
             case R.id.exposure:
-                brightness_seekBar.setVisibility(View.GONE);
-                contrast_seekBar.setVisibility(View.GONE);
+                filter_name.setText("Exposure");
                 exposure_seekBar.setVisibility(View.VISIBLE);
-                saturation_seekBar.setVisibility(View.GONE);
-                sharpness_seekBar.setVisibility(View.GONE);
+                highlight_seekBar.setVisibility(View.GONE);
                 shadow_seekBar.setVisibility(View.GONE);
+                contrast_seekBar.setVisibility(View.GONE);
+                brightness_seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.GONE);
+                warmth_seekBar.setVisibility(View.GONE);
+                sharpness_seekBar.setVisibility(View.GONE);
+                break;
+
+            case R.id.highlights:
+                filter_name.setText("Highlights");
+                exposure_seekBar.setVisibility(View.GONE);
+                highlight_seekBar.setVisibility(View.VISIBLE);
+                shadow_seekBar.setVisibility(View.GONE);
+                contrast_seekBar.setVisibility(View.GONE);
+                brightness_seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.GONE);
+                warmth_seekBar.setVisibility(View.GONE);
+                sharpness_seekBar.setVisibility(View.GONE);
+                break;
+
+            case R.id.warmth:
+                filter_name.setText("Warmth");
+                exposure_seekBar.setVisibility(View.GONE);
+                highlight_seekBar.setVisibility(View.GONE);
+                shadow_seekBar.setVisibility(View.GONE);
+                contrast_seekBar.setVisibility(View.GONE);
+                brightness_seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.GONE);
+                warmth_seekBar.setVisibility(View.VISIBLE);
+                sharpness_seekBar.setVisibility(View.GONE);
                 break;
 
             case R.id.saturation:
                 filter_name.setText("Saturation");
-                brightness_seekBar.setVisibility(View.GONE);
-                contrast_seekBar.setVisibility(View.GONE);
                 exposure_seekBar.setVisibility(View.GONE);
-                saturation_seekBar.setVisibility(View.VISIBLE);
-                sharpness_seekBar.setVisibility(View.GONE);
+                highlight_seekBar.setVisibility(View.GONE);
                 shadow_seekBar.setVisibility(View.GONE);
+                contrast_seekBar.setVisibility(View.GONE);
+                brightness_seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.VISIBLE);
+                warmth_seekBar.setVisibility(View.GONE);
+                sharpness_seekBar.setVisibility(View.GONE);
                 break;
 
             case R.id.sharpness:
-                brightness_seekBar.setVisibility(View.GONE);
-                contrast_seekBar.setVisibility(View.GONE);
+                filter_name.setText("Sharpness");
                 exposure_seekBar.setVisibility(View.GONE);
-                saturation_seekBar.setVisibility(View.GONE);
+                highlight_seekBar.setVisibility(View.GONE);
                 shadow_seekBar.setVisibility(View.GONE);
+                contrast_seekBar.setVisibility(View.GONE);
+                brightness_seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.GONE);
+                warmth_seekBar.setVisibility(View.GONE);
                 sharpness_seekBar.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.shadow:
-                brightness_seekBar.setVisibility(View.GONE);
-                contrast_seekBar.setVisibility(View.GONE);
+                filter_name.setText("Shadow");
                 exposure_seekBar.setVisibility(View.GONE);
-                saturation_seekBar.setVisibility(View.GONE);
-                sharpness_seekBar.setVisibility(View.GONE);
+                highlight_seekBar.setVisibility(View.GONE);
                 shadow_seekBar.setVisibility(View.VISIBLE);
+                contrast_seekBar.setVisibility(View.GONE);
+                brightness_seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.GONE);
+                warmth_seekBar.setVisibility(View.GONE);
+                sharpness_seekBar.setVisibility(View.GONE);
                 break;
 
             case R.id.brightness:
-
                 filter_name.setText("Brightness");
                 exposure_seekBar.setVisibility(View.GONE);
-                saturation_seekBar.setVisibility(View.GONE);
-                brightness_seekBar.setVisibility(View.VISIBLE);
-                contrast_seekBar.setVisibility(View.GONE);
-                sharpness_seekBar.setVisibility(View.GONE);
+                highlight_seekBar.setVisibility(View.GONE);
                 shadow_seekBar.setVisibility(View.GONE);
+                contrast_seekBar.setVisibility(View.GONE);
+                brightness_seekBar.setVisibility(View.VISIBLE);
+                saturation_seekBar.setVisibility(View.GONE);
+                warmth_seekBar.setVisibility(View.GONE);
+                sharpness_seekBar.setVisibility(View.GONE);
+                break;
+
+            case R.id.contrast:
+                filter_name.setText("Contrast");
+                exposure_seekBar.setVisibility(View.GONE);
+                highlight_seekBar.setVisibility(View.GONE);
+                shadow_seekBar.setVisibility(View.GONE);
+                contrast_seekBar.setVisibility(View.VISIBLE);
+                brightness_seekBar.setVisibility(View.GONE);
+                saturation_seekBar.setVisibility(View.GONE);
+                warmth_seekBar.setVisibility(View.GONE);
+                sharpness_seekBar.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    public void onExposureChanged(Context context,int alpha) {
+        exposureFinal = alpha;
+        Filter myFilter = new Filter();
+        myFilter.addSubFilter(new VignetteSubfilter(context ,alpha));
+        imageView.setImageBitmap(myFilter.processFilter(finalImage.copy(Bitmap.Config.ARGB_8888, true)));
     }
 
     public void onBrightnessChanged(int brightness) {
@@ -445,7 +403,6 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
         imageView.setImageBitmap(myFilter.processFilter(finalImage.copy(Bitmap.Config.ARGB_8888, true)));
     }
 
-
     public void onEditStarted() {
 
     }
@@ -462,10 +419,68 @@ public class Edit extends AppCompatActivity implements SeekBar.OnSeekBarChangeLi
         finalImage = myFilter.processFilter(bitmap);
     }
 
+
+    public static Bitmap hue(Bitmap bitmap, float hue) {
+        Bitmap newBitmap = bitmap.copy(bitmap.getConfig(), true);
+        final int width = newBitmap.getWidth();
+        final int height = newBitmap.getHeight();
+        float [] hsv = new float[3];
+
+        for(int y = 0; y < height; y++){
+            for(int x = 0; x < width; x++){
+                int pixel = newBitmap.getPixel(x,y);
+                Color.colorToHSV(pixel,hsv);
+                hsv[0] = hue;
+                newBitmap.setPixel(x,y, Color.HSVToColor(Color.alpha(pixel),hsv));
+            }
+        }
+
+        bitmap.recycle();
+        bitmap = null;
+
+        return newBitmap;
+       }
+//
+//else if (selected_effect.equals("hue")) {
+//        selected_effect = selected_effect + "_" +
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-        if (seekBar.getId() == R.id.brightness_seekBar) {
+
+        if(seekBar.getId() == R.id.exposure_seekBar)
+        {
+//            Filter myFilter = new Filter();
+//            myFilter.addSubFilter(new ColorOverlaySubFilter(100, .2f, .2f, .0f));
+//            imageView.setImageBitmap(myFilter.processFilter(finalImage.copy(Bitmap.Config.ARGB_8888, true)));
+
+            //    onExposureChanged(this,progress - 100);
+        }
+        else if (seekBar.getId() == R.id.brightness_seekBar) {
             onBrightnessChanged(progress - 100);
+        } else if (seekBar.getId() == R.id.contrast_seekBar) {
+            progress += 10;
+            float floatVal = .10f * progress;
+            onContrastChanged(floatVal);
+        } else if (seekBar.getId() == R.id.saturation_seekBar) {
+            float floatVal = .10f * progress;
+            onSaturationChanged(floatVal);
+        }
+        else if (seekBar.getId() == R.id.shadow_seekBar) {
+
+            int shadow = -8000 * progress;
+            imageView.setImageBitmap(applyShadingFilter(bitmap, shadow));
+
+            //     imageView.setImageBitmap(applyShadingFilter(bitmap,12));
+        } else if (seekBar.getId() == R.id.sharpness_seekBar) {
+
+//            sharpness_seekBar.setProgress(180);
+      //      bitmap = BitmapProcessing.hue(bitmap, (float) sharpness_seekBar.getProgress());
+//            modifyHueHolder();
+//            hue_value.setOnSeekBarChangeListener(onHueChange);
+
+  //          bitmap = hue(bitmap, (float) sharpness_seekBar.getProgress());
+
+            hue(bitmap,110);
+   //         imageView.setImageBitmap(hue(bitmap,sharpness_seekBar.getProgress()));
         }
     }
 

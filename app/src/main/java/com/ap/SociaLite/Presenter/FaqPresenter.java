@@ -36,7 +36,7 @@ public class FaqPresenter implements FaqContract {
                         FaqActivity.rv_faq.setAdapter(new FaqListAdapter(mContext, response.body().faq_list, FaqActivity));
                     }
                 } else {
-                    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+           //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
             }
 

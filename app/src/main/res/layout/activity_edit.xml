@@ -252,7 +252,7 @@
                     app:layout_constraintVertical_bias="0.0">
 
                     <SeekBar
-                        android:id="@+id/brightness_seekBar"
+                        android:id="@+id/highlight_seekBar"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="24dp"
@@ -269,6 +269,24 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+
+                    <SeekBar
+                        android:id="@+id/brightness_seekBar"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginRight="24dp"
+                        android:visibility="gone"
+                        android:progressDrawable="@drawable/seek_bar"
+                        android:thumb="@drawable/seek_thumb"
+                        android:progress="100"
+                        android:max="200"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <SeekBar
                         android:id="@+id/contrast_seekBar"
@@ -308,6 +326,24 @@
 
                     <SeekBar
                         android:id="@+id/saturation_seekBar"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginRight="24dp"
+                        android:visibility="gone"
+                        android:progressDrawable="@drawable/seek_bar"
+                        android:thumb="@drawable/seek_thumb"
+                        android:progress="100"
+                        android:max="200"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <SeekBar
+                        android:id="@+id/warmth_seekBar"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="24dp"

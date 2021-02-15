@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.ap.SociaLite.Application.BitmapUtils;
 import com.ap.SociaLite.R;
 
 import java.io.File;
@@ -66,8 +67,6 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
     @BindView(R.id.blackimg)
     ImageView blackimg;
 
-
-
     @BindView(R.id.edt_text)
     EditText edt_text;
 
@@ -83,6 +82,7 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
     String image, imageone;
     Bitmap myBitmap;
     Matrix matrix;
+    Uri imgUri1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +96,10 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 
         imageone = getIntent().getStringExtra("img2");
 
+        imgUri1 = Uri.parse(getIntent().getStringExtra("imageUri1"));
+        if (imgUri1 != null) {
+            imageView.setImageURI(imgUri1);
+        }
         if (imageone != null) {
             File imgFile = new File(imageone);
 
@@ -104,7 +108,6 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
                myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 imageView.setImageBitmap(myBitmap);
                 imageView.setTag(imgFile.toString());
-
             }
         }
     }
@@ -118,13 +121,12 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 
             case R.id.btn_save:
 
-              //  startActivity(new Intent(Text.this, CameraActivity.class));
+              //startActivity(new Intent(Text.this, CameraActivity.class));
                 edt_text.buildDrawingCache();
                 Bitmap bmp = Bitmap.createBitmap(edt_text.getDrawingCache());
                 System.out.println("ashish"+edt_text.getText().toString());
                 Bitmap bmw=combineImages1( myBitmap,bmp);
                 blackimg.setImageBitmap(bmw);
-
                 break;
 
             case R.id.white:
