@@ -45,7 +45,6 @@ public class json {
     @SerializedName("story_data")
     public List<com.ap.SociaLite.Pojo.story_data> story_data;
 
-
     @SerializedName("story_view")
     public List<com.ap.SociaLite.Pojo.story_view> story_view;
 
