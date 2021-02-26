@@ -36,12 +36,6 @@ public class Search extends AppCompatActivity {
     @BindView(R.id.search_view)
     public SearchView search_view;
 
-//    @BindView(R.id.search_msg)
-//    public ConstraintLayout search_msg;
-//
-//    @BindView(R.id.search_share)
-//    public ConstraintLayout search_share;
-
     public  SearchProfileAdapter searchProfileAdapter;
     public List<user_list> user_lists;
     String id;

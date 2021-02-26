@@ -39,8 +39,6 @@ public class SearchPresenter implements SearchContract {
             public void onResponse(Call<json> call, Response<json> response) {
                 if (response.body().status.equals("1")) {
                     if (response.body().user_list != null && response.body().user_list.size() > 0) {
-                     //
-
 
                         search.user_lists = response.body().user_list;
                         search.searchProfileAdapter = new SearchProfileAdapter(mContext,search.user_lists,search);
