@@ -41,7 +41,6 @@ public class SpotlightAdapter extends RecyclerView.Adapter<SpotlightAdapter.MyHo
 
         holder.name.setText((CharSequence)Name.get(position));
 
-
     }
 
     @Override
@@ -73,6 +72,4 @@ public class SpotlightAdapter extends RecyclerView.Adapter<SpotlightAdapter.MyHo
         }
 
     }
-
-
 }
