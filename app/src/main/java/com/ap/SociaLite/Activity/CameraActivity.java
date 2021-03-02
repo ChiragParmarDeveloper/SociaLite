@@ -12,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.VideoView;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ap.SociaLite.Editors.EditImageActivity;
 import com.ap.SociaLite.R;
 import com.squareup.picasso.Picasso;
 
@@ -82,6 +85,11 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.video_three)
     VideoView video_three;
 
+    @Nullable
+    @VisibleForTesting
+    Uri mSaveImageUri;
+    String img_url;
+
     Bitmap bitmap;
     String my_network, business_interaction, path_one, path_two, path_three;
     private static final int PICK_IMAGE_one = 100;
@@ -124,6 +132,15 @@ public class CameraActivity extends AppCompatActivity {
 //
 //            }
         }
+
+        img_url = getIntent().getStringExtra("img_url");
+
+        if(img_url!=null){
+            mSaveImageUri = Uri.fromFile(new File(img_url));
+            img_one.setImageURI(mSaveImageUri);
+        }
+
+
 
     }
 
@@ -257,7 +274,8 @@ public class CameraActivity extends AppCompatActivity {
                 break;
 
             case R.id.btn_one:
-                openGallery();
+//                openGallery();
+                startActivity(new Intent(CameraActivity.this, EditImageActivity.class));
                 break;
 
             case R.id.btn_two:

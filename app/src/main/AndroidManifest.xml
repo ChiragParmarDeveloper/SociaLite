@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Editors.EditImageActivity" />
         <activity android:name=".Activity.SpotlightActivityForUser"/>
         <activity android:name=".Activity.ProfileConnectionsActivity" />
         <activity android:name=".Activity.ProfileConnectionActivity" />
