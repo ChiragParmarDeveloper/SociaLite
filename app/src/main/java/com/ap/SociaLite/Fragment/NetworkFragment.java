@@ -18,6 +18,7 @@ import com.ap.SociaLite.Activity.RegistrationVerificationActivity;
 import com.ap.SociaLite.Activity.SpotLightActivity;
 import com.ap.SociaLite.Adapter.CategoryPostAdapter;
 import com.ap.SociaLite.Adapter.MyNetworkAdapter;
+import com.ap.SociaLite.Editors.EditImageActivity;
 import com.ap.SociaLite.R;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class NetworkFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Intent in = new Intent(getActivity(), CameraActivity.class);
+                Intent in = new Intent(getActivity(), EditImageActivity.class);
                 in.putExtra("network_fragment", "my_network");
                 startActivity(in);
             }

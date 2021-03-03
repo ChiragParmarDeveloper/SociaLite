@@ -3,12 +3,15 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ap.SociaLite.PictureThread;
@@ -40,24 +43,37 @@ public class SharePost extends AppCompatActivity {
     private Bitmap bitmap;
     String image;
 
+    @Nullable
+    @VisibleForTesting
+    Uri mSaveImageUri;
+    String img_url;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_post);
         ButterKnife.bind(this);
 
-        image = getIntent().getStringExtra("img2");
-        if (image != null) {
-            File imgFile = new File(image);
+//        image = getIntent().getStringExtra("img2");
+//        if (image != null) {
+//            File imgFile = new File(image);
+//
+//            if (imgFile.exists()) {
+//
+//                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(bitmap);
+//                imageView.setTag(imgFile.toString());
+//
+//            }
+//        }
 
-            if (imgFile.exists()) {
+        img_url = getIntent().getStringExtra("img_url");
 
-                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(bitmap);
-                imageView.setTag(imgFile.toString());
-
-            }
+        if(img_url!=null){
+            mSaveImageUri = Uri.fromFile(new File(img_url));
+            imageView.setImageURI(mSaveImageUri);
         }
+
     }
 
     @OnClick({R.id.img_cross, R.id.btn_next, R.id.btn_save, R.id.All_contact})

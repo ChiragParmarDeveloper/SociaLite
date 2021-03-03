@@ -15,6 +15,7 @@ import android.widget.VideoView;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.ap.SociaLite.Editors.EditImageActivity;
 import com.ap.SociaLite.R;
@@ -28,35 +29,14 @@ import butterknife.OnClick;
 
 public class CameraActivity extends AppCompatActivity {
 
-    @BindView(R.id.layout_edit)
-    LinearLayout layout_edit;
-
-    @BindView(R.id.img_edit)
-    ImageView img_edit;
 
     @BindView(R.id.layout_lock)
-    LinearLayout layout_lock;
-
-    @BindView(R.id.img_lock)
-    ImageView img_lock;
+    ConstraintLayout layout_lock;
 
     @BindView(R.id.layout_clock)
-    LinearLayout layout_clock;
+    ConstraintLayout layout_clock;
 
-    @BindView(R.id.img_clock)
-    ImageView img_clock;
 
-    @BindView(R.id.layout_filter)
-    LinearLayout layout_filter;
-
-    @BindView(R.id.img_filter)
-    ImageView img_filter;
-
-    @BindView(R.id.layout_drama)
-    LinearLayout layout_drama;
-
-    @BindView(R.id.img_drama)
-    ImageView img_drama;
 
     @BindView(R.id.img_back)
     ImageView img_back;
@@ -64,26 +44,19 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.imageView)
     ImageView imageView;
 
-    @BindView(R.id.img_one)
-    ImageView img_one;
 
-    @BindView(R.id.img_two)
-    ImageView img_two;
 
-    @BindView(R.id.img_three)
-    ImageView img_three;
-
-    @BindView(R.id.video_one)
-    VideoView video_one;
-
-    @BindView(R.id.video)
-    VideoView video;
-
-    @BindView(R.id.video_two)
-    VideoView video_two;
-
-    @BindView(R.id.video_three)
-    VideoView video_three;
+//    @BindView(R.id.video_one)
+//    VideoView video_one;
+//
+//    @BindView(R.id.video)
+//    VideoView video;
+//
+//    @BindView(R.id.video_two)
+//    VideoView video_two;
+//
+//    @BindView(R.id.video_three)
+//    VideoView video_three;
 
     @Nullable
     @VisibleForTesting
@@ -137,15 +110,14 @@ public class CameraActivity extends AppCompatActivity {
 
         if(img_url!=null){
             mSaveImageUri = Uri.fromFile(new File(img_url));
-            img_one.setImageURI(mSaveImageUri);
+            imageView.setImageURI(mSaveImageUri);
         }
 
 
 
     }
 
-    @OnClick({R.id.img_back, R.id.next, R.id.layout_edit, R.id.layout_lock, R.id.layout_clock, R.id.layout_filter, R.id.layout_drama,
-            R.id.img_one, R.id.img_two, R.id.img_three, R.id.btn_one, R.id.btn_two, R.id.btn_three})
+    @OnClick({R.id.img_back, R.id.next, R.id.layout_lock, R.id.layout_clock})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -175,34 +147,22 @@ public class CameraActivity extends AppCompatActivity {
                 }
                 break;
 
-            case R.id.layout_edit:
-                Intent in = new Intent(CameraActivity.this, Text.class);
-                //  in.putExtra("img1", path_one);
-                in.putExtra("imageUri1", imageuri.toString());
-            //    in.putExtra("img2", path);
-                startActivity(in);
-                break;
-
             case R.id.layout_lock:
                 Intent sharepost = new Intent(CameraActivity.this, SharePost.class);
                 sharepost.putExtra("img2", path);
+                sharepost.putExtra("img_url",getIntent().getStringExtra("img_url"));
                 startActivity(sharepost);
                 break;
 
             case R.id.layout_clock:
                 Intent post = new Intent(CameraActivity.this, SchedulePost.class);
-                post.putExtra("img1", path_one);
-                post.putExtra("img2", path_two);
-                post.putExtra("img3", path_three);
+//                post.putExtra("img1", path_one);
+//                post.putExtra("img2", path_two);
+//                post.putExtra("img3", path_three);
+                post.putExtra("img_url",getIntent().getStringExtra("img_url"));
                 startActivity(post);
                 break;
 
-            case R.id.layout_filter:
-
-                Intent edit = new Intent(CameraActivity.this, Edit.class);
-                edit.putExtra("imageUri1", imageuri.toString());
-                startActivity(edit);
-                break;
 
             case R.id.layout_drama:
 
@@ -213,77 +173,65 @@ public class CameraActivity extends AppCompatActivity {
                 startActivity(shape);
                 break;
 
-            case R.id.img_one:
-                if (path_one != null) {
-                    File imgone = new File(path_one);
-                    if (imgone.exists()) {
-                        //        imageView.setImageURI(Uri.fromFile(imgone));
-                  //      imageUri = Uri.fromFile(imgone);
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgone.getAbsolutePath());
-                        imageView.setImageBitmap(myBitmap);
-
-                        imageView.setTag(imgone.toString());
-                        path = imageView.getTag().toString();
-
-                    }
-                }
-
-                if (imageUri1 != null) {
-                    imageView.setImageURI(imageUri1);
-                    imageuri = Uri.parse(imageUri1.toString());
-                }
-                break;
-
-            case R.id.img_two:
-
-                if (path_two != null) {
-                    File imgtwo = new File(path_two);
-                    if (imgtwo.exists()) {
-                        //   imageView.setImageURI(Uri.fromFile(imgtwo));
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgtwo.getAbsolutePath());
-                        imageView.setImageBitmap(myBitmap);
-
-                        imageView.setTag(imgtwo.toString());
-                        path = imageView.getTag().toString();
-                    }
-                }
-                if (imageUri2 != null) {
-                    imageView.setImageURI(imageUri2);
-                    imageuri = Uri.parse(imageUri2.toString());
-                }
-                break;
-
-            case R.id.img_three:
-
-                if (path_three != null) {
-                    File imgthree = new File(path_three);
-                    if (imgthree.exists()) {
-                        //       imageView.setImageURI(Uri.fromFile(imgthree));
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgthree.getAbsolutePath());
-                        imageView.setImageBitmap(myBitmap);
-
-                        imageView.setTag(imgthree.toString());
-                        path = imageView.getTag().toString();
-                        ///            imageUri =  imageUri3.;
-                    }
-                }
-                if (imageUri3 != null) {
-                    imageView.setImageURI(imageUri3);
-                    imageuri = Uri.parse(imageUri3.toString());
-                }
-                break;
-
-            case R.id.btn_one:
-//                openGallery();
-                startActivity(new Intent(CameraActivity.this, EditImageActivity.class));
-                break;
-
-            case R.id.btn_two:
-                openGallery1();
-                break;
-            case R.id.btn_three:
-                openGallery2();
-                break;
+//            case R.id.img_one:
+//                if (path_one != null) {
+//                    File imgone = new File(path_one);
+//                    if (imgone.exists()) {
+//                        //        imageView.setImageURI(Uri.fromFile(imgone));
+//                  //      imageUri = Uri.fromFile(imgone);
+//                        Bitmap myBitmap = BitmapFactory.decodeFile(imgone.getAbsolutePath());
+//                        imageView.setImageBitmap(myBitmap);
+//
+//                        imageView.setTag(imgone.toString());
+//                        path = imageView.getTag().toString();
+//
+//                    }
+//                }
+//
+//                if (imageUri1 != null) {
+//                    imageView.setImageURI(imageUri1);
+//                    imageuri = Uri.parse(imageUri1.toString());
+//                }
+//                break;
+//
+//            case R.id.img_two:
+//
+//                if (path_two != null) {
+//                    File imgtwo = new File(path_two);
+//                    if (imgtwo.exists()) {
+//                        //   imageView.setImageURI(Uri.fromFile(imgtwo));
+//                        Bitmap myBitmap = BitmapFactory.decodeFile(imgtwo.getAbsolutePath());
+//                        imageView.setImageBitmap(myBitmap);
+//
+//                        imageView.setTag(imgtwo.toString());
+//                        path = imageView.getTag().toString();
+//                    }
+//                }
+//                if (imageUri2 != null) {
+//                    imageView.setImageURI(imageUri2);
+//                    imageuri = Uri.parse(imageUri2.toString());
+//                }
+//                break;
+//
+//            case R.id.img_three:
+//
+//                if (path_three != null) {
+//                    File imgthree = new File(path_three);
+//                    if (imgthree.exists()) {
+//                        //       imageView.setImageURI(Uri.fromFile(imgthree));
+//                        Bitmap myBitmap = BitmapFactory.decodeFile(imgthree.getAbsolutePath());
+//                        imageView.setImageBitmap(myBitmap);
+//
+//                        imageView.setTag(imgthree.toString());
+//                        path = imageView.getTag().toString();
+//                        ///            imageUri =  imageUri3.;
+//                    }
+//                }
+//                if (imageUri3 != null) {
+//                    imageView.setImageURI(imageUri3);
+//                    imageuri = Uri.parse(imageUri3.toString());
+//                }
+//                break;
 
         }
     }
@@ -315,7 +263,7 @@ public class CameraActivity extends AppCompatActivity {
                     imageUri1 = data.getData();
                     if (imageUri1.toString().contains("image")) {
                         imageView.setImageURI(imageUri1);
-                        img_one.setImageURI(imageUri1);
+                      //  img_one.setImageURI(imageUri1);
                         path_one = getRealPathFromURI(imageUri1);
                     }
 //                    else if (imageUri.toString().contains("video")) {
@@ -346,7 +294,7 @@ public class CameraActivity extends AppCompatActivity {
                 if (requestCode == PICK_IMAGE_two && resultCode == RESULT_OK && null != data) {
                     imageUri2 = data.getData();
                     if (imageUri2.toString().contains("image")) {
-                        img_two.setImageURI(imageUri2);
+                    //    img_two.setImageURI(imageUri2);
                         path_two = getRealPathFromURI(imageUri2);
                     }
 
@@ -373,7 +321,7 @@ public class CameraActivity extends AppCompatActivity {
                 if (requestCode == PICK_IMAGE_three && resultCode == RESULT_OK && null != data) {
                     imageUri3 = data.getData();
                     if (imageUri3.toString().contains("image")) {
-                        img_three.setImageURI(imageUri3);
+                     //   img_three.setImageURI(imageUri3);
                         path_three = getRealPathFromURI(imageUri3);
                     }
 //                    else if (imageUri.toString().contains("video")) {

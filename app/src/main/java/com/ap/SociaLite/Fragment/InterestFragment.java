@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ap.SociaLite.Activity.CameraActivity;
 import com.ap.SociaLite.Adapter.InterestPostAdapter;
 import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Editors.EditImageActivity;
 import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
 
@@ -59,7 +60,7 @@ public class InterestFragment extends Fragment {
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.camera_constrain:
-                startActivity(new Intent(getActivity(), CameraActivity.class));
+                startActivity(new Intent(getActivity(), EditImageActivity.class));
                 break;
         }
     }

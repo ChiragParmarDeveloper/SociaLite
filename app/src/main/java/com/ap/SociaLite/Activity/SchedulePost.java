@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.VideoView;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ap.SociaLite.R;
@@ -92,6 +95,11 @@ public class SchedulePost extends AppCompatActivity {
     int hour, minute;
     String imagetwo, imageone, imagethree;
 
+    @Nullable
+    @VisibleForTesting
+    Uri mSaveImageUri;
+    String img_url;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,44 +107,51 @@ public class SchedulePost extends AppCompatActivity {
         setContentView(R.layout.activity_schedule_post);
         ButterKnife.bind(this);
 
-        imageone = getIntent().getStringExtra("img1");
-        imagetwo = getIntent().getStringExtra("img2");
-        imagethree = getIntent().getStringExtra("img3");
+//        imageone = getIntent().getStringExtra("img1");
+//        imagetwo = getIntent().getStringExtra("img2");
+//        imagethree = getIntent().getStringExtra("img3");
+//
+//        if (imageone != null) {
+//            layout_img1.setVisibility(View.VISIBLE);
+//            File imgFile = new File(imageone);
+//
+//            if (imgFile.exists()) {
+//
+//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(myBitmap);
+//                img_one.setImageBitmap(myBitmap);
+//                imageView.setTag(imgFile.toString());
+//
+//            }
+//        }
+//        if (imagetwo != null) {
+//            layout_img2.setVisibility(View.VISIBLE);
+//            File imgFile = new File(imagetwo);
+//
+//            if (imgFile.exists()) {
+//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(myBitmap);
+//                img_two.setImageBitmap(myBitmap);
+//            }
+//        }
+//
+//        if (imagethree != null) {
+//
+//            layout_img3.setVisibility(View.VISIBLE);
+//            File imgFile = new File(imagethree);
+//
+//            if (imgFile.exists()) {
+//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(myBitmap);
+//                img_three.setImageBitmap(myBitmap);
+//            }
+//        }
 
-        if (imageone != null) {
-            layout_img1.setVisibility(View.VISIBLE);
-            File imgFile = new File(imageone);
+        img_url = getIntent().getStringExtra("img_url");
 
-            if (imgFile.exists()) {
-
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(myBitmap);
-                img_one.setImageBitmap(myBitmap);
-                imageView.setTag(imgFile.toString());
-
-            }
-        }
-        if (imagetwo != null) {
-            layout_img2.setVisibility(View.VISIBLE);
-            File imgFile = new File(imagetwo);
-
-            if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(myBitmap);
-                img_two.setImageBitmap(myBitmap);
-            }
-        }
-
-        if (imagethree != null) {
-
-            layout_img3.setVisibility(View.VISIBLE);
-            File imgFile = new File(imagethree);
-
-            if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(myBitmap);
-                img_three.setImageBitmap(myBitmap);
-            }
+        if(img_url!=null){
+            mSaveImageUri = Uri.fromFile(new File(img_url));
+            imageView.setImageURI(mSaveImageUri);
         }
 
         dateSetListener = new DatePickerDialog.OnDateSetListener() {

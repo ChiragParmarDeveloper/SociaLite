@@ -18,6 +18,7 @@ import com.ap.SociaLite.Adapter.BusinessInteractionAdapter;
 import com.ap.SociaLite.Adapter.CategoryListAdapter;
 import com.ap.SociaLite.Adapter.MyNetworkAdapter;
 import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Editors.EditImageActivity;
 import com.ap.SociaLite.Presenter.BusinessFragmentPresenter;
 import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
@@ -76,7 +77,7 @@ public class BusinessFragment extends Fragment {
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.post_constraint:
-                Intent in = new Intent(getActivity(), CameraActivity.class);
+                Intent in = new Intent(getActivity(), EditImageActivity.class);
                 in.putExtra("business_fragment", "business_interaction");
                 startActivity(in);
                 break;
