@@ -3,20 +3,14 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.ap.SociaLite.Application.Session;
-import com.ap.SociaLite.Pojo.user_details;
 import com.ap.SociaLite.Presenter.PrivacyPresenter;
 import com.ap.SociaLite.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,14 +18,11 @@ import butterknife.OnClick;
 
 public class Privacy extends AppCompatActivity {
 
-//    @BindView(R.id.img_back)
-//    ImageView img_back;
-
     @BindView(R.id.hidedpost)
     ConstraintLayout hidedpost;
 
     @BindView(R.id.toggle_account)
-   public ToggleButton toggle_account;
+    public ToggleButton toggle_account;
 
     String user_id;
 
