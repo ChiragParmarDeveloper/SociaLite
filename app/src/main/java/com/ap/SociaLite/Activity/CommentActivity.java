@@ -52,8 +52,15 @@ public class CommentActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.img_send:
-                new CommentPresenter(this, this).add_comment(user_id, post_id, edt_comment.getText().toString().trim());
-                new CommentPresenter(this, this).view_comment(post_id);
+                if(edt_comment.getText().toString().equals(""))
+                {
+
+                }else
+                {
+                    new CommentPresenter(this, this).add_comment(user_id, post_id, edt_comment.getText().toString().trim());
+                    new CommentPresenter(this, this).view_comment(post_id);
+                }
+
                 break;
         }
     }

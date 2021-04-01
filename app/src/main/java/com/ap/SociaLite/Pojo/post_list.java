@@ -2,8 +2,6 @@ package com.ap.SociaLite.Pojo;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class post_list {
 
     @SerializedName("post_id")
@@ -29,6 +27,8 @@ public class post_list {
 
     @SerializedName("schedule_time")
     public String schedule_time;
-//    @SerializedName("comments")
-//    public List<String> comments;
+
+
+    @SerializedName("post_time")
+    public String post_time;
 }

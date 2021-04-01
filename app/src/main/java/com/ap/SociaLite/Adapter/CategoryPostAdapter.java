@@ -70,6 +70,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
         holder.txt_description.setText(item.description);
         holder.txt_rating.setText(item.rate);
+        holder.txt_time.setText(item.post_time);
         //   String rating = item.rate;
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
@@ -330,6 +331,9 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
         @BindView(R.id.txt_comment_pos_1)
         TextView txt_comment_pos_1;
+
+        @BindView(R.id.txt_time)
+        TextView txt_time;
 
 
         @BindView(R.id.layout)

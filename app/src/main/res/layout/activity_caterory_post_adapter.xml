@@ -409,6 +409,7 @@
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:id="@+id/circularImageView3"
                             android:layout_width="30dp"
+                            app:civ_border="false"
                             android:layout_height="30dp"
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_user_icon" />
@@ -448,6 +449,7 @@
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
+                            app:civ_border="false"
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_user_icon" />
 
@@ -473,6 +475,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/txt_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
