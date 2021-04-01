@@ -38,7 +38,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         this.alldata.addAll(datas);
     }
 
-    public static String User_id;
+ //   public static String User_id;
     String id;
     private int selectedItem;
 //
@@ -66,7 +66,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         holder.name.setText(item.username);
 
         if (selectedItem == position) {
-            User_id = datas.get(position).request_id;
+            search.RequestId = datas.get(position).request_id;
             search.search_profile_user_name.setText(datas.get(position).username);
             if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
                 Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
@@ -83,11 +83,10 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
             Picasso.get().load(item.profile_pic).into(holder.profile);
         }
 
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User_id = datas.get(position).request_id;
+                search.RequestId = datas.get(position).request_id;
                 if (datas.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
                     Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
                     search.search_profile_image.setImageDrawable(upload_img);

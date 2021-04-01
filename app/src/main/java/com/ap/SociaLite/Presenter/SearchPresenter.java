@@ -27,7 +27,6 @@ public class SearchPresenter implements SearchContract {
         this.search = fragment;
     }
 
-
     @Override
     public void all_user(String user_id) {
         search.progressbar.setVisibility(View.VISIBLE);
@@ -53,6 +52,26 @@ public class SearchPresenter implements SearchContract {
             public void onFailure(Call<json> call, Throwable t) {
                 search.progressbar.setVisibility(View.GONE);
 //                Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Log.d("error", String.valueOf(t.getMessage()));
+            }
+        });
+    }
+
+    @Override
+    public void send_request(String UserId, String RequestId) {
+        new RService.api().call(mContext).connection_request(UserId,RequestId).enqueue(new Callback<json>() {
+            @Override
+            public void onResponse(Call<json> call, Response<json> response) {
+                if (response.body().status.equals("1")) {
+                    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                } else {
+                    //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<json> call, Throwable t) {
+            //      Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
 //                Log.d("error", String.valueOf(t.getMessage()));
             }
         });

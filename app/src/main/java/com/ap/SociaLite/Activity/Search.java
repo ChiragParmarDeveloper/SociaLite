@@ -1,10 +1,8 @@
 package com.ap.SociaLite.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,13 +41,10 @@ public class Search extends AppCompatActivity {
     @BindView(R.id.progressbar)
     public ProgressBar progressbar;
 
-
     public SearchProfileAdapter searchProfileAdapter;
-    //  public List<user_list> user_lists;
     public List<data> datas;
 
-    String id;
-    String user_id;
+    public String user_id, RequestId, UserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +54,7 @@ public class Search extends AppCompatActivity {
 
         Session session = new Session(getApplicationContext());
         user_id = session.getUser_id();
+        UserId = session.getUser_id();
 
         new SearchPresenter(this, this).all_user(user_id);
         filter();
@@ -72,25 +68,23 @@ public class Search extends AppCompatActivity {
                 break;
 
             case R.id.search_connect:
-                id = SearchProfileAdapter.User_id;
-                Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), UserId, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), RequestId, Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.search_msg:
-                id = SearchProfileAdapter.User_id;
-                Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), RequestId, Toast.LENGTH_LONG).show();
 
-                Intent chat = new Intent(view.getContext(), MessageChatActivity.class);
-                view.getContext().startActivity(chat);
+//                Intent chat = new Intent(view.getContext(), MessageChatActivity.class);
+//                view.getContext().startActivity(chat);
 
                 break;
 
             case R.id.search_share:
-                id = SearchProfileAdapter.User_id;
-                Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), RequestId, Toast.LENGTH_LONG).show();
 
-                Intent in = new Intent(view.getContext(), ShareToFriend.class);
-                view.getContext().startActivity(in);
+//                Intent in = new Intent(view.getContext(), ShareToFriend.class);
+//                view.getContext().startActivity(in);
                 break;
         }
     }

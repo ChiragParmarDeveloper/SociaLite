@@ -59,6 +59,12 @@ public interface RService {
     Call<json> fetch_user(@Field("user_id") String user_id);
 
     @FormUrlEncoded
+    @POST("friend_connection.php")
+    Call<json> connection_request(@Field("UserId") String UserId,
+                                  @Field("RequestId") String RequestId);
+
+
+    @FormUrlEncoded
     @POST("view_hided_post.php")
     Call<json> hidepost(@Field("user_id") String user_id);
 
