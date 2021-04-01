@@ -1,5 +1,6 @@
 package com.ap.SociaLite.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -66,11 +67,18 @@ public class Search extends AppCompatActivity {
             case R.id.search_msg:
                 id = SearchProfileAdapter.User_id;
                 Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
+
+                Intent chat = new Intent(view.getContext(), MessageChatActivity.class);
+                view.getContext().startActivity(chat);
+
                 break;
 
             case R.id.search_share:
                 id = SearchProfileAdapter.User_id;
                 Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
+
+                Intent in = new Intent(view.getContext(), ShareToFriend.class);
+                view.getContext().startActivity(in);
                 break;
         }
     }
