@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Activity.Search">
 
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:elevation="10dp"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,9 +26,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -185,7 +200,7 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="#263238"/>
+                        android:background="#263238" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
@@ -206,13 +221,13 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
+                        <com.mikhaellopez.circularimageview.CircularImageView
                             android:id="@+id/search_profile_image"
-                            android:layout_width="130dp"
-                            android:layout_height="130dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginTop="20dp"
-                            android:scaleType="fitXY"
                             android:src="@drawable/ic_user_icon"
+                            app:civ_border="true"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/search_profile_user_name" />
@@ -328,7 +343,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

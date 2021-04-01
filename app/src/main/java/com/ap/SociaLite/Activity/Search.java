@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,9 +14,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Adapter.SearchProfileAdapter;
-import com.ap.SociaLite.Pojo.user_list;
+import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.Presenter.SearchPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.List;
 
@@ -32,14 +35,21 @@ public class Search extends AppCompatActivity {
     public TextView search_profile_user_name;
 
     @BindView(R.id.search_profile_image)
-    public ImageView search_profile_image;
+    public CircularImageView search_profile_image;
 
     @BindView(R.id.search_view)
     public SearchView search_view;
 
-    public  SearchProfileAdapter searchProfileAdapter;
-    public List<user_list> user_lists;
+    @BindView(R.id.progressbar)
+    public ProgressBar progressbar;
+
+
+    public SearchProfileAdapter searchProfileAdapter;
+    //  public List<user_list> user_lists;
+    public List<data> datas;
+
     String id;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +57,10 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
-        new SearchPresenter(this, this).all_user();
+        Session session = new Session(getApplicationContext());
+        user_id = session.getUser_id();
 
+        new SearchPresenter(this, this).all_user(user_id);
         filter();
     }
 

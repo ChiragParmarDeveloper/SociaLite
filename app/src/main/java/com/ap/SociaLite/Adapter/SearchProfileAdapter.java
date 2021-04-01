@@ -1,20 +1,19 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.Search;
-import com.ap.SociaLite.Pojo.user_list;
+import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,22 +23,33 @@ import java.util.Locale;
 public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdapter.MyHolder> {
 
     Context mContext;
+    public List<data> datas;
     Search search;
-    List<user_list> user_lists;
-    List<user_list> allUser_List;
-    user_list item;
+    List<data> alldata;
+    data item;
+
+    public SearchProfileAdapter(Context mContext, List<data> datas, Search search) {
+        this.mContext = mContext;
+        this.datas = datas;
+        this.search = search;
+        selectedItem = 0;
+
+        this.alldata = new ArrayList<>();
+        this.alldata.addAll(datas);
+    }
+
     public static String User_id;
     String id;
     private int selectedItem;
-
-    public SearchProfileAdapter(Context context, List<user_list> list, Search fragment) {
-        this.mContext = context;
-        this.user_lists = list;
-        this.allUser_List= new ArrayList<>();
-        this.allUser_List.addAll(user_lists);
-        this.search = fragment;
-        selectedItem = 0;
-    }
+//
+//    public SearchProfileAdapter(Context context, List<user_list> list, Search fragment) {
+//        this.mContext = context;
+//        this.user_lists = list;
+//
+//
+//        this.search = fragment;
+//
+//    }
 
     @NonNull
     @Override
@@ -51,45 +61,52 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        item = user_lists.get(position);
-        id = user_lists.get(position).id;
+        item = datas.get(position);
+        id = datas.get(position).request_id;
+        holder.name.setText(item.username);
 
         if (selectedItem == position) {
-            User_id = user_lists.get(position).id;
-            search.search_profile_user_name.setText(user_lists.get(position).username);
-            if (item.profile_pic.length() > 0) {
-                Picasso.get().load(user_lists.get(position).profile_pic).placeholder(R.mipmap.ic_launcher).into(search.search_profile_image);
+            User_id = datas.get(position).request_id;
+            search.search_profile_user_name.setText(datas.get(position).username);
+            if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+                search.search_profile_image.setImageDrawable(upload_img);
+            } else {
+                Picasso.get().load(item.profile_pic).into(search.search_profile_image);
             }
         }
 
-        if (item.profile_pic.length() > 0) {
-            Picasso.get().load(item.profile_pic).placeholder(R.mipmap.ic_launcher).into(holder.profile);
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+            holder.profile.setImageDrawable(upload_img);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.profile);
         }
 
-        holder.name.setText(item.username);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               User_id = user_lists.get(position).id;
-
-                if (item.profile_pic.length() > 0) {
-                    Picasso.get().load(user_lists.get(position).profile_pic).placeholder(R.mipmap.ic_launcher).into(search.search_profile_image);
+                User_id = datas.get(position).request_id;
+                if (datas.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
+                    Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+                    search.search_profile_image.setImageDrawable(upload_img);
+                } else {
+                    Picasso.get().load(datas.get(position).profile_pic).into(search.search_profile_image);
                 }
-
-                search.search_profile_user_name.setText(user_lists.get(position).username);
+                search.search_profile_user_name.setText(datas.get(position).username);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return user_lists.size();
+        return datas.size();
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
 
-        ImageView profile;
+        CircularImageView profile;
         TextView name;
 
         public MyHolder(@NonNull View itemView) {
@@ -104,13 +121,13 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
 
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
-        user_lists.clear();
+        datas.clear();
         if (charText.length() == 0) {
-            user_lists.addAll(allUser_List);
+            datas.addAll(alldata);
         } else {
-            for (user_list  wp : allUser_List) {
+            for (data wp : alldata) {
                 if (wp.username.toLowerCase(Locale.getDefault()).contains(charText)) {
-                    user_lists.add(wp);
+                    datas.add(wp);
                 }
             }
         }
