@@ -1,5 +1,6 @@
 package com.ap.SociaLite.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -44,7 +45,7 @@ public class Search extends AppCompatActivity {
     public SearchProfileAdapter searchProfileAdapter;
     public List<data> datas;
 
-    public String user_id, RequestId, UserId;
+    public String user_id, RequestId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,6 @@ public class Search extends AppCompatActivity {
 
         Session session = new Session(getApplicationContext());
         user_id = session.getUser_id();
-        UserId = session.getUser_id();
 
         new SearchPresenter(this, this).all_user(user_id);
         filter();
@@ -68,23 +68,19 @@ public class Search extends AppCompatActivity {
                 break;
 
             case R.id.search_connect:
-                Toast.makeText(getApplicationContext(), UserId, Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(), RequestId, Toast.LENGTH_LONG).show();
+                new SearchPresenter(this, this).send_request(user_id, RequestId);
                 break;
 
             case R.id.search_msg:
-                Toast.makeText(getApplicationContext(), RequestId, Toast.LENGTH_LONG).show();
-
+//                Toast.makeText(getApplicationContext(), RequestId, Toast.LENGTH_LONG).show();
 //                Intent chat = new Intent(view.getContext(), MessageChatActivity.class);
 //                view.getContext().startActivity(chat);
-
+                Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.search_share:
-                Toast.makeText(getApplicationContext(), RequestId, Toast.LENGTH_LONG).show();
-
-//                Intent in = new Intent(view.getContext(), ShareToFriend.class);
-//                view.getContext().startActivity(in);
+                Intent in = new Intent(view.getContext(), ShareToFriend.class);
+                view.getContext().startActivity(in);
                 break;
         }
     }
