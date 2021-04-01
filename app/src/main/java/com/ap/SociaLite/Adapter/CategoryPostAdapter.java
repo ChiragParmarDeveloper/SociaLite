@@ -82,7 +82,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             Picasso.get().load(item.profile_pic).into(holder.circularImageView);
         }
 
-
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +113,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                                 break;
 
                             case R.id.copylink:
-                                Toast.makeText(view.getContext(), "Clicked copy", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(view.getContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
                                 break;
 
                             default:

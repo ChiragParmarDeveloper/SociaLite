@@ -66,7 +66,7 @@ public class Report_Presenter implements Report_Contract {
 
             @Override
             public void onFailure(Call<json> call, Throwable t) {
-                //  Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                  Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                 // Log.d("error", String.valueOf(t.getMessage()));
             }
         });

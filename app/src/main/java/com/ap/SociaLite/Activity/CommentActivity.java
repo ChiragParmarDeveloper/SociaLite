@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,23 +46,26 @@ public class CommentActivity extends AppCompatActivity {
         new CommentPresenter(this, this).view_comment(post_id);
     }
 
-    @OnClick({R.id.img_back, R.id.img_send})
+    @OnClick({R.id.img_back, R.id.img_send, R.id.ing_camera})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
                 onBackPressed();
                 break;
             case R.id.img_send:
-                if(edt_comment.getText().toString().equals(""))
-                {
+                if (edt_comment.getText().toString().equals("")) {
 
-                }else
-                {
+                } else {
                     new CommentPresenter(this, this).add_comment(user_id, post_id, edt_comment.getText().toString().trim());
                     new CommentPresenter(this, this).view_comment(post_id);
                 }
-
                 break;
+            case R.id.ing_camera:
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+                ;
+                break;
+
+
         }
     }
 }
