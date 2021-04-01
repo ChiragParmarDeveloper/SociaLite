@@ -28,6 +28,11 @@ public class post_list {
     @SerializedName("schedule_time")
     public String schedule_time;
 
+    @SerializedName("username")
+    public String username;
+
+    @SerializedName("profile_pic")
+    public String profile_pic;
 
     @SerializedName("post_time")
     public String post_time;

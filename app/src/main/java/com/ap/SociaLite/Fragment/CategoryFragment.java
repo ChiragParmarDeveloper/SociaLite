@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,9 @@ public class CategoryFragment extends Fragment {
 
     @BindView(R.id.rv_interestlist)
     public RecyclerView rv_interestlist;
+
+    @BindView(R.id.progressbar)
+    public ProgressBar progressbar;
 
     public String user_id;
 

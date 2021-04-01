@@ -25,17 +25,23 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/img_dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="15dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="25dp"
             android:layout_marginLeft="15dp"
             android:src="@drawable/ic_user_icon"
-            app:civ_border_width="1dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="#921500"
-            app:civ_shadow_gravity="center"
-            app:civ_shadow_radius="7dp" />
+            android:layout_centerVertical="true"
+            app:civ_border="false" />
+
+
+        <!--            -->
+
+        <!--            android:layout_marginLeft="15dp"-->
+        <!--            app:civ_border_width="1dp"-->
+        <!--            app:civ_shadow="true"-->
+        <!--            app:civ_shadow_color="#921500"-->
+        <!--            app:civ_shadow_gravity="center"-->
+        <!--            app:civ_shadow_radius="7dp" />-->
 
 
         <RelativeLayout
@@ -43,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_centerVertical="true"
+            android:layout_marginStart="13dp"
             android:layout_marginEnd="10dp"
             android:layout_toRightOf="@id/img_dp"
             android:gravity="center_vertical">
@@ -83,8 +90,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="30dp"
         android:background="@color/colorWhite" />
 

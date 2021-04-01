@@ -2,6 +2,7 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -66,12 +68,20 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
     public void onBindViewHolder(@NonNull CategoryPostAdapter.MyHolder holder, int position) {
         item = post_lists.get(position);
         String id = post_lists.get(position).post_id;
-        //    holder.txt_name.setText((CharSequence) Name.get(position));
-        Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+
+        Picasso.get().load(item.image).into(holder.img_category);
         holder.txt_description.setText(item.description);
         holder.txt_rating.setText(item.rate);
         holder.txt_time.setText(item.post_time);
-        //   String rating = item.rate;
+        holder.txt_name.setText(item.username);
+
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+            holder.circularImageView.setImageDrawable(upload_img);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+        }
+
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -335,12 +345,14 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         @BindView(R.id.txt_time)
         TextView txt_time;
 
-
         @BindView(R.id.layout)
         LinearLayout layout;
 
         @BindView(R.id.layout1)
         LinearLayout layout1;
+
+        @BindView(R.id.circularImageView)
+        CircularImageView circularImageView;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

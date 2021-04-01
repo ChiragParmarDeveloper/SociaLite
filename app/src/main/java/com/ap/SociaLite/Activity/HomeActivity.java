@@ -410,6 +410,12 @@ public class HomeActivity extends AppCompatActivity {
         new HomeActivityPresenter(this, this).fetch_profile(user_id);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new HomeActivityPresenter(this, this).fetch_profile(user_id);
+    }
+
     @SuppressLint("ResourceAsColor")
     @OnClick({R.id.layout_category, R.id.layout_interest, R.id.layout_network, R.id.layout_share, R.id.layout_business, R.id.img_leftmenu,
             R.id.imgsearch})
@@ -548,7 +554,5 @@ public class HomeActivity extends AppCompatActivity {
                 break;
         }
     }
-    public void CustomDialog() {
 
-    }
 }
