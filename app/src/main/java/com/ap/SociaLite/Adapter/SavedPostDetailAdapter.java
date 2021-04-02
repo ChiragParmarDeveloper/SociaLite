@@ -231,9 +231,8 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
 
                             holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
 
-                            //    Picasso.get().load(response.body().comments.comments.size() - 1).into(holder.circularImageView);
-
-                            //   holder.txt_comment_pos_0.setText(response.body().comments.comments.get(0).comment);
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+                            Picasso.get().load(img).into(holder.circularImageView3);
 
                         } else {
                             holder.layout.setVisibility(View.GONE);
@@ -245,7 +244,8 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
                             holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
                             //        Picasso.get().load(item.profile_pic).into(holder.circular);
 
-
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                            Picasso.get().load(img).into(holder.circular);
                         } else {
                             holder.layout1.setVisibility(View.GONE);
                         }
@@ -295,6 +295,9 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
 
         @BindView(R.id.img_popup)
         ImageView img_popup;
+
+        @BindView(R.id.circularImageView3)
+        CircularImageView circularImageView3;
 
         @BindView(R.id.txt_name_position_0)
         TextView txt_name_position_0;

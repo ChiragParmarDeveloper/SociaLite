@@ -47,7 +47,7 @@ public class SchedulePostSettingAdapter extends RecyclerView.Adapter<SchedulePos
         item = post_lists.get(position);
         String id = post_lists.get(position).post_id;
 
-        Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.schedule_post_image);
+        Picasso.get().load(item.image).into(holder.schedule_post_image);
         holder.schedule_post_contain.setText(item.description);
 
         String date = item.schedule_date + " on " + item.schedule_time;
