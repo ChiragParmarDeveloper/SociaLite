@@ -43,6 +43,12 @@ public interface RService {
     Call<json> login(@Field("email_or_mobile") String email_or_mobile,
                      @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("save_token.php")
+    Call<json> token(@Field("user_id") String user_id,
+                     @Field("token_id") String token_id);
+
+
     @POST("faq.php")
     Call<json> faq();
 
@@ -70,6 +76,12 @@ public interface RService {
     @POST("view_hided_post.php")
     Call<json> hidepost(@Field("user_id") String user_id);
 
+
+    @FormUrlEncoded
+    @POST("view_saved_post.php")
+    Call<json> savepost(@Field("user_id") String user_id);
+
+
     @POST("interest_list.php")
     Call<json> interest_list();
 
@@ -84,10 +96,21 @@ public interface RService {
                         @Part("password") RequestBody password,
                         @Part MultipartBody.Part profile_pic);
 
+    @Multipart
+    @POST("profile_image.php")
+    Call<json> photo(@Part("id") RequestBody id,
+                     @Part MultipartBody.Part profile_pic);
+
+
+    @Multipart
+    @POST("cover_image.php")
+    Call<json> cover_photo(@Part("user_id") RequestBody user_id,
+                           @Part MultipartBody.Part cover_photo);
 
     @FormUrlEncoded
     @POST("fetch_profile.php")
     Call<json> profile(@Field("user_id") String user_id);
+
 
     @Multipart
     @POST("edit_profile.php")
@@ -95,7 +118,6 @@ public interface RService {
                            @Part("username") RequestBody username,
                            @Part("email") RequestBody email,
                            @Part("mobile_number") RequestBody mobile_number,
-                           @Part("password") RequestBody password,
                            @Part("location") RequestBody location,
                            @Part("bio") RequestBody bio,
                            @Part("dob") RequestBody dob,

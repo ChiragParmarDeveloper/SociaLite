@@ -2,20 +2,14 @@ package com.ap.SociaLite.Activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Adapter.HiddenPostAdapter;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Presenter.HidedPostPresenter;
 import com.ap.SociaLite.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,8 +17,8 @@ import butterknife.OnClick;
 
 public class HidedPost extends AppCompatActivity {
 
-    @BindView(R.id.img_back)
-    ImageView img_back;
+    @BindView(R.id.progressbar)
+    public ProgressBar progressbar;
 
     @BindView(R.id.rv_hidedpost)
     public RecyclerView rv_hidedpost;

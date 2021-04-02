@@ -1,52 +1,53 @@
 package com.ap.SociaLite.Activity;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
-import com.ap.SociaLite.Adapter.HiddedPostDetailAdapter;
 import com.ap.SociaLite.Adapter.SavedPostDetailAdapter;
+import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Presenter.SavedPostDetailActivityPresenter;
 import com.ap.SociaLite.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class SavedPostDetailActivity extends AppCompatActivity {
 
-    private RecyclerView rec_savedpost_detail;
+    @BindView(R.id.progressbar)
+    public ProgressBar progressbar;
 
-    ImageView img_back;
+    @BindView(R.id.rec_savedpost_detail)
+    public RecyclerView rec_savedpost_detail;
 
-    private SavedPostDetailAdapter savedPostDetailAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-
-    ArrayList Name = new ArrayList<>(Arrays.asList("Name 1", "Name 2", "Name 3", "Name 4", "Name 5"));
+    public String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_post_detail);
+        ButterKnife.bind(this);
 
-        img_back = findViewById(R.id.img_back);
+        Session session = new Session(SavedPostDetailActivity.this);
+        user_id = session.getUser_id();
 
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        new SavedPostDetailActivityPresenter(this,this).save_post(user_id);
+    }
+
+    @OnClick({R.id.img_back})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
                 onBackPressed();
-            }
-        });
-
-        rec_savedpost_detail = findViewById(R.id.rec_savedpost_detail);
-        layoutManager = new GridLayoutManager(SavedPostDetailActivity.this, 1);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        rec_savedpost_detail.setLayoutManager(layoutManager);
-        savedPostDetailAdapter = new SavedPostDetailAdapter(Name,SavedPostDetailActivity.this);
-        rec_savedpost_detail.setAdapter(savedPostDetailAdapter);
-
-
+                break;
+        }
     }
 }

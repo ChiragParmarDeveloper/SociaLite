@@ -17,8 +17,9 @@ public interface EditProfileContract {
     boolean validate(EditText edt_username, EditText edt_email, EditText edt_no, Button edt_dob, EditText edt_location);
 
     void edit_profile (RequestBody user_id, RequestBody username, RequestBody email, RequestBody mobile_number,
-                   RequestBody password, RequestBody location, RequestBody bio,RequestBody dob, MultipartBody.Part profile_pic);
+                    RequestBody location, RequestBody bio,RequestBody dob, MultipartBody.Part profile_pic);
 
 
 
+    void profile_photo(RequestBody id,MultipartBody.Part profile_pic);
 }

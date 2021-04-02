@@ -407,6 +407,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        new HomeActivityPresenter(this,this).save_token(user_id,FirebaseInstanceId.getInstance().getToken());
         new HomeActivityPresenter(this, this).fetch_profile(user_id);
     }
 

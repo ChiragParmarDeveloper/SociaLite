@@ -239,6 +239,8 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
                             holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
 
+                        //    Picasso.get().load(response.body().comments.comments.size() - 1).into(holder.circularImageView);
+
                             //   holder.txt_comment_pos_0.setText(response.body().comments.comments.get(0).comment);
 
                         } else {
@@ -249,6 +251,9 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
                             holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
                             holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
+                    //        Picasso.get().load(item.profile_pic).into(holder.circular);
+
+
 
                         } else {
                             holder.layout1.setVisibility(View.GONE);
@@ -352,6 +357,10 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
         @BindView(R.id.circularImageView)
         CircularImageView circularImageView;
+
+        @BindView(R.id.circular)
+        CircularImageView circular;
+
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

@@ -1,6 +1,8 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -29,30 +31,25 @@ public class HidedPostPresenter implements HidedPostContract {
 
     @Override
     public void view_hided_post(String user_id) {
+        hidedPost.progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(mContext).hidepost(user_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
-
+                    hidedPost.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-                        if (response.body().hide_post != null) {
-
-                            List<String> post = new ArrayList<>();
-                            for (int i = 0; i < response.body().hide_post.post_hide.size(); i++) {
-                                post.add(response.body().hide_post.post_hide.get(i).image);
-                            }
-
+                        if (response.body().hide_post != null ) {
                             hidedPost.rv_hidedpost.setLayoutManager(new GridLayoutManager(mContext, 3));
-                            hidedPost.rv_hidedpost.setAdapter(new HiddenPostAdapter(mContext, post, hidedPost));
-
+                            hidedPost.rv_hidedpost.setAdapter(new HiddenPostAdapter(mContext,hidedPost, response.body().hide_post));
                         }
                     } else {
-                        //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                     //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
+                    hidedPost.progressbar.setVisibility(View.GONE);
                     //  Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
                     //  Log.d("error", String.valueOf(t.getMessage()));
                 }

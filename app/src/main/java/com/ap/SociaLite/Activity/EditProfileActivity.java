@@ -58,8 +58,8 @@ public class EditProfileActivity extends AppCompatActivity {
     @BindView(R.id.edt_dob)
     public Button edt_dob;
 
-    @BindView(R.id.edt_pwd)
-    public EditText edt_pwd;
+//    @BindView(R.id.edt_pwd)
+//    public EditText edt_pwd;
 
     @BindView(R.id.edt_location)
     public EditText edt_location;
@@ -89,9 +89,7 @@ public class EditProfileActivity extends AppCompatActivity {
         Session session = new Session(EditProfileActivity.this);
         id = session.getUser_id();
 
-
         new EditProfilePresenter(this, this).fetch_profile(id);
-
     }
 
     @OnClick({R.id.img_back, R.id.edit_profile_save, R.id.edit_profile_change_profile, R.id.edt_dob})
@@ -121,9 +119,9 @@ public class EditProfileActivity extends AppCompatActivity {
                     RequestBody bio = RequestBody.create(MediaType.parse("text/plain"), edt_bio.getText().toString().trim());
                     RequestBody dob = RequestBody.create(MediaType.parse("text/plain"), edt_dob.getText().toString().trim());
                     RequestBody location = RequestBody.create(MediaType.parse("text/plain"), edt_location.getText().toString().trim());
-                    RequestBody password = RequestBody.create(MediaType.parse("text/plain"), edt_pwd.getText().toString().trim());
+              //      RequestBody password = RequestBody.create(MediaType.parse("text/plain"), edt_pwd.getText().toString().trim());
 
-                    new EditProfilePresenter(this, this).edit_profile(user_id, username, email, mobile_number, password, location,
+                    new EditProfilePresenter(this, this).edit_profile(user_id, username, email, mobile_number, location,
                             bio, dob, profile_pic);
 
                 }
@@ -155,9 +153,23 @@ public class EditProfileActivity extends AppCompatActivity {
             imageUri = data.getData();
             schedule_post_image.setImageURI(imageUri);
             image = getRealPathFromURI(imageUri);
+
+            if (image != null) {
+                File file = new File(image);
+                RequestBody picture = RequestBody.create(MediaType.parse("image/*"), file);
+                profile_pic = MultipartBody.Part.createFormData("profile_pic", file.getPath(), picture);
+            } else {
+                RequestBody picture = RequestBody.create(MediaType.parse("image/*"), "");
+                profile_pic = MultipartBody.Part.createFormData("profile_pic", "", picture);
+            }
+
+            RequestBody u_id = RequestBody.create(MediaType.parse("text/plain"),id);
+
+            new EditProfilePresenter(this, this).profile_photo(u_id, profile_pic);
         } else {
 
         }
+
     }
 
     public String getRealPathFromURI(Uri uri) {
@@ -188,9 +200,9 @@ public class EditProfileActivity extends AppCompatActivity {
         edt_dob.setText(sdf.format(myCalendar.getTime()));
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new EditProfilePresenter(this, this).fetch_profile(id);
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        new EditProfilePresenter(this, this).fetch_profile(id);
+//    }
 }

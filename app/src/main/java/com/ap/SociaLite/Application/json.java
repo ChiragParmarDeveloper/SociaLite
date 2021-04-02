@@ -22,7 +22,7 @@ public class json {
     public com.ap.SociaLite.Pojo.user_details user_details;
 
     @SerializedName("hide_post")
-    public com.ap.SociaLite.Pojo.hide_post hide_post;
+    public List<com.ap.SociaLite.Pojo.hide_post> hide_post;
 
     @SerializedName("interest_list")
     public List<com.ap.SociaLite.Pojo.interest_list> interest_list;

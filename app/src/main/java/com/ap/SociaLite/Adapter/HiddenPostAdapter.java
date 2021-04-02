@@ -10,14 +10,12 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Activity.Faq;
 import com.ap.SociaLite.Activity.HiddedPostDetailActivity;
 import com.ap.SociaLite.Activity.HidedPost;
-import com.ap.SociaLite.Pojo.faq_list;
+import com.ap.SociaLite.Pojo.hide_post;
 import com.ap.SociaLite.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,12 +25,13 @@ public class HiddenPostAdapter extends RecyclerView.Adapter<HiddenPostAdapter.Ho
 
     Context mContext;
     HidedPost hidedPost;
-    List<String> mList;
+    List<hide_post> hide_posts;
+    hide_post item;
 
-    public HiddenPostAdapter(Context context, List<String> post, HidedPost fragment) {
-        this.mContext = context;
-        this.mList = post;
-        this.hidedPost = fragment;
+    public HiddenPostAdapter(Context mContext, HidedPost hidedPost, List<hide_post> hide_posts) {
+        this.mContext = mContext;
+        this.hidedPost = hidedPost;
+        this.hide_posts = hide_posts;
     }
 
     @NonNull
@@ -46,12 +45,13 @@ public class HiddenPostAdapter extends RecyclerView.Adapter<HiddenPostAdapter.Ho
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 
-        Picasso.get().load(mList.get(position)).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+        item = hide_posts.get(position);
+        Picasso.get().load(item.image).into(holder.img_category);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent hidden = new Intent(view.getContext(),HiddedPostDetailActivity.class);
+                Intent hidden = new Intent(view.getContext(), HiddedPostDetailActivity.class);
                 view.getContext().startActivity(hidden);
             }
         });
@@ -60,11 +60,9 @@ public class HiddenPostAdapter extends RecyclerView.Adapter<HiddenPostAdapter.Ho
 
     @Override
     public int getItemCount() {
-        if (mList == null) {
-            return 0;
-        } else {
-            return mList.size();
-        }
+
+        return hide_posts.size();
+
     }
 
     public class Holder extends RecyclerView.ViewHolder {

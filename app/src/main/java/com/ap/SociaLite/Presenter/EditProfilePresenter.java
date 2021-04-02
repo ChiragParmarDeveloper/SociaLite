@@ -113,10 +113,10 @@ public class EditProfilePresenter implements EditProfileContract {
     }
 
     @Override
-    public void edit_profile(RequestBody user_id, RequestBody username, RequestBody email, RequestBody mobile_number, RequestBody password,
+    public void edit_profile(RequestBody user_id, RequestBody username, RequestBody email, RequestBody mobile_number,
                              RequestBody location, RequestBody bio, RequestBody dob, MultipartBody.Part profile_pic) {
         try {
-            new RService.api().call(mContext).editprofile(user_id, username, email, mobile_number, password, location, bio, dob, profile_pic)
+            new RService.api().call(mContext).editprofile(user_id, username, email, mobile_number, location, bio, dob, profile_pic)
                     .enqueue(new Callback<json>() {
                         @Override
                         public void onResponse(Call<json> call, Response<json> response) {
@@ -139,5 +139,35 @@ public class EditProfilePresenter implements EditProfileContract {
         } catch (Exception e) {
 
         }
+    }
+
+    @Override
+    public void profile_photo(RequestBody id, MultipartBody.Part profile_pic) {
+        editProfileActivity.progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(mContext).photo(id, profile_pic).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    editProfileActivity.progressbar.setVisibility(View.GONE);
+                    if (response.body().status.equals("1")) {
+
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+
+                    } else {
+                        //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    editProfileActivity.progressbar.setVisibility(View.GONE);
+                    //       Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                    //       Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+
     }
 }

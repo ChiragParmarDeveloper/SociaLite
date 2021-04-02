@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,13 +20,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Fragment.Profile_fragments.BusinessInteractionFragment;
 import com.ap.SociaLite.Fragment.Profile_fragments.TimeLineFragment;
+import com.ap.SociaLite.Presenter.EditProfilePresenter;
 import com.ap.SociaLite.Presenter.ProfileActivityPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -69,9 +75,13 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.textView10)
     public TextView textView10;
 
+    @BindView(R.id.progressbar)
+    public ProgressBar progressbar;
+
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
-    String image;
+    String image,user_id;
+    MultipartBody.Part cover_photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Session session = new Session(ProfileActivity.this);
+        user_id=session.getUser_id();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new TimeLineFragment()).commit();
 
         new ProfileActivityPresenter(this, this).profile_my_profile(session.getUser_id());
@@ -154,6 +165,20 @@ public class ProfileActivity extends AppCompatActivity {
             imageUri = data.getData();
             imageView12.setImageURI(imageUri);
             image = getRealPathFromURI(imageUri);
+
+            if (image != null) {
+                File file = new File(image);
+                RequestBody picture = RequestBody.create(MediaType.parse("image/*"), file);
+                cover_photo = MultipartBody.Part.createFormData("cover_photo", file.getPath(), picture);
+            } else {
+                RequestBody picture = RequestBody.create(MediaType.parse("image/*"), "");
+                cover_photo = MultipartBody.Part.createFormData("cover_photo", "", picture);
+            }
+
+            RequestBody u_id = RequestBody.create(MediaType.parse("text/plain"), user_id);
+            new ProfileActivityPresenter(this, this).cover_photo(u_id,cover_photo);
+
+
         } else {
 
         }

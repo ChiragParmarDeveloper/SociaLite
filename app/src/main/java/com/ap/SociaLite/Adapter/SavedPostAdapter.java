@@ -11,22 +11,27 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.HiddedPostDetailActivity;
+import com.ap.SociaLite.Activity.HidedPost;
 import com.ap.SociaLite.Activity.SavedPostDetailActivity;
+import com.ap.SociaLite.Pojo.hide_post;
 import com.ap.SociaLite.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SavedPostAdapter extends RecyclerView.Adapter<SavedPostAdapter.MyHolder> {
 
-    ArrayList images;
-    Context context;
+    Context mContext;
+    List<hide_post> hide_posts;
+    hide_post item;
 
-    public SavedPostAdapter(ArrayList images, Context context) {
-        this.images = images;
-        this.context = context;
+    public SavedPostAdapter(Context mContext, List<hide_post> hide_posts) {
+        this.mContext = mContext;
+        this.hide_posts = hide_posts;
     }
 
     @NonNull
@@ -39,8 +44,8 @@ public class SavedPostAdapter extends RecyclerView.Adapter<SavedPostAdapter.MyHo
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-
-        holder.img_category.setImageResource((Integer) images.get(position));
+        item = hide_posts.get(position);
+        Picasso.get().load(item.image).into(holder.img_category);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,12 +54,11 @@ public class SavedPostAdapter extends RecyclerView.Adapter<SavedPostAdapter.MyHo
                 view.getContext().startActivity(saved);
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return images.size();
+        return hide_posts.size();
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder{

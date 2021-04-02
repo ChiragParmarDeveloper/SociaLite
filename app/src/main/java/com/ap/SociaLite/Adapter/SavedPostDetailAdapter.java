@@ -2,6 +2,7 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,25 +20,38 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
+import com.ap.SociaLite.Activity.SavedPostDetailActivity;
 import com.ap.SociaLite.Activity.ShareToFriend;
+import com.ap.SociaLite.Application.RService;
+import com.ap.SociaLite.Application.json;
+import com.ap.SociaLite.Pojo.hide_post;
+import com.ap.SociaLite.Presenter.SavedPostDetailActivityPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetailAdapter.MyHolder> {
 
     Boolean click = true;
-    String rating = "";
+    String rate = "";
 
-    ArrayList Name;
-    Context context;
+    Context mContext;
+    List<hide_post> mList;
+    SavedPostDetailActivity savedPostDetailActivity;
+    hide_post item;
 
-    public SavedPostDetailAdapter(ArrayList name, Context context) {
-        Name = name;
-        this.context = context;
+    public SavedPostDetailAdapter(Context mContext, List<hide_post> mList, SavedPostDetailActivity savedPostDetailActivity) {
+        this.mContext = mContext;
+        this.mList = mList;
+        this.savedPostDetailActivity = savedPostDetailActivity;
     }
 
     @NonNull
@@ -51,13 +65,21 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
-        holder.txt_name.setText((CharSequence) Name.get(position));
+        item = mList.get(position);
+        String id = mList.get(position).post_id;
+        Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+        holder.txt_name.setText(item.username);
+        holder.txt_time.setText(item.post_time);
+        Picasso.get().load(item.image).into(holder.img_category);
+
+        holder.txt_description.setText(item.description);
+        holder.txt_rating.setText(item.rate);
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                PopupMenu popup = new PopupMenu(context, holder.img_popup);
+                PopupMenu popup = new PopupMenu(mContext, holder.img_popup);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
                         .inflate(R.menu.popup_menu, popup.getMenu());
@@ -69,21 +91,20 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
 
                         switch (item.getItemId()) {
                             case R.id.hide:
-                                Toast.makeText(view.getContext(), "Clicked hide", Toast.LENGTH_SHORT).show();
-                                //startActivity(new Intent(App.this, App_Main.class));
+                                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).hide_post(savedPostDetailActivity.user_id, id);
                                 break;
 
-                            case R.id.help:
-                                Toast.makeText(view.getContext(), "Clicked help", Toast.LENGTH_SHORT).show();
+                            case R.id.save:
+                                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).category_save_post(savedPostDetailActivity.user_id, id);
                                 break;
 
                             case R.id.report:
-                                Intent in = new Intent(view.getContext(), Report.class);
+                                Intent in = new Intent(view.getContext(), Report.class).putExtra("post_id", id);
                                 view.getContext().startActivity(in);
                                 break;
 
                             case R.id.copylink:
-                                Toast.makeText(view.getContext(), "Clicked copy", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(view.getContext(), "Coming soon", Toast.LENGTH_SHORT).show();
                                 break;
 
                             default:
@@ -110,13 +131,10 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
             @Override
             public void onClick(View view) {
 
-                if(click == true)
-                {
+                if (click == true) {
                     holder.rating_bar.setVisibility(View.VISIBLE);
                     click = false;
-                }
-                else
-                {
+                } else {
                     holder.rating_bar.setVisibility(View.GONE);
                     click = true;
                 }
@@ -127,8 +145,9 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "1";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "1";
+                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
+                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -137,8 +156,10 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
         holder.rating_star2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "2";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "2";
+                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
+                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
+
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -147,8 +168,9 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
         holder.rating_star3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "3";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "3";
+                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
+                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -157,8 +179,9 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
         holder.rating_star4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "4";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "4";
+                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
+                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -167,10 +190,20 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
         holder.rating_star5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "5";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "5";
+                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
+                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
+            }
+        });
+
+        holder.txt_allcomment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(view.getContext(), CommentActivity.class);
+                in.putExtra("post_id", id);
+                view.getContext().startActivity(in);
             }
         });
 
@@ -178,23 +211,106 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(view.getContext(), CommentActivity.class);
+                in.putExtra("post_id", id);
                 view.getContext().startActivity(in);
             }
         });
+
+
+        try {
+            new RService.api().call(mContext).fetch_comments(id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+
+                    if (response.body().status.equals("1")) {
+
+                        if (response.body().comments.comments != null && response.body().comments.comments.size() > 0) {
+
+                            Log.d("commnet_new", String.valueOf(response.body().comments.comments.size()));
+                            holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name);
+
+                            holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
+
+                            //    Picasso.get().load(response.body().comments.comments.size() - 1).into(holder.circularImageView);
+
+                            //   holder.txt_comment_pos_0.setText(response.body().comments.comments.get(0).comment);
+
+                        } else {
+                            holder.layout.setVisibility(View.GONE);
+                        }
+
+                        if (response.body().comments.comments != null && response.body().comments.comments.size() > 1) {
+
+                            holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
+                            holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
+                            //        Picasso.get().load(item.profile_pic).into(holder.circular);
+
+
+                        } else {
+                            holder.layout1.setVisibility(View.GONE);
+                        }
+
+                    } else {
+                        holder.layout.setVisibility(View.GONE);
+                        holder.layout1.setVisibility(View.GONE);
+                        //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //  Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
     }
 
     @Override
     public int getItemCount() {
-        return Name.size();
+        return mList.size();
     }
 
-    public static class MyHolder extends RecyclerView.ViewHolder{
+    public static class MyHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.txt_allcomment)
+        TextView txt_allcomment;
+
+        @BindView(R.id.layout)
+        LinearLayout layout;
+
+        @BindView(R.id.layout1)
+        LinearLayout layout1;
+
+        @BindView(R.id.circularImageView)
+        CircularImageView circularImageView;
+
+        @BindView(R.id.circular)
+        CircularImageView circular;
 
         @BindView(R.id.txt_name)
         TextView txt_name;
 
         @BindView(R.id.img_popup)
         ImageView img_popup;
+
+        @BindView(R.id.txt_name_position_0)
+        TextView txt_name_position_0;
+
+        @BindView(R.id.txt_comment_pos_0)
+        TextView txt_comment_pos_0;
+
+
+        @BindView(R.id.txt_name_pos_1)
+        TextView txt_name_pos_1;
+
+        @BindView(R.id.txt_comment_pos_1)
+        TextView txt_comment_pos_1;
+
+        @BindView(R.id.txt_time)
+        TextView txt_time;
 
         @BindView(R.id.constraint_popup)
         ConstraintLayout constraint_popup;
@@ -225,6 +341,15 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
 
         @BindView(R.id.rating_star5)
         ImageView rating_star5;
+
+        @BindView(R.id.img_category)
+        ImageView img_category;
+
+        @BindView(R.id.txt_description)
+        TextView txt_description;
+
+        @BindView(R.id.txt_rating)
+        TextView txt_rating;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
