@@ -77,7 +77,7 @@ public class EditProfileActivity extends AppCompatActivity {
     Uri imageUri;
     String image, id, path;
     Calendar myCalendar = Calendar.getInstance();
-    MultipartBody.Part profile_pic;
+    MultipartBody.Part pic;
     public List<user_details> mList = new ArrayList<>();
 
     @Override
@@ -106,10 +106,10 @@ public class EditProfileActivity extends AppCompatActivity {
                     if (image != null) {
                         File idfile = new File(image);
                         RequestBody idcardfile = RequestBody.create(MediaType.parse("image/*"), idfile);
-                        profile_pic = MultipartBody.Part.createFormData("profile_pic", idfile.getPath(), idcardfile);
+                        pic = MultipartBody.Part.createFormData("profile_pic", idfile.getPath(), idcardfile);
                     } else {
                         RequestBody idcardfile = RequestBody.create(MediaType.parse("image/*"), "");
-                        profile_pic = MultipartBody.Part.createFormData("profile_pic", "", idcardfile);
+                        pic = MultipartBody.Part.createFormData("profile_pic", "", idcardfile);
                     }
 
                     RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), id);
@@ -122,7 +122,7 @@ public class EditProfileActivity extends AppCompatActivity {
               //      RequestBody password = RequestBody.create(MediaType.parse("text/plain"), edt_pwd.getText().toString().trim());
 
                     new EditProfilePresenter(this, this).edit_profile(user_id, username, email, mobile_number, location,
-                            bio, dob, profile_pic);
+                            bio, dob, pic);
 
                 }
 
@@ -157,15 +157,15 @@ public class EditProfileActivity extends AppCompatActivity {
             if (image != null) {
                 File file = new File(image);
                 RequestBody picture = RequestBody.create(MediaType.parse("image/*"), file);
-                profile_pic = MultipartBody.Part.createFormData("profile_pic", file.getPath(), picture);
+                pic = MultipartBody.Part.createFormData("profile_pic", file.getPath(), picture);
             } else {
                 RequestBody picture = RequestBody.create(MediaType.parse("image/*"), "");
-                profile_pic = MultipartBody.Part.createFormData("profile_pic", "", picture);
+                pic = MultipartBody.Part.createFormData("profile_pic", "", picture);
             }
 
             RequestBody u_id = RequestBody.create(MediaType.parse("text/plain"),id);
 
-            new EditProfilePresenter(this, this).profile_photo(u_id, profile_pic);
+            new EditProfilePresenter(this, this).profile_photo(u_id,pic);
         } else {
 
         }
