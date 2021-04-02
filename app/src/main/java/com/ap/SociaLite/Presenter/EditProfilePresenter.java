@@ -1,6 +1,8 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,7 +25,6 @@ public class EditProfilePresenter implements EditProfileContract {
 
     public Context mContext;
     public EditProfileActivity editProfileActivity;
-    public static String path;
 
     public EditProfilePresenter(Context context, EditProfileActivity fragment) {
         this.mContext = context;
@@ -32,18 +33,21 @@ public class EditProfilePresenter implements EditProfileContract {
 
     @Override
     public void fetch_profile(String user_id) {
+        editProfileActivity.progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(mContext).profile(user_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
-
+                    editProfileActivity.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().user_details != null) {
 
-                            path = response.body().user_details.profile_pic;
-                            if(response.body().user_details.profile_pic.length() > 0)
-                            {
-                                Picasso.get().load(response.body().user_details.profile_pic).placeholder(R.mipmap.ic_launcher).into(editProfileActivity.schedule_post_image);
+
+                            if (response.body().user_details.profile_pic.equals("http://the-socialite.com/admin/")) {
+                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+                                editProfileActivity.schedule_post_image.setImageDrawable(upload_img);
+                            } else {
+                                Picasso.get().load(response.body().user_details.profile_pic).into(editProfileActivity.schedule_post_image);
                             }
 
                             editProfileActivity.edt_username.setText(response.body().user_details.username);
@@ -53,8 +57,6 @@ public class EditProfilePresenter implements EditProfileContract {
                             editProfileActivity.edt_bio.setText(response.body().user_details.bio);
                             editProfileActivity.edt_dob.setText(response.body().user_details.dob);
                             editProfileActivity.edt_location.setText(response.body().user_details.location);
-                            editProfileActivity.edt_pwd.setText(response.body().user_details.password);
-
                         }
                     } else {
                         //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
@@ -63,6 +65,7 @@ public class EditProfilePresenter implements EditProfileContract {
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
+                    editProfileActivity.progressbar.setVisibility(View.GONE);
                     //       Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
                     //       Log.d("error", String.valueOf(t.getMessage()));
                 }
@@ -74,7 +77,7 @@ public class EditProfilePresenter implements EditProfileContract {
     }
 
     @Override
-    public boolean validate(EditText edt_username, EditText edt_email, EditText edt_no, Button edt_dob, EditText edt_location, EditText edt_pwd) {
+    public boolean validate(EditText edt_username, EditText edt_email, EditText edt_no, Button edt_dob, EditText edt_location) {
 
         if (edt_username.getText().toString().isEmpty()) {
             edt_username.setError("Please enter username");
@@ -104,10 +107,6 @@ public class EditProfilePresenter implements EditProfileContract {
         }
         if (edt_location.getText().toString().isEmpty()) {
             edt_location.setError("Please enter location");
-            return false;
-        }
-        if (edt_pwd.getText().toString().isEmpty()) {
-            edt_pwd.setError("Please enter password");
             return false;
         }
         return true;

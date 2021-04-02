@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +48,9 @@ public class EditProfileActivity extends AppCompatActivity {
 
     @BindView(R.id.schedule_post_image)
     public ImageView schedule_post_image;
+
+    @BindView(R.id.progressbar)
+    public ProgressBar progressbar;
 
     @BindView(R.id.edt_bio)
     public EditText edt_bio;
@@ -86,11 +89,8 @@ public class EditProfileActivity extends AppCompatActivity {
         Session session = new Session(EditProfileActivity.this);
         id = session.getUser_id();
 
-        path = EditProfilePresenter.path;
 
-     //   Toast.makeText(getApplicationContext(), path, Toast.LENGTH_LONG).show();
         new EditProfilePresenter(this, this).fetch_profile(id);
-
 
     }
 
@@ -103,15 +103,13 @@ public class EditProfileActivity extends AppCompatActivity {
 
             case R.id.edit_profile_save:
 
-                if (new EditProfilePresenter(this, this).validate(edt_username, edt_email, edt_no, edt_dob, edt_location, edt_pwd)) {
+                if (new EditProfilePresenter(this, this).validate(edt_username, edt_email, edt_no, edt_dob, edt_location)) {
 
                     if (image != null) {
                         File idfile = new File(image);
                         RequestBody idcardfile = RequestBody.create(MediaType.parse("image/*"), idfile);
                         profile_pic = MultipartBody.Part.createFormData("profile_pic", idfile.getPath(), idcardfile);
-                    }
-
-                    else {
+                    } else {
                         RequestBody idcardfile = RequestBody.create(MediaType.parse("image/*"), "");
                         profile_pic = MultipartBody.Part.createFormData("profile_pic", "", idcardfile);
                     }
@@ -188,5 +186,11 @@ public class EditProfileActivity extends AppCompatActivity {
         String myFormat = "yyyy/MM/dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         edt_dob.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new EditProfilePresenter(this, this).fetch_profile(id);
     }
 }

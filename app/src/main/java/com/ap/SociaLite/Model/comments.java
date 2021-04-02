@@ -13,4 +13,8 @@ public class comments {
     @SerializedName("created_at")
     public String created_at;
 
+    @SerializedName("profile_pic")
+    public String profile_pic;
+
+
 }

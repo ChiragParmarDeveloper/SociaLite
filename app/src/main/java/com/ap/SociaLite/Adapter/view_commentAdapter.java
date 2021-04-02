@@ -13,6 +13,7 @@ import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Model.comments;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class view_commentAdapter extends RecyclerView.Adapter<view_commentAdapte
         item = comments.get(position);
         holder.viewer_name.setText(item.user_name);
         holder.viewer_comment.setText(item.comment);
-
+        Picasso.get().load(item.profile_pic).into(holder.viewer_profile);
     }
 
     @Override
