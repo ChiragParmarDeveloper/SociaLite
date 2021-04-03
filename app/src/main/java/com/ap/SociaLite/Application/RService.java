@@ -55,8 +55,6 @@ public interface RService {
     @POST("report.php")
     Call<json> report();
 
-//    @POST("fetch_user.php")
-//    Call<json> fetch_user();
 
     @FormUrlEncoded
     @POST("friend_list.php")
