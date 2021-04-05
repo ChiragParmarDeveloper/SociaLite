@@ -47,6 +47,7 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
 
     @BindView(R.id.txt_no)
     TextView txt_no;
+
     public boolean isVarificationCompleted = false;
     String image,name,mail,detail,date_birth,loc,pwd,phoneNumber, otp,country_code,phone;
     FirebaseAuth auth;

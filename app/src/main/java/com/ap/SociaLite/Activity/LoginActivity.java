@@ -27,9 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.btn_login)
     TextView btn_login;
 
-    @BindView(R.id.txt_forgot)
-    TextView txt_forgot;
-
     @BindView(R.id.checkbox)
     public CheckBox checkbox;
 

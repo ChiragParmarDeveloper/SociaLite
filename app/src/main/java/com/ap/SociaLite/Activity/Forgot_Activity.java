@@ -3,14 +3,12 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ap.SociaLite.R;
-import com.google.firebase.auth.FirebaseAuth;
+import com.hbb20.CountryCodePicker;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,26 +16,20 @@ import butterknife.OnClick;
 
 public class Forgot_Activity extends AppCompatActivity {
 
-    @BindView(R.id.img_back)
-    ImageView img_back;
+    @BindView(R.id.mobile)
+    EditText mobile;
 
-    @BindView(R.id.btn_submit)
-    Button btn_submit;
+    @BindView(R.id.code_picker)
+    CountryCodePicker code_picker;
 
-    @BindView(R.id.email_id)
-    EditText email_id;
-    String email;
-    // FirebaseAuth auth;
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    String emailAddress = "chirag.parmar1994@gmail.com";
+    String mobile_number;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_);
         ButterKnife.bind(this);
-        email = email_id.getText().toString().trim();
-
 
     }
 
@@ -49,7 +41,10 @@ public class Forgot_Activity extends AppCompatActivity {
                 break;
 
             case R.id.btn_submit:
-                startActivity(new Intent(Forgot_Activity.this, OtpActivity.class));
+                Intent in = new Intent(Forgot_Activity.this, OtpActivity.class);
+                in.putExtra("country_code", code_picker.getTextView_selectedCountry().getText().toString().trim());
+                in.putExtra("phone_no", mobile.getText().toString().trim());
+                startActivity(in);
                 break;
         }
     }
