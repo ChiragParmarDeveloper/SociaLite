@@ -56,39 +56,11 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
                 new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.user_id,id);
             }
         });
-
-//        Drawable plus_favorite = mContext.getDrawable(R.drawable.ic_category_plus);
-//        Drawable right_favorite = mContext.getDrawable(R.drawable.ic_category_right);
-
-//        if (item.flag.equals("1")) {
-//            holder.img_right.setVisibility(View.VISIBLE);
-//        } else {
-//            holder.img_right.setImageDrawable(plus_favorite);
-//        }
-
-//        holder.img_right.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                new InterestFragmentPresenter(mContext,interestFragment).update_new_intrests(interestFragment.user_id,id);
-//                new InterestFragmentPresenter(mContext, interestFragment).fetch_all_intrest(interestFragment.user_id);
-//            }
-//        });
-
-
-        //   int realposition = position % mList.size();
-
-        // holder.txt_iconname.setText((CharSequence) mList.get(realposition));
-//        holder.img_category.setImageResource((Integer) CategoryImages.get(realposition));
-        //   Picasso.get().load(item.).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
-
-//        holder.img_category.setImageResource((Integer) CategoryImages.get(realposition));
-        //   Picasso.get().load(item.).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
     }
 
     @Override
     public int getItemCount() {
         return details.size();
-        //return                Integer.MAX_VALUE;
     }
 
     public class Holder extends RecyclerView.ViewHolder {

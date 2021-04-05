@@ -51,8 +51,6 @@ public class InterestFragment extends Fragment {
         Session session = new Session(getActivity());
         user_id = session.getUser_id();
 
-        new InterestFragmentPresenter(getActivity(), this).fetch_my_intrest(user_id);
-
         return view;
     }
 
@@ -63,5 +61,11 @@ public class InterestFragment extends Fragment {
                 startActivity(new Intent(getActivity(), EditImageActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        new InterestFragmentPresenter(getActivity(), this).fetch_my_intrest(user_id);
     }
 }

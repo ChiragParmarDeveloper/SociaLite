@@ -2,6 +2,7 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -67,9 +69,18 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         item = post_lists.get(position);
         String id = post_lists.get(position).post_id;
-        Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+        Picasso.get().load(item.image).into(holder.img_category);
         holder.txt_description.setText(item.description);
         holder.txt_rating.setText(item.rate);
+        holder.txt_time.setText(item.post_time);
+        holder.txt_name.setText(item.username);
+
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+            holder.circularImageView.setImageDrawable(upload_img);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+        }
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +107,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
 
                             case R.id.report:
                                 Intent in = new Intent(view.getContext(), Report.class);
+                                in.putExtra("post_id", id);
                                 view.getContext().startActivity(in);
                                 break;
 
@@ -220,8 +232,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
 
                             holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).comment);
 
-                            //   holder.txt_comment_pos_0.setText(response.body().comments.comments.get(0).comment);
-
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+                            Picasso.get().load(img).into(holder.circularImageView3);
                         }
                         else
                         {
@@ -233,6 +245,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
                             holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).user_name);
                             holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).comment);
 
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                            Picasso.get().load(img).into(holder.circular);
                         }
                         else
                         {
@@ -277,11 +291,17 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         @BindView(R.id.layout_share)
         LinearLayout layout_share;
 
+        @BindView(R.id.circularImageView3)
+        CircularImageView circularImageView3;
+
         @BindView(R.id.layout_comment)
         LinearLayout layout_comment;
 
         @BindView(R.id.layout_star)
         LinearLayout layout_star;
+
+        @BindView(R.id.circular)
+        CircularImageView circular;
 
         @BindView(R.id.rating_bar)
         CardView rating_bar;
@@ -319,6 +339,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         @BindView(R.id.txt_comment_pos_0)
         TextView txt_comment_pos_0;
 
+        @BindView(R.id.circularImageView)
+        CircularImageView circularImageView;
 
         @BindView(R.id.txt_name_pos_1)
         TextView txt_name_pos_1;
@@ -326,6 +348,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         @BindView(R.id.txt_comment_pos_1)
         TextView txt_comment_pos_1;
 
+        @BindView(R.id.txt_time)
+        TextView txt_time;
 
         @BindView(R.id.layout)
         LinearLayout layout;

@@ -80,7 +80,6 @@ public class ResetpasswordActivity extends AppCompatActivity {
                     Toast.makeText(ResetpasswordActivity.this, response.body().message, Toast.LENGTH_LONG).show();
                     startActivity(new Intent(ResetpasswordActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
-
                 } else {
                     //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
@@ -93,9 +92,7 @@ public class ResetpasswordActivity extends AppCompatActivity {
 //                Log.d("error", String.valueOf(t.getMessage()));
             }
         });
-
     }
-
 
     public boolean validate() {
         if (edt_password.getText().toString().isEmpty()) {

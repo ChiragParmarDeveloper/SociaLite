@@ -308,7 +308,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_margin="4dp"
-                                android:text=""
+                                android:text="1"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="11sp" />
 
