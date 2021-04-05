@@ -35,13 +35,11 @@ public class OtpActivity extends AppCompatActivity {
     @BindView(R.id.txt_sentno)
     TextView txt_sentno;
 
-
     @BindView(R.id.pinview)
     PinView pinview;
 
-
     public boolean isVarificationCompleted = false;
-    String image, name, mail, detail, date_birth, loc, pwd, phoneNumber, otp, country_code, phone;
+    String phoneNumber, otp, country_code, phone;
     FirebaseAuth auth;
     private String verificationCode;
     private PhoneAuthProvider.ForceResendingToken token;
@@ -72,7 +70,6 @@ public class OtpActivity extends AppCompatActivity {
                 TimeUnit.SECONDS,                // Unit of timeout
                 OtpActivity.this,        // Activity (for callback binding)
                 mCallback); // OnVerificationStateChangedCallbacks
-
     }
 
     private void StartFirebaseLogin() {
@@ -109,7 +106,8 @@ public class OtpActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             startActivity(new Intent(OtpActivity.this, ResetpasswordActivity.class)
-                                    .putExtra("phone_no", phoneNumber));
+                                    .putExtra("phone_no",phoneNumber));
+
                         } else {
                             Toast.makeText(OtpActivity.this, "Incorrect OTP", Toast.LENGTH_SHORT).show();
                         }

@@ -49,6 +49,11 @@ public interface RService {
                      @Field("token_id") String token_id);
 
 
+    @FormUrlEncoded
+    @POST("forgot_password.php")
+    Call<json> forgot_pwd(@Field("mobile_number") String mobile_number,
+                          @Field("password") String password);
+
     @POST("faq.php")
     Call<json> faq();
 
