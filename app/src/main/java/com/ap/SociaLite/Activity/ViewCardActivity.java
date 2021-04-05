@@ -17,9 +17,6 @@ import butterknife.OnClick;
 
 public class ViewCardActivity extends AppCompatActivity {
 
-    @BindView(R.id.img_back)
-    ImageView img_back;
-
     @BindView(R.id.card_name)
    public TextView card_name;
 
