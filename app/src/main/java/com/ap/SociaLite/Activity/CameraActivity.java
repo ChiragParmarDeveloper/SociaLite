@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.Nullable;
@@ -128,21 +129,21 @@ public class CameraActivity extends AppCompatActivity {
 
                 if (my_network != null) {
                     Intent in = new Intent(CameraActivity.this, PostNetwork.class);
-                    in.putExtra("img1", path_one);
-                    in.putExtra("img2", path_two);
-                    in.putExtra("img3", path_three);
+//                    in.putExtra("img1", path_one);
+//                    in.putExtra("img2", path_two);
+//                    in.putExtra("img3", path_three);
                     startActivity(in);
                 } else if (business_interaction != null) {
                     Intent in = new Intent(CameraActivity.this, PostBusiness.class);
-                    in.putExtra("img1", path_one);
-                    in.putExtra("img2", path_two);
-                    in.putExtra("img3", path_three);
+//                    in.putExtra("img1", path_one);
+//                    in.putExtra("img2", path_two);
+//                    in.putExtra("img3", path_three);
                     startActivity(in);
                 } else {
                     Intent in = new Intent(CameraActivity.this, Post.class);
-                    in.putExtra("img1", path_one);
-                    in.putExtra("img2", path_two);
-                    in.putExtra("img3", path_three);
+//                    in.putExtra("img1", path_one);
+//                    in.putExtra("img2", path_two);
+//                    in.putExtra("img3", path_three);
                     startActivity(in);
                 }
                 break;

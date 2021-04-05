@@ -40,18 +40,6 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                     if (response.body().status.equals("1")) {
 
                         if (response.body().interest_details != null && response.body().interest_details.size() > 0) {
-                            //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-
-//                            List<String> interest_name = new ArrayList<>();
-//                            for (int i = 0; i < response.body().interest_details.size(); i++) {
-//                                interest_name.add(response.body().interest_details.get(i).interest_name);
-//                            }
-//
-//                            List<String> interest_img = new ArrayList<>();
-//                            for (int i = 0; i < response.body().interest_details.size(); i++) {
-//                                interest_img.add(response.body().interest_details.get(i).interest_image);
-//                            }
-
                             categoryFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
                             categoryFragment.rv_interestlist.setAdapter(new CategoryListAdapter(mContext, response.body().interest_details, categoryFragment));
                         }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,7 +44,6 @@ import com.ap.SociaLite.ThirdPartyEditor.SaveSettings;
 import com.ap.SociaLite.ThirdPartyEditor.TextStyleBuilder;
 import com.ap.SociaLite.ThirdPartyEditor.ViewType;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -76,13 +76,18 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     @Nullable
     @VisibleForTesting
     Uri mSaveImageUri;
-
+    String my_network,business_interaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         makeFullScreen();
         setContentView(R.layout.activity_edit_image);
+
+        my_network = getIntent().getStringExtra("network_fragment");
+
+        business_interaction= getIntent().getStringExtra("business_fragment");
+        Toast.makeText(this, business_interaction, Toast.LENGTH_SHORT).show();
 
         initViews();
 
@@ -289,7 +294,10 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         mSaveImageUri = Uri.fromFile(new File(imagePath));
                         mPhotoEditorView.getSource().setImageURI(mSaveImageUri);
 
-                        startActivity(new Intent(EditImageActivity.this, CameraActivity.class).putExtra("img_url",imagePath));
+                        startActivity(new Intent(EditImageActivity.this, CameraActivity.class)
+                                .putExtra("img_url", imagePath)
+                                .putExtra("network_fragment", my_network)
+                                .putExtra("business_fragment", business_interaction));
 
                     }
 

@@ -33,9 +33,6 @@ import butterknife.OnClick;
 
 public class BusinessFragment extends Fragment {
 
-//    public BusinessFragment() {
-//        // Required empty public constructor
-//    }
     @BindView(R.id.post_constraint)
     ConstraintLayout post_constraint;
 

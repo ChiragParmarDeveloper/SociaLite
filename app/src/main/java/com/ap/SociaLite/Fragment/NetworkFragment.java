@@ -61,7 +61,6 @@ public class NetworkFragment extends Fragment {
         network_image_constrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent in = new Intent(getActivity(), EditImageActivity.class);
                 in.putExtra("network_fragment", "my_network");
                 startActivity(in);
