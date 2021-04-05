@@ -34,7 +34,6 @@ public class TimeLineFragmentPresenter implements TimeLineFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
                             timeLineFragment.rv_timeline.setLayoutManager(new GridLayoutManager(mContext, 1));
                             timeLineFragment.rv_timeline.setAdapter(new TimelineAdapter(mContext, response.body().post_list, timeLineFragment));

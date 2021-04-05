@@ -2,6 +2,7 @@ package com.ap.SociaLite.Adapter.Profile_adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -29,6 +30,7 @@ import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.Presenter.TimeLineFragmentPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -69,9 +71,19 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
 
         item = post_lists.get(position);
         String id = post_lists.get(position).post_id;
-        Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+        Picasso.get().load(item.image).into(holder.img_category);
         holder.txt_description.setText(item.description);
         holder.txt_rating.setText(item.rate);
+        holder.txt_time.setText(item.post_time);
+        holder.txt_name.setText(item.username);
+
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+            holder.circularImageView.setImageDrawable(upload_img);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+        }
+
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,11 +111,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
 
                             case R.id.report:
                                 Intent in = new Intent(view.getContext(), Report.class);
+                                in.putExtra("post_id", id);
                                 view.getContext().startActivity(in);
                                 break;
 
                             case R.id.copylink:
-                                Toast.makeText(view.getContext(), "Clicked copy", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(view.getContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
                                 break;
 
                             default:
@@ -230,6 +243,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
                             holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).user_name);
                             holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).comment);
 
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+                            Picasso.get().load(img).into(holder.circularImageView3);
+
                         }
                         else
                         {
@@ -241,6 +257,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
                             holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).user_name);
                             holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).comment);
 
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                            Picasso.get().load(img).into(holder.circular);
+
                         }
                         else
                         {
@@ -248,6 +267,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
                         }
 
                     } else {
+                        holder.layout.setVisibility(View.GONE);
+                        holder.layout1.setVisibility(View.GONE);
                         //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
@@ -318,6 +339,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
         @BindView(R.id.txt_allcomment)
         TextView txt_allcomment;
 
+        @BindView(R.id.txt_time)
+        TextView txt_time;
+
         @BindView(R.id.txt_name_position_0)
         TextView txt_name_position_0;
 
@@ -335,6 +359,16 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
 
         @BindView(R.id.layout1)
         LinearLayout layout1;
+
+        @BindView(R.id.circularImageView)
+        CircularImageView circularImageView;
+
+        @BindView(R.id.circular)
+        CircularImageView circular;
+
+        @BindView(R.id.circularImageView3)
+        CircularImageView circularImageView3;
+
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

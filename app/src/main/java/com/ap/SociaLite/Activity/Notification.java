@@ -52,7 +52,6 @@ public class Notification extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.img_back:
                 onBackPressed();
-                //startActivity(new Intent(CameraActivity.this,LoginActivity.class));
                 break;
         }
     }
