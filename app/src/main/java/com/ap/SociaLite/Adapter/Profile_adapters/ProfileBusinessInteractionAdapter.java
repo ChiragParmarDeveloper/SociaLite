@@ -3,7 +3,7 @@ package com.ap.SociaLite.Adapter.Profile_adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +30,7 @@ import com.ap.SociaLite.Fragment.Profile_fragments.BusinessInteractionFragment;
 import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.BusinessInteractionFragmentPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
 
         item = post_lists.get(position);
         String id = post_lists.get(position).post_id;
-        Picasso.get().load(item.image).placeholder(R.mipmap.ic_launcher).into(holder.post_image);
+        Picasso.get().load(item.image).into(holder.post_image);
         holder.description_post.setText(item.description);
         holder.txt_rating.setText(item.rate);
         holder.address_post.setText(item.location);
@@ -78,6 +79,18 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
         if (item.in_bussiness_interaction.equals("1")) {
             holder.img_business.setVisibility(View.VISIBLE);
         }
+
+        holder.txt_time.setText(item.post_time);
+        holder.txt_name.setText(item.username);
+
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+            holder.circularImageView.setImageDrawable(upload_img);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+        }
+
+
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,11 +120,12 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
 
                             case R.id.report:
                                 Intent in = new Intent(view.getContext(), Report.class);
+                                in.putExtra("post_id", id);
                                 view.getContext().startActivity(in);
                                 break;
 
                             case R.id.copylink:
-                                Toast.makeText(view.getContext(), "Clicked copy", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(view.getContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
                                 break;
 
                             default:
@@ -281,27 +295,31 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
 
                         if (response.body().comments.comments != null && response.body().comments.comments.size() > 0) {
 
-                            holder.textView12.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).user_name);
-                            holder.textView11.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).comment);
+                            holder.textView12.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name);
+                            holder.textView11.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+                            Picasso.get().load(img).into(holder.circularImageView3);
 
-                        }
-                        else
-                        {
+
+                        } else {
                             holder.layout.setVisibility(View.GONE);
                         }
 
                         if (response.body().comments.comments != null && response.body().comments.comments.size() > 1) {
 
-                            holder.textView14.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).user_name);
-                            holder.textView13.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).comment);
+                            holder.textView14.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
+                            holder.textView13.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
 
-                        }
-                        else
-                        {
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                            Picasso.get().load(img).into(holder.circularImageView5);
+
+                        } else {
                             holder.layout1.setVisibility(View.GONE);
                         }
 
                     } else {
+                        holder.layout.setVisibility(View.GONE);
+                        holder.layout1.setVisibility(View.GONE);
                         //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
@@ -330,8 +348,23 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
         @BindView(R.id.img_popup)
         ImageView img_popup;
 
+        @BindView(R.id.circularImageView)
+        CircularImageView circularImageView;
+
+        @BindView(R.id.circularImageView3)
+        CircularImageView circularImageView3;
+
+
+
+        @BindView(R.id.circularImageView5)
+        CircularImageView circularImageView5;
+
+
         @BindView(R.id.constraint_popup)
         ConstraintLayout constraint_popup;
+
+        @BindView(R.id.txt_time)
+        TextView txt_time;
 
         @BindView(R.id.layout_share)
         LinearLayout layout_share;
@@ -404,7 +437,6 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
 
         @BindView(R.id.textView14)
         TextView textView14;
-
 
 
         public MyHolder(@NonNull View itemView) {
