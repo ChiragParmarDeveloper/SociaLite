@@ -19,23 +19,26 @@ import com.ap.SociaLite.Activity.HideConnectionActivity;
 import com.ap.SociaLite.Adapter.BlockedContactAdapter;
 import com.ap.SociaLite.Adapter.MyNetworkAdapter;
 import com.ap.SociaLite.Adapter.ShareCareAdapter;
+import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import butterknife.ButterKnife;
+
 public class ShareFragment extends Fragment {
 
-
-    public ShareFragment() {
-        // Required empty public constructor
-    }
+//
+//    public ShareFragment() {
+//        // Required empty public constructor
+//    }
 
     ConstraintLayout setting_messages_constraint;
     ImageView set_setting_msg;
     Button cancel,blocked_conversation,hide_conversation;
 
-
+    String user_id;
     private ShareCareAdapter myshareCareAdapter;
     private RecyclerView.LayoutManager layoutManager;
     RecyclerView messages_recycler;
@@ -47,7 +50,9 @@ public class ShareFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_share, container, false);
-
+        ButterKnife.bind(this, view);
+        Session session = new Session(getActivity());
+        user_id = session.getUser_id();
 
 
         setting_messages_constraint = view.findViewById(R.id.setting_messages_constraint);

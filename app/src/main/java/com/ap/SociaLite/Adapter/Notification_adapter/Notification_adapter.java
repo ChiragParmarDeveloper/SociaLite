@@ -30,8 +30,8 @@ public class Notification_adapter extends RecyclerView.Adapter<Notification_adap
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 //        String array = Name.toString();
-        String Type = "connect";
-//
+        String Type = "accept_decline";
+
 //        for(int i = 0 ; i < Name.size() ; i++){
 //            Type = (String) Name.get(i);
 //

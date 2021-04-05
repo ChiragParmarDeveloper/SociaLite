@@ -99,6 +99,7 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.imgnotification)
     ImageView imgnotification;
 
+
     public TextView txt_name, txt_email, txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
     ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout,img_arrow;
     public CircularImageView img_dp;
@@ -419,7 +420,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @SuppressLint("ResourceAsColor")
     @OnClick({R.id.layout_category, R.id.layout_interest, R.id.layout_network, R.id.layout_share, R.id.layout_business, R.id.img_leftmenu,
-            R.id.imgsearch})
+            R.id.imgsearch,R.id.imgnotification})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.layout_category:
@@ -553,6 +554,13 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.imgsearch:
                 startActivity(new Intent(HomeActivity.this, Search.class));
                 break;
+            case R.id.imgnotification:
+                startActivity(new Intent(HomeActivity.this, Notification.class));
+                break;
+
+
+
+
         }
     }
 
