@@ -104,16 +104,16 @@ public class CameraActivity extends AppCompatActivity {
                 if (my_network != null) {
                     Intent in = new Intent(CameraActivity.this, PostNetwork.class);
                     in.putExtra("img_url", img_url);
-//                    in.putExtra("img1", path_one);
-//                    in.putExtra("img2", path_two);
-//                    in.putExtra("img3", path_three);
+                    in.putExtra("date", date);
+                    in.putExtra("time", time);
+                    in.putExtra("finallist", finallist);
                     startActivity(in);
                 } else if (business_interaction != null) {
                     Intent in = new Intent(CameraActivity.this, PostBusiness.class);
                     in.putExtra("img_url", img_url);
-//                    in.putExtra("img1", path_one);
-//                    in.putExtra("img2", path_two);
-//                    in.putExtra("img3", path_three);
+                    in.putExtra("date", date);
+                    in.putExtra("time", time);
+                    in.putExtra("finallist", finallist);
                     startActivity(in);
                 } else {
                     Intent in = new Intent(CameraActivity.this, Post.class);
@@ -147,9 +147,10 @@ public class CameraActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 date = data.getStringExtra("date");
                 time = data.getStringExtra("time");
+                Log.d("date_back", date);
+                Log.d("time_back", time);
             }
-        }
-        else if (requestCode == 2) {
+        } else if (requestCode == 2) {
             if (resultCode == RESULT_OK) {
                 finallist = (ArrayList<String>) data.getSerializableExtra("finallist");
                 Log.d("finallist++++", String.valueOf(finallist));
