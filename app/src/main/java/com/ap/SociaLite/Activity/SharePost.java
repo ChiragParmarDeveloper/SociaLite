@@ -83,6 +83,7 @@ public class SharePost extends AppCompatActivity {
 
     //public static ArrayList<String> mFinalList = new ArrayList<>();
     public ArrayList<String> share_frnd_ids = new ArrayList<>();
+    String my_network, business_interaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,9 @@ public class SharePost extends AppCompatActivity {
         Session session = new Session(getApplicationContext());
         UserId = session.getUser_id();
 
+        my_network = getIntent().getStringExtra("network_fragment");
+
+        business_interaction = getIntent().getStringExtra("business_fragment");
 //        image = getIntent().getStringExtra("img2");
 //        if (image != null) {
 //            File imgFile = new File(image);
@@ -233,10 +237,23 @@ public class SharePost extends AppCompatActivity {
                 break;
 
             case R.id.btn_next:
-                startActivity(new Intent(SharePost.this, Post.class)
-                        .putExtra("img_url", img_url)
-                        .putExtra("finallist", share_frnd_ids));
-                share_frnd_ids.clear();
+                if (my_network != null) {
+                    Intent in = new Intent(SharePost.this, PostNetwork.class);
+                    in.putExtra("img_url", img_url);
+                    in.putExtra("finallist", share_frnd_ids);
+                    startActivity(in);
+                } else if (business_interaction != null) {
+                    Intent in = new Intent(SharePost.this, PostBusiness.class);
+                    in.putExtra("img_url", img_url);
+                    in.putExtra("finallist", share_frnd_ids);
+                    startActivity(in);
+                } else {
+                    startActivity(new Intent(SharePost.this, Post.class)
+                            .putExtra("img_url", img_url)
+                            .putExtra("finallist", share_frnd_ids));
+                    share_frnd_ids.clear();
+
+                }
                 break;
 
             case R.id.All_contact:

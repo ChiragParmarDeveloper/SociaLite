@@ -2,6 +2,7 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.ShareToFriend;
@@ -21,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class SharetoFrndAdapter extends RecyclerView.Adapter<SharetoFrndAdapter.MyHolder> {
 
@@ -61,16 +64,26 @@ public class SharetoFrndAdapter extends RecyclerView.Adapter<SharetoFrndAdapter.
         }
 
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
                 if (holder.checkBox.isChecked()) {
+
                     String id = datas.get(position).request_id;
                     shareToFriend.sharefrnd_id.add(id);
+                 //   id = shareToFriend.sharefrnd_id.stream().collect(Collectors.joining(","));
+
                     Log.d("sharefrnd_id_check", String.valueOf(shareToFriend.sharefrnd_id));
+                   // Log.d("id_check---", String.valueOf(id));
+
                 } else {
                     String id = datas.get(position).request_id;
+
                     shareToFriend.sharefrnd_id.remove(id);
+                //    id = shareToFriend.sharefrnd_id.stream().collect(Collectors.joining(","));
+
                     Log.d("sharefrnd_id_uncheck---", String.valueOf(shareToFriend.sharefrnd_id));
+              //      Log.d("id_uncheck---", String.valueOf(id));
 
                 }
             }

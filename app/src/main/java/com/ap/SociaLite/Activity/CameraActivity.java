@@ -128,6 +128,8 @@ public class CameraActivity extends AppCompatActivity {
             case R.id.layout_lock:
                 Intent i = new Intent(this, SharePost.class);
                 i.putExtra("img_url", getIntent().getStringExtra("img_url"));
+                i.putExtra("network_fragment", my_network);
+                i.putExtra("business_fragment", business_interaction);
                 startActivityForResult(i, 2);
                 finallist.clear();
                 break;
@@ -135,6 +137,8 @@ public class CameraActivity extends AppCompatActivity {
             case R.id.layout_clock:
                 Intent in = new Intent(this, SchedulePost.class);
                 in.putExtra("img_url", getIntent().getStringExtra("img_url"));
+                in.putExtra("network_fragment", my_network);
+                in.putExtra("business_fragment", business_interaction);
                 startActivityForResult(in, 1);
                 break;
         }

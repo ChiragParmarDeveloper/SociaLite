@@ -35,6 +35,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface RService {
 
@@ -98,6 +99,19 @@ public interface RService {
                         @Part("location") RequestBody location,
                         @Part("password") RequestBody password,
                         @Part MultipartBody.Part profile_pic);
+
+    @Multipart
+    @POST("create_post.php")
+    Call<json> create_post(@Part("user_id") RequestBody user_id,
+                           @Part MultipartBody.Part[] post_image,
+                           @Part("description") RequestBody description,
+                           @Part("intrest_id") RequestBody intrest_id,
+                           @Part("in_bussiness_interaction") RequestBody in_bussiness_interaction,
+                           @Part("location") RequestBody location,
+                           @Part("hide_users[]") RequestBody hide_users,
+                           @Part("share_users[]") RequestBody share_users,
+                           @Part("schedule_date") RequestBody schedule_date,
+                           @Part("schedule_time") RequestBody schedule_time);
 
     @Multipart
     @POST("profile_image.php")

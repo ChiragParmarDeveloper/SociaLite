@@ -81,7 +81,6 @@ public class ViewAllContectActivity extends AppCompatActivity {
         });
     }
 
-    
     @OnClick({R.id.img_back, R.id.btn_share})
     public void OnClick(View view) {
         switch (view.getId()) {

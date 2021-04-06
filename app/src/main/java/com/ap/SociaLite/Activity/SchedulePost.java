@@ -99,7 +99,7 @@ public class SchedulePost extends AppCompatActivity {
     @VisibleForTesting
     Uri mSaveImageUri;
     String img_url;
-
+    String my_network, business_interaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +107,10 @@ public class SchedulePost extends AppCompatActivity {
         setContentView(R.layout.activity_schedule_post);
         ButterKnife.bind(this);
 
+
+        my_network = getIntent().getStringExtra("network_fragment");
+
+        business_interaction = getIntent().getStringExtra("business_fragment");
 //        imageone = getIntent().getStringExtra("img1");
 //        imagetwo = getIntent().getStringExtra("img2");
 //        imagethree = getIntent().getStringExtra("img3");
@@ -171,10 +175,27 @@ public class SchedulePost extends AppCompatActivity {
                 break;
 
             case R.id.btn_next:
-                startActivity(new Intent(SchedulePost.this, Post.class)
-                        .putExtra("img_url", img_url)
-                        .putExtra("date", date.getText().toString())
-                        .putExtra("time", time.getText().toString()));
+                if (my_network != null) {
+                    Intent in = new Intent(SchedulePost.this, PostNetwork.class);
+                    in.putExtra("img_url", img_url);
+                    in.putExtra("date", date.getText().toString());
+                    in.putExtra("time", time.getText().toString());
+                    startActivity(in);
+                } else if (business_interaction != null) {
+                    Intent in = new Intent(SchedulePost.this, PostBusiness.class);
+                    in.putExtra("img_url", img_url);
+                    in.putExtra("date", date.getText().toString());
+                    in.putExtra("time", time.getText().toString());
+                    startActivity(in);
+                } else {
+                    startActivity(new Intent(SchedulePost.this, Post.class)
+                            .putExtra("img_url", img_url)
+                            .putExtra("date", date.getText().toString())
+                            .putExtra("time", time.getText().toString()));
+
+                }
+
+
                 break;
 
             case R.id.btn_save:
@@ -184,7 +205,7 @@ public class SchedulePost extends AppCompatActivity {
                 setResult(RESULT_OK, intent);
                 finish();
 //                mFinalList.clear();
-              //  startActivity(new Intent(SchedulePost.this, CameraActivity.class));
+                //  startActivity(new Intent(SchedulePost.this, CameraActivity.class));
                 break;
 
             case R.id.imageView:
