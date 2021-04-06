@@ -61,7 +61,6 @@ public class SharePost extends AppCompatActivity {
     @BindView(R.id.constraintLayout56)
     ConstraintLayout constraintLayout56;
 
-
     @BindView(R.id.checkBox_pos_3)
     CheckBox checkBox_pos_3;
 
@@ -70,7 +69,6 @@ public class SharePost extends AppCompatActivity {
 
     @BindView(R.id.txt_name_pos_3)
     TextView txt_name_pos_3;
-
 
     @BindView(R.id.imageView)
     ImageView imageView;
@@ -83,6 +81,7 @@ public class SharePost extends AppCompatActivity {
     Uri mSaveImageUri;
     String img_url;
 
+    //public static ArrayList<String> mFinalList = new ArrayList<>();
     public ArrayList<String> share_frnd_ids = new ArrayList<>();
 
     @Override
@@ -92,16 +91,14 @@ public class SharePost extends AppCompatActivity {
         ButterKnife.bind(this);
         Session session = new Session(getApplicationContext());
         UserId = session.getUser_id();
+
 //        image = getIntent().getStringExtra("img2");
 //        if (image != null) {
 //            File imgFile = new File(image);
-//
 //            if (imgFile.exists()) {
-//
 //                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 //                imageView.setImageBitmap(bitmap);
 //                imageView.setTag(imgFile.toString());
-//
 //            }
 //        }
 
@@ -204,7 +201,6 @@ public class SharePost extends AppCompatActivity {
                             });
 
 
-
                         } else {
                             constraintLayout56.setVisibility(View.GONE);
                         }
@@ -237,16 +233,36 @@ public class SharePost extends AppCompatActivity {
                 break;
 
             case R.id.btn_next:
-                startActivity(new Intent(SharePost.this, Post.class));
+                startActivity(new Intent(SharePost.this, Post.class)
+                        .putExtra("img_url", img_url)
+                        .putExtra("finallist", share_frnd_ids));
+                share_frnd_ids.clear();
                 break;
 
             case R.id.All_contact:
-                startActivity(new Intent(SharePost.this, ViewAllContectActivity.class));
+                Intent i = new Intent(this, ViewAllContectActivity.class);
+                startActivityForResult(i, 1);
+                share_frnd_ids.clear();
                 break;
 
             case R.id.btn_save:
-                startActivity(new Intent(SharePost.this, CameraActivity.class));
+                Intent intent = new Intent();
+                intent.putExtra("finallist", share_frnd_ids);
+                setResult(RESULT_OK, intent);
+                finish();
+                share_frnd_ids.clear();
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                share_frnd_ids = (ArrayList<String>) data.getSerializableExtra("finallist");
+                Log.d("finalviewall++++", String.valueOf(share_frnd_ids));
+            }
         }
     }
 }

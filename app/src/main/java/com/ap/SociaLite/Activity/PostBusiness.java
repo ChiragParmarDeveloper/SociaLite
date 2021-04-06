@@ -88,7 +88,8 @@ public class PostBusiness extends AppCompatActivity {
 
     @BindView(R.id.imageView)
     ImageView imageView;
-
+    String img_url;
+    Uri mSaveImageUri;
     boolean click = true;
     String imagetwo, imageone, imagethree, picture_path;
     ArrayList<String> mArrayUri = new ArrayList<String>();
@@ -105,45 +106,52 @@ public class PostBusiness extends AppCompatActivity {
 
         Session session = new Session(PostBusiness.this);
 
-        imageone = getIntent().getStringExtra("img1");
-        imagetwo = getIntent().getStringExtra("img2");
-        imagethree = getIntent().getStringExtra("img3");
+        img_url = getIntent().getStringExtra("img_url");
 
-        if (imageone != null) {
-            layout_img1.setVisibility(View.VISIBLE);
-            File imgFile = new File(imageone);
-
-            if (imgFile.exists()) {
-
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(myBitmap);
-                img_one.setImageBitmap(myBitmap);
-                imageView.setTag(imgFile.toString());
-
-            }
-        }
-        if (imagetwo != null) {
-            layout_img2.setVisibility(View.VISIBLE);
-            File imgFile = new File(imagetwo);
-
-            if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(myBitmap);
-                img_two.setImageBitmap(myBitmap);
-            }
+        if(img_url!=null){
+            mSaveImageUri = Uri.fromFile(new File(img_url));
+            imageView.setImageURI(mSaveImageUri);
         }
 
-        if (imagethree != null) {
-
-            layout_img3.setVisibility(View.VISIBLE);
-            File imgFile = new File(imagethree);
-
-            if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(myBitmap);
-                img_three.setImageBitmap(myBitmap);
-            }
-        }
+//        imageone = getIntent().getStringExtra("img1");
+//        imagetwo = getIntent().getStringExtra("img2");
+//        imagethree = getIntent().getStringExtra("img3");
+//
+//        if (imageone != null) {
+//            layout_img1.setVisibility(View.VISIBLE);
+//            File imgFile = new File(imageone);
+//
+//            if (imgFile.exists()) {
+//
+//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(myBitmap);
+//                img_one.setImageBitmap(myBitmap);
+//                imageView.setTag(imgFile.toString());
+//
+//            }
+//        }
+//        if (imagetwo != null) {
+//            layout_img2.setVisibility(View.VISIBLE);
+//            File imgFile = new File(imagetwo);
+//
+//            if (imgFile.exists()) {
+//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(myBitmap);
+//                img_two.setImageBitmap(myBitmap);
+//            }
+//        }
+//
+//        if (imagethree != null) {
+//
+//            layout_img3.setVisibility(View.VISIBLE);
+//            File imgFile = new File(imagethree);
+//
+//            if (imgFile.exists()) {
+//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(myBitmap);
+//                img_three.setImageBitmap(myBitmap);
+//            }
+//        }
         new PostBusinessPresenter(this, this).fetch_my_intrest(session.getUser_id());
     }
 

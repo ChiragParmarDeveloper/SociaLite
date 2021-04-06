@@ -1,8 +1,8 @@
 package com.ap.SociaLite.Activity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +17,7 @@ import com.ap.SociaLite.Presenter.PostPresenter;
 import com.ap.SociaLite.R;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,6 +66,8 @@ public class Post extends AppCompatActivity {
 
     String user_id;
     String imagetwo, imageone, imagethree;
+    String img_url,date,time;
+    Uri mSaveImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,45 +78,57 @@ public class Post extends AppCompatActivity {
         Session session = new Session(Post.this);
         user_id = session.getUser_id();
 
-        imageone = getIntent().getStringExtra("img1");
-        imagetwo = getIntent().getStringExtra("img2");
-        imagethree = getIntent().getStringExtra("img3");
+        img_url = getIntent().getStringExtra("img_url");
+        date = getIntent().getStringExtra("date");
+        time = getIntent().getStringExtra("time");
 
-        if (imageone != null) {
-            layout_img1.setVisibility(View.VISIBLE);
-            File imgFile = new File(imageone);
+        ArrayList<String> share_List = (ArrayList<String>) getIntent().getSerializableExtra("finallist");
+        Log.d("finallist", String.valueOf(share_List));
 
-            if (imgFile.exists()) {
-
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(myBitmap);
-                img_one.setImageBitmap(myBitmap);
-                imageView.setTag(imgFile.toString());
-
-            }
-        }
-        if (imagetwo != null) {
-            layout_img2.setVisibility(View.VISIBLE);
-            File imgFile = new File(imagetwo);
-
-            if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(myBitmap);
-                img_two.setImageBitmap(myBitmap);
-            }
+        if (img_url != null) {
+            mSaveImageUri = Uri.fromFile(new File(img_url));
+            imageView.setImageURI(mSaveImageUri);
         }
 
-        if (imagethree != null) {
 
-            layout_img3.setVisibility(View.VISIBLE);
-            File imgFile = new File(imagethree);
-
-            if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(myBitmap);
-                img_three.setImageBitmap(myBitmap);
-            }
-        }
+//        imageone = getIntent().getStringExtra("img1");
+//
+//
+//        if (imageone != null) {
+//            layout_img1.setVisibility(View.VISIBLE);
+//            File imgFile = new File(imageone);
+//
+//            if (imgFile.exists()) {
+//
+//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(myBitmap);
+//                img_one.setImageBitmap(myBitmap);
+//                imageView.setTag(imgFile.toString());
+//
+//            }
+//        }
+//        if (imagetwo != null) {
+//            layout_img2.setVisibility(View.VISIBLE);
+//            File imgFile = new File(imagetwo);
+//
+//            if (imgFile.exists()) {
+//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(myBitmap);
+//                img_two.setImageBitmap(myBitmap);
+//            }
+//        }
+//
+//        if (imagethree != null) {
+//
+//            layout_img3.setVisibility(View.VISIBLE);
+//            File imgFile = new File(imagethree);
+//
+//            if (imgFile.exists()) {
+//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//                imageView.setImageBitmap(myBitmap);
+//                img_three.setImageBitmap(myBitmap);
+//            }
+//        }
 
         new PostPresenter(this, this).fetch_my_intrest(user_id);
     }
@@ -128,48 +143,48 @@ public class Post extends AppCompatActivity {
             case R.id.btn_share:
                 break;
             case R.id.img_one:
-                if (imageone != null) {
-                    File imgone = new File(imageone);
-                    if (imgone.exists()) {
-                        //        imageView.setImageURI(Uri.fromFile(imgone));
-
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgone.getAbsolutePath());
-                        imageView.setImageBitmap(myBitmap);
-                        imageView.setTag(imgone.toString());
-                    }
-                }
+//                if (imageone != null) {
+//                    File imgone = new File(imageone);
+//                    if (imgone.exists()) {
+//                        //        imageView.setImageURI(Uri.fromFile(imgone));
+//
+//                        Bitmap myBitmap = BitmapFactory.decodeFile(imgone.getAbsolutePath());
+//                        imageView.setImageBitmap(myBitmap);
+//                        imageView.setTag(imgone.toString());
+//                    }
+//                }
 
                 break;
 
             case R.id.img_two:
 
-                if (imagetwo != null) {
-                    File imgtwo = new File(imagetwo);
-                    if (imgtwo.exists()) {
-                        //   imageView.setImageURI(Uri.fromFile(imgtwo));
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgtwo.getAbsolutePath());
-                        imageView.setImageBitmap(myBitmap);
-
-                        imageView.setTag(imgtwo.toString());
-                        //     path = imageView.getTag().toString();
-
-                    }
-                }
+//                if (imagetwo != null) {
+//                    File imgtwo = new File(imagetwo);
+//                    if (imgtwo.exists()) {
+//                        //   imageView.setImageURI(Uri.fromFile(imgtwo));
+//                        Bitmap myBitmap = BitmapFactory.decodeFile(imgtwo.getAbsolutePath());
+//                        imageView.setImageBitmap(myBitmap);
+//
+//                        imageView.setTag(imgtwo.toString());
+//                        //     path = imageView.getTag().toString();
+//
+//                    }
+//                }
                 break;
 
             case R.id.img_three:
 
-                if (imagethree != null) {
-                    File imgthree = new File(imagethree);
-                    if (imgthree.exists()) {
-                        //       imageView.setImageURI(Uri.fromFile(imgthree));
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgthree.getAbsolutePath());
-                        imageView.setImageBitmap(myBitmap);
-
-                        imageView.setTag(imgthree.toString());
-                        //    path = imageView.getTag().toString();
-                    }
-                }
+//                if (imagethree != null) {
+//                    File imgthree = new File(imagethree);
+//                    if (imgthree.exists()) {
+//                        //       imageView.setImageURI(Uri.fromFile(imgthree));
+//                        Bitmap myBitmap = BitmapFactory.decodeFile(imgthree.getAbsolutePath());
+//                        imageView.setImageBitmap(myBitmap);
+//
+//                        imageView.setTag(imgthree.toString());
+//                        //    path = imageView.getTag().toString();
+//                    }
+//                }
         }
     }
 }

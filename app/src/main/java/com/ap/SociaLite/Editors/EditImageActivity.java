@@ -87,7 +87,6 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         my_network = getIntent().getStringExtra("network_fragment");
 
         business_interaction= getIntent().getStringExtra("business_fragment");
-        Toast.makeText(this, business_interaction, Toast.LENGTH_SHORT).show();
 
         initViews();
 

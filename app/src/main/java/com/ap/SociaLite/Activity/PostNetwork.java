@@ -3,6 +3,7 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -55,12 +56,20 @@ public class PostNetwork extends AppCompatActivity {
     VideoView video_three;
 
     String imagetwo, imageone, imagethree;
-
+    String img_url;
+    Uri mSaveImageUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_network);
         ButterKnife.bind(this);
+
+        img_url = getIntent().getStringExtra("img_url");
+
+        if(img_url!=null){
+            mSaveImageUri = Uri.fromFile(new File(img_url));
+            imageView.setImageURI(mSaveImageUri);
+        }
 
 //        imageone = getIntent().getStringExtra("img1");
 //        imagetwo = getIntent().getStringExtra("img2");

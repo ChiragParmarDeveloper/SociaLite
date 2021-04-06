@@ -88,11 +88,19 @@ public class ViewAllContectActivity extends AppCompatActivity {
         switch (view.getId()) {
 
             case R.id.img_back:
-                onBackPressed();
+                Intent intent = new Intent();
+                intent.putExtra("finallist", sharefrnd_id);
+                setResult(RESULT_OK, intent);
+                finish();
+                sharefrnd_id.clear();
                 break;
 
             case R.id.btn_share:
-                startActivity(new Intent(ViewAllContectActivity.this, SharePost.class));
+                Intent i = new Intent();
+                i.putExtra("finallist", sharefrnd_id);
+                setResult(RESULT_OK, i);
+                finish();
+                sharefrnd_id.clear();
                 break;
 
         }

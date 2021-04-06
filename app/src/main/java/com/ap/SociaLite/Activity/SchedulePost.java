@@ -149,7 +149,7 @@ public class SchedulePost extends AppCompatActivity {
 
         img_url = getIntent().getStringExtra("img_url");
 
-        if(img_url!=null){
+        if (img_url != null) {
             mSaveImageUri = Uri.fromFile(new File(img_url));
             imageView.setImageURI(mSaveImageUri);
         }
@@ -163,19 +163,28 @@ public class SchedulePost extends AppCompatActivity {
         };
     }
 
-    @OnClick({R.id.img_cross, R.id.btn_next, R.id.btn_save, R.id.imageView,R.id.img_one,R.id.img_two,R.id.img_three, R.id.btn_date, R.id.btn_time})
+    @OnClick({R.id.img_cross, R.id.btn_next, R.id.btn_save, R.id.imageView, R.id.img_one, R.id.img_two, R.id.img_three, R.id.btn_date, R.id.btn_time})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_cross:
-                finish();
+                onBackPressed();
                 break;
 
             case R.id.btn_next:
-                startActivity(new Intent(SchedulePost.this, Post.class));
+                startActivity(new Intent(SchedulePost.this, Post.class)
+                        .putExtra("img_url", img_url)
+                        .putExtra("date", date.getText().toString())
+                        .putExtra("time", time.getText().toString()));
                 break;
 
             case R.id.btn_save:
-                startActivity(new Intent(SchedulePost.this, CameraActivity.class));
+                Intent intent = new Intent();
+                intent.putExtra("date", date.getText().toString());
+                intent.putExtra("time", time.getText().toString());
+                setResult(RESULT_OK, intent);
+                finish();
+//                mFinalList.clear();
+              //  startActivity(new Intent(SchedulePost.this, CameraActivity.class));
                 break;
 
             case R.id.imageView:
@@ -206,7 +215,7 @@ public class SchedulePost extends AppCompatActivity {
                         imageView.setImageBitmap(myBitmap);
 
                         imageView.setTag(imgtwo.toString());
-                   //     path = imageView.getTag().toString();
+                        //     path = imageView.getTag().toString();
 
                     }
                 }
@@ -222,7 +231,7 @@ public class SchedulePost extends AppCompatActivity {
                         imageView.setImageBitmap(myBitmap);
 
                         imageView.setTag(imgthree.toString());
-                    //    path = imageView.getTag().toString();
+                        //    path = imageView.getTag().toString();
                     }
                 }
                 break;
