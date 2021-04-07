@@ -3,6 +3,7 @@ package com.ap.SociaLite.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,9 +24,17 @@ import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Activity.ViewCardActivity;
+import com.ap.SociaLite.Fragment.BusinessFragment;
+import com.ap.SociaLite.Fragment.CategoryFragment;
+import com.ap.SociaLite.Pojo.post_list;
+import com.ap.SociaLite.Presenter.BusinessFragmentPresenter;
+import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,13 +44,15 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
     Boolean click = true;
     String rating = "";
 
-    ArrayList Name;
-    Context context;
+    Context mContext;
+    BusinessFragment businessFragment;
+    List<post_list> post_lists = new ArrayList<>();
+    post_list item;
 
-
-    public BusinessInteractionAdapter(ArrayList name, Context context) {
-        Name = name;
-        this.context = context;
+    public BusinessInteractionAdapter(Context mContext, BusinessFragment businessFragment, List<post_list> post_lists) {
+        this.mContext = mContext;
+        this.businessFragment = businessFragment;
+        this.post_lists = post_lists;
     }
 
     @NonNull
@@ -55,13 +66,28 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
-        holder.txt_name.setText((CharSequence) Name.get(position));
+        item = post_lists.get(position);
+        String id = post_lists.get(position).post_id;
+
+        Picasso.get().load(item.image).into(holder.post_image);
+        holder.description_post.setText(item.description);
+        holder.address_post.setText(item.location);
+        holder.txt_rating.setText(item.rate);
+        holder.txt_time.setText(item.post_time);
+        holder.txt_name.setText(item.username);
+
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+            holder.circularImageView.setImageDrawable(upload_img);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+        }
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                PopupMenu popup = new PopupMenu(context, holder.img_popup);
+                PopupMenu popup = new PopupMenu(mContext, holder.img_popup);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
                         .inflate(R.menu.popup_menu, popup.getMenu());
@@ -73,21 +99,22 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
 
                         switch (item.getItemId()) {
                             case R.id.hide:
-                                Toast.makeText(view.getContext(), "Clicked hide", Toast.LENGTH_SHORT).show();
-                                //startActivity(new Intent(App.this, App_Main.class));
+                                new BusinessFragmentPresenter(mContext, businessFragment).hide_post(businessFragment.user_id, id);
+                         //       new BusinessFragmentPresenter(mContext, businessFragment).business_post(categoryFragment.user_id);
                                 break;
 
-                            case R.id.help:
-                                Toast.makeText(view.getContext(), "Clicked help", Toast.LENGTH_SHORT).show();
+                            case R.id.save:
+                                new BusinessFragmentPresenter(mContext, businessFragment).category_save_post(businessFragment.user_id, id);
                                 break;
 
                             case R.id.report:
                                 Intent in = new Intent(view.getContext(), Report.class);
+                                in.putExtra("post_id", id);
                                 view.getContext().startActivity(in);
                                 break;
 
                             case R.id.copylink:
-                                Toast.makeText(view.getContext(), "Clicked copy", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(view.getContext(), "Coming Soon...", Toast.LENGTH_SHORT).show();
                                 break;
 
                             default:
@@ -140,7 +167,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             @Override
             public void onClick(View view) {
                 rating = "1";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -150,7 +177,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             @Override
             public void onClick(View view) {
                 rating = "2";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -160,7 +187,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             @Override
             public void onClick(View view) {
                 rating = "3";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -170,7 +197,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             @Override
             public void onClick(View view) {
                 rating = "4";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -180,7 +207,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             @Override
             public void onClick(View view) {
                 rating = "5";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -189,11 +216,11 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         holder.intrested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.intrested.setBackground(context.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
+                holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
                 holder.intrested.setTextColor(Color.WHITE);
-                holder.card.setBackground(context.getResources().getDrawable(R.drawable.border_rs));
+                holder.card.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.card.setTextColor(Color.BLACK);
-                holder.message.setBackground(context.getResources().getDrawable(R.drawable.border_rs));
+                holder.message.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.message.setTextColor(Color.BLACK);
             }
         });
@@ -202,11 +229,11 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             @Override
             public void onClick(View view) {
 
-                holder.card.setBackground(context.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
+                holder.card.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
                 holder.card.setTextColor(Color.WHITE);
-                holder.intrested.setBackground(context.getResources().getDrawable(R.drawable.border_rs));
+                holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.intrested.setTextColor(Color.BLACK);
-                holder.message.setBackground(context.getResources().getDrawable(R.drawable.border_rs));
+                holder.message.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.message.setTextColor(Color.BLACK);
 
                 Intent c = new Intent(view.getContext(), ViewCardActivity.class);
@@ -218,12 +245,14 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             @Override
             public void onClick(View view) {
 
-                holder.message.setBackground(context.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
+                holder.message.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
                 holder.message.setTextColor(Color.WHITE);
-                holder.intrested.setBackground(context.getResources().getDrawable(R.drawable.border_rs));
+                holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.intrested.setTextColor(Color.BLACK);
-                holder.card.setBackground(context.getResources().getDrawable(R.drawable.border_rs));
+                holder.card.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.card.setTextColor(Color.BLACK);
+
+                Toast.makeText(mContext, "Coming Soon...", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -235,7 +264,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
 
     @Override
     public int getItemCount() {
-        return Name.size();
+        return post_lists.size();
     }
 
 
@@ -286,7 +315,21 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         @BindView(R.id.rating_star5)
         ImageView rating_star5;
 
+        @BindView(R.id.circularImageView)
+        CircularImageView circularImageView;
 
+        @BindView(R.id.post_image)
+        ImageView post_image;
+
+        @BindView(R.id.description_post)
+        TextView description_post;
+
+        @BindView(R.id.address_post)
+        TextView address_post;
+        @BindView(R.id.txt_rating)
+        TextView txt_rating;
+        @BindView(R.id.txt_time)
+        TextView txt_time;
 
 
         public MyHolder(@NonNull View itemView) {

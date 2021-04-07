@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.ap.SociaLite.Activity.CameraActivity;
 import com.ap.SociaLite.Adapter.BusinessInteractionAdapter;
@@ -37,10 +38,13 @@ public class BusinessFragment extends Fragment {
     ConstraintLayout post_constraint;
 
     @BindView(R.id.recycleview_business_post)
-    RecyclerView recycleview_business_post;
+    public RecyclerView recycleview_business_post;
 
     @BindView(R.id.rv_interestlist)
     public RecyclerView rv_interestlist;
+
+    @BindView(R.id.progressbar)
+    public ProgressBar progressbar;
 
     private BusinessInteractionAdapter businessInteractionAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -58,12 +62,12 @@ public class BusinessFragment extends Fragment {
      //   post_constraint = view.findViewById(R.id.post_constraint);
 
         //---------------------------------------------for post-----------------------------------------
-        recycleview_business_post = view.findViewById(R.id.recycleview_business_post);
-        layoutManager = new GridLayoutManager(getActivity(), 1);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        recycleview_business_post.setLayoutManager(layoutManager);
-        businessInteractionAdapter = new BusinessInteractionAdapter(Name,getActivity());
-        recycleview_business_post.setAdapter(businessInteractionAdapter);
+//        recycleview_business_post = view.findViewById(R.id.recycleview_business_post);
+//        layoutManager = new GridLayoutManager(getActivity(), 1);
+//        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+//        recycleview_business_post.setLayoutManager(layoutManager);
+//        businessInteractionAdapter = new BusinessInteractionAdapter(Name,getActivity());
+//        recycleview_business_post.setAdapter(businessInteractionAdapter);
 
         new BusinessFragmentPresenter(getActivity(),this).fetch_all_intrest(session.getUser_id());
 

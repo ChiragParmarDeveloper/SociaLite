@@ -63,6 +63,11 @@ public interface RService {
 
 
     @FormUrlEncoded
+    @POST("bussiness_wise_post.php")
+    Call<json> post_business(@Field("interest_id") String interest_id);
+
+
+    @FormUrlEncoded
     @POST("friend_list.php")
     Call<json> frnd_list(@Field("UserId") String UserId);
 

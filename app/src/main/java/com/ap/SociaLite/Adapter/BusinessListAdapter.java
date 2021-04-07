@@ -7,16 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Fragment.BusinessFragment;
-import com.ap.SociaLite.Fragment.CategoryFragment;
-import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.Pojo.interest_details;
 import com.ap.SociaLite.Presenter.BusinessFragmentPresenter;
-import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -24,7 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BusinessListAdapter  extends RecyclerView.Adapter<BusinessListAdapter.Holder> {
+public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.Holder> {
 
     Context mContext;
     BusinessFragment businessFragment;
@@ -48,7 +46,6 @@ public class BusinessListAdapter  extends RecyclerView.Adapter<BusinessListAdapt
     @Override
     public void onBindViewHolder(@NonNull BusinessListAdapter.Holder holder, int position) {
         item = details.get(position);
-        String id = details.get(position).interest_id;
 
         holder.txt_iconname.setText(item.interest_name);
         Picasso.get().load(item.interest_image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
@@ -65,23 +62,29 @@ public class BusinessListAdapter  extends RecyclerView.Adapter<BusinessListAdapt
         holder.img_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new BusinessFragmentPresenter(mContext,businessFragment).update_new_intrests(businessFragment.user_id,id);
-                new BusinessFragmentPresenter(mContext,businessFragment).fetch_all_intrest(businessFragment.user_id);
+                String id = details.get(position).interest_id;
+                new BusinessFragmentPresenter(mContext, businessFragment).update_new_intrests(businessFragment.user_id, id);
+                new BusinessFragmentPresenter(mContext, businessFragment).fetch_all_intrest(businessFragment.user_id);
             }
         });
 
-        //   int realposition = position % mList.size();
 
-        // holder.txt_iconname.setText((CharSequence) mList.get(realposition));
-//        holder.img_category.setImageResource((Integer) CategoryImages.get(realposition));
-        //   Picasso.get().load(item.).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
-
+        holder.img_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (details.get(position).flag.equals("1")) {
+                    String interest_id = details.get(position).interest_id;
+                    new BusinessFragmentPresenter(mContext, businessFragment).business_post(interest_id);
+                } else {
+           //         Toast.makeText(mContext, "id not selected", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return details.size();
-        //return                 Integer.MAX_VALUE;
     }
 
     public class Holder extends RecyclerView.ViewHolder {

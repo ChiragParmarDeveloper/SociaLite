@@ -1,10 +1,13 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.ap.SociaLite.Adapter.BusinessInteractionAdapter;
 import com.ap.SociaLite.Adapter.BusinessListAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
@@ -35,18 +38,6 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                     if (response.body().status.equals("1")) {
 
                         if (response.body().interest_details != null && response.body().interest_details.size() > 0) {
-                            //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-
-//                            List<String> interest_name = new ArrayList<>();
-//                            for (int i = 0; i < response.body().interest_details.size(); i++) {
-//                                interest_name.add(response.body().interest_details.get(i).interest_name);
-//                            }
-//
-//                            List<String> interest_img = new ArrayList<>();
-//                            for (int i = 0; i < response.body().interest_details.size(); i++) {
-//                                interest_img.add(response.body().interest_details.get(i).interest_image);
-//                            }
-
                             businessFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
                             businessFragment.rv_interestlist.setAdapter(new BusinessListAdapter(mContext, response.body().interest_details, businessFragment));
                         }
@@ -89,5 +80,84 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
 
         }
 
+    }
+
+    @Override
+    public void business_post(String interest_id) {
+        businessFragment.progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(mContext).post_business(interest_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    businessFragment.progressbar.setVisibility(View.GONE);
+                    if (response.body().status.equals("1")) {
+                        if (response.body().post_list != null && response.body().post_list.size() > 0) {
+                            businessFragment.recycleview_business_post.setLayoutManager(new GridLayoutManager(mContext, 1));
+                            businessFragment.recycleview_business_post.setAdapter(new BusinessInteractionAdapter(mContext, businessFragment, response.body().post_list));
+                        }
+                    } else {
+                        //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    businessFragment.progressbar.setVisibility(View.GONE);
+                    // Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void hide_post(String user_id, String post_id) {
+        try {
+            new RService.api().call(mContext).dashboard_hidepost(user_id, post_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+
+                    } else {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    // Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    // Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void category_save_post(String user_id, String post_id) {
+        try {
+            new RService.api().call(mContext).dashboard_savepost(user_id, post_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    // Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    // Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
     }
 }

@@ -33,6 +33,7 @@ public class ViewCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_card);
         ButterKnife.bind(this);
+
         Session session = new Session(ViewCardActivity.this);
         user_id = session.getUser_id();
 
