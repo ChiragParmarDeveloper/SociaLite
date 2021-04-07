@@ -463,7 +463,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="View All Comments"
-                        android:textSize="9sp"
+                        android:textSize="11sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/layout1" />
 

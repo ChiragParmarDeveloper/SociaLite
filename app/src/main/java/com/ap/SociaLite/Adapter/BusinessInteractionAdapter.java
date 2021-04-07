@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,8 @@ import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Activity.ViewCardActivity;
+import com.ap.SociaLite.Application.RService;
+import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Fragment.BusinessFragment;
 import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Pojo.post_list;
@@ -38,6 +41,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInteractionAdapter.MyHolder>{
 
@@ -159,9 +165,20 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(view.getContext(), CommentActivity.class);
+                in.putExtra("post_id", id);
                 view.getContext().startActivity(in);
             }
         });
+
+        holder.textView15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(v.getContext(), CommentActivity.class);
+                in.putExtra("post_id", id);
+                v.getContext().startActivity(in);
+            }
+        });
+
 
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,6 +273,55 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             }
         });
 
+        try {
+            new RService.api().call(mContext).fetch_comments(id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+
+                    if (response.body().status.equals("1")) {
+
+                        if (response.body().comments.comments != null && response.body().comments.comments.size() > 0) {
+
+                            Log.d("commnet_new", String.valueOf(response.body().comments.comments.size()));
+                            holder.textView12.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name);
+
+                            holder.textView11.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
+
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+                            Picasso.get().load(img).into(holder.circularImageView3);
+
+                        } else {
+                            holder.layout.setVisibility(View.GONE);
+                        }
+
+                        if (response.body().comments.comments != null && response.body().comments.comments.size() > 1) {
+
+                            holder.textView14.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
+                            holder.textView13.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
+
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                            Picasso.get().load(img).into(holder.circularImageView5);
+
+                        } else {
+                            holder.layout1.setVisibility(View.GONE);
+                        }
+
+                    } else {
+                        holder.layout.setVisibility(View.GONE);
+                        holder.layout1.setVisibility(View.GONE);
+                        //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //  Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
 
     }
 
@@ -272,6 +338,13 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
 
         @BindView(R.id.txt_name)
         TextView txt_name;
+
+        @BindView(R.id.textView11)
+        TextView textView11;
+
+        @BindView(R.id.textView12)
+        TextView textView12;
+
 
         @BindView(R.id.img_popup)
         ImageView img_popup;
@@ -297,6 +370,13 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         @BindView(R.id.message)
         Button message;
 
+        @BindView(R.id.layout)
+        ConstraintLayout layout;
+
+        @BindView(R.id.layout1)
+        ConstraintLayout layout1;
+
+
         @BindView(R.id.rating_bar)
         CardView rating_bar;
 
@@ -318,6 +398,13 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         @BindView(R.id.circularImageView)
         CircularImageView circularImageView;
 
+        @BindView(R.id.circularImageView5)
+        CircularImageView circularImageView5;
+
+        @BindView(R.id.circularImageView3)
+        CircularImageView circularImageView3;
+
+
         @BindView(R.id.post_image)
         ImageView post_image;
 
@@ -330,6 +417,13 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         TextView txt_rating;
         @BindView(R.id.txt_time)
         TextView txt_time;
+        @BindView(R.id.textView15)
+        TextView textView15;
+        @BindView(R.id.textView14)
+        TextView textView14;
+
+        @BindView(R.id.textView13)
+        TextView textView13;
 
 
         public MyHolder(@NonNull View itemView) {
