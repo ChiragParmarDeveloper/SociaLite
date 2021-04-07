@@ -75,6 +75,7 @@ public class Post extends AppCompatActivity {
 
     @BindView(R.id.progressbar)
     public ProgressBar progressbar;
+
     ArrayList<String> mArrayUri = new ArrayList<String>();
     String user_id;
     String imagetwo, imageone, imagethree;
@@ -83,7 +84,6 @@ public class Post extends AppCompatActivity {
     public String selected_id;
     MultipartBody.Part[] post_image;
     ArrayList<String> share_List = new ArrayList<>();
-
     ArrayList<String> hide_list = new ArrayList<>();
 
     @Override
@@ -149,7 +149,7 @@ public class Post extends AppCompatActivity {
         new PostPresenter(this, this).fetch_my_intrest(user_id);
     }
 
-    @OnClick({R.id.img_back, R.id.btn_share, R.id.img_one})
+    @OnClick({R.id.img_back, R.id.btn_share})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -199,21 +199,6 @@ public class Post extends AppCompatActivity {
                         business, location, hide_user, share_user, date_, time_);
 
                 break;
-            case R.id.img_one:
-//                if (imageone != null) {
-//                    File imgone = new File(imageone);
-//                    if (imgone.exists()) {
-//                        //        imageView.setImageURI(Uri.fromFile(imgone));
-//
-//                        Bitmap myBitmap = BitmapFactory.decodeFile(imgone.getAbsolutePath());
-//                        imageView.setImageBitmap(myBitmap);
-//                        imageView.setTag(imgone.toString());
-//                    }
-//                }
-
-                break;
-
-
         }
     }
 }
