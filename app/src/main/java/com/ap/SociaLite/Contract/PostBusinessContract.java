@@ -9,4 +9,14 @@ public interface PostBusinessContract {
 
     void upload_card (MultipartBody.Part[] image, RequestBody user_id);
 
+    void post(RequestBody user_id,
+              MultipartBody.Part[] post_image,
+              RequestBody description,
+              RequestBody intrest_id,
+              RequestBody in_bussiness_interaction,
+              RequestBody location,
+              RequestBody hide_users,
+              RequestBody share_users,
+              RequestBody schedule_date,
+              RequestBody schedule_time);
 }

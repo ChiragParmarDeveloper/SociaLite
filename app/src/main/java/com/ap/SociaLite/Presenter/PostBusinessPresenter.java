@@ -1,10 +1,14 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.ap.SociaLite.Activity.HomeActivity;
 import com.ap.SociaLite.Activity.PostBusiness;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
@@ -53,6 +57,22 @@ public class PostBusinessPresenter implements PostBusinessContract {
                             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             postBusiness.spinner.setAdapter(spinnerAdapter);
 
+
+                            postBusiness.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    String itemvalue = parent.getItemAtPosition(position).toString();
+                                    postBusiness.spinner.setPrompt(itemvalue);
+                                    postBusiness.selected_id = response.body().interest_details.get(position).interest_id;
+                                    Log.d("selected_id", postBusiness.selected_id);
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+
                         }
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
@@ -94,4 +114,41 @@ public class PostBusinessPresenter implements PostBusinessContract {
 
         }
     }
+
+    @Override
+    public void post(RequestBody user_id, MultipartBody.Part[] post_image, RequestBody description, RequestBody intrest_id,
+                     RequestBody in_bussiness_interaction, RequestBody location, RequestBody hide_users, RequestBody share_users,
+                     RequestBody schedule_date, RequestBody schedule_time) {
+
+        postBusiness.progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(mContext).create_post(user_id, post_image, description, intrest_id,
+                    in_bussiness_interaction, location, hide_users, share_users, schedule_date, schedule_time).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    postBusiness.progressbar.setVisibility(View.GONE);
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        Intent in = new Intent(mContext, HomeActivity.class);
+                        in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        mContext.startActivity(in);
+                        postBusiness.finish();
+
+                    } else {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    postBusiness.progressbar.setVisibility(View.GONE);
+                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
 }
+
