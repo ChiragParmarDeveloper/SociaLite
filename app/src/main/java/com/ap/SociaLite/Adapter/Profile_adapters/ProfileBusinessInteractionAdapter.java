@@ -91,7 +91,6 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
         }
 
 
-
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -354,11 +353,8 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
         @BindView(R.id.circularImageView3)
         CircularImageView circularImageView3;
 
-
-
         @BindView(R.id.circularImageView5)
         CircularImageView circularImageView5;
-
 
         @BindView(R.id.constraint_popup)
         ConstraintLayout constraint_popup;

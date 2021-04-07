@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.Faq;
@@ -60,11 +61,13 @@ public class FaqListAdapter extends RecyclerView.Adapter<FaqListAdapter.Holder> 
                     holder.tv_faq_description.setVisibility(View.VISIBLE);
                     holder.img_next.setVisibility(View.VISIBLE);
                     holder.img_down.setVisibility(View.GONE);
+                    holder.view2.setVisibility(View.VISIBLE);
                     openlyout = false;
                 }else {
                     holder.tv_faq_description.setVisibility(View.GONE);
                     holder.img_next.setVisibility(View.GONE);
                     holder.img_down.setVisibility(View.VISIBLE);
+                    holder.view2.setVisibility(View.GONE);
                     openlyout = true;
                 }
             }
@@ -94,10 +97,13 @@ public class FaqListAdapter extends RecyclerView.Adapter<FaqListAdapter.Holder> 
         ImageView img_down;
 
         @BindView(R.id.rlFaq)
-        RelativeLayout rlFaq;
+        ConstraintLayout rlFaq;
 
         @BindView(R.id.view1)
         View view1;
+
+        @BindView(R.id.view2)
+        View view2;
 
         public Holder(@NonNull View itemView) {
             super(itemView);

@@ -45,11 +45,6 @@ public class BusinessFragment extends Fragment {
 
     @BindView(R.id.progressbar)
     public ProgressBar progressbar;
-
-    private BusinessInteractionAdapter businessInteractionAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-
-    ArrayList Name = new ArrayList<>(Arrays.asList("Name 1", "Name 2", "Name 3", "Name 4", "Name 5"));
     public String user_id;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,15 +54,6 @@ public class BusinessFragment extends Fragment {
         ButterKnife.bind(this, view);
         Session session = new Session(getActivity());
         user_id=session.getUser_id();
-     //   post_constraint = view.findViewById(R.id.post_constraint);
-
-        //---------------------------------------------for post-----------------------------------------
-//        recycleview_business_post = view.findViewById(R.id.recycleview_business_post);
-//        layoutManager = new GridLayoutManager(getActivity(), 1);
-//        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-//        recycleview_business_post.setLayoutManager(layoutManager);
-//        businessInteractionAdapter = new BusinessInteractionAdapter(Name,getActivity());
-//        recycleview_business_post.setAdapter(businessInteractionAdapter);
 
         new BusinessFragmentPresenter(getActivity(),this).fetch_all_intrest(session.getUser_id());
 

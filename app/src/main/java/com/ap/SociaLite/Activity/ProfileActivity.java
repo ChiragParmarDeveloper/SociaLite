@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +21,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Fragment.Profile_fragments.BusinessInteractionFragment;
 import com.ap.SociaLite.Fragment.Profile_fragments.TimeLineFragment;
-import com.ap.SociaLite.Presenter.EditProfilePresenter;
 import com.ap.SociaLite.Presenter.ProfileActivityPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -35,9 +35,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 public class ProfileActivity extends AppCompatActivity {
-
-    @BindView(R.id.img_back)
-    ImageView img_back;
 
     @BindView(R.id.constraint_setting)
     ConstraintLayout constraint_setting;
@@ -78,9 +75,16 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.progressbar)
     public ProgressBar progressbar;
 
+    @BindView(R.id.messages)
+    ConstraintLayout messages;
+
+    @BindView(R.id.share)
+    ConstraintLayout share;
+
+
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
-    String image,user_id;
+    String image, user_id;
     MultipartBody.Part cover_photo;
 
     @Override
@@ -90,13 +94,14 @@ public class ProfileActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Session session = new Session(ProfileActivity.this);
-        user_id=session.getUser_id();
+        user_id = session.getUser_id();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new TimeLineFragment()).commit();
 
         new ProfileActivityPresenter(this, this).profile_my_profile(session.getUser_id());
     }
 
-    @OnClick({R.id.img_back, R.id.constraint_setting, R.id.connections, R.id.profile_add_cover, R.id.timeline_btn, R.id.business_btn, R.id.spotlight_btn})
+    @OnClick({R.id.img_back, R.id.constraint_setting, R.id.connections, R.id.profile_add_cover,
+            R.id.timeline_btn, R.id.business_btn, R.id.spotlight_btn, R.id.messages, R.id.share})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -115,6 +120,15 @@ public class ProfileActivity extends AppCompatActivity {
 
             case R.id.profile_add_cover:
                 openGallery();
+                break;
+
+            case R.id.share:
+                Intent in = new Intent(view.getContext(), ShareToFriend.class);
+                view.getContext().startActivity(in);
+                break;
+
+            case R.id.messages:
+                Toast.makeText(this, "Coming Soon...", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.timeline_btn:
@@ -176,7 +190,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
             RequestBody u_id = RequestBody.create(MediaType.parse("text/plain"), user_id);
-            new ProfileActivityPresenter(this, this).cover_photo(u_id,cover_photo);
+            new ProfileActivityPresenter(this, this).cover_photo(u_id, cover_photo);
 
 
         } else {

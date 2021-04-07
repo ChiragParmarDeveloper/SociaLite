@@ -36,4 +36,7 @@ public class post_list {
 
     @SerializedName("post_time")
     public String post_time;
+
+    @SerializedName("user_id")
+    public String user_id;
 }

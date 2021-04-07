@@ -48,7 +48,7 @@ import retrofit2.Response;
 public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInteractionAdapter.MyHolder>{
 
     Boolean click = true;
-    String rating = "";
+    String rate = "";
 
     Context mContext;
     BusinessFragment businessFragment;
@@ -183,8 +183,9 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "1";
-                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
+
+                rate = "1";
+                new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id,rate);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -193,8 +194,8 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         holder.rating_star2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "2";
-                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "2";
+                new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id,rate);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -203,8 +204,8 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         holder.rating_star3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "3";
-                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "3";
+                new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id,rate);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -213,8 +214,8 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         holder.rating_star4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "4";
-                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "4";
+                new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id,rate);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -223,8 +224,8 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         holder.rating_star5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "5";
-                Toast.makeText(mContext, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "5";
+                new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id,rate);
                 holder.rating_bar.setVisibility(View.GONE);
                 click = true;
             }
@@ -239,12 +240,16 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                 holder.card.setTextColor(Color.BLACK);
                 holder.message.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.message.setTextColor(Color.BLACK);
+
+                Toast.makeText(mContext, "Coming Soon...", Toast.LENGTH_SHORT).show();
             }
         });
 
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String user_id = post_lists.get(position).user_id;
 
                 holder.card.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
                 holder.card.setTextColor(Color.WHITE);
@@ -254,6 +259,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                 holder.message.setTextColor(Color.BLACK);
 
                 Intent c = new Intent(view.getContext(), ViewCardActivity.class);
+                c.putExtra("user_id",user_id);
                 view.getContext().startActivity(c);
             }
         });
@@ -375,7 +381,6 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
 
         @BindView(R.id.layout1)
         ConstraintLayout layout1;
-
 
         @BindView(R.id.rating_bar)
         CardView rating_bar;
