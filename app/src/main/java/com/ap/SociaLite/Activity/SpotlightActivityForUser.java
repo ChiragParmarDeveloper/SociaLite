@@ -40,6 +40,8 @@ public class SpotlightActivityForUser extends AppCompatActivity {
     @BindView(R.id.img_status)
     public ImageView img_status;
 
+    @BindView(R.id.view_count)
+    public TextView view_count;
 
     public String user_id;
 

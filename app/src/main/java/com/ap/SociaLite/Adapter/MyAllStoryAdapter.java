@@ -54,6 +54,7 @@ public class MyAllStoryAdapter extends RecyclerView.Adapter<MyAllStoryAdapter.Ho
             @Override
             public void onClick(View view) {
                 Picasso.get().load(story.get(position).story_image).into(spotlightActivityForUser.img_status);
+
                 new SpotlightActivityForUserPresenter(mContext, spotlightActivityForUser).view_story_viewer(spotlightActivityForUser.user_id, story.get(position).story_id);
             }
         });

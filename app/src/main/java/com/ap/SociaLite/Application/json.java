@@ -15,6 +15,9 @@ public class json {
     @SerializedName("message")
     public String message;
 
+    @SerializedName("count")
+    public String count;
+
     @SerializedName("faq_list")
     public List<com.ap.SociaLite.Pojo.faq_list> faq_list;
 

@@ -89,6 +89,7 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
                                     @Override
                                     public void run() {
                                         Picasso.get().load(response.body().story_data.get(finalI).story_image).into(spotlightActivityForUser.img_status);
+
                                     }
                                 }, 2000*i);
                             }
