@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.SpotlightActivityForUser;
 import com.ap.SociaLite.Pojo.story_data;
-import com.ap.SociaLite.Presenter.SpotlightActivityForUserPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -26,7 +26,7 @@ public class MyAllStoryAdapter extends RecyclerView.Adapter<MyAllStoryAdapter.Ho
     SpotlightActivityForUser spotlightActivityForUser;
     List<story_data> story = new ArrayList<>();
     story_data item;
-
+    int abc;
     public MyAllStoryAdapter(Context context, List<story_data> list, SpotlightActivityForUser fragment) {
         this.mContext = context;
         this.story = list;
@@ -53,13 +53,19 @@ public class MyAllStoryAdapter extends RecyclerView.Adapter<MyAllStoryAdapter.Ho
             @Override
             public void onClick(View view) {
 
-              //  if (id != null) {
-                    Picasso.get().load(story.get(position).story_image).into(spotlightActivityForUser.img_status);
+                //  if (id != null) {
+                Picasso.get().load(story.get(position).story_image).into(spotlightActivityForUser.img_status);
                 //}
 
-                new SpotlightActivityForUserPresenter(mContext, spotlightActivityForUser).view_story_viewer(spotlightActivityForUser.user_id, id);
+                //        new SpotlightActivityForUserPresenter(mContext, spotlightActivityForUser).view_story_viewer(spotlightActivityForUser.user_id, id);
             }
         });
+
+      //  abc=0;
+
+
+//             abc = position + 1;
+
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -29,7 +30,8 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
         this.mContext = context;
         this.spotlightActivityForUser = fragment;
     }
-
+    int abc;
+    Handler handler;
     @Override
     public void fetch_profile(String user_id) {
         try {
@@ -71,13 +73,27 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
             new RService.api().call(mContext).my_all_story(user_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
-
                     if (response.body().status.equals("1")) {
-
                         if (response.body().story_data != null && response.body().story_data.size() > 0) {
                             spotlightActivityForUser.rv_mystory.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
                             spotlightActivityForUser.rv_mystory.setAdapter(new MyAllStoryAdapter(mContext, response.body().story_data, spotlightActivityForUser));
-                        }
+
+                             abc=0;
+                             handler=new Handler();
+                            for (int i = 0; i < response.body().story_data.size(); i++) {
+                                int finalI = i;
+
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                   //     System.out.println(response.body().story_data.get(0).story_image);
+
+                                        Picasso.get().load(response.body().story_data.get(finalI).story_image).into(spotlightActivityForUser.img_status);
+
+                                    }
+                                }, 2000*i);
+                            }
+                            }
                     } else {
                         //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
