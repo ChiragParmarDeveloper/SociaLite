@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -39,10 +40,13 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
                     if (response.body().status.equals("1")) {
                         if (response.body().user_details != null) {
 
-                            if (response.body().user_details.profile_pic.length() > 0) {
-                                Picasso.get().load(response.body().user_details.profile_pic).placeholder(R.mipmap.ic_launcher).into(spotlightActivityForUser.user_profile);
-                            }
 
+                            if (response.body().user_details.profile_pic.equals("http://the-socialite.com/admin/")) {
+                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+                                spotlightActivityForUser.user_profile.setImageDrawable(upload_img);
+                            } else {
+                                Picasso.get().load(response.body().user_details.profile_pic).into(spotlightActivityForUser.user_profile);
+                            }
                             spotlightActivityForUser.user_name.setText(response.body().user_details.username);
                         }
                     } else {
@@ -74,7 +78,6 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
                             spotlightActivityForUser.rv_mystory.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
                             spotlightActivityForUser.rv_mystory.setAdapter(new MyAllStoryAdapter(mContext, response.body().story_data, spotlightActivityForUser));
                         }
-
                     } else {
                         //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }

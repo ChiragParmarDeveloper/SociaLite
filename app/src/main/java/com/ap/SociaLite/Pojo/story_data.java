@@ -9,4 +9,8 @@ public class story_data {
 
     @SerializedName("story_image")
     public String story_image;
+
+    @SerializedName("username")
+    public String username;
+
 }

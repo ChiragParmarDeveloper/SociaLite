@@ -6,13 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.SpotlightActivityForUser;
-import com.ap.SociaLite.Activity.Text;
 import com.ap.SociaLite.Pojo.story_data;
 import com.ap.SociaLite.Presenter.SpotlightActivityForUserPresenter;
 import com.ap.SociaLite.R;
@@ -48,20 +46,18 @@ public class MyAllStoryAdapter extends RecyclerView.Adapter<MyAllStoryAdapter.Ho
         item = story.get(position);
         String id = story.get(position).story_id;
 
-      //  holder.spotlight_textview_rs.setText(item.story_id);
-        if (item.story_image.length() > 0) {
-            Picasso.get().load(item.story_image).placeholder(R.mipmap.ic_launcher).into(holder.spotlight_user_profile_rs);
-        }
+        holder.spotlight_textview_rs.setText(item.username);
+        Picasso.get().load(item.story_image).into(holder.spotlight_user_profile_rs);
 
         holder.spotlight_linearLayout_user_story.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (item.story_image.length() > 0) {
-                    Picasso.get().load(item.story_image).placeholder(R.mipmap.ic_launcher).into(spotlightActivityForUser.img_status);
-                }
+              //  if (id != null) {
+                    Picasso.get().load(story.get(position).story_image).into(spotlightActivityForUser.img_status);
+                //}
 
-                new SpotlightActivityForUserPresenter(mContext, spotlightActivityForUser).view_story_viewer(spotlightActivityForUser.user_id,id);
+                new SpotlightActivityForUserPresenter(mContext, spotlightActivityForUser).view_story_viewer(spotlightActivityForUser.user_id, id);
             }
         });
     }
