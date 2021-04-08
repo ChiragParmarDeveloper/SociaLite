@@ -28,11 +28,10 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_user_icon"
+                app:civ_border="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </com.mikhaellopez.circularimageview.CircularImageView>
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/viewer_name"

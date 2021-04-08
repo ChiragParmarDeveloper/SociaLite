@@ -5,6 +5,6 @@ import okhttp3.RequestBody;
 
 public interface AddSpotlightActivity_2Contract {
 
-    void put_my_story(RequestBody user_id, MultipartBody.Part story_image);
+    void put_my_story(RequestBody user_id, MultipartBody.Part story_file);
 
 }

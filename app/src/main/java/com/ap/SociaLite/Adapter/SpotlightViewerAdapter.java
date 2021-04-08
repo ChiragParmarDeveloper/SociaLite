@@ -2,6 +2,7 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,13 @@ public class SpotlightViewerAdapter extends RecyclerView.Adapter<SpotlightViewer
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         item = views.get(position);
         String id = views.get(position).user_id;
-        Picasso.get().load(item.profile_pic).placeholder(R.mipmap.ic_launcher).into(holder.profile);
+
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+            holder.profile.setImageDrawable(upload_img);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.profile);
+        }
         holder.name.setText(item.username);
      }
 

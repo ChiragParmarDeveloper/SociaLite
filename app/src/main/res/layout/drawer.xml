@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="qwfkqwuifguqew"
+                android:text=""
                 android:textColor="@color/colorWhite"
                 android:textSize="14sp" />
 
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_name"
-                android:text="wqlkfqwkfhiqwuf"
+                android:text=""
                 android:textColor="@color/colorWhite"
                 android:textSize="11sp" />
         </RelativeLayout>

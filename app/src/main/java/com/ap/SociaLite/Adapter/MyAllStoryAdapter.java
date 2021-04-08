@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.SpotlightActivityForUser;
 import com.ap.SociaLite.Pojo.story_data;
+import com.ap.SociaLite.Presenter.SpotlightActivityForUserPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -52,20 +53,10 @@ public class MyAllStoryAdapter extends RecyclerView.Adapter<MyAllStoryAdapter.Ho
         holder.spotlight_linearLayout_user_story.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //  if (id != null) {
                 Picasso.get().load(story.get(position).story_image).into(spotlightActivityForUser.img_status);
-                //}
-
-                //        new SpotlightActivityForUserPresenter(mContext, spotlightActivityForUser).view_story_viewer(spotlightActivityForUser.user_id, id);
+                new SpotlightActivityForUserPresenter(mContext, spotlightActivityForUser).view_story_viewer(spotlightActivityForUser.user_id, story.get(position).story_id);
             }
         });
-
-      //  abc=0;
-
-
-//             abc = position + 1;
-
     }
 
     @Override

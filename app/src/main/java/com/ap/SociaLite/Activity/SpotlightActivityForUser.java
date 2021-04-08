@@ -11,6 +11,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Editors.EditImageActivity;
 import com.ap.SociaLite.Presenter.SpotlightActivityForUserPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -64,12 +65,16 @@ public class SpotlightActivityForUser extends AppCompatActivity {
                 break;
 
             case R.id.linearLayout_user_story:
-                startActivity(new Intent(SpotlightActivityForUser.this, AddSpotlightActivity.class));
+             //   startActivity(new Intent(SpotlightActivityForUser.this, AddSpotlightActivity.class));
+                Intent in = new Intent(SpotlightActivityForUser.this, EditImageActivity.class);
+                in.putExtra("user_story", "user_story");
+                startActivity(in);
                 break;
 
             case R.id.views_cardview:
                 views_nested_scr.setVisibility(View.VISIBLE);
                 break;
+
             case R.id.img_back_views:
                 views_nested_scr.setVisibility(View.GONE);
                 break;
