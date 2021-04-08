@@ -21,10 +21,10 @@
             android:id="@+id/spotlight_user_profile_rs"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            app:civ_border="false"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_user_icon">
+            android:src="@drawable/ic_user_icon"/>
 
-        </com.mikhaellopez.circularimageview.CircularImageView>
 
         <TextView
             android:id="@+id/spotlight_textview_rs"

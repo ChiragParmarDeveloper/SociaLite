@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -284,6 +285,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Toast.makeText(HomeActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
 
                 txt_faq.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_faq.setImageResource(R.drawable.ic_faq);
