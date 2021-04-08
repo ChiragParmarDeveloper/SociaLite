@@ -30,8 +30,10 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
         this.mContext = context;
         this.spotlightActivityForUser = fragment;
     }
+
     int abc;
     Handler handler;
+
     @Override
     public void fetch_profile(String user_id) {
         try {
@@ -86,10 +88,7 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                   //     System.out.println(response.body().story_data.get(0).story_image);
-
                                         Picasso.get().load(response.body().story_data.get(finalI).story_image).into(spotlightActivityForUser.img_status);
-
                                     }
                                 }, 2000*i);
                             }

@@ -59,12 +59,14 @@ public class AddSpotlightActivity extends AppCompatActivity {
 
             if (picture_file == null){
 
+
                 return;
             }
             else
             {
                 try{
                     FileOutputStream fos = new FileOutputStream(picture_file);
+
                     fos.write(bytes);
                     fos.close();
 
@@ -94,6 +96,7 @@ public class AddSpotlightActivity extends AppCompatActivity {
             }
 
             File outputFile = new File(folder_gui,"temp.jpg");
+
             return outputFile;
 
         }
@@ -119,6 +122,7 @@ public class AddSpotlightActivity extends AppCompatActivity {
                 break;
         }
     }
+
     private void openGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         gallery.setType("image/* video/*");
