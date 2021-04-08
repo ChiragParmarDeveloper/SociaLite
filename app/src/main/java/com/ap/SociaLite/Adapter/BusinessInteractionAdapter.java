@@ -72,6 +72,12 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
+        Drawable star1 = mContext.getDrawable(R.drawable.ic_rating_star1);
+        Drawable star2 = mContext.getDrawable(R.drawable.ic_rating_star2);
+        Drawable star3 = mContext.getDrawable(R.drawable.ic_rating_star3);
+        Drawable star4 = mContext.getDrawable(R.drawable.ic_rating_star4);
+        Drawable star5 = mContext.getDrawable(R.drawable.ic_rating_star5);
+
         item = post_lists.get(position);
         String id = post_lists.get(position).post_id;
 
@@ -82,11 +88,32 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         holder.txt_time.setText(item.post_time);
         holder.txt_name.setText(item.username);
 
+
+
         if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
             Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
             holder.circularImageView.setImageDrawable(upload_img);
         } else {
             Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+        }
+
+        if(post_lists.get(position).rate.equals("0")){
+            holder.img_star.setImageDrawable(star1);
+        }
+        if(post_lists.get(position).rate.equals("1")){
+            holder.img_star.setImageDrawable(star1);
+        }
+        if(post_lists.get(position).rate.equals("2")){
+            holder.img_star.setImageDrawable(star2);
+        }
+        if(post_lists.get(position).rate.equals("3")){
+            holder.img_star.setImageDrawable(star3);
+        }
+        if(post_lists.get(position).rate.equals("4")){
+            holder.img_star.setImageDrawable(star4);
+        }
+        if(post_lists.get(position).rate.equals("5")){
+            holder.img_star.setImageDrawable(star5);
         }
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +214,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                 rate = "1";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id,rate);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star1);
                 click = true;
             }
         });
@@ -197,6 +225,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                 rate = "2";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id,rate);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star2);
                 click = true;
             }
         });
@@ -207,6 +236,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                 rate = "3";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id,rate);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star3);
                 click = true;
             }
         });
@@ -217,6 +247,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                 rate = "4";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id,rate);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star4);
                 click = true;
             }
         });
@@ -227,6 +258,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                 rate = "5";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id,rate);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star5);
                 click = true;
             }
         });
@@ -384,6 +416,9 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
 
         @BindView(R.id.rating_bar)
         CardView rating_bar;
+
+        @BindView(R.id.img_star)
+        ImageView img_star;
 
         @BindView(R.id.rating_star1)
         ImageView rating_star1;

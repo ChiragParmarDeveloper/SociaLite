@@ -3,6 +3,7 @@ package com.ap.SociaLite.Adapter.Profile_connection_adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,7 +54,37 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+
+        //remove comment only to make rating enable
+
+//        Drawable star1 = mContext.getDrawable(R.drawable.ic_rating_star1);
+//        Drawable star2 = mContext.getDrawable(R.drawable.ic_rating_star2);
+//        Drawable star3 = mContext.getDrawable(R.drawable.ic_rating_star3);
+//        Drawable star4 = mContext.getDrawable(R.drawable.ic_rating_star4);
+//        Drawable star5 = mContext.getDrawable(R.drawable.ic_rating_star5);
+
         holder.txt_name.setText((CharSequence) Name.get(position));
+
+        //this comment also
+
+//        if(post_lists.get(position).rate.equals("0")){
+//            holder.img_star.setImageDrawable(star1);
+//        }
+//        if(post_lists.get(position).rate.equals("1")){
+//            holder.img_star.setImageDrawable(star1);
+//        }
+//        if(post_lists.get(position).rate.equals("2")){
+//            holder.img_star.setImageDrawable(star2);
+//        }
+//        if(post_lists.get(position).rate.equals("3")){
+//            holder.img_star.setImageDrawable(star3);
+//        }
+//        if(post_lists.get(position).rate.equals("4")){
+//            holder.img_star.setImageDrawable(star4);
+//        }
+//        if(post_lists.get(position).rate.equals("5")){
+//            holder.img_star.setImageDrawable(star5);
+//        }
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +171,8 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                 rating = "1";
                 Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
+                //remove belove comment
+                //    holder.img_star.setImageDrawable(star1);
                 click = true;
             }
         });
@@ -150,6 +183,8 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                 rating = "2";
                 Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
+                //remove belove comment
+                //    holder.img_star.setImageDrawable(star2);
                 click = true;
             }
         });
@@ -160,6 +195,8 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                 rating = "3";
                 Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
+                //remove belove comment
+                //    holder.img_star.setImageDrawable(star3);
                 click = true;
             }
         });
@@ -170,6 +207,8 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                 rating = "4";
                 Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
+                //remove belove comment
+                //    holder.img_star.setImageDrawable(star4);
                 click = true;
             }
         });
@@ -180,6 +219,8 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                 rating = "5";
                 Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
                 holder.rating_bar.setVisibility(View.GONE);
+                //remove belove comment
+                //    holder.img_star.setImageDrawable(star5);
                 click = true;
             }
         });
@@ -262,6 +303,9 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
 
         @BindView(R.id.rating_bar)
         CardView rating_bar;
+
+        @BindView(R.id.img_star)
+        ImageView img_star;
 
         @BindView(R.id.rating_star1)
         ImageView rating_star1;

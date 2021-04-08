@@ -67,6 +67,13 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+
+        Drawable star1 = mContext.getDrawable(R.drawable.ic_rating_star1);
+        Drawable star2 = mContext.getDrawable(R.drawable.ic_rating_star2);
+        Drawable star3 = mContext.getDrawable(R.drawable.ic_rating_star3);
+        Drawable star4 = mContext.getDrawable(R.drawable.ic_rating_star4);
+        Drawable star5 = mContext.getDrawable(R.drawable.ic_rating_star5);
+
         item = post_lists.get(position);
         String id = post_lists.get(position).post_id;
         Picasso.get().load(item.image).into(holder.img_category);
@@ -80,6 +87,25 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             holder.circularImageView.setImageDrawable(upload_img);
         } else {
             Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+        }
+
+        if(post_lists.get(position).rate.equals("0")){
+            holder.img_star.setImageDrawable(star1);
+        }
+        if(post_lists.get(position).rate.equals("1")){
+            holder.img_star.setImageDrawable(star1);
+        }
+        if(post_lists.get(position).rate.equals("2")){
+            holder.img_star.setImageDrawable(star2);
+        }
+        if(post_lists.get(position).rate.equals("3")){
+            holder.img_star.setImageDrawable(star3);
+        }
+        if(post_lists.get(position).rate.equals("4")){
+            holder.img_star.setImageDrawable(star4);
+        }
+        if(post_lists.get(position).rate.equals("5")){
+            holder.img_star.setImageDrawable(star5);
         }
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
@@ -150,12 +176,15 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             }
         });
 
+
+
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 rate = "1";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star1);
                 click = true;
             }
         });
@@ -166,6 +195,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
                 rate = "2";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star2);
                 click = true;
             }
         });
@@ -176,6 +206,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
                 rate = "3";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star3);
                 click = true;
             }
         });
@@ -186,6 +217,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
                 rate = "4";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star4);
                 click = true;
             }
         });
@@ -196,6 +228,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
                 rate = "5";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star5);
                 click = true;
             }
         });
@@ -305,6 +338,9 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
 
         @BindView(R.id.rating_bar)
         CardView rating_bar;
+
+        @BindView(R.id.img_star)
+        ImageView img_star;
 
         @BindView(R.id.rating_star1)
         ImageView rating_star1;

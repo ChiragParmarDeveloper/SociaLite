@@ -2,6 +2,7 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -65,6 +66,12 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
+        Drawable star1 = mContext.getDrawable(R.drawable.ic_rating_star1);
+        Drawable star2 = mContext.getDrawable(R.drawable.ic_rating_star2);
+        Drawable star3 = mContext.getDrawable(R.drawable.ic_rating_star3);
+        Drawable star4 = mContext.getDrawable(R.drawable.ic_rating_star4);
+        Drawable star5 = mContext.getDrawable(R.drawable.ic_rating_star5);
+
         item = mList.get(position);
         String id = mList.get(position).post_id;
         Picasso.get().load(item.profile_pic).into(holder.circularImageView);
@@ -74,6 +81,25 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
 
         holder.txt_description.setText(item.description);
         holder.txt_rating.setText(item.rate);
+
+        if(mList.get(position).rate.equals("0")){
+            holder.img_star.setImageDrawable(star1);
+        }
+        if(mList.get(position).rate.equals("1")){
+            holder.img_star.setImageDrawable(star1);
+        }
+        if(mList.get(position).rate.equals("2")){
+            holder.img_star.setImageDrawable(star2);
+        }
+        if(mList.get(position).rate.equals("3")){
+            holder.img_star.setImageDrawable(star3);
+        }
+        if(mList.get(position).rate.equals("4")){
+            holder.img_star.setImageDrawable(star4);
+        }
+        if(mList.get(position).rate.equals("5")){
+            holder.img_star.setImageDrawable(star5);
+        }
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +175,7 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
                 new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
                 new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star1);
                 click = true;
             }
         });
@@ -161,6 +188,7 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
                 new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
 
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star2);
                 click = true;
             }
         });
@@ -172,6 +200,7 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
                 new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
                 new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star3);
                 click = true;
             }
         });
@@ -183,6 +212,7 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
                 new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
                 new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star4);
                 click = true;
             }
         });
@@ -194,6 +224,7 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
                 new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
                 new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star5);
                 click = true;
             }
         });
@@ -329,6 +360,9 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
 
         @BindView(R.id.rating_bar)
         CardView rating_bar;
+
+        @BindView(R.id.img_star)
+        ImageView img_star;
 
         @BindView(R.id.rating_star1)
         ImageView rating_star1;

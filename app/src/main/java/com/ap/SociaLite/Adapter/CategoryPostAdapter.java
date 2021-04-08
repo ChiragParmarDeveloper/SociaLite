@@ -89,6 +89,9 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             Picasso.get().load(item.profile_pic).into(holder.circularImageView);
         }
 
+        if(post_lists.get(position).rate.equals("0")){
+            holder.img_star.setImageDrawable(star1);
+        }
         if(post_lists.get(position).rate.equals("1")){
             holder.img_star.setImageDrawable(star1);
         }
@@ -104,7 +107,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         if(post_lists.get(position).rate.equals("5")){
             holder.img_star.setImageDrawable(star5);
         }
-        
+
 
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
@@ -174,9 +177,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                 }
             }
         });
-
-
-
+        
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
