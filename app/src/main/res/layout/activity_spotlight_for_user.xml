@@ -75,8 +75,9 @@
                 android:id="@+id/img_status"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/img1"
                 android:scaleType="fitXY" />
+
+<!--            android:src="@drawable/img1"-->
 
         </androidx.cardview.widget.CardView>
 
