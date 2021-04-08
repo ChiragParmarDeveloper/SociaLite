@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ap.SociaLite.Activity.CameraActivity;
 import com.ap.SociaLite.Activity.RegisterActivity;
@@ -46,32 +47,33 @@ public class NetworkFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_network, container, false);
         ButterKnife.bind(this, view);
+        Toast.makeText(getContext(), "Coming soon..", Toast.LENGTH_SHORT).show();
 
-        network_image_constrain = view.findViewById(R.id.network_image_constrain);
-        network_story_constrain = view.findViewById(R.id.network_story_constrain);
+//        network_image_constrain = view.findViewById(R.id.network_image_constrain);
+//        network_story_constrain = view.findViewById(R.id.network_story_constrain);
+//
+//        recycleview_network_post = view.findViewById(R.id.recycleview_network_post);
+//        layoutManager = new GridLayoutManager(getActivity(), 1);
+//        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+//        recycleview_network_post.setLayoutManager(layoutManager);
+//        myNetworkAdapter = new MyNetworkAdapter(Name,getActivity());
+//        recycleview_network_post.setAdapter(myNetworkAdapter);
 
-        recycleview_network_post = view.findViewById(R.id.recycleview_network_post);
-        layoutManager = new GridLayoutManager(getActivity(), 1);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        recycleview_network_post.setLayoutManager(layoutManager);
-        myNetworkAdapter = new MyNetworkAdapter(Name,getActivity());
-        recycleview_network_post.setAdapter(myNetworkAdapter);
-
-        network_image_constrain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(getActivity(), EditImageActivity.class);
-                in.putExtra("network_fragment", "my_network");
-                startActivity(in);
-            }
-        });
-
-        network_story_constrain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), SpotLightActivity.class));
-            }
-        });
+//        network_image_constrain.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent in = new Intent(getActivity(), EditImageActivity.class);
+//                in.putExtra("network_fragment", "my_network");
+//                startActivity(in);
+//            }
+//        });
+//
+//        network_story_constrain.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getActivity(), SpotLightActivity.class));
+//            }
+//        });
 
         return view;
     }

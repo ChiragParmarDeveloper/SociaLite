@@ -34,6 +34,7 @@ public class AddSpotlightActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
     String picture_path;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +79,6 @@ public class AddSpotlightActivity extends AppCompatActivity {
                 }
 
             }
-
         }
     };
 

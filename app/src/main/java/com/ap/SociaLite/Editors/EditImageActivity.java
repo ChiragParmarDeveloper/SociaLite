@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.ChangeBounds;
 import androidx.transition.TransitionManager;
 
+import com.ap.SociaLite.Activity.AddSpotlightActivity_2;
 import com.ap.SociaLite.Activity.CameraActivity;
 import com.ap.SociaLite.Editors.base.BaseActivity;
 import com.ap.SociaLite.Editors.filters.FilterListener;
@@ -76,7 +76,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     @Nullable
     @VisibleForTesting
     Uri mSaveImageUri;
-    String my_network,business_interaction;
+    String my_network, business_interaction, user_story;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,9 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
         my_network = getIntent().getStringExtra("network_fragment");
 
-        business_interaction= getIntent().getStringExtra("business_fragment");
+        business_interaction = getIntent().getStringExtra("business_fragment");
+
+        user_story = getIntent().getStringExtra("user_story");
 
         initViews();
 
@@ -293,11 +295,18 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         mSaveImageUri = Uri.fromFile(new File(imagePath));
                         mPhotoEditorView.getSource().setImageURI(mSaveImageUri);
 
-                        startActivity(new Intent(EditImageActivity.this, CameraActivity.class)
-                                .putExtra("img_url", imagePath)
-                                .putExtra("network_fragment", my_network)
-                                .putExtra("business_fragment", business_interaction));
 
+                        if (user_story != null) {
+
+                            startActivity(new Intent(EditImageActivity.this, AddSpotlightActivity_2.class)
+                                    .putExtra("path", imagePath));
+                        } else {
+
+                            startActivity(new Intent(EditImageActivity.this, CameraActivity.class)
+                                    .putExtra("img_url", imagePath)
+                                    .putExtra("network_fragment", my_network)
+                                    .putExtra("business_fragment", business_interaction));
+                        }
                     }
 
                     @Override

@@ -151,9 +151,9 @@ public interface RService {
 
 
     @Multipart
-    @POST("put_story.php")
+    @POST("put_storys.php")
     Call<json> put_story(@Part("user_id") RequestBody user_id,
-                         @Part MultipartBody.Part story_image);
+                         @Part MultipartBody.Part story_file);
 
 
     @FormUrlEncoded

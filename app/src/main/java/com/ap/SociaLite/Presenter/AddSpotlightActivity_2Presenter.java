@@ -1,10 +1,13 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ap.SociaLite.Activity.AddSpotlightActivity_2;
+import com.ap.SociaLite.Activity.ProfileActivity;
+import com.ap.SociaLite.Activity.SpotlightActivityForUser;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.AddSpotlightActivity_2Contract;
@@ -26,32 +29,38 @@ public class AddSpotlightActivity_2Presenter implements AddSpotlightActivity_2Co
     }
 
     @Override
-    public void put_my_story(RequestBody user_id, MultipartBody.Part story_image) {
+    public void put_my_story(RequestBody user_id, MultipartBody.Part story_file) {
+        addSpotlightActivity_2.progressbar.setVisibility(View.VISIBLE);
         try {
-            new RService.api().call(mContext).put_story(user_id, story_image)
+            new RService.api().call(mContext).put_story(user_id, story_file)
                     .enqueue(new Callback<json>() {
                         @Override
                         public void onResponse(Call<json> call, Response<json> response) {
-
+                            addSpotlightActivity_2.progressbar.setVisibility(View.GONE);
                             if (response.body().status.equals("1")) {
                                 Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                                addSpotlightActivity_2.onBackPressed();
+                                Intent spotlight = new Intent(mContext, SpotlightActivityForUser.class);
+                                spotlight.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                mContext.startActivity(spotlight);
+                                addSpotlightActivity_2.finish();
 //                                Intent in = new Intent(mContext, SpotLightActivity.class);
 //                                mContext.startActivity(in);
 //                                addSpotlightActivity_2.finish();
                             } else {
-                          //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                                //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<json> call, Throwable t) {
-                        //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
-                       //     Log.d("error", String.valueOf(t.getMessage()));
+                            addSpotlightActivity_2.progressbar.setVisibility(View.GONE);
+                            //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                            //     Log.d("error", String.valueOf(t.getMessage()));
                         }
                     });
         } catch (Exception e) {
 
         }
     }
+
 }
