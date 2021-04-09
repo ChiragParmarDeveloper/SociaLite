@@ -2,8 +2,6 @@ package com.ap.SociaLite.Activity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,7 +21,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Presenter.PostBusinessPresenter;
-import com.ap.SociaLite.Presenter.PostPresenter;
 import com.ap.SociaLite.R;
 
 import java.io.File;
@@ -109,15 +106,13 @@ public class PostBusiness extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
 
-
-
-   // MultipartBody.Part image;
-    MultipartBody.Part[] image;
+    MultipartBody.Part upload_image;
     MultipartBody.Part[] post_image;
     ArrayList<String> share_List = new ArrayList<>();
     ArrayList<String> hide_list = new ArrayList<>();
-    String user_id,date, time;
+    String user_id, date, time;
     public String selected_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -248,7 +243,7 @@ public class PostBusiness extends AppCompatActivity {
                 break;
 
             case R.id.business_upload_your_card:
-           //     openGallery();
+                openGallery();
                 break;
 
 //            case R.id.img_one:
@@ -298,47 +293,45 @@ public class PostBusiness extends AppCompatActivity {
         }
     }
 
-//    private void openGallery() {
-//        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-//        startActivityForResult(gallery, PICK_IMAGE);
-//    }
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        //Result if we want hint number
-//        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-//            imageUri = data.getData();
-//            picture_path = getRealPathFromURI(imageUri);
-//            File f = new File(picture_path);
-//            mArrayUri.add(picture_path);
-//
-//            image = new MultipartBody.Part[mArrayUri.size()];
-//
-//            for (int index = 0; index < mArrayUri.size(); index++) {
-//                Log.d("Upload request", "image " + index + "  " + mArrayUri.get(index));
-//                File file2 = new File(mArrayUri.get(index));
-//                RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file2);
-//                image[index] = MultipartBody.Part.createFormData("image[]", file2.getPath(), surveyBody);
-//            }
-//
-//            Session session = new Session(PostBusiness.this);
-//            RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), session.getUser_id());
-//
-//            new PostBusinessPresenter(this, this).upload_card(image, user_id);
-//
-//        } else {
-//
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //Result if we want hint number
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            imageUri = data.getData();
+            picture_path = getRealPathFromURI(imageUri);
 
-//    public String getRealPathFromURI(Uri uri) {
-//        String[] projection = {MediaStore.Images.Media.DATA};
-//        @SuppressWarnings("deprecation")
-//        Cursor cursor = managedQuery(uri, projection, null, null, null);
-//        int column_index = cursor
-//                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//        cursor.moveToFirst();
-//        return cursor.getString(column_index);
-//    }
+            if (picture_path != null) {
+                File file = new File(picture_path);
+                RequestBody picture = RequestBody.create(MediaType.parse("image/*"), file);
+                upload_image = MultipartBody.Part.createFormData("upload_image", file.getPath(), picture);
+            } else {
+                RequestBody picture = RequestBody.create(MediaType.parse("image/*"), "");
+                upload_image = MultipartBody.Part.createFormData("upload_image", "", picture);
+            }
+
+            Session session = new Session(PostBusiness.this);
+            RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), session.getUser_id());
+
+            new PostBusinessPresenter(this, this).upload_card(user_id,upload_image);
+
+        } else {
+
+        }
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        @SuppressWarnings("deprecation")
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
 }

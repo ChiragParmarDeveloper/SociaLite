@@ -91,12 +91,13 @@ public class PostBusinessPresenter implements PostBusinessContract {
     }
 
     @Override
-    public void upload_card(MultipartBody.Part[] image, RequestBody user_id) {
+    public void upload_card(RequestBody user_id, MultipartBody.Part upload_image) {
+        postBusiness.progressbar.setVisibility(View.VISIBLE);
         try {
-            new RService.api().call(mContext).card_upload(image, user_id).enqueue(new Callback<json>() {
+            new RService.api().call(mContext).card_upload(user_id, upload_image).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
-
+                    postBusiness.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
@@ -106,6 +107,7 @@ public class PostBusinessPresenter implements PostBusinessContract {
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
+                    postBusiness.progressbar.setVisibility(View.GONE);
                     //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
                     //     Log.d("error", String.valueOf(t.getMessage()));
                 }
@@ -113,7 +115,9 @@ public class PostBusinessPresenter implements PostBusinessContract {
         } catch (Exception e) {
 
         }
+
     }
+
 
     @Override
     public void post(RequestBody user_id, MultipartBody.Part[] post_image, RequestBody description, RequestBody intrest_id,
