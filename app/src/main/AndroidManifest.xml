@@ -78,7 +78,10 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activity.Forgot_Activity" />
         <activity android:name=".Activity.OtpActivity" />
-        <activity android:name=".Activity.HomeActivity" />
+        <activity android:name=".Activity.HomeActivity" >
+
+
+        </activity>
         <activity android:name=".Activity.SampleActivity" />
         <activity
             android:name=".Activity.RegisterActivity"
