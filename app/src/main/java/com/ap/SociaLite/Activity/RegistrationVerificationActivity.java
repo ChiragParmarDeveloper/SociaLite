@@ -99,7 +99,6 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
                 TimeUnit.SECONDS,                // Unit of timeout
                 RegistrationVerificationActivity.this,        // Activity (for callback binding)
                 mCallback); // OnVerificationStateChangedCallbacks
-
     }
 
     private void StartFirebaseLogin() {

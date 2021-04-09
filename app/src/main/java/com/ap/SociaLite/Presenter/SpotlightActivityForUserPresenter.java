@@ -3,7 +3,7 @@ package com.ap.SociaLite.Presenter;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.widget.Toast;
+import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,7 +44,6 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
                     if (response.body().status.equals("1")) {
                         if (response.body().user_details != null) {
 
-
                             if (response.body().user_details.profile_pic.equals("http://the-socialite.com/admin/")) {
                                 Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
                                 spotlightActivityForUser.user_profile.setImageDrawable(upload_img);
@@ -80,8 +79,8 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
                             spotlightActivityForUser.rv_mystory.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
                             spotlightActivityForUser.rv_mystory.setAdapter(new MyAllStoryAdapter(mContext, response.body().story_data, spotlightActivityForUser));
 
-                             abc=0;
-                             handler=new Handler();
+                            abc = 0;
+                            handler = new Handler();
                             for (int i = 0; i < response.body().story_data.size(); i++) {
                                 int finalI = i;
 
@@ -91,9 +90,9 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
                                         Picasso.get().load(response.body().story_data.get(finalI).story_image).into(spotlightActivityForUser.img_status);
 
                                     }
-                                }, 2000*i);
+                                }, 2000 * i);
                             }
-                            }
+                        }
                     } else {
                         //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
@@ -121,10 +120,15 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
                     if (response.body().status.equals("1")) {
 
                         if (response.body().story_view != null && response.body().story_view.size() > 0) {
+
+                            spotlightActivityForUser.view_count.setVisibility(View.VISIBLE);
+                            spotlightActivityForUser.view_count.setText(response.body().count + " " + "views");
                             spotlightActivityForUser.views_recycler.setLayoutManager(new GridLayoutManager(mContext, 1));
                             spotlightActivityForUser.views_recycler.setAdapter(new SpotlightViewerAdapter(mContext, response.body().story_view, spotlightActivityForUser));
                         }
                     } else {
+                        spotlightActivityForUser.view_count.setVisibility(View.VISIBLE);
+                        spotlightActivityForUser.view_count.setText("0 views");
                         spotlightActivityForUser.views_recycler.setLayoutManager(new GridLayoutManager(mContext, 1));
                         spotlightActivityForUser.views_recycler.setAdapter(new SpotlightViewerAdapter(mContext, response.body().story_view, spotlightActivityForUser));
                     }

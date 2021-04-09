@@ -49,9 +49,9 @@ public class NetworkFragment extends Fragment {
         ButterKnife.bind(this, view);
         Toast.makeText(getContext(), "Coming soon..", Toast.LENGTH_SHORT).show();
 
-//        network_image_constrain = view.findViewById(R.id.network_image_constrain);
-//        network_story_constrain = view.findViewById(R.id.network_story_constrain);
-//
+        network_image_constrain = view.findViewById(R.id.network_image_constrain);
+        network_story_constrain = view.findViewById(R.id.network_story_constrain);
+
 //        recycleview_network_post = view.findViewById(R.id.recycleview_network_post);
 //        layoutManager = new GridLayoutManager(getActivity(), 1);
 //        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));

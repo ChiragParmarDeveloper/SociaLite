@@ -146,9 +146,8 @@ public interface RService {
 
     @Multipart
     @POST("upload_card.php")
-    Call<json> card_upload(@Part MultipartBody.Part[] image,
-                           @Part("user_id") RequestBody user_id);
-
+    Call<json> card_upload(@Part("user_id") RequestBody user_id,
+                           @Part MultipartBody.Part upload_image);
 
     @Multipart
     @POST("put_storys.php")

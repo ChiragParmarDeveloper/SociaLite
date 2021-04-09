@@ -7,7 +7,7 @@ public interface PostBusinessContract {
 
     void fetch_my_intrest (String user_id);
 
-    void upload_card (MultipartBody.Part[] image, RequestBody user_id);
+    void upload_card (RequestBody user_id,MultipartBody.Part upload_image);
 
     void post(RequestBody user_id,
               MultipartBody.Part[] post_image,
