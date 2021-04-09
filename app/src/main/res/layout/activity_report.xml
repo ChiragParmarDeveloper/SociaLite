@@ -9,8 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_2sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,8 +18,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_left_arrow"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:text="Report"
             android:textColor="@color/colorBlack"
-            android:textSize="17sp"
+            android:textSize="@dimen/_13sdp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout18"
         android:layout_width="0dp"
-        android:layout_height="12dp"
+        android:layout_height="@dimen/_5sdp"
         android:layout_marginTop="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

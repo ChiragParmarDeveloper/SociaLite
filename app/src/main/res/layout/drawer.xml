@@ -69,13 +69,13 @@
 
                 <TextView
                     android:id="@+id/txt_email"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txt_name"
                     android:text="alps@gmail.com"
                     android:layout_marginTop="-5dp"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="@dimen/_14sdp" />
             </RelativeLayout>
 
 
@@ -105,7 +105,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/_50sdp">
 
 
             <LinearLayout

@@ -9,8 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_2sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,8 +18,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_left_arrow"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
@@ -28,8 +28,8 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/user_profile_1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_marginStart="10dp"
             android:src="@drawable/dummy1"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,7 +42,7 @@
             android:id="@+id/user1_online"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="28dp"
             android:layout_marginBottom="5dp"
             android:src="@drawable/ic_online_icon"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -62,8 +62,8 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/user_profile_2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_marginEnd="15dp"
             android:src="@drawable/dummy1"
 
@@ -77,7 +77,7 @@
             android:id="@+id/user2_online"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="28dp"
             android:layout_marginBottom="5dp"
             android:src="@drawable/ic_online_icon"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -85,8 +85,8 @@
 
         <ImageView
             android:id="@+id/chat_setting"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
             android:layout_marginEnd="20dp"
             android:src="@drawable/ic_setting_icon"
             app:layout_constraintBottom_toBottomOf="parent"

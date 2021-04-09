@@ -9,8 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_2sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,8 +18,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_cross"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:src="@drawable/cross"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:text="Edit"
             android:textColor="@color/colorBlack"
-            android:textSize="22sp"
+            android:textSize="@dimen/_13sdp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,8 +43,8 @@
 
         <Button
             android:id="@+id/btn_save"
-            android:layout_width="76dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_25sdp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/button_style"
             android:text="Save"
@@ -59,7 +59,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout18"
         android:layout_width="0dp"
-        android:layout_height="12dp"
+        android:layout_height="@dimen/_5sdp"
         android:layout_marginTop="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
