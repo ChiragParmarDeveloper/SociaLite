@@ -2,6 +2,7 @@ package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ap.SociaLite.Activity.InterestActivity;
@@ -31,10 +32,11 @@ public class RegistrationVerificationPresenter implements RegistrationVerificati
     public void register(MultipartBody.Part profile_pic, RequestBody username, RequestBody email, RequestBody mobile_number,
                          RequestBody bio, RequestBody dob, RequestBody location, RequestBody password) {
 
+        registrationVerificationActivity.progressbar.setVisibility(View.VISIBLE);
         new RService.api().call(mContext).register(username, mobile_number, email, bio, dob, location, password, profile_pic).enqueue(new Callback<json>() {
             @Override
             public void onResponse(Call<json> call, Response<json> response) {
-
+                registrationVerificationActivity.progressbar.setVisibility(View.GONE);
                 if (response.body().status.equals("1")) {
                     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
 
@@ -52,6 +54,7 @@ public class RegistrationVerificationPresenter implements RegistrationVerificati
 
             @Override
             public void onFailure(Call<json> call, Throwable t) {
+                registrationVerificationActivity.progressbar.setVisibility(View.GONE);
                 //Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
                 //      Log.d("error", String.valueOf(t.getMessage()));
             }
