@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -20,6 +21,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
+
+    @BindView(R.id.progressbar)
+    public ProgressBar progressbar;
 
     @BindView(R.id.txt_Register)
     TextView txt_Register;

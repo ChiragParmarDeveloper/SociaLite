@@ -1,17 +1,15 @@
 package com.ap.SociaLite.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ap.SociaLite.Presenter.LoginPresenter;
 import com.ap.SociaLite.Presenter.RegistrationVerificationPresenter;
 import com.ap.SociaLite.R;
 import com.chaos.view.PinView;
@@ -42,6 +40,9 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
     @BindView(R.id.pinview)
     PinView pinview;
 
+    @BindView(R.id.progressbar)
+    public ProgressBar progressbar;
+
     @BindView(R.id.otp_resend)
     TextView otp_resend;
 
@@ -49,7 +50,7 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
     TextView txt_no;
 
     public boolean isVarificationCompleted = false;
-    String image,name,mail,detail,date_birth,loc,pwd,phoneNumber, otp,country_code,phone;
+    String image, name, mail, detail, date_birth, loc, pwd, phoneNumber, otp, country_code, phone;
     FirebaseAuth auth;
     private String verificationCode;
     private PhoneAuthProvider.ForceResendingToken token;
@@ -122,7 +123,7 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
             public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
                 verificationCode = s;
-                  //         Toast.makeText(RegistrationVerificationActivity.this, "Code sent", Toast.LENGTH_SHORT).show();
+                //         Toast.makeText(RegistrationVerificationActivity.this, "Code sent", Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -152,7 +153,7 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
                             RequestBody passoword = RequestBody.create(MediaType.parse("text/plain"), pwd);
 
                             new RegistrationVerificationPresenter(RegistrationVerificationActivity.this, RegistrationVerificationActivity.this)
-                                    .register(profile_pic,user_name,email,no,bio,dob,location,passoword);
+                                    .register(profile_pic, user_name, email, no, bio, dob, location, passoword);
 
                         } else {
                             Toast.makeText(RegistrationVerificationActivity.this, "Incorrect OTP", Toast.LENGTH_SHORT).show();
