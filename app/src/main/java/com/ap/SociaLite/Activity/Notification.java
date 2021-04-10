@@ -39,11 +39,11 @@ public class Notification extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
 
-        layoutManager = new GridLayoutManager(Notification.this, 1);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        recycleview_notification.setLayoutManager(layoutManager);
-        notificationAdapter = new Notification_adapter(Name,Notification.this);
-        recycleview_notification.setAdapter(notificationAdapter);
+//        layoutManager = new GridLayoutManager(Notification.this, 1);
+//        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+//        recycleview_notification.setLayoutManager(layoutManager);
+//        notificationAdapter = new Notification_adapter(Name,Notification.this);
+//        recycleview_notification.setAdapter(notificationAdapter);
 
 
     }
