@@ -62,7 +62,6 @@
         <activity android:name=".Activity.Setting" />
         <activity android:name=".Activity.Search" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.CameraActivity" />
-        <activity android:name=".Adapter.CategoryListAdapter" />
         <activity android:name=".Activity.RegistrationVerificationActivity" />
         <activity
             android:name=".Activity.CreatePostActivity"

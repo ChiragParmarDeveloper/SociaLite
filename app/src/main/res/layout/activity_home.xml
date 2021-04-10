@@ -3,7 +3,6 @@
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view2="https://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
@@ -119,9 +118,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    card_view2:cardCornerRadius="10dp"
-                    card_view2:cardElevation="5dp"
-                    card_view2:cardUseCompatPadding="true"
                     tools:ignore="MissingConstraints">
 
                     <LinearLayout
@@ -285,9 +281,8 @@
             android:background="#F47E6A"
             android:fitsSystemWindows="false"
             app:headerLayout="@layout/drawer"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"/>
 
-        </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
 
 
