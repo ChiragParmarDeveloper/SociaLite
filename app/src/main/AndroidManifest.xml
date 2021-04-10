@@ -18,9 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Editors.EditImageActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activity.SpotlightActivityForUser"/>
+        <activity
+            android:name=".Editors.EditImageActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activity.SpotlightActivityForUser" />
         <activity android:name=".Activity.ProfileConnectionsActivity" />
         <activity android:name=".Activity.ProfileConnectionActivity" />
         <activity android:name=".Activity.EditProfileActivity" />
@@ -43,11 +44,13 @@
         <activity android:name=".Activity.UserSpotlightViewActivity" />
         <activity android:name=".Activity.SpotLightActivity" />
         <activity android:name=".Activity.ViewAllContectActivity" />
-        <activity android:name=".Activity.Notification"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.Notification"
+            android:screenOrientation="portrait" />
         <activity android:name=".Activity.Report_Status" />
-        <activity android:name=".Activity.Report"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.Report"
+            android:screenOrientation="portrait" />
         <activity android:name=".Activity.CommentActivity" />
         <activity android:name=".Activity.ShareToFriend" />
         <activity android:name=".Activity.ShapeCut" />
@@ -55,17 +58,22 @@
         <activity android:name=".Activity.SchedulePost" />
         <activity android:name=".Activity.SharePost" />
         <activity android:name=".Activity.TemplateBackground" />
-        <activity android:name=".Activity.Post"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activity.Edit"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.Post"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Edit"
+            android:screenOrientation="portrait" />
         <activity android:name=".Activity.Text" />
-        <activity android:name=".Activity.Faq"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.Faq"
+            android:screenOrientation="portrait" />
         <activity android:name=".Activity.HidedPost" />
         <activity android:name=".Activity.Privacy" />
         <activity android:name=".Activity.Setting" />
-        <activity android:name=".Activity.Search" android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Activity.Search"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.CameraActivity" />
         <activity android:name=".Activity.RegistrationVerificationActivity" />
         <activity
@@ -76,28 +84,32 @@
             tools:ignore="Instantiatable" />
         <activity
             android:name=".Activity.LoginActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activity.InterestActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Activity.InterestActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ResetpasswordActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activity.Forgot_Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activity.OtpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activity.HomeActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Activity.Forgot_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.OtpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.HomeActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.RegisterActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activity.MainActivity" />
         <activity
             android:name=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
