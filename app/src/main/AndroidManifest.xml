@@ -55,7 +55,8 @@
         <activity android:name=".Activity.Post" />
         <activity android:name=".Activity.Edit" />
         <activity android:name=".Activity.Text" />
-        <activity android:name=".Activity.Faq" />
+        <activity android:name=".Activity.Faq"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Activity.HidedPost" />
         <activity android:name=".Activity.Privacy" />
         <activity android:name=".Activity.Setting" />
@@ -78,10 +79,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activity.Forgot_Activity" />
         <activity android:name=".Activity.OtpActivity" />
-        <activity android:name=".Activity.HomeActivity" >
-
-
-        </activity>
+        <activity android:name=".Activity.HomeActivity" />
         <activity android:name=".Activity.SampleActivity" />
         <activity
             android:name=".Activity.RegisterActivity"

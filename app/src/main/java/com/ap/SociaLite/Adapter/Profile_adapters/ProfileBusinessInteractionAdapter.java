@@ -265,6 +265,8 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
                 holder.card.setTextColor(Color.BLACK);
                 holder.message.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.message.setTextColor(Color.BLACK);
+
+                Toast.makeText(mContext, "Coming soon...", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -294,6 +296,8 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
                 holder.intrested.setTextColor(Color.BLACK);
                 holder.card.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.card.setTextColor(Color.BLACK);
+                Toast.makeText(mContext, "Coming soon...", Toast.LENGTH_SHORT).show();
+
             }
         });
 

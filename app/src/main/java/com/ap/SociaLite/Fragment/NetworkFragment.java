@@ -59,21 +59,21 @@ public class NetworkFragment extends Fragment {
 //        myNetworkAdapter = new MyNetworkAdapter(Name,getActivity());
 //        recycleview_network_post.setAdapter(myNetworkAdapter);
 
-//        network_image_constrain.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent in = new Intent(getActivity(), EditImageActivity.class);
-//                in.putExtra("network_fragment", "my_network");
-//                startActivity(in);
-//            }
-//        });
-//
-//        network_story_constrain.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getActivity(), SpotLightActivity.class));
-//            }
-//        });
+        network_image_constrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getActivity(), EditImageActivity.class);
+                in.putExtra("network_fragment", "my_network");
+                startActivity(in);
+            }
+        });
+
+        network_story_constrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), SpotLightActivity.class));
+            }
+        });
 
         return view;
     }
