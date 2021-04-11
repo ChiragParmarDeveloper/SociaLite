@@ -92,8 +92,6 @@ public class ConnectionFragment extends Fragment {
                 Intent con_pro1 = new Intent(getContext(), ProfileConnectionActivity.class);
                 startActivity(con_pro1);
                 break;
-
-
         }
     }
 
