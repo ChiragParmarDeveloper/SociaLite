@@ -60,4 +60,8 @@ public class json {
     @SerializedName("data")
     public List<com.ap.SociaLite.Pojo.data> data;
 
+    @SerializedName("user_connection")
+    public List<com.ap.SociaLite.Pojo.user_connection> user_connection;
+
+
 }

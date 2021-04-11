@@ -1,15 +1,22 @@
 package com.ap.SociaLite.Activity;
 
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
+import com.ap.SociaLite.Adapter.ConnectionAdapter.ConnectionAdapter;
 import com.ap.SociaLite.Adapter.TabaccssorAdapter_myconnection.TabaccssorAdapter_myconnection;
 import com.ap.SociaLite.R;
 import com.google.android.material.tabs.TabLayout;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ProfileConnectionsActivity extends AppCompatActivity {
 
@@ -18,14 +25,15 @@ public class ProfileConnectionsActivity extends AppCompatActivity {
 
     ViewPager pharmacy_tabs_pager;
 
-    ImageView img_back;
-
+    @BindView(R.id.connection_serach)
+    public EditText connection_serach;
+    public ConnectionAdapter connectionAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_connections);
+        ButterKnife.bind(this);
 
-        img_back = findViewById(R.id.img_back);
         pharmacy_tabs_pager = findViewById(R.id.connection_tabs_pager);
         tabLayout = findViewById(R.id.connection_tabs);
 
@@ -34,12 +42,39 @@ public class ProfileConnectionsActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(pharmacy_tabs_pager);
 
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+   //     filter();
+    }
+
+    @OnClick({R.id.img_back})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
                 onBackPressed();
+                break;
+        }
+    }
+
+
+    private void filter() {
+
+        connection_serach.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ProfileConnectionsActivity.this.connectionAdapter.filter(String.valueOf(s));
+                connectionAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
-
     }
+
+
 }

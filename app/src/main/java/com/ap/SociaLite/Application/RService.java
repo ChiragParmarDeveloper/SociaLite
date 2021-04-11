@@ -71,6 +71,13 @@ public interface RService {
     @POST("friend_list.php")
     Call<json> frnd_list(@Field("UserId") String UserId);
 
+
+    @FormUrlEncoded
+    @POST("connection_fetch.php")
+    Call<json> connection(@Field("UserId") String UserId);
+
+
+
     @FormUrlEncoded
     @POST("search.php")
     Call<json> fetch_user(@Field("user_id") String user_id);

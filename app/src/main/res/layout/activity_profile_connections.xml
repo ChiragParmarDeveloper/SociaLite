@@ -40,9 +40,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/textView"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/toolbar"
-                    app:layout_constraintTop_toTopOf="@+id/toolbar">
+                    app:layout_constraintTop_toTopOf="@+id/toolbar"/>
 
-                </androidx.appcompat.widget.AppCompatImageView>
 
                 <TextView
                     android:id="@+id/textView"
@@ -100,6 +99,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <EditText
+                        android:id="@+id/connection_serach"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="16dp"
@@ -111,9 +111,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imgsearch"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    </EditText>
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <ImageView
                         android:id="@+id/imgsearch"

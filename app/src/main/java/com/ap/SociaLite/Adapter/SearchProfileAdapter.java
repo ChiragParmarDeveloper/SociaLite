@@ -38,18 +38,9 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         this.alldata.addAll(datas);
     }
 
- //   public static String User_id;
     String id;
     private int selectedItem;
-//
-//    public SearchProfileAdapter(Context context, List<user_list> list, Search fragment) {
-//        this.mContext = context;
-//        this.user_lists = list;
-//
-//
-//        this.search = fragment;
-//
-//    }
+
 
     @NonNull
     @Override
