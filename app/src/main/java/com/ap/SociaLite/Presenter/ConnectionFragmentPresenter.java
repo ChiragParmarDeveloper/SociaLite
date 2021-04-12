@@ -2,6 +2,7 @@ package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -57,4 +58,28 @@ public class ConnectionFragmentPresenter implements ConnectionFragmentContrast {
 
         }
     }
+
+
+    @Override
+    public void send_request(String UserId, String RequestId) {
+        new RService.api().call(mContext).connection_request(UserId,RequestId).enqueue(new Callback<json>() {
+            @Override
+            public void onResponse(Call<json> call, Response<json> response) {
+                if (response.body().status.equals("1")) {
+                    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                } else {
+                    //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<json> call, Throwable t) {
+                //      Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Log.d("error", String.valueOf(t.getMessage()));
+            }
+        });
+    }
 }
+
+
+

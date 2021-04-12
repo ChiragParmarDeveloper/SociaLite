@@ -34,8 +34,8 @@ public class ProfileConnectionTimelineFragmentPresenter implements ProfileConnec
             new RService.api().call(mContext).timeline_my_post(user_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
+                    profileConnectionTimelineFragment.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-                        profileConnectionTimelineFragment.progressbar.setVisibility(View.GONE);
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
                             profileConnectionTimelineFragment.recycleview_timeline.setLayoutManager(new GridLayoutManager(mContext, 1));
                             profileConnectionTimelineFragment.recycleview_timeline.setAdapter(new ProfileConnectionTimelineAdapter(mContext, profileConnectionTimelineFragment, response.body().post_list));

@@ -72,8 +72,7 @@ public class ConnectionFragment extends Fragment {
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.layout_connect:
-                Toast.makeText(getContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
-              //  new SearchPresenter(this, this).send_request(user_id, RequestId);
+                new ConnectionFragmentPresenter(this, getContext()).send_request(UserId,RequestId);
                 break;
 
             case R.id.connection_msg:
