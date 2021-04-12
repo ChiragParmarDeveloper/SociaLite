@@ -30,12 +30,12 @@ public class ProfileActivityPresenter implements ProfileActivityContract {
 
     @Override
     public void profile_my_profile(String user_id) {
-        profileActivity.progressbar.setVisibility(View.VISIBLE);
+  //      profileActivity.progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(mContext).my_profileActivity(user_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
-                    profileActivity.progressbar.setVisibility(View.GONE);
+              //      profileActivity.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().my_profile_user_details != null && response.body().my_profile_user_details.size() > 0) {
 
@@ -65,7 +65,7 @@ public class ProfileActivityPresenter implements ProfileActivityContract {
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    profileActivity.progressbar.setVisibility(View.GONE);
+            //        profileActivity.progressbar.setVisibility(View.GONE);
                     //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //    Log.d("error", String.valueOf(t.getMessage()));
                 }
