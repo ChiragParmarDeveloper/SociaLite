@@ -76,6 +76,12 @@ public interface RService {
     @POST("connection_fetch.php")
     Call<json> connection(@Field("UserId") String UserId);
 
+
+
+    @FormUrlEncoded
+    @POST("my_network.php")
+    Call<json> netork_post(@Field("UserId") String UserId);
+
     @FormUrlEncoded
     @POST("my_connections.php")
     Call<json> my_connection (@Field("UserId") String UserId);
