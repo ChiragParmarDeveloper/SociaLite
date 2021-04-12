@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Activity.ProfileConnectionActivity">
 
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/_10sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -107,6 +118,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/share"
                     android:layout_width="0dp"
                     android:layout_height="70dp"
                     android:layout_weight="1">
@@ -129,11 +141,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView14" />
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/msg"
                     android:layout_width="0dp"
                     android:layout_height="70dp"
                     android:layout_weight="1">
@@ -157,10 +168,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
             </LinearLayout>
 
             <TextView
@@ -170,7 +178,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut..."
+                android:text="Lorem ipsum dolor sit amet, quis nostrud exercitation ullamco laboris nisi ut..."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
@@ -271,7 +279,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView12"
+                    android:id="@+id/cover_image"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_marginStart="10dp"
@@ -282,6 +290,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
@@ -299,12 +308,8 @@
                     android:layout_height="70dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="145dp"
-                    android:src="@drawable/profile_pic"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </com.mikhaellopez.circularimageview.CircularImageView>
-
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

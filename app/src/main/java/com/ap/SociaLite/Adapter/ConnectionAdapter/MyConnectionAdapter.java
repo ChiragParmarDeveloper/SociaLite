@@ -61,6 +61,7 @@ public class MyConnectionAdapter extends RecyclerView.Adapter<MyConnectionAdapte
         }
 
         if (selectedItem == position) {
+
             myConnectionFragment.RequestId = user_connections.get(position).Request_Id;
             myConnectionFragment.search_profile_user_name.setText(user_connections.get(position).username);
             if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
@@ -74,8 +75,8 @@ public class MyConnectionAdapter extends RecyclerView.Adapter<MyConnectionAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myConnectionFragment.RequestId = user_connections.get(position).Request_Id;
-                myConnectionFragment.search_profile_user_name.setText(user_connections.get(position).username);
+               myConnectionFragment.RequestId = user_connections.get(position).Request_Id;
+               myConnectionFragment.search_profile_user_name.setText(user_connections.get(position).username);
 
                 if (user_connections.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
                     Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);

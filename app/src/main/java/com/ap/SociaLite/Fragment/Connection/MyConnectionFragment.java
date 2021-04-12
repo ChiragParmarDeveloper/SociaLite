@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +43,9 @@ public class MyConnectionFragment extends Fragment {
     @BindView(R.id.search_profile_image)
     public ImageView search_profile_image;
 
+    @BindView(R.id.constraint_myconnection)
+    public ConstraintLayout constraint_myconnection;
+
     public MyConnectionAdapter myConnectionAdapter;
     public String UserId, RequestId;
     public List<user_connection> user_connections;
@@ -55,16 +59,16 @@ public class MyConnectionFragment extends Fragment {
 
         Session session = new Session(getContext());
         UserId = session.getUser_id();
-
+        new MyConnectionFragmentPresenter(this, getContext()).following(UserId);
         return view;
     }
 
-    @OnClick({R.id.connection_msg, R.id.layout_connect, R.id.search_profile_user_name, R.id.share, R.id.search_profile_image})
+    @OnClick({R.id.connection_msg, R.id.layout_disconnect, R.id.search_profile_user_name, R.id.share, R.id.search_profile_image})
     public void OnClick(View view) {
         switch (view.getId()) {
-            case R.id.layout_connect:
-                Toast.makeText(getContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
-                //  new SearchPresenter(this, this).send_request(user_id, RequestId);
+            case R.id.layout_disconnect:
+                new MyConnectionFragmentPresenter(this, getContext()).remove_frnd(UserId, RequestId);
+                new MyConnectionFragmentPresenter(this, getContext()).following(UserId);
                 break;
 
             case R.id.connection_msg:
@@ -81,11 +85,13 @@ public class MyConnectionFragment extends Fragment {
 
             case R.id.search_profile_user_name:
                 Intent con_pro = new Intent(getContext(), ProfileConnectionActivity.class);
+                con_pro.putExtra("request_id", RequestId);
                 startActivity(con_pro);
                 break;
 
             case R.id.search_profile_image:
                 Intent con_pro1 = new Intent(getContext(), ProfileConnectionActivity.class);
+                con_pro1.putExtra("request_id", RequestId);
                 startActivity(con_pro1);
                 break;
         }

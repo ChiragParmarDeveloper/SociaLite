@@ -20,9 +20,6 @@ import java.util.Arrays;
 
 public class ProfileConnectionTimelineFragment extends Fragment {
 
-    public ProfileConnectionTimelineFragment() {
-        // Required empty public constructor
-    }
 
     RecyclerView recycleview_timeline;
 

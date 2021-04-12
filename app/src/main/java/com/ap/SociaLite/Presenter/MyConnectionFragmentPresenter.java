@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.ap.SociaLite.Adapter.ConnectionAdapter.ConnectionAdapter;
 import com.ap.SociaLite.Adapter.ConnectionAdapter.MyConnectionAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
@@ -42,6 +41,34 @@ public class MyConnectionFragmentPresenter implements MyConnectionFragmentContra
                             myConnectionFragment.myconnections_recyclerview.setLayoutManager(new GridLayoutManager(mContext, 1));
                             myConnectionFragment.myconnections_recyclerview.setAdapter(myConnectionFragment.myConnectionAdapter);
                         }
+                    } else {
+                        myConnectionFragment.constraint_myconnection.setVisibility(View.GONE);
+                        //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    myConnectionFragment.progressbar.setVisibility(View.GONE);
+                    //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void remove_frnd(String UserId, String RequestId) {
+        myConnectionFragment.progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(mContext).disconnect(UserId, RequestId).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    myConnectionFragment.progressbar.setVisibility(View.GONE);
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }

@@ -41,6 +41,7 @@ public class ConnectionFragmentPresenter implements ConnectionFragmentContrast {
                             connectionFragment.connections_recyclerview.setAdapter(connectionFragment.connectionAdapter);
                         }
                     } else {
+                        connectionFragment.layout_connection.setVisibility(View.GONE);
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }

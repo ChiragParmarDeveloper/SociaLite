@@ -123,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
-                        android:text="500"
+                        android:text="0"
                         android:textColor="#EE6851"
                         android:textSize="20dp"
                         app:layout_constraintEnd_toEndOf="parent"

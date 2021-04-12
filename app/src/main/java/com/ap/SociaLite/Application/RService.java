@@ -89,6 +89,14 @@ public interface RService {
     Call<json> connection_request(@Field("UserId") String UserId,
                                   @Field("RequestId") String RequestId);
 
+
+
+    @FormUrlEncoded
+    @POST("remove_connection.php")
+    Call<json> disconnect(@Field("UserId") String UserId,
+                                  @Field("RequestId") String RequestId);
+
+
     @FormUrlEncoded
     @POST("view_hided_post.php")
     Call<json> hidepost(@Field("user_id") String user_id);

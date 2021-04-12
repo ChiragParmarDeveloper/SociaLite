@@ -46,6 +46,11 @@ public class ConnectionFragment extends Fragment {
     @BindView(R.id.connections_recyclerview)
     public RecyclerView connections_recyclerview;
 
+    @BindView(R.id.layout_connection)
+    public ConstraintLayout layout_connection;
+
+
+
     public ConnectionAdapter connectionAdapter;
     public String UserId, RequestId;
     public List<user_connection> user_connections;
@@ -85,11 +90,13 @@ public class ConnectionFragment extends Fragment {
 
             case R.id.search_profile_user_name:
                 Intent con_pro = new Intent(getContext(), ProfileConnectionActivity.class);
+                con_pro.putExtra("request_id",RequestId);
                 startActivity(con_pro);
                 break;
 
             case R.id.search_profile_image:
                 Intent con_pro1 = new Intent(getContext(), ProfileConnectionActivity.class);
+                con_pro1.putExtra("request_id",RequestId);
                 startActivity(con_pro1);
                 break;
         }

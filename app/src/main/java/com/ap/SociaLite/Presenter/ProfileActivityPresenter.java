@@ -39,7 +39,6 @@ public class ProfileActivityPresenter implements ProfileActivityContract {
                     if (response.body().status.equals("1")) {
                         if (response.body().my_profile_user_details != null && response.body().my_profile_user_details.size() > 0) {
 
-
                             if (response.body().my_profile_user_details.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
                                 Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
                                 profileActivity.circularImageView6.setImageDrawable(upload_img);
@@ -55,7 +54,7 @@ public class ProfileActivityPresenter implements ProfileActivityContract {
 
                             profileActivity.user_name.setText(response.body().my_profile_user_details.get(0).username);
                             profileActivity.textView16.setText(response.body().my_profile_user_details.get(0).bio);
-                            profileActivity.textView10.setText(response.body().my_profile_user_details.get(0).connection);
+                            profileActivity.textView10.setText(response.body().count);
 
 
                         }
