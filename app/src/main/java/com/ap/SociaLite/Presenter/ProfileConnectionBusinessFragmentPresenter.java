@@ -7,49 +7,53 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.ap.SociaLite.Adapter.Profile_connection_adapters.ProfileConnectionTimelineAdapter;
+import com.ap.SociaLite.Adapter.Profile_connection_adapters.ProfileConnectionBusinessAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
-import com.ap.SociaLite.Contract.ProfileConnectionTimelineFragmentContrast;
-import com.ap.SociaLite.Fragment.profile_connection_fragments.ProfileConnectionTimelineFragment;
+import com.ap.SociaLite.Contract.ProfileConnectionBusinessFragmentContrast;
+import com.ap.SociaLite.Fragment.profile_connection_fragments.ProfileConnectionBusinessFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileConnectionTimelineFragmentPresenter implements ProfileConnectionTimelineFragmentContrast {
+public class ProfileConnectionBusinessFragmentPresenter implements ProfileConnectionBusinessFragmentContrast {
+
 
     public Context mContext;
-    public ProfileConnectionTimelineFragment profileConnectionTimelineFragment;
+    public ProfileConnectionBusinessFragment profileConnectionBusinessFragment;
 
-    public ProfileConnectionTimelineFragmentPresenter(Context mContext, ProfileConnectionTimelineFragment profileConnectionTimelineFragment) {
+    public ProfileConnectionBusinessFragmentPresenter(Context mContext, ProfileConnectionBusinessFragment profileConnectionBusinessFragment) {
         this.mContext = mContext;
-        this.profileConnectionTimelineFragment = profileConnectionTimelineFragment;
+        this.profileConnectionBusinessFragment = profileConnectionBusinessFragment;
     }
 
     @Override
-    public void time_line_post(String user_id) {
-        profileConnectionTimelineFragment.progressbar.setVisibility(View.VISIBLE);
+    public void my_post_business_intrection(String user_id) {
+        profileConnectionBusinessFragment.progressbar.setVisibility(View.VISIBLE);
         try {
-            new RService.api().call(mContext).timeline_my_post(user_id).enqueue(new Callback<json>() {
+            new RService.api().call(mContext).my_bussiness_post(user_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
+                    profileConnectionBusinessFragment.progressbar.setVisibility(View.GONE);
+
                     if (response.body().status.equals("1")) {
-                        profileConnectionTimelineFragment.progressbar.setVisibility(View.GONE);
+
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
-                            profileConnectionTimelineFragment.recycleview_timeline.setLayoutManager(new GridLayoutManager(mContext, 1));
-                            profileConnectionTimelineFragment.recycleview_timeline.setAdapter(new ProfileConnectionTimelineAdapter(mContext, profileConnectionTimelineFragment, response.body().post_list));
+                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                            profileConnectionBusinessFragment.recycleview_business_interaction.setLayoutManager(new GridLayoutManager(mContext, 1));
+                            profileConnectionBusinessFragment.recycleview_business_interaction.setAdapter(new ProfileConnectionBusinessAdapter(mContext,profileConnectionBusinessFragment,response.body().post_list));
                         }
                     } else {
-                        //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    profileConnectionTimelineFragment.progressbar.setVisibility(View.GONE);
+                    profileConnectionBusinessFragment.progressbar.setVisibility(View.GONE);
 
-                    //        Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
@@ -74,7 +78,7 @@ public class ProfileConnectionTimelineFragmentPresenter implements ProfileConnec
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    //  Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     // Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
@@ -107,7 +111,6 @@ public class ProfileConnectionTimelineFragmentPresenter implements ProfileConnec
         }
     }
 
-
     @Override
     public void rating_post(String user_id, String post_id, String rate) {
         try {
@@ -131,5 +134,4 @@ public class ProfileConnectionTimelineFragmentPresenter implements ProfileConnec
 
         }
     }
-
 }

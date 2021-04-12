@@ -132,10 +132,8 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
 
                         switch (item.getItemId()) {
                             case R.id.hide:
-
                                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).hide_post(businessInteractionFragment.user_id, id);
                                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
-
                                 break;
 
                             case R.id.save:
