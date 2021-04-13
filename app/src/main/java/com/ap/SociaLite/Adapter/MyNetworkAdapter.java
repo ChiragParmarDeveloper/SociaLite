@@ -2,6 +2,8 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,24 +22,40 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
+import com.ap.SociaLite.Application.RService;
+import com.ap.SociaLite.Application.json;
+import com.ap.SociaLite.Fragment.CategoryFragment;
+import com.ap.SociaLite.Fragment.NetworkFragment;
+import com.ap.SociaLite.Pojo.post_list;
+import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
+import com.ap.SociaLite.Presenter.NetworkFragmentPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHolder>{
 
     Boolean click = true;
-    String rating = "";
+    String rate = "";
 
-    ArrayList Name;
-    Context context;
+    Context mContext;
+    NetworkFragment networkFragment;
+    List<post_list> post_lists = new ArrayList<>();
+    post_list item;
 
-    public MyNetworkAdapter(ArrayList name, Context context) {
-        Name = name;
-        this.context = context;
+    public MyNetworkAdapter(Context mContext, NetworkFragment networkFragment, List<post_list> post_lists) {
+        this.mContext = mContext;
+        this.networkFragment = networkFragment;
+        this.post_lists = post_lists;
     }
 
     @NonNull
@@ -51,13 +69,53 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
-        holder.txt_name.setText((CharSequence) Name.get(position));
+        Drawable star1 = mContext.getDrawable(R.drawable.ic_rating_star1);
+        Drawable star2 = mContext.getDrawable(R.drawable.ic_rating_star2);
+        Drawable star3 = mContext.getDrawable(R.drawable.ic_rating_star3);
+        Drawable star4 = mContext.getDrawable(R.drawable.ic_rating_star4);
+        Drawable star5 = mContext.getDrawable(R.drawable.ic_rating_star5);
+
+        item = post_lists.get(position);
+        String id = post_lists.get(position).post_id;
+
+        Picasso.get().load(item.image).into(holder.img_category);
+        holder.txt_description.setText(item.description);
+        holder.txt_rating.setText(item.rate);
+        holder.txt_time.setText(item.post_time);
+        holder.txt_name.setText(item.username);
+
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+            holder.circularImageView.setImageDrawable(upload_img);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+        }
+
+        if(post_lists.get(position).rate.equals("0")){
+            holder.img_star.setImageDrawable(star1);
+        }
+        if(post_lists.get(position).rate.equals("1")){
+            holder.img_star.setImageDrawable(star1);
+        }
+        if(post_lists.get(position).rate.equals("2")){
+            holder.img_star.setImageDrawable(star2);
+        }
+        if(post_lists.get(position).rate.equals("3")){
+            holder.img_star.setImageDrawable(star3);
+        }
+        if(post_lists.get(position).rate.equals("4")){
+            holder.img_star.setImageDrawable(star4);
+        }
+        if(post_lists.get(position).rate.equals("5")){
+            holder.img_star.setImageDrawable(star5);
+        }
+
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                PopupMenu popup = new PopupMenu(context, holder.img_popup);
+                PopupMenu popup = new PopupMenu(mContext, holder.img_popup);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
                         .inflate(R.menu.popup_menu, popup.getMenu());
@@ -69,21 +127,22 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
 
                         switch (item.getItemId()) {
                             case R.id.hide:
-                                Toast.makeText(view.getContext(), "Clicked hide", Toast.LENGTH_SHORT).show();
-                                //startActivity(new Intent(App.this, App_Main.class));
+                                new NetworkFragmentPresenter(mContext, networkFragment).hide_post(networkFragment.UserId, id);
+                                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                                 break;
 
-                            case R.id.help:
-                                Toast.makeText(view.getContext(), "Clicked help", Toast.LENGTH_SHORT).show();
+                            case R.id.save:
+                                new NetworkFragmentPresenter(mContext, networkFragment).category_save_post(networkFragment.UserId,id);
                                 break;
 
                             case R.id.report:
                                 Intent in = new Intent(view.getContext(), Report.class);
+                                in.putExtra("post_id", id);
                                 view.getContext().startActivity(in);
                                 break;
 
                             case R.id.copylink:
-                                Toast.makeText(view.getContext(), "Clicked copy", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(view.getContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
                                 break;
 
                             default:
@@ -127,9 +186,11 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "1";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "1";
+                new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id,rate);
+                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star1);
                 click = true;
             }
         });
@@ -137,9 +198,11 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
         holder.rating_star2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "2";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "2";
+                new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id,rate);
+                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star2);
                 click = true;
             }
         });
@@ -147,9 +210,11 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
         holder.rating_star3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "3";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "3";
+                new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id,rate);
+                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star3);
                 click = true;
             }
         });
@@ -157,9 +222,11 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
         holder.rating_star4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "4";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "4";
+                new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id,rate);
+                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star4);
                 click = true;
             }
         });
@@ -167,9 +234,11 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
         holder.rating_star5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rating = "5";
-                Toast.makeText(context, "rating : " + rating, Toast.LENGTH_SHORT).show();
+                rate = "5";
+                new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id,rate);
+                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                 holder.rating_bar.setVisibility(View.GONE);
+                holder.img_star.setImageDrawable(star5);
                 click = true;
             }
         });
@@ -179,15 +248,74 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(view.getContext(), CommentActivity.class);
+                in.putExtra("post_id", id);
                 view.getContext().startActivity(in);
             }
         });
 
+        holder.txt_allcomment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(view.getContext(), CommentActivity.class);
+                in.putExtra("post_id", id);
+                view.getContext().startActivity(in);
+            }
+        });
+
+        try {
+            new RService.api().call(mContext).fetch_comments(id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+
+                    if (response.body().status.equals("1")) {
+
+                        if (response.body().comments.comments != null && response.body().comments.comments.size() > 0) {
+
+                            Log.d("commnet_new", String.valueOf(response.body().comments.comments.size()));
+                            holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name);
+
+                            holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
+
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+                            Picasso.get().load(img).into(holder.circularImageView3);
+
+                        } else {
+                            holder.layout.setVisibility(View.GONE);
+                        }
+
+                        if (response.body().comments.comments != null && response.body().comments.comments.size() > 1) {
+
+                            holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
+                            holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
+
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                            Picasso.get().load(img).into(holder.circular);
+
+                        } else {
+                            holder.layout1.setVisibility(View.GONE);
+                        }
+
+                    } else {
+                        holder.layout.setVisibility(View.GONE);
+                        holder.layout1.setVisibility(View.GONE);
+                        //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //  Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
     }
 
     @Override
     public int getItemCount() {
-        return Name.size();
+        return post_lists.size();
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
@@ -213,6 +341,9 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
         @BindView(R.id.rating_bar)
         CardView rating_bar;
 
+        @BindView(R.id.img_star)
+        ImageView img_star;
+
         @BindView(R.id.rating_star1)
         ImageView rating_star1;
 
@@ -227,6 +358,49 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
 
         @BindView(R.id.rating_star5)
         ImageView rating_star5;
+
+        @BindView(R.id.img_category)
+        ImageView img_category;
+
+        @BindView(R.id.txt_description)
+        TextView txt_description;
+
+        @BindView(R.id.txt_rating)
+        TextView txt_rating;
+
+        @BindView(R.id.txt_allcomment)
+        TextView txt_allcomment;
+
+        @BindView(R.id.txt_name_position_0)
+        TextView txt_name_position_0;
+
+        @BindView(R.id.txt_comment_pos_0)
+        TextView txt_comment_pos_0;
+
+
+        @BindView(R.id.txt_name_pos_1)
+        TextView txt_name_pos_1;
+
+        @BindView(R.id.txt_comment_pos_1)
+        TextView txt_comment_pos_1;
+
+        @BindView(R.id.txt_time)
+        TextView txt_time;
+
+        @BindView(R.id.layout)
+        LinearLayout layout;
+
+        @BindView(R.id.layout1)
+        LinearLayout layout1;
+
+        @BindView(R.id.circularImageView)
+        CircularImageView circularImageView;
+
+        @BindView(R.id.circular)
+        CircularImageView circular;
+
+        @BindView(R.id.circularImageView3)
+        CircularImageView circularImageView3;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

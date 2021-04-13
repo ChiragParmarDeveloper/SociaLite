@@ -3,6 +3,7 @@ package com.ap.SociaLite.Activity;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
@@ -28,12 +30,20 @@ import com.ap.SociaLite.Fragment.ShareFragment;
 import com.ap.SociaLite.Presenter.HomeActivityPresenter;
 import com.ap.SociaLite.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.OnSuccessListener;
+import com.google.android.play.core.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -100,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.imgnotification)
     ImageView imgnotification;
 
-
+    private int REQUEST_CODE = 1;
     public TextView txt_name, txt_email, txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
     ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout,img_arrow;
     public CircularImageView img_dp;
@@ -410,9 +420,45 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        //NOTIFY USER THAT UPDATE IS AVILBLE FOR NEW VERSION
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(HomeActivity.this);
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo result) {
+
+                if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                        // For a flexible update, use AppUpdateType.FLEXIBLE
+                        && result.isUpdateTypeAllowed(IMMEDIATE)) {
+                    try {
+                        appUpdateManager.startUpdateFlowForResult(result, IMMEDIATE, HomeActivity.this, REQUEST_CODE);
+                    } catch (IntentSender.SendIntentException e) {
+                        e.printStackTrace();
+                    }
+                    // Request the update.
+                }
+            }
+        });
+
         new HomeActivityPresenter(this,this).save_token(user_id,FirebaseInstanceId.getInstance().getToken());
         new HomeActivityPresenter(this, this).fetch_profile(user_id);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE) {
+            //      Toast.makeText(this, "Start Download", Toast.LENGTH_SHORT).show();
+            if (resultCode != RESULT_OK) {
+                //         Log.d("update","Update flow failed! Result code: " + resultCode);
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+            }
+        }
+    }
+
+
 
     @Override
     protected void onResume() {
