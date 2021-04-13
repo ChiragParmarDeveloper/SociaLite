@@ -22,9 +22,6 @@ import butterknife.OnClick;
 
 public class Notification extends AppCompatActivity {
 
-    @BindView(R.id.img_back)
-    ImageView img_back;
-
     @BindView(R.id.recycleview_notification)
     RecyclerView recycleview_notification;
 
