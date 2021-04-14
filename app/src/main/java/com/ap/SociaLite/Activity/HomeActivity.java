@@ -295,8 +295,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(HomeActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
-
                 txt_faq.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_faq.setImageResource(R.drawable.ic_faq);
 
@@ -318,7 +316,7 @@ public class HomeActivity extends AppCompatActivity {
                 txt_logout.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_logout.setImageResource(R.drawable.ic_logout);
 
-
+                startActivity(new Intent(HomeActivity.this, help.class));
             }
         });
 
@@ -605,8 +603,6 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.imgnotification:
                 startActivity(new Intent(HomeActivity.this, Notification.class));
                 break;
-
-
 
 
         }

@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.help_center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_back"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_left_arrow"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                app:layout_constraintStart_toStartOf="@+id/toolbar"
+                app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Help Center"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/toolbar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout18"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout18">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:orientation="vertical">
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="This policy describes the information we process to support Socialite and other features offered by Socialite."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="I. What kinds of information do we collect?"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="16dp"-->
+                <!--                    android:textStyle="bold" />-->
+
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="To provide the Socialite Product, we must process information about you. The types of information we collect depend on how you use our Product."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Things you and others do and provide"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="16dp"-->
+                <!--                    android:textStyle="bold" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Information and content you provide. We collect the content, communications and other information you provide when you use our Product, including when you sign up for an account, create or share content, and message or communicate with others. This can include information in or about the content you provide (like metadata), such as the location of a photo or the date a file was created."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Networks and connections. We collect information about the people, Pages, accounts, hashtags, and how you interact with them across our Product, such as people you communicate with the most. We also collect contact information if you choose to upload, sync or import it from a device (such as an address book or call log or SMS log history), which we use for things like helping you and others find people you may know and for the other purposes listed below."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Your usage. We collect information about how you use our Product, such as the types of content you view or engage with; the features you use; the actions you take; the people or accounts you interact with; and the time, frequency and duration of your activities. For example, we log when you're using and have last used our Product, and what posts, videos and other content you view on our Product. We also collect information about how you use features like our camera."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Things others do and information they provide about you. We also receive and analyze content, communications and information that other people provide when they use our Product. This can include information about you, such as when others share or comment on a photo of you, send a message to you, or upload, sync or import your contact information."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Device Information"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="16dp"-->
+                <!--                    android:textStyle="bold" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="As described below, we collect information from and about the computers, phones, connected TVs and other web-connected devices you use that integrate with our Product, and we combine this information across different devices you use. For example, we use information collected about your use of our Product on your phone to better personalize the content or features you see when you use our Product on another device, such as your laptop or tablet."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Device attributes: information such as the operating system, hardware and software versions, battery level, signal strength, available storage space, browser type, app and file names and types, and plugins."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Device operations: information about operations and behaviors performed on the device, such as whether a window is foreground or background, or mouse movements (which can help distinguish humans from bots)."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Device signals: Bluetooth signals, and information about nearby Wi-Fi access points, beacons, and cell towers."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Data from device settings: information you allow us to receive through device settings you turn on, such as access to your GPS location, camera or photos."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Network and connections: information such as the name of your mobile operator or ISP, language, time zone, mobile phone number, IP address, connection speed and, in some cases, information about other devices that are nearby or on your network, so we can do things like help you stream a video from your phone to your TV."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Cookie data: data from cookies stored on your device, including cookie IDs and settings."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="II. How do we use this information?"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="16dp"-->
+                <!--                    android:textStyle="bold" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="We use the information we have (subject to choices you make) as described below and to provide and support the Socialite and related services. Here's how:"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Provide, personalize and improve our Product"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="16dp"-->
+                <!--                    android:textStyle="bold" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="We use the information we have to deliver our Product, including to personalize features and content (including your Interest Feed, My Network Suggestions and Business Interaction) and make suggestions for you (such as people or you may be interested in or topics you may want to get engaged in) on and off our Product. To create personalized Product that are unique and relevant to you, we use your connections, preferences, interests and activities based on the data we collect and learn from you and others (including any data with special protections you choose to provide); how you use and interact with our Product; and the people, places, or things you're connected to and interested in on and off our Product."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Information across Socialite Product and devices: We connect information about your activities to provide a more tailored and consistent experience on Socialite, whenever you use them."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Location-related information: We use location-related information-such as your current location, where you live, the places you like to go, and the businesses and people you're near-to provide, personalize and improve our Product, for you and others. Location-related information can be based on things like precise device location (if you've allowed us to collect it), IP addresses, and information from your and others'."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Product research and development: We use the information we have to develop, test and improve our Product, including by conducting surveys and research, and testing and troubleshooting new Product and features."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Promote safety, integrity and security"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="16dp"-->
+                <!--                    android:textStyle="bold" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="We use the information we have to verify accounts and activity, combat harmful conduct, detect and prevent spam and other bad experiences, maintain the integrity of our Product, and promote safety and security on and off for Socialite. For example, we use data we have to investigate suspicious activity or violations of our terms or policies, or to detect when someone needs help."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Communicate with you"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="16dp"-->
+                <!--                    android:textStyle="bold" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="We use the information we have to send you marketing communications, communicate with you about our Product, and let you know about our policies and terms. We also use your information to respond to you when you contact us."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="III. How is this information shared?"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="16dp"-->
+                <!--                    android:textStyle="bold" />-->
+
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Your information is shared with others in the following ways:"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Sharing on Socialite"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="16dp"-->
+                <!--                    android:textStyle="bold" />-->
+
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="People and accounts you share and communicate with"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="When you share and communicate using our Product, we provide you the platform to share with all the audience on socialite or just to share with your people or your connections on socialite. For example, when you post in section of “Category and My Interest” ( say for Dance, Acting, Travel, many more), your post is shared with all the audience which is connected on Socialite to reach your content worldwide, Similarly for “Business Interaction” to generate more business opportunities for our users. Now, if you post under “My Network” your post is shared with your connections only, allowing you to use your personal space to be in touch with your people."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Public accounts can be seen by anyone, on or off our Product, including if they don't have an account. This includes your Socialite username; information in your public profile on Socialite; and content you share in “Category and My Interest”."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="Content others share or reshare about you"-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:justificationMode="inter_word"-->
+                <!--                    android:text="You should consider who you choose to share with, because people who can see your activity on our Product can choose to share it with others on and off our Product, including people and businesses outside the audience you shared with. For example, when you share a post or send a message to specific friends or accounts, they can download, screenshot, or reshare that content to others across or off our Product. Also, when you comment on someone else's post or react to their content, your comment or reaction is visible to anyone who can see the other person's content."-->
+                <!--                    android:textColor="#272727"-->
+                <!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="People can also use our Product to create and share content about you. For example, people can share a photo of you in a Story, mention a location in a post, or share information about you in their posts or messages. If you are uncomfortable with what others have shared about you on our Product, you can report the content."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="Information about your active status or presence on our Product."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="People in your networks can see signals telling them whether you are active on our Socialite or Not."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="Apps, websites, and third-party integrations on or using our Product."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="Information collected by third-party services is subject to their own terms and policies, not this one."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="Devices and operating systems providing native versions of Socialite (i.e. where we have not developed our own first-party apps) will have access to all information you choose to share with them, including information your friends share with you, so they can provide our core functionality to you."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="New owner"-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="bold" />-->
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="If the ownership or control of all or part of our Product or their assets changes, we may transfer your information to the new owner."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="Vendors and service providers"-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="We provide information and content to vendors and service providers who support our business, such as by providing technical infrastructure services, analyzing how our products are used, providing customer service, or conducting surveys."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="Law enforcement or legal requests"-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="bold" />-->
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="We share information with law enforcement or in response to legal requests in the circumstances outlined below."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="IV. How can I manage or delete information about me?"-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="bold" />-->
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="We provide you with the ability to access, rectify, port and erase your data."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="We store data until it is no longer necessary to provide our services, or until your account is deleted - whichever comes first. This is a case-by-case determination that depends on things like the nature of the data, why it is collected and processed, and relevant legal or operational retention needs. For example, when you search for something on Socialite, you can access and delete that query from within your search history at any time."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="When you delete your account, we delete things you have posted, such as your photos and status updates, and you won't be able to recover that information later. Information that others have shared about you isn't part of your account and won't be deleted."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="V. How do we respond to legal requests or prevent harm?"-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="bold" />-->
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="We access, preserve and share your information with regulators, law enforcement or others:"-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="In response to a legal request (like a search warrant, court order or subpoena) if we have a good faith belief that the law requires us to do so. This may include responding to legal requests from jurisdictions outside of India when we have a good-faith belief that the response is required by law in that jurisdiction, affects users in that jurisdiction, and is consistent with internationally recognized standards."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="When we have a good-faith belief it is necessary to: detect, prevent and address fraud, unauthorized use of the Product, violations of our terms or policies, or other harmful or illegal activity; to protect ourselves (including our rights, property or Product), you or others, including as part of investigations or regulatory inquiries; or to prevent death or imminent bodily harm. For example, if relevant, we provide information to and receive information from third-party partners about the reliability of your account to prevent fraud, abuse and other harmful activity on and off our Product."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="VI. How do we operate and transfer data as part of our global services?"-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="We share information globally. Your information may, for example, be transferred or transmitted to, or stored and processed in India or other countries outside of where you live for the purposes as described in this policy. These data transfers are necessary to provide the services set forth in the Socialite Terms and to globally operate and provide our Product to you."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="VII. How will we notify you of changes to this policy?"-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="We'll notify you before we make changes to this policy and give you the opportunity to review the revised policy before you choose to continue using our Product."-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="14sp" />-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="VIII. How to contact Socialite with questions"
+                    android:textColor="#272727"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="You can learn more about how privacy works on Socialite. If you have questions about this policy, you can contact us as described below. You can contact us online or by mail at:"
+                    android:textColor="#272727"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Socialite,"
+                    android:textColor="#272727"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="A-402, Anmol Tower, Rajasthan Hospital Rd."
+                    android:textColor="#272727"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Shahibaug, Ahmedabad-380004."
+                    android:textColor="#272727"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Email: aakashjain462@gmail.com"
+                    android:textColor="#272727"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
