@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.contact_us"></activity>
+        <activity android:name=".Activity.contact_us"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Activity.privacy_policy" />
         <activity android:name=".Activity.help_center" />
         <activity

@@ -35,7 +35,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.Query;
 
 public interface RService {
 
@@ -77,14 +76,13 @@ public interface RService {
     Call<json> connection(@Field("UserId") String UserId);
 
 
-
     @FormUrlEncoded
     @POST("my_network.php")
     Call<json> netork_post(@Field("UserId") String UserId);
 
     @FormUrlEncoded
     @POST("my_connections.php")
-    Call<json> my_connection (@Field("UserId") String UserId);
+    Call<json> my_connection(@Field("UserId") String UserId);
 
     @FormUrlEncoded
     @POST("search.php")
@@ -96,11 +94,10 @@ public interface RService {
                                   @Field("RequestId") String RequestId);
 
 
-
     @FormUrlEncoded
     @POST("remove_connection.php")
     Call<json> disconnect(@Field("UserId") String UserId,
-                                  @Field("RequestId") String RequestId);
+                          @Field("RequestId") String RequestId);
 
 
     @FormUrlEncoded
@@ -155,6 +152,12 @@ public interface RService {
     @POST("fetch_profile.php")
     Call<json> profile(@Field("user_id") String user_id);
 
+
+    @FormUrlEncoded
+    @POST("contact_us.php")
+    Call<json> contact(@Field("name") String name,
+                       @Field("email") String email,
+                       @Field("message") String message);
 
     @Multipart
     @POST("edit_profile.php")

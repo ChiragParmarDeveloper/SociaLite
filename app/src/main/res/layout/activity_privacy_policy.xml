@@ -63,6 +63,94 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout18">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:text="Welcome to Socialite !"
+                    android:textColor="#272727"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="These Terms of Use govern your use of Socialite and provide information about the Socialite Service, outlined below. When you create a Socialite account or use Socialite, you agree to these terms."
+                    android:textColor="#272727"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:layout_marginTop="5dp"
+                    android:text="The Socialite Service"
+                    android:textColor="#272727"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Shahibaug, Ahmedabad-380004."
+                    android:textColor="#272727"
+                    android:textSize="14sp" />
+
+
+
+
+
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="Things you and others do and provide"-->
+<!--                    android:textColor="#272727"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="bold" />-->
+
+
+
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/link"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:autoLink="web|email"-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:text="@string/developed_by_bracecodes"-->
+<!--                    android:textColorLink="#0000FF"-->
+<!--                    android:textSize="14dp" />-->
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
