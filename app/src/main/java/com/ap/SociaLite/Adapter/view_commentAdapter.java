@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,14 @@ public class view_commentAdapter extends RecyclerView.Adapter<view_commentAdapte
         item = comments.get(position);
         holder.viewer_name.setText(item.user_name);
         holder.viewer_comment.setText(item.comment);
-        Picasso.get().load(item.profile_pic).into(holder.viewer_profile);
+
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+            holder.viewer_profile.setImageDrawable(upload_img);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.viewer_profile);
+        }
+
     }
 
     @Override

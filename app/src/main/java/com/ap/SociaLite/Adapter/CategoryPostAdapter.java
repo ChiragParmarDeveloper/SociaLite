@@ -272,8 +272,16 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
                             holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
 
-                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
-                            Picasso.get().load(img).into(holder.circularImageView3);
+
+                            if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+                                holder.circularImageView3.setImageDrawable(upload_img);
+                            } else {
+                                String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+                                Picasso.get().load(img).into(holder.circularImageView3);
+                            }
+
+
 
                         } else {
                             holder.layout.setVisibility(View.GONE);
@@ -284,9 +292,13 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                             holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
                             holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
 
-                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
-                            Picasso.get().load(img).into(holder.circular);
-
+                            if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+                                holder.circular.setImageDrawable(upload_img);
+                            } else {
+                                String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                                Picasso.get().load(img).into(holder.circular);
+                            }
                         } else {
                             holder.layout1.setVisibility(View.GONE);
                         }

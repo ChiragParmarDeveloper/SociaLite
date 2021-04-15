@@ -327,9 +327,15 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
 
                             holder.textView12.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name);
                             holder.textView11.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
-                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
-                            Picasso.get().load(img).into(holder.circularImageView3);
 
+                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+
+                            if (img.equals("http://the-socialite.com/admin/")) {
+                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+                                holder.circularImageView3.setImageDrawable(upload_img);
+                            } else {
+                                Picasso.get().load(img).into(holder.circularImageView3);
+                            }
 
                         } else {
                             holder.layout.setVisibility(View.GONE);
@@ -341,7 +347,13 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                             holder.textView13.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
 
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
-                            Picasso.get().load(img).into(holder.circularImageView5);
+
+                            if (img.equals("http://the-socialite.com/admin/")) {
+                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+                                holder.circularImageView5.setImageDrawable(upload_img);
+                            } else {
+                                Picasso.get().load(img).into(holder.circularImageView5);
+                            }
 
                         } else {
                             holder.layout1.setVisibility(View.GONE);

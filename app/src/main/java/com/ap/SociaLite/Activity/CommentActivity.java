@@ -19,8 +19,8 @@ import butterknife.OnClick;
 
 public class CommentActivity extends AppCompatActivity {
 
-    @BindView(R.id.img_back)
-    ImageView img_back;
+//    @BindView(R.id.img_back)
+//    ImageView img_back;
 
     @BindView(R.id.img_send)
     ImageView img_send;

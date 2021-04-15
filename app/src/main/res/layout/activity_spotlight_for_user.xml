@@ -151,6 +151,7 @@
                 android:id="@+id/user_profile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                app:civ_border="false"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_user_icon"/>
 

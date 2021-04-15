@@ -70,7 +70,6 @@ public class CommentPresenter implements CommentContract {
                         {
                             commentActivity.rv_view_comment.setLayoutManager(new GridLayoutManager(mContext, 1));
                             commentActivity.rv_view_comment.setAdapter(new view_commentAdapter(mContext,response.body().comments.comments, commentActivity));
-
                         }
 
                     } else {
