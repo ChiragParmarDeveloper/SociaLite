@@ -40,7 +40,6 @@ public class ProfileConnectionBusinessFragmentPresenter implements ProfileConnec
                     if (response.body().status.equals("1")) {
 
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
-                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                             profileConnectionBusinessFragment.recycleview_business_interaction.setLayoutManager(new GridLayoutManager(mContext, 1));
                             profileConnectionBusinessFragment.recycleview_business_interaction.setAdapter(new ProfileConnectionBusinessAdapter(mContext,profileConnectionBusinessFragment,response.body().post_list));
                         }
