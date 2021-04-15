@@ -108,8 +108,12 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                 business_btn.setBackground(getResources().getDrawable(R.drawable.border_square_rs));
                 business_btn.setTextColor(Color.BLACK);
 
-                Intent spotlight = new Intent(ProfileConnectionActivity.this, SpotLightActivity.class);
+                Intent spotlight = new Intent(ProfileConnectionActivity.this, SpotlightActivityForUser.class);
+                spotlight.putExtra("user_id",user_id);
                 startActivity(spotlight);
+
+//                Intent spotlight = new Intent(ProfileConnectionActivity.this, SpotLightActivity.class);
+//                startActivity(spotlight);
 
             }
         });

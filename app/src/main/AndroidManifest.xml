@@ -49,7 +49,9 @@
         <activity android:name=".Activity.AddSpotlightActivity" />
         <activity android:name=".Activity.UserFriendSpotlightViewActivity" />
         <activity android:name=".Activity.UserSpotlightViewActivity" />
-        <activity android:name=".Activity.SpotLightActivity" />
+        <activity android:name=".Activity.SpotLightActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Activity.ViewAllContectActivity" />
         <activity
             android:name=".Activity.Notification"
