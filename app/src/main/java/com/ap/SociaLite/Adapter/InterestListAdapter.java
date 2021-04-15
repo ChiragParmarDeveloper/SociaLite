@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +28,14 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
     InterestFragment interestFragment;
     List<interest_details> details = new ArrayList<>();
     interest_details item;
-
+    private int selectedItem;
     public InterestListAdapter(Context context, List<interest_details> list, InterestFragment fragment) {
         this.mContext = context;
         this.details = list;
         this.interestFragment = fragment;
+
+
+        selectedItem = 0;
     }
 
     @NonNull
@@ -49,6 +53,12 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
 
         holder.txt_iconname.setText(item.interest_name);
         Picasso.get().load(item.interest_image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+
+
+        if (selectedItem == position) {
+            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.user_id,id);
+        }
+
 
         holder.img_category.setOnClickListener(new View.OnClickListener() {
             @Override

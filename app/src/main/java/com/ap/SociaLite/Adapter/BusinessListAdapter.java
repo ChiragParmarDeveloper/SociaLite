@@ -28,11 +28,14 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
     BusinessFragment businessFragment;
     List<interest_details> details = new ArrayList<>();
     interest_details item;
+    private int selectedItem;
 
     public BusinessListAdapter(Context context, List<interest_details> list, BusinessFragment fragment) {
         this.mContext = context;
         this.details = list;
         this.businessFragment = fragment;
+
+        selectedItem = 0;
     }
 
     @NonNull
@@ -58,6 +61,33 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
         } else {
             holder.img_right.setImageDrawable(plus_favorite);
         }
+
+
+        if (selectedItem == position) {
+
+            if (details.get(position).flag.equals("1")) {
+                String interest_id = details.get(position).interest_id;
+                new BusinessFragmentPresenter(mContext, businessFragment).business_post(interest_id);
+            } else {
+                //         Toast.makeText(mContext, "id not selected", Toast.LENGTH_SHORT).show();
+            }
+
+
+//
+//
+//            search.RequestId = datas.get(position).request_id;
+//            search.search_profile_user_name.setText(datas.get(position).username);
+//            if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+//                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                search.search_profile_image.setImageDrawable(upload_img);
+//            } else {
+//                Picasso.get().load(item.profile_pic).into(search.search_profile_image);
+//            }
+        }
+
+
+
+
 
         holder.img_right.setOnClickListener(new View.OnClickListener() {
             @Override

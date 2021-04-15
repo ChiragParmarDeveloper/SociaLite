@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 import com.ap.SociaLite.Activity.SpotLightActivity;
 import com.ap.SociaLite.Application.RService;
@@ -33,8 +34,11 @@ public class SpotLightActivityPresenter implements SpotLightActivityContract {
                     if (response.body().status.equals("1")) {
                         if (response.body().user_details != null) {
 
-                            if (response.body().user_details.profile_pic.length() > 0) {
-                                Picasso.get().load(response.body().user_details.profile_pic).placeholder(R.mipmap.ic_launcher).into(spotLightActivity.user_profile);
+                            if (response.body().user_details.profile_pic.equals("http://the-socialite.com/admin/")) {
+                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+                                spotLightActivity.user_profile.setImageDrawable(upload_img);
+                            } else {
+                                Picasso.get().load(response.body().user_details.profile_pic).into(spotLightActivity.user_profile);
                             }
 
                             spotLightActivity.user_name.setText(response.body().user_details.username);

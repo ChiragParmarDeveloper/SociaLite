@@ -97,6 +97,10 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                             businessFragment.recycleview_business_post.setAdapter(new BusinessInteractionAdapter(mContext, businessFragment, response.body().post_list));
                         }
                     } else {
+
+                        businessFragment.recycleview_business_post.setLayoutManager(new GridLayoutManager(mContext, 1));
+                        businessFragment.recycleview_business_post.setAdapter(new BusinessInteractionAdapter(mContext, businessFragment, response.body().post_list));
+
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
