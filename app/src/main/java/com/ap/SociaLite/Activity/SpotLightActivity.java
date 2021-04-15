@@ -43,8 +43,10 @@ public class SpotLightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spot_light);
         ButterKnife.bind(this);
+
         Session session = new Session(SpotLightActivity.this);
         user_id = session.getUser_id();
+
         friends_spotlight = findViewById(R.id.friends_spotlight);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
