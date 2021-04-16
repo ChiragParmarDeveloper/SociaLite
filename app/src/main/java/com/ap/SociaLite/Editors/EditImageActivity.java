@@ -490,7 +490,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     public void onBackPressed() {
         if (mIsFilterVisible) {
             showFilter(false);
-            mTxtCurrentTool.setText(R.string.app_name);
+            mTxtCurrentTool.setText(" ");
         }
 //        else if (!mPhotoEditor.isCacheEmpty()) {
 ////            showSaveDialog();
