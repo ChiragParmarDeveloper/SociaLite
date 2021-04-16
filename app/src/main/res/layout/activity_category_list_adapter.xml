@@ -9,6 +9,7 @@
     app:cardCornerRadius="3.00dp"
     tools:context=".Adapter.CategoryListAdapter">
 
+
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/img_category"
         android:layout_width="65dp"
