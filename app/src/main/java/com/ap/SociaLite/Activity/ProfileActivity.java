@@ -3,6 +3,7 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -43,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
     ConstraintLayout connections;
 
     @BindView(R.id.profile_add_cover)
-    Button profile_add_cover;
+    ImageView profile_add_cover;
 
     @BindView(R.id.timeline_btn)
     Button timeline_btn;
