@@ -249,7 +249,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_marginBottom="120dp"
+                android:layout_marginBottom="80dp"
                 android:background="@drawable/const_button_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -304,7 +304,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/constraintLayout45"
                 android:layout_width="0dp"
-                android:layout_height="280dp"
+                android:layout_height="350dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
