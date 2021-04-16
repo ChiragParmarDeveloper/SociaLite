@@ -145,7 +145,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         ImageView imgRedo;
         ImageView imgCamera;
         ImageView imgGallery;
-        ImageView imgSave;
+        TextView imgSave;
         ImageView imgClose;
 //        ImageView imgShare;
 

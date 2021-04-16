@@ -320,15 +320,27 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
+<!--                <ImageView-->
+<!--                    android:id="@+id/profile_add_cover"-->
+<!--                    android:layout_width="25dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:src="@drawable/ic_cameara_add_icon"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/imageView12"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/imageView12" />-->
+
+                <Button
                     android:id="@+id/profile_add_cover"
-                    android:layout_width="25dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:src="@drawable/ic_cameara_add_icon"
+                    android:background="#EE6851"
+                    android:text="Add Cover Photo"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView12" />
+                    app:layout_constraintEnd_toEndOf="@+id/imageView12"/>
 
                 <TextView
                     android:id="@+id/user_name"
