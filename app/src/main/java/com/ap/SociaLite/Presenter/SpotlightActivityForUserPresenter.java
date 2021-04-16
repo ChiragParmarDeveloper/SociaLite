@@ -76,7 +76,7 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
                         if (response.body().story_data != null && response.body().story_data.size() > 0) {
-                            spotlightActivityForUser.rv_mystory.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
+                            spotlightActivityForUser.rv_mystory.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
                             spotlightActivityForUser.rv_mystory.setAdapter(new MyAllStoryAdapter(mContext, response.body().story_data, spotlightActivityForUser));
 
                             abc = 0;

@@ -78,11 +78,16 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     @Override
     public int getItemCount() {
-
         return details.size();
-
-        //  return Integer.MAX_VALUE;
     }
+
+//    @Override
+//    public int getItemCount() {
+//
+//        return details.size();
+//
+//        //  return Integer.MAX_VALUE;
+//    }
 
     public class Holder extends RecyclerView.ViewHolder {
 

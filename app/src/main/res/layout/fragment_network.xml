@@ -59,15 +59,14 @@
                     android:id="@+id/network_story_constrain"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    app:layout_constraintBottom_toTopOf="@+id/view2"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintStart_toStartOf="parent">
 
                     <ImageView
                         android:id="@+id/network_stories"
                         android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_height="32dp"
                         android:src="@drawable/ic_mynetwork_stories"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -80,10 +79,9 @@
                     android:id="@+id/network_image_constrain"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view2">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
                         android:id="@+id/imageView8"
@@ -99,7 +97,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
                 <View
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
@@ -109,7 +106,7 @@
                     android:background="#707070"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/network_story_constrain" />
+                    app:layout_constraintTop_toTopOf="@+id/network_story_constrain" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

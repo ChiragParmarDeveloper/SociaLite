@@ -39,7 +39,7 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                     if (response.body().status.equals("1")) {
 
                         if (response.body().interest_details != null && response.body().interest_details.size() > 0) {
-                            businessFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
+                            businessFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
                             businessFragment.rv_interestlist.setAdapter(new BusinessListAdapter(mContext, response.body().interest_details, businessFragment));
                         }
                     } else {

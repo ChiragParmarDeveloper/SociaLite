@@ -103,7 +103,7 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
                     if (response.body().status.equals("1")) {
 
                         if (response.body().interest_details != null && response.body().interest_details.size() > 0) {
-                            interestFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
+                            interestFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
                             interestFragment.rv_interestlist.setAdapter(new InterestListAdapter(mContext, response.body().interest_details, interestFragment));
 
                         }

@@ -40,7 +40,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                     if (response.body().status.equals("1")) {
 
                         if (response.body().interest_details != null && response.body().interest_details.size() > 0) {
-                            categoryFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
+                            categoryFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
                             categoryFragment.rv_interestlist.setAdapter(new CategoryListAdapter(mContext, response.body().interest_details, categoryFragment));
                         }
                     } else {

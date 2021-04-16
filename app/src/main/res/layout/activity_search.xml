@@ -231,10 +231,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#263238" />
+
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
@@ -251,6 +248,11 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#263238" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
