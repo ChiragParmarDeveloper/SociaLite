@@ -83,7 +83,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout27"
                 android:layout_width="0dp"
