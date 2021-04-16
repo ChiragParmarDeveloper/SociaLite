@@ -255,8 +255,6 @@ public class HomeActivity extends AppCompatActivity {
                 img_help.setImageResource(R.drawable.ic_help);
 
                 startActivity(new Intent(HomeActivity.this, Setting.class));
-
-
             }
         });
 
@@ -413,8 +411,6 @@ public class HomeActivity extends AppCompatActivity {
                 txt_logout.setTextColor(getResources().getColor(R.color.colorWhite));
                 img_logout.setImageResource(R.drawable.ic_logout);
 
-
-                //    Toast.makeText(getApplicationContext(), "nice work", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -603,8 +599,6 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.imgnotification:
                 startActivity(new Intent(HomeActivity.this, Notification.class));
                 break;
-
-
         }
     }
 
