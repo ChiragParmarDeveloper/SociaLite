@@ -42,6 +42,11 @@ public class Search extends AppCompatActivity {
     @BindView(R.id.progressbar)
     public ProgressBar progressbar;
 
+    @BindView(R.id.txt_connection)
+    public TextView txt_connection;
+
+
+
     public SearchProfileAdapter searchProfileAdapter;
     public List<data> datas;
 
@@ -69,6 +74,7 @@ public class Search extends AppCompatActivity {
 
             case R.id.search_connect:
                 new SearchPresenter(this, this).send_request(user_id, RequestId);
+                new SearchPresenter(this, this).all_user(user_id);
                 break;
 
             case R.id.search_msg:

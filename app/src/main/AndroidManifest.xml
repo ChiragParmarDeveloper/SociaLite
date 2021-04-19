@@ -81,8 +81,7 @@
         <activity android:name=".Activity.Privacy" />
         <activity android:name=".Activity.Setting" />
         <activity
-            android:name=".Activity.Search"
-            android:windowSoftInputMode="stateHidden" />
+            android:name=".Activity.Search" />
         <activity android:name=".Activity.CameraActivity" />
         <activity android:name=".Activity.RegistrationVerificationActivity" />
         <activity

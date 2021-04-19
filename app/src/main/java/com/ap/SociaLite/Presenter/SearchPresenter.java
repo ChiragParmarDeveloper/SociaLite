@@ -64,6 +64,7 @@ public class SearchPresenter implements SearchContract {
             public void onResponse(Call<json> call, Response<json> response) {
                 if (response.body().status.equals("1")) {
                     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+
                 } else {
                     //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }

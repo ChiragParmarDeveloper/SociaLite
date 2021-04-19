@@ -67,6 +67,15 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
             } else {
                 Picasso.get().load(item.profile_pic).into(search.search_profile_image);
             }
+
+            if (datas.get(position).is_connected.equals("Accepted")) {
+                search.txt_connection.setText("Connected");
+            } else if (datas.get(position).is_connected.equals("Requested")) {
+                search.txt_connection.setText("Request");
+            } else {
+                search.txt_connection.setText("Connect");
+            }
+
         }
 
         if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
@@ -87,8 +96,26 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
                     Picasso.get().load(datas.get(position).profile_pic).into(search.search_profile_image);
                 }
                 search.search_profile_user_name.setText(datas.get(position).username);
+
+                if( datas.get(position).is_connected.equals("Accepted"))
+                {
+                    search.txt_connection.setText("Connected");
+                }else if(datas.get(position).is_connected.equals("Requested"))
+                {
+                    search.txt_connection.setText("Request");
+                }
+                else
+                {
+                    search.txt_connection.setText("Connect");
+                }
+
             }
         });
+
+
+
+
+
     }
 
     @Override
