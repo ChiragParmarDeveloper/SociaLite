@@ -111,11 +111,6 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
 
             }
         });
-
-
-
-
-
     }
 
     @Override
