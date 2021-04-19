@@ -2,6 +2,7 @@ package com.ap.SociaLite.Activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -127,7 +128,16 @@ public class SharePost extends AppCompatActivity {
                             txt_name_pos_1.setText(response.body().data.get(response.body().data.size() - 1).username);
 
                             String img0 = response.body().data.get(response.body().data.size() - 1).profile_pic;
-                            Picasso.get().load(img0).into(img_pos_1);
+
+                            if (img0.equals("http://the-socialite.com/admin/")) {
+                                Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                img_pos_1.setImageDrawable(upload_img);
+                            } else {
+                                Picasso.get().load(img0).into(img_pos_1);
+                            }
+
+
+
 
                             checkBox_pos_1.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -156,7 +166,15 @@ public class SharePost extends AppCompatActivity {
                             txt_name_pos_2.setText(response.body().data.get(response.body().data.size() - 2).username);
 
                             String img1 = response.body().data.get(response.body().data.size() - 2).profile_pic;
-                            Picasso.get().load(img1).into(img_pos_2);
+
+                            if (img1.equals("http://the-socialite.com/admin/")) {
+                                Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                img_pos_2.setImageDrawable(upload_img);
+                            } else {
+                                Picasso.get().load(img1).into(img_pos_2);
+                            }
+
+
 
                             checkBox_pos_2.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -184,8 +202,13 @@ public class SharePost extends AppCompatActivity {
                             txt_name_pos_3.setText(response.body().data.get(response.body().data.size() - 3).username);
 
                             String img2 = response.body().data.get(response.body().data.size() - 3).profile_pic;
-                            Picasso.get().load(img2).into(img_pos_3);
 
+                            if (img2.equals("http://the-socialite.com/admin/")) {
+                                Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                img_pos_3.setImageDrawable(upload_img);
+                            } else {
+                                Picasso.get().load(img2).into(img_pos_3);
+                            }
 
                             checkBox_pos_3.setOnClickListener(new View.OnClickListener() {
                                 @Override

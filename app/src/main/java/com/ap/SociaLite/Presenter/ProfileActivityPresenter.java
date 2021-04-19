@@ -47,7 +47,8 @@ public class ProfileActivityPresenter implements ProfileActivityContract {
                             }
 
                             if (response.body().my_profile_user_details.get(0).cover_photo.equals("http://the-socialite.com/admin/")) {
-
+                                Drawable upload_cover = mContext.getDrawable(R.drawable.socialite_cover_photo);
+                                profileActivity.imageView12.setImageDrawable(upload_cover);
                             } else {
                                 Picasso.get().load(response.body().my_profile_user_details.get(0).cover_photo).into(profileActivity.imageView12);
                             }

@@ -139,7 +139,8 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                             }
 
                             if (response.body().my_profile_user_details.get(0).cover_photo.equals("http://the-socialite.com/admin/")) {
-
+                                Drawable upload_cover = getDrawable(R.drawable.socialite_cover_photo);
+                                cover_image.setImageDrawable(upload_cover);
                             } else {
                                 Picasso.get().load(response.body().my_profile_user_details.get(0).cover_photo).into(cover_image);
                             }
