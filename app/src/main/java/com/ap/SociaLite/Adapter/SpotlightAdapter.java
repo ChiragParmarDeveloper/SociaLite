@@ -64,8 +64,8 @@ public class SpotlightAdapter extends RecyclerView.Adapter<SpotlightAdapter.MyHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent in = new Intent(view.getContext(), UserFriendSpotlightViewActivity.class);
-                    view.getContext().startActivity(in);
+               //     Intent in = new Intent(view.getContext(), UserFriendSpotlightViewActivity.class);
+                //    view.getContext().startActivity(in);
                 }
             });
 
