@@ -48,7 +48,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         String id = details.get(position).interest_id;
 
         holder.txt_iconname.setText(item.interest_name);
-        Picasso.get().load(item.interest_image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+        Picasso.get().load(item.interest_image).into(holder.img_category);
 
         Drawable plus_favorite = mContext.getDrawable(R.drawable.ic_category_plus);
         Drawable right_favorite = mContext.getDrawable(R.drawable.ic_category_right);
@@ -58,6 +58,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         } else {
             holder.img_right.setImageDrawable(plus_favorite);
         }
+
         holder.img_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

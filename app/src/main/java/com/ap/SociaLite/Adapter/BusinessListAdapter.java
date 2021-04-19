@@ -51,7 +51,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
         item = details.get(position);
 
         holder.txt_iconname.setText(item.interest_name);
-        Picasso.get().load(item.interest_image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
+        Picasso.get().load(item.interest_image).into(holder.img_category);
 
         Drawable plus_favorite = mContext.getDrawable(R.drawable.ic_category_plus);
         Drawable right_favorite = mContext.getDrawable(R.drawable.ic_category_right);
@@ -72,21 +72,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
                 //         Toast.makeText(mContext, "id not selected", Toast.LENGTH_SHORT).show();
             }
 
-
-//
-//
-//            search.RequestId = datas.get(position).request_id;
-//            search.search_profile_user_name.setText(datas.get(position).username);
-//            if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
-//                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-//                search.search_profile_image.setImageDrawable(upload_img);
-//            } else {
-//                Picasso.get().load(item.profile_pic).into(search.search_profile_image);
-//            }
         }
-
-
-
 
 
         holder.img_right.setOnClickListener(new View.OnClickListener() {
