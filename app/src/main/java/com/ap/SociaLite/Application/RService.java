@@ -272,6 +272,12 @@ public interface RService {
                                  @Field("interest_id") String interest_id);
 
 
+
+    @FormUrlEncoded
+    @POST("remove_interest.php")
+    Call<json> delete_interest(@Field("user_id") String user_id,
+                                 @Field("interest_ids") String interest_ids);
+
     @FormUrlEncoded
     @POST("interest_wise_post.php")
     Call<json> interest_wise_post(@Field("interest_id") String interest_id);

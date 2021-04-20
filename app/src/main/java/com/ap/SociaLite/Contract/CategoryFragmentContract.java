@@ -16,4 +16,6 @@ public interface CategoryFragmentContract {
     void update_new_intrests(String user_id, String interest_id);
     //update new  intrests (on plus icon click)
 
+    void remove_interest(String user_id,String interest_ids);
+
 }

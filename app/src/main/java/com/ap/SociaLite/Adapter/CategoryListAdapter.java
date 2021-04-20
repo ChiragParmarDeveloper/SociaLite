@@ -72,6 +72,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         holder.img_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                categoryFragment.interest_ids = details.get(position).interest_id;
                 new CategoryFragmentPresenter(mContext, categoryFragment).update_new_intrests(categoryFragment.user_id, id);
                 new CategoryFragmentPresenter(mContext, categoryFragment).fetch_all_intrest(categoryFragment.user_id);
             }
