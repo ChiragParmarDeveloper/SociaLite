@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Adapter.SpotlightAdapter;
 import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Editors.EditImageActivity;
 import com.ap.SociaLite.Presenter.SpotLightActivityPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -62,6 +63,9 @@ public class SpotLightActivity extends AppCompatActivity {
                 break;
 
             case R.id.linearLayout_user_story:
+                Intent in = new Intent(SpotLightActivity.this, EditImageActivity.class);
+                in.putExtra("my_network_user_story", "my_network_user_story");
+                startActivity(in);
               //  startActivity(new Intent(SpotLightActivity.this, AddSpotlightActivity.class));
                 break;
         }

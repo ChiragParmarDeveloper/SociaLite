@@ -35,7 +35,7 @@ public class AddSpotlightActivity_2 extends AppCompatActivity {
     LinearLayout layout_album, layout_lock, layout_clock, layout_shape, layout_drama;
     // ImageView send;
 
-    String picture_path, id;
+    public String picture_path, id,my_network_user_story;
     MultipartBody.Part story_file;
     Uri mSaveImageUri;
 
@@ -47,6 +47,7 @@ public class AddSpotlightActivity_2 extends AppCompatActivity {
 
         Session session = new Session(AddSpotlightActivity_2.this);
         id = session.getUser_id();
+        my_network_user_story = getIntent().getStringExtra("my_network_user_story");
 
         //    img_cross = findViewById(R.id.img_cross);
         //  send = findViewById(R.id.send);
@@ -119,9 +120,6 @@ public class AddSpotlightActivity_2 extends AppCompatActivity {
                 break;
 
             case R.id.send:
-
-            //    String path = add_spotlight_image.getTag().toString();
-
                 if (picture_path != null) {
                     File idfile = new File(picture_path);
                     RequestBody idcardfile = RequestBody.create(MediaType.parse("image/*"), idfile);

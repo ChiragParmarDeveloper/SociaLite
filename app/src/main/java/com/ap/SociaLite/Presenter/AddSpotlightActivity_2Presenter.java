@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.ap.SociaLite.Activity.AddSpotlightActivity_2;
 import com.ap.SociaLite.Activity.ProfileActivity;
+import com.ap.SociaLite.Activity.SpotLightActivity;
 import com.ap.SociaLite.Activity.SpotlightActivityForUser;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
@@ -38,14 +39,27 @@ public class AddSpotlightActivity_2Presenter implements AddSpotlightActivity_2Co
                         public void onResponse(Call<json> call, Response<json> response) {
                             addSpotlightActivity_2.progressbar.setVisibility(View.GONE);
                             if (response.body().status.equals("1")) {
-                                Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                                Intent spotlight = new Intent(mContext, SpotlightActivityForUser.class);
-                                spotlight.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                mContext.startActivity(spotlight);
-                                addSpotlightActivity_2.finish();
-//                                Intent in = new Intent(mContext, SpotLightActivity.class);
-//                                mContext.startActivity(in);
-//                                addSpotlightActivity_2.finish();
+
+
+                                if(addSpotlightActivity_2.my_network_user_story !=null)
+                                {
+                                    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                                    Intent spotlight = new Intent(mContext, SpotLightActivity.class);
+                                    spotlight.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    mContext.startActivity(spotlight);
+                                    addSpotlightActivity_2.finish();
+                                }
+                                else
+                                {
+                                    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                                    Intent spotlight = new Intent(mContext, SpotlightActivityForUser.class);
+                                    spotlight.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    mContext.startActivity(spotlight);
+                                    addSpotlightActivity_2.finish();
+                                }
+
+
+
                             } else {
                                 //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                             }

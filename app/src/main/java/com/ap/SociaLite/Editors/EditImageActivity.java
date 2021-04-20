@@ -76,7 +76,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     @Nullable
     @VisibleForTesting
     Uri mSaveImageUri;
-    String my_network, business_interaction, user_story;
+    String my_network, business_interaction, user_story, my_network_user_story;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +89,9 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         business_interaction = getIntent().getStringExtra("business_fragment");
 
         user_story = getIntent().getStringExtra("user_story");
+
+        my_network_user_story = getIntent().getStringExtra("my_network_user_story");
+
 
         initViews();
 
@@ -300,6 +303,10 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
                             startActivity(new Intent(EditImageActivity.this, AddSpotlightActivity_2.class)
                                     .putExtra("path", imagePath));
+                        } else if (my_network_user_story != null) {
+                            startActivity(new Intent(EditImageActivity.this, AddSpotlightActivity_2.class)
+                                    .putExtra("path", imagePath)
+                                    .putExtra("my_network_user_story", my_network_user_story));
                         } else {
 
                             startActivity(new Intent(EditImageActivity.this, CameraActivity.class)
