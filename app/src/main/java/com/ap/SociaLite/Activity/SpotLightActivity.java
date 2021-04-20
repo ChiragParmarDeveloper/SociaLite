@@ -30,13 +30,14 @@ public class SpotLightActivity extends AppCompatActivity {
     @BindView(R.id.user_name)
     public TextView user_name;
 
+    @BindView(R.id.friends_spotlight)
     public RecyclerView friends_spotlight;
 
-    private SpotlightAdapter myspotlightadapter;
-    private RecyclerView.LayoutManager layoutManager;
+//    private SpotlightAdapter myspotlightadapter;
+//    private RecyclerView.LayoutManager layoutManager;
 
-    ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name"));
-    String user_id;
+  //  ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name"));
+    String user_id,UserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +47,10 @@ public class SpotLightActivity extends AppCompatActivity {
 
         Session session = new Session(SpotLightActivity.this);
         user_id = session.getUser_id();
-
-        friends_spotlight = findViewById(R.id.friends_spotlight);
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        friends_spotlight.setLayoutManager(layoutManager);
-        myspotlightadapter = new SpotlightAdapter(Name, getApplicationContext());
-        friends_spotlight.setAdapter(myspotlightadapter);
-
+        UserId= session.getUser_id();
 
         new SpotLightActivityPresenter(this, this).fetch_profile(user_id);
-
+        new SpotLightActivityPresenter(this,this).frnd_story(UserId);
     }
 
     @OnClick({R.id.img_back, R.id.linearLayout_user_story})
@@ -67,7 +61,7 @@ public class SpotLightActivity extends AppCompatActivity {
                 break;
 
             case R.id.linearLayout_user_story:
-                startActivity(new Intent(SpotLightActivity.this, AddSpotlightActivity.class));
+              //  startActivity(new Intent(SpotLightActivity.this, AddSpotlightActivity.class));
                 break;
         }
     }

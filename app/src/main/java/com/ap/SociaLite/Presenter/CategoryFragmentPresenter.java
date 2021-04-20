@@ -61,10 +61,10 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
     }
 
     @Override
-    public void Category_post_fragment(String user_id) {
+    public void Category_post_fragment(String interest_id) {
         categoryFragment.progressbar.setVisibility(View.VISIBLE);
         try {
-            new RService.api().call(mContext).category_post(user_id).enqueue(new Callback<json>() {
+            new RService.api().call(mContext).category_post(interest_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     categoryFragment.progressbar.setVisibility(View.GONE);
@@ -75,6 +75,9 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                             categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
                         }
                     } else {
+                        categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
+                        categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
+
                         //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }

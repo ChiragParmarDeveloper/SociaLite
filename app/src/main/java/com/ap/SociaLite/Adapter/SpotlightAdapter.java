@@ -1,31 +1,35 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Activity.UserFriendSpotlightViewActivity;
+import com.ap.SociaLite.Activity.SpotLightActivity;
+import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SpotlightAdapter extends RecyclerView.Adapter<SpotlightAdapter.MyHolder> {
 
-    ArrayList Name;
-    Context context;
 
-    public SpotlightAdapter(ArrayList name, Context context) {
-        Name = name;
-        this.context = context;
+    Context mContext;
+    SpotLightActivity spotLightActivity;
+    List<data> datas;
+    data item;
+
+    public SpotlightAdapter(Context mContext, SpotLightActivity spotLightActivity, List<data> datas) {
+        this.mContext = mContext;
+        this.spotLightActivity = spotLightActivity;
+        this.datas = datas;
     }
 
     @NonNull
@@ -38,34 +42,40 @@ public class SpotlightAdapter extends RecyclerView.Adapter<SpotlightAdapter.MyHo
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+        item = datas.get(position);
 
-        holder.name.setText((CharSequence)Name.get(position));
+        holder.spotlight_textview_rs.setText(item.username);
 
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+            holder.spotlight_user_profile_rs.setImageDrawable(upload_img);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.spotlight_user_profile_rs);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return Name.size();
+        return datas.size();
     }
 
 
     public class MyHolder extends RecyclerView.ViewHolder {
 
-        ImageView profile;
-        TextView name;
+        CircularImageView spotlight_user_profile_rs;
+        TextView spotlight_textview_rs;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
-
-            profile = itemView.findViewById(R.id.spotlight_user_profile_rs);
-            name = itemView.findViewById(R.id.spotlight_textview_rs);
+            spotlight_user_profile_rs = itemView.findViewById(R.id.spotlight_user_profile_rs);
+            spotlight_textview_rs = itemView.findViewById(R.id.spotlight_textview_rs);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-               //     Intent in = new Intent(view.getContext(), UserFriendSpotlightViewActivity.class);
-                //    view.getContext().startActivity(in);
+                    //     Intent in = new Intent(view.getContext(), UserFriendSpotlightViewActivity.class);
+                    //    view.getContext().startActivity(in);
                 }
             });
 
