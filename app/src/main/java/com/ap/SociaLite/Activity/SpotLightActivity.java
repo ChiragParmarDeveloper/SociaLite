@@ -3,6 +3,7 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,10 @@ public class SpotLightActivity extends AppCompatActivity {
 
     @BindView(R.id.friends_spotlight)
     public RecyclerView friends_spotlight;
+
+    @BindView(R.id.user_frndstory)
+    public ImageView user_frndstory;
+
 
     String user_id,UserId;
 
