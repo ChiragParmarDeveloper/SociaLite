@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.SpotLightActivity;
 import com.ap.SociaLite.Pojo.data;
+import com.ap.SociaLite.Pojo.story;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -24,6 +26,7 @@ public class SpotlightAdapter extends RecyclerView.Adapter<SpotlightAdapter.MyHo
     Context mContext;
     SpotLightActivity spotLightActivity;
     List<data> datas;
+    List <story> stories;
     data item;
 
     public SpotlightAdapter(Context mContext, SpotLightActivity spotLightActivity, List<data> datas) {
@@ -71,9 +74,16 @@ public class SpotlightAdapter extends RecyclerView.Adapter<SpotlightAdapter.MyHo
             spotlight_user_profile_rs = itemView.findViewById(R.id.spotlight_user_profile_rs);
             spotlight_textview_rs = itemView.findViewById(R.id.spotlight_textview_rs);
 
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                 //   response.body().details.product_image
+
+
+                    Toast.makeText(mContext, "hello", Toast.LENGTH_SHORT).show();
                     //     Intent in = new Intent(view.getContext(), UserFriendSpotlightViewActivity.class);
                     //    view.getContext().startActivity(in);
                 }

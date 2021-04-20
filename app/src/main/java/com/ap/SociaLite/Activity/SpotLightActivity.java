@@ -33,10 +33,6 @@ public class SpotLightActivity extends AppCompatActivity {
     @BindView(R.id.friends_spotlight)
     public RecyclerView friends_spotlight;
 
-//    private SpotlightAdapter myspotlightadapter;
-//    private RecyclerView.LayoutManager layoutManager;
-
-  //  ArrayList Name = new ArrayList<>(Arrays.asList("Name", "Name"));
     String user_id,UserId;
 
     @Override
@@ -66,4 +62,10 @@ public class SpotLightActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new SpotLightActivityPresenter(this, this).fetch_profile(user_id);
+        new SpotLightActivityPresenter(this,this).frnd_story(UserId);
+    }
 }

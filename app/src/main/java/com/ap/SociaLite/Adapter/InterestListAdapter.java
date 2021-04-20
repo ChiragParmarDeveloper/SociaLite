@@ -29,11 +29,11 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
     List<interest_details> details = new ArrayList<>();
     interest_details item;
     private int selectedItem;
+
     public InterestListAdapter(Context context, List<interest_details> list, InterestFragment fragment) {
         this.mContext = context;
         this.details = list;
         this.interestFragment = fragment;
-
 
         selectedItem = 0;
     }
@@ -56,14 +56,14 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
 
 
         if (selectedItem == position) {
-            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.user_id,id);
+            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(id);
         }
 
 
         holder.img_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.user_id,id);
+                new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(id);
             }
         });
     }

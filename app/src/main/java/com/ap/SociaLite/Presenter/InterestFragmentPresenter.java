@@ -124,9 +124,9 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
     }
 
     @Override
-    public void fetch_my_intrest_wise_post(String user_id, String interest_id) {
+    public void fetch_my_intrest_wise_post(String interest_id) {
         try {
-            new RService.api().call(mContext).interest_wise_post(user_id, interest_id).enqueue(new Callback<json>() {
+            new RService.api().call(mContext).interest_wise_post( interest_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {

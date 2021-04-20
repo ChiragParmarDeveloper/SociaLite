@@ -3,7 +3,6 @@ package com.ap.SociaLite.Presenter;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ap.SociaLite.Activity.SpotLightActivity;
@@ -72,16 +71,7 @@ public class SpotLightActivityPresenter implements SpotLightActivityContract {
 
                     if (response.body().status.equals("1")) {
                         if (response.body().data != null && response.body().data.size() > 0) {
-
-
-//                            layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//                            //recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-//                            friends_spotlight.setLayoutManager(layoutManager);
-//                            myspotlightadapter = new SpotlightAdapter(Name, getApplicationContext());
-//                            friends_spotlight.setAdapter(myspotlightadapter);
-
-                            spotLightActivity.friends_spotlight.setLayoutManager( new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-                           // spotLightActivity.friends_spotlight.setLayoutManager(new GridLayoutManager(mContext, 1));
+                            spotLightActivity.friends_spotlight.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
                             spotLightActivity.friends_spotlight.setAdapter(new SpotlightAdapter(mContext, spotLightActivity, response.body().data));
                         }
                     } else {

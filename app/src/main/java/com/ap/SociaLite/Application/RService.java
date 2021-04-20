@@ -274,8 +274,7 @@ public interface RService {
 
     @FormUrlEncoded
     @POST("interest_wise_post.php")
-    Call<json> interest_wise_post(@Field("user_id") String user_id,
-                                  @Field("interest_id") String interest_id);
+    Call<json> interest_wise_post(@Field("interest_id") String interest_id);
 
 
     @FormUrlEncoded
