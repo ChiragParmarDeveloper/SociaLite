@@ -85,7 +85,6 @@ public interface RService {
     Call<json> my_connection(@Field("UserId") String UserId);
 
 
-
     @FormUrlEncoded
     @POST("friend_story.php")
     Call<json> allfrnd_story(@Field("UserId") String UserId);
@@ -99,6 +98,12 @@ public interface RService {
     @POST("friend_connection.php")
     Call<json> connection_request(@Field("UserId") String UserId,
                                   @Field("RequestId") String RequestId);
+
+
+    @FormUrlEncoded
+    @POST("add_story_view.php")
+    Call<json> added_story_view(@Field("user_id") String user_id,
+                                @Field("story_id") String story_id);
 
 
     @FormUrlEncoded
@@ -272,11 +277,10 @@ public interface RService {
                                  @Field("interest_id") String interest_id);
 
 
-
     @FormUrlEncoded
     @POST("remove_interest.php")
     Call<json> delete_interest(@Field("user_id") String user_id,
-                                 @Field("interest_ids") String interest_ids);
+                               @Field("interest_ids") String interest_ids);
 
     @FormUrlEncoded
     @POST("interest_wise_post.php")

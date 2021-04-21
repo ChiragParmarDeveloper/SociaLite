@@ -38,8 +38,7 @@ public class SpotLightActivity extends AppCompatActivity {
     @BindView(R.id.user_frndstory)
     public ImageView user_frndstory;
 
-
-    String user_id,UserId;
+    public String user_id,UserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

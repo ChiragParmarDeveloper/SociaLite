@@ -2,6 +2,7 @@ package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -76,6 +77,31 @@ public class SpotLightActivityPresenter implements SpotLightActivityContract {
                         }
                     } else {
                         //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //       Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                    //       Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void story_view_added(String user_id, String story_id) {
+        try {
+            new RService.api().call(mContext).added_story_view(user_id, story_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+
+                    if (response.body().status.equals("1")) {
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    } else {
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 

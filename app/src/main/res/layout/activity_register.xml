@@ -154,7 +154,6 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout20"
                         android:layout_width="0dp"
