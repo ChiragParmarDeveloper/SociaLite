@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -79,8 +78,10 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
             @Override
             public void onClick(View view) {
                 String id = details.get(position).interest_id;
+                businessFragment.interest_ids = details.get(position).interest_id;
                 new BusinessFragmentPresenter(mContext, businessFragment).update_new_intrests(businessFragment.user_id, id);
                 new BusinessFragmentPresenter(mContext, businessFragment).fetch_all_intrest(businessFragment.user_id);
+
             }
         });
 
@@ -92,7 +93,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
                     String interest_id = details.get(position).interest_id;
                     new BusinessFragmentPresenter(mContext, businessFragment).business_post(interest_id);
                 } else {
-           //         Toast.makeText(mContext, "id not selected", Toast.LENGTH_SHORT).show();
+                    //         Toast.makeText(mContext, "id not selected", Toast.LENGTH_SHORT).show();
                 }
             }
         });

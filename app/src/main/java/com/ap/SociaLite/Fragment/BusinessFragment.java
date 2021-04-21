@@ -45,7 +45,7 @@ public class BusinessFragment extends Fragment {
 
     @BindView(R.id.progressbar)
     public ProgressBar progressbar;
-    public String user_id;
+    public String user_id,interest_ids;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,4 +71,10 @@ public class BusinessFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        new BusinessFragmentPresenter(getActivity(),this).fetch_all_intrest(user_id);
+
+    }
 }

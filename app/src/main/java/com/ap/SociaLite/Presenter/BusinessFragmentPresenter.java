@@ -67,7 +67,10 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new BusinessFragmentPresenter(mContext, businessFragment).remove_interest(businessFragment.user_id,businessFragment.interest_ids);
+                        new BusinessFragmentPresenter(mContext,businessFragment).fetch_all_intrest(businessFragment.user_id);
+
                     }
                 }
 
@@ -189,4 +192,29 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
 
         }
     }
+
+    @Override
+    public void remove_interest(String user_id, String interest_ids) {
+        try {
+            new RService.api().call(mContext).delete_interest(user_id, interest_ids).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
 }

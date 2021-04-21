@@ -16,4 +16,7 @@ public interface BusinessFragmentContract {
     void category_save_post(String user_id, String post_id);
 
     void rating_post(String user_id, String post_id, String rate);
+
+
+    void remove_interest(String user_id,String interest_ids);
 }
