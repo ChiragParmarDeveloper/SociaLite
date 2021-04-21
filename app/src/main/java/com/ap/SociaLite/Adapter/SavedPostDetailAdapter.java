@@ -336,7 +336,6 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
         @BindView(R.id.txt_comment_pos_0)
         TextView txt_comment_pos_0;
 
-
         @BindView(R.id.txt_name_pos_1)
         TextView txt_name_pos_1;
 

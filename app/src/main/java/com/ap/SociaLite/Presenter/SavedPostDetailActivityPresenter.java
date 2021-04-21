@@ -8,7 +8,6 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.ap.SociaLite.Activity.SavedPostDetailActivity;
-import com.ap.SociaLite.Adapter.HiddedPostDetailAdapter;
 import com.ap.SociaLite.Adapter.SavedPostDetailAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
@@ -32,7 +31,7 @@ public class SavedPostDetailActivityPresenter implements SavedPostDetailActivity
     public void save_post(String user_id) {
         savedPostDetailActivity.progressbar.setVisibility(View.VISIBLE);
         try {
-            new RService.api().call(mContext).hidepost(user_id).enqueue(new Callback<json>() {
+            new RService.api().call(mContext).savepost(user_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     savedPostDetailActivity.progressbar.setVisibility(View.GONE);
@@ -40,11 +39,9 @@ public class SavedPostDetailActivityPresenter implements SavedPostDetailActivity
                         if (response.body().hide_post != null) {
                             savedPostDetailActivity.rec_savedpost_detail.setLayoutManager(new GridLayoutManager(mContext, 1));
                             savedPostDetailActivity.rec_savedpost_detail.setAdapter(new SavedPostDetailAdapter(mContext, response.body().hide_post, savedPostDetailActivity));
-
                         }
                     } else {
-
-                        //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -84,7 +81,6 @@ public class SavedPostDetailActivityPresenter implements SavedPostDetailActivity
         }
     }
 
-
     @Override
     public void rating_post(String user_id, String post_id, String rate) {
         try {
@@ -117,12 +113,10 @@ public class SavedPostDetailActivityPresenter implements SavedPostDetailActivity
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-
                     } else {
                         //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
-
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
                     // Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -133,4 +127,5 @@ public class SavedPostDetailActivityPresenter implements SavedPostDetailActivity
 
         }
     }
+
 }
