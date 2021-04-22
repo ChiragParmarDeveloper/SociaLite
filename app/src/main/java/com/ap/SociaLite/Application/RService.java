@@ -72,6 +72,11 @@ public interface RService {
 
 
     @FormUrlEncoded
+    @POST("notification_list.php")
+    Call<json> notification(@Field("UserId") String UserId);
+
+
+    @FormUrlEncoded
     @POST("connection_fetch.php")
     Call<json> connection(@Field("UserId") String UserId);
 
