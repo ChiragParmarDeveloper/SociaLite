@@ -77,6 +77,19 @@ public interface RService {
 
 
     @FormUrlEncoded
+    @POST("request_accept.php")
+    Call<json> accept(@Field("UserId") String UserId,
+                      @Field("RequestId") String RequestId);
+
+
+
+    @FormUrlEncoded
+    @POST("request_denied.php")
+    Call<json> denied(@Field("UserId") String UserId,
+                      @Field("RequestId") String RequestId);
+
+
+    @FormUrlEncoded
     @POST("connection_fetch.php")
     Call<json> connection(@Field("UserId") String UserId);
 

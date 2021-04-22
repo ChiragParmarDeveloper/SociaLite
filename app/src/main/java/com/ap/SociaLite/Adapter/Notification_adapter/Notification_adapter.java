@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Activity.Notification;
 import com.ap.SociaLite.Pojo.data;
+import com.ap.SociaLite.Presenter.NotificationPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -98,6 +99,19 @@ public class Notification_adapter extends RecyclerView.Adapter<Notification_adap
             Picasso.get().load(item.request_user_profile_pic).into(holder.request_user_image);
         }
 
+        holder.request_accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
+            }
+        });
+
+        holder.request_decline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new NotificationPresenter(notification, mContext).request_denied(item.request_id, notification.UserId);
+            }
+        });
 
     }
 

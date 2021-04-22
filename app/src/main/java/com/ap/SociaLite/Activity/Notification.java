@@ -47,7 +47,6 @@ public class Notification extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         new NotificationPresenter(this, this).user_notification_list(UserId);
     }
 }
