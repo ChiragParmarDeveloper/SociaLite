@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Fragment.Connection.ConnectionFragment;
 import com.ap.SociaLite.Fragment.Connection.MyConnectionFragment;
 import com.ap.SociaLite.Pojo.user_connection;
 import com.ap.SociaLite.R;
@@ -34,11 +33,11 @@ public class MyConnectionAdapter extends RecyclerView.Adapter<MyConnectionAdapte
         this.user_connections = user_connections;
         this.myConnectionFragment = myConnectionFragment;
         selectedItem = 0;
+
         this.alldata = new ArrayList<>();
         this.alldata.addAll(user_connections);
 
     }
-
 
     @NonNull
     @Override
@@ -75,8 +74,8 @@ public class MyConnectionAdapter extends RecyclerView.Adapter<MyConnectionAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               myConnectionFragment.RequestId = user_connections.get(position).Request_Id;
-               myConnectionFragment.search_profile_user_name.setText(user_connections.get(position).username);
+                myConnectionFragment.RequestId = user_connections.get(position).Request_Id;
+                myConnectionFragment.search_profile_user_name.setText(user_connections.get(position).username);
 
                 if (user_connections.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
                     Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
@@ -94,7 +93,7 @@ public class MyConnectionAdapter extends RecyclerView.Adapter<MyConnectionAdapte
         return user_connections.size();
     }
 
-    public static class MyHolder extends RecyclerView.ViewHolder{
+    public static class MyHolder extends RecyclerView.ViewHolder {
 
         ImageView profile;
         TextView name;
@@ -106,6 +105,7 @@ public class MyConnectionAdapter extends RecyclerView.Adapter<MyConnectionAdapte
             name = itemView.findViewById(R.id.user_name);
         }
     }
+
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
         user_connections.clear();
@@ -120,7 +120,4 @@ public class MyConnectionAdapter extends RecyclerView.Adapter<MyConnectionAdapte
         }
         notifyDataSetChanged();
     }
-
-
-
 }

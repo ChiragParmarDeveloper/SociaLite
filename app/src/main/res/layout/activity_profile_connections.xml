@@ -141,9 +141,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout41"
                 app:tabIndicatorColor="#EE6851"
                 app:tabSelectedTextColor="#EE6851"
-                app:tabTextColor="#263238">
-
-            </com.google.android.material.tabs.TabLayout>
+                app:tabTextColor="#263238"/>
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/connection_tabs_pager"

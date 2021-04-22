@@ -49,11 +49,9 @@ public class ConnectionFragment extends Fragment {
     @BindView(R.id.layout_connection)
     public ConstraintLayout layout_connection;
 
-
-
-    public ConnectionAdapter connectionAdapter;
+    public static ConnectionAdapter connectionAdapter;
     public String UserId, RequestId;
-    public List<user_connection> user_connections;
+    public static List<user_connection> user_connections;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

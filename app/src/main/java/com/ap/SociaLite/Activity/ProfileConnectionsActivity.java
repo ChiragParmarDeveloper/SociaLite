@@ -11,6 +11,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.ap.SociaLite.Adapter.ConnectionAdapter.ConnectionAdapter;
 import com.ap.SociaLite.Adapter.TabaccssorAdapter_myconnection.TabaccssorAdapter_myconnection;
+import com.ap.SociaLite.Fragment.Connection.ConnectionFragment;
+import com.ap.SociaLite.Fragment.Connection.MyConnectionFragment;
 import com.ap.SociaLite.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -27,7 +29,7 @@ public class ProfileConnectionsActivity extends AppCompatActivity {
 
     @BindView(R.id.connection_serach)
     public EditText connection_serach;
-    public ConnectionAdapter connectionAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,8 @@ public class ProfileConnectionsActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(pharmacy_tabs_pager);
 
-   //     filter();
+        filter();
+        filter_myconnection();
     }
 
     @OnClick({R.id.img_back})
@@ -55,7 +58,7 @@ public class ProfileConnectionsActivity extends AppCompatActivity {
     }
 
 
-    private void filter() {
+    public void filter() {
 
         connection_serach.addTextChangedListener(new TextWatcher() {
             @Override
@@ -65,8 +68,8 @@ public class ProfileConnectionsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ProfileConnectionsActivity.this.connectionAdapter.filter(String.valueOf(s));
-                connectionAdapter.notifyDataSetChanged();
+                ConnectionFragment.connectionAdapter.filter(String.valueOf(s));
+                ConnectionFragment.connectionAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -76,5 +79,24 @@ public class ProfileConnectionsActivity extends AppCompatActivity {
         });
     }
 
+    public void filter_myconnection() {
 
+        connection_serach.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                MyConnectionFragment.myConnectionAdapter.filter(String.valueOf(s));
+                MyConnectionFragment.myConnectionAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
 }

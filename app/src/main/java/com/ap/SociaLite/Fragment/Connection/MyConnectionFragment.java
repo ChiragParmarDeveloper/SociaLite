@@ -46,7 +46,7 @@ public class MyConnectionFragment extends Fragment {
     @BindView(R.id.constraint_myconnection)
     public ConstraintLayout constraint_myconnection;
 
-    public MyConnectionAdapter myConnectionAdapter;
+    public static MyConnectionAdapter myConnectionAdapter;
     public String UserId, RequestId;
     public List<user_connection> user_connections;
 
@@ -59,6 +59,7 @@ public class MyConnectionFragment extends Fragment {
 
         Session session = new Session(getContext());
         UserId = session.getUser_id();
+
         new MyConnectionFragmentPresenter(this, getContext()).following(UserId);
         return view;
     }

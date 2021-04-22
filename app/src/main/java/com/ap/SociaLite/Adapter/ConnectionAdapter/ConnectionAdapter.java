@@ -33,6 +33,7 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.My
         this.user_connections = user_connections;
         this.connectionFragment = connectionFragment;
         selectedItem = 0;
+
         this.alldata = new ArrayList<>();
         this.alldata.addAll(user_connections);
 
