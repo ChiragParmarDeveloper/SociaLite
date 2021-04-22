@@ -103,6 +103,7 @@ public class Notification_adapter extends RecyclerView.Adapter<Notification_adap
             @Override
             public void onClick(View v) {
                 new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
+                new NotificationPresenter(notification, mContext).user_notification_list(notification.UserId);
             }
         });
 
@@ -110,6 +111,7 @@ public class Notification_adapter extends RecyclerView.Adapter<Notification_adap
             @Override
             public void onClick(View v) {
                 new NotificationPresenter(notification, mContext).request_denied(item.request_id, notification.UserId);
+                new NotificationPresenter(notification, mContext).user_notification_list(notification.UserId);
             }
         });
 
