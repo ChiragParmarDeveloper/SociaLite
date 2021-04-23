@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:text="Dashboard"
                     android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_13sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
