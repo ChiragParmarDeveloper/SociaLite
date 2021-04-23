@@ -172,8 +172,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                                 } else {
                                     Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
                                 }
-
-                                //   android:alpha=".150"
+                                
                                 if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
                                     Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
                                     profile_pic_2.setImageDrawable(upload_img);
