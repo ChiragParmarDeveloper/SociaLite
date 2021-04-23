@@ -82,7 +82,6 @@ public interface RService {
                       @Field("RequestId") String RequestId);
 
 
-
     @FormUrlEncoded
     @POST("request_denied.php")
     Call<json> denied(@Field("UserId") String UserId,
@@ -256,6 +255,13 @@ public interface RService {
     @FormUrlEncoded
     @POST("my_profile.php")
     Call<json> my_profileActivity(@Field("user_id") String user_id);
+
+
+    @FormUrlEncoded
+    @POST("profile_connection.php")
+    Call<json> connection_type(@Field("UserId") String UserId,
+                               @Field("RequestId") String RequestId);
+
 
     @FormUrlEncoded
     @POST("add_post_rating.php")

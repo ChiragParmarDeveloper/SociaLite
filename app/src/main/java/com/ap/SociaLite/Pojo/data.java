@@ -37,4 +37,14 @@ public class data {
     @SerializedName("notification_type")
     public String notification_type;
 
+
+    @SerializedName("user_id__connected")
+    public String user_id__connected;
+
+    @SerializedName("reuest_profile_pics")
+    public String reuest_profile_pics;
+
+    @SerializedName("request_id_connection")
+    public String request_id_connection;
+
 }

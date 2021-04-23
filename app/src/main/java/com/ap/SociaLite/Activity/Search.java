@@ -65,7 +65,7 @@ public class Search extends AppCompatActivity {
         filter();
     }
 
-    @OnClick({R.id.img_back, R.id.search_connect, R.id.search_msg, R.id.search_share})
+    @OnClick({R.id.img_back, R.id.search_connect, R.id.search_msg, R.id.search_share,R.id.search_profile_user_name,R.id.search_profile_image})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -88,6 +88,19 @@ public class Search extends AppCompatActivity {
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
                 view.getContext().startActivity(in);
                 break;
+
+            case R.id.search_profile_user_name:
+                Intent con_pro1 = new Intent(view.getContext(), ProfileConnectionActivity.class);
+                con_pro1.putExtra("request_id",RequestId);
+                startActivity(con_pro1);
+                break;
+
+            case R.id.search_profile_image:
+                Intent con_pro = new Intent(view.getContext(), ProfileConnectionActivity.class);
+                con_pro.putExtra("request_id",RequestId);
+                startActivity(con_pro);
+                break;
+
         }
     }
 

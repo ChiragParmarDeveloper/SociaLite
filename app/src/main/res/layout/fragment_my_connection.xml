@@ -182,7 +182,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="10dp"
-                    android:text="User name 3"
+                    android:text="User name"
                     android:textColor="@color/colorBlack"
                     android:textSize="15dp"
                     app:layout_constraintEnd_toEndOf="parent"

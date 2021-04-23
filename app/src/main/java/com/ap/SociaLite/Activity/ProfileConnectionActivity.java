@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.ap.SociaLite.Application.RService;
+import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Fragment.profile_connection_fragments.ProfileConnectionBusinessFragment;
 import com.ap.SociaLite.Fragment.profile_connection_fragments.ProfileConnectionTimelineFragment;
@@ -52,8 +53,18 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     @BindView(R.id.share)
     public ConstraintLayout share;
 
+    @BindView(R.id.profile_pic_1)
+    public CircularImageView profile_pic_1;
+
+    @BindView(R.id.profile_pic_2)
+    public CircularImageView profile_pic_2;
+
+    @BindView(R.id.txt_connect)
+    public TextView txt_connect;
+
+
     Button timeline_btn, business_btn, spotlight_btn;
-    String user_id;
+    String user_id, UserId, RequestId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +78,13 @@ public class ProfileConnectionActivity extends AppCompatActivity {
         business_btn = findViewById(R.id.business_btn);
         spotlight_btn = findViewById(R.id.spotlight_btn);
 
+        //UserId = login user_id;
+        //user_id = request_id;
+        Session session = new Session(getApplicationContext());
+        UserId = session.getUser_id();
         user_id = getIntent().getStringExtra("request_id");
+        RequestId = getIntent().getStringExtra("request_id");
+
 
         timeline_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +126,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                 business_btn.setTextColor(Color.BLACK);
 
                 Intent spotlight = new Intent(ProfileConnectionActivity.this, SpotlightActivityForUser.class);
-                spotlight.putExtra("user_id",user_id);
+                spotlight.putExtra("user_id", user_id);
                 startActivity(spotlight);
 
 //                Intent spotlight = new Intent(ProfileConnectionActivity.this, SpotLightActivity.class);
@@ -119,6 +136,115 @@ public class ProfileConnectionActivity extends AppCompatActivity {
         });
 
         my_profile(user_id);
+        profile_connection(UserId, RequestId);
+    }
+
+    private void profile_connection(String UserId, String RequestId) {
+        progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(this).connection_type(UserId, RequestId).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    progressbar.setVisibility(View.GONE);
+                    if (response.body().status.equals("1")) {
+                        if (response.body().data != null && response.body().data.size() > 0) {
+//
+                            if (response.body().data.get(0).user_id__connected.equals("Accepted") && response.body().data.get(0).request_id_connection.equals("Accepted")) {
+
+                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                    profile_pic_1.setImageDrawable(upload_img);
+                                } else {
+                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+                                }
+
+                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                    profile_pic_2.setImageDrawable(upload_img);
+                                } else {
+                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+                                }
+                            } else if (response.body().data.get(0).user_id__connected.equals("Accepted") && response.body().data.get(0).request_id_connection.equals("Requested")) {
+
+                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                    profile_pic_1.setImageDrawable(upload_img);
+                                } else {
+                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+                                }
+
+                                //   android:alpha=".150"
+                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                    profile_pic_2.setImageDrawable(upload_img);
+                                    profile_pic_2.setAlpha(.150f);
+                                } else {
+                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+                                    profile_pic_2.setAlpha(.150f);
+                                }
+                            } else if (response.body().data.get(0).user_id__connected.equals("Requested") && response.body().data.get(0).request_id_connection.equals("Accepted")) {
+
+                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                    profile_pic_1.setImageDrawable(upload_img);
+                                    profile_pic_2.setAlpha(.150f);
+                                } else {
+                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+                                    profile_pic_2.setAlpha(.150f);
+                                }
+
+                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                    profile_pic_2.setImageDrawable(upload_img);
+                                } else {
+                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+
+                                }
+                            } else if (response.body().data.get(0).user_id__connected.equals("not_connected") && response.body().data.get(0).request_id_connection.equals("not_connected")) {
+
+                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                    profile_pic_1.setImageDrawable(upload_img);
+                                    profile_pic_1.setAlpha(.150f);
+                                } else {
+                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+                                    profile_pic_1.setAlpha(.150f);
+                                }
+
+                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+                                    profile_pic_2.setImageDrawable(upload_img);
+                                    profile_pic_2.setAlpha(.150f);
+                                } else {
+                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+                                    profile_pic_2.setAlpha(.150f);
+                                }
+                                txt_connect.setText("Not Connected");
+                            }
+
+//
+//                            profile_bio.setText(response.body().my_profile_user_details.get(0).bio);
+//                            //profileActivity.textView10.setText(response.body().my_profile_user_details.get(0).connection);
+
+
+                        }
+                    } else {
+                        //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    progressbar.setVisibility(View.GONE);
+                    //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+
+
     }
 
     private void my_profile(String user_id) {
@@ -169,7 +295,8 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.img_back,R.id.share,R.id.msg})
+
+    @OnClick({R.id.img_back, R.id.share, R.id.msg})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -186,4 +313,12 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        my_profile(user_id);
+        profile_connection(UserId, RequestId);
+    }
 }
+
