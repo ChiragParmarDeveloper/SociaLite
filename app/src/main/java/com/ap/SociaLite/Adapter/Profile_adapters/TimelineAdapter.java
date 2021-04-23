@@ -117,7 +117,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
                 PopupMenu popup = new PopupMenu(mContext, holder.img_popup);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
-                        .inflate(R.menu.popup_menu, popup.getMenu());
+                        .inflate(R.menu.timeline_menu, popup.getMenu());
 
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -132,6 +132,11 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
 
                             case R.id.save:
                                 new TimeLineFragmentPresenter(mContext, timeLineFragment).category_save_post(timeLineFragment.user_id, id);
+                                break;
+
+                            case R.id.delete:
+                                new TimeLineFragmentPresenter(mContext, timeLineFragment).delete_post_timeline(timeLineFragment.user_id, id);
+                                new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
                                 break;
 
                             case R.id.report:

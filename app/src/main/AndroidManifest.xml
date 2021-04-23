@@ -38,7 +38,7 @@
         <activity android:name=".Activity.SchedulePostSettingActivity" />
         <activity android:name=".Activity.SavedPostDetailActivity" />
         <activity android:name=".Activity.SavedPostActivity" />
-        <activity android:name=".Activity.ProfileActivity" />
+        <activity android:name=".Activity.ProfileActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".Activity.AddCardActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.PostNetwork" />
@@ -90,7 +90,8 @@
         <activity android:name=".Activity.Setting"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.Search" />
+            android:name=".Activity.Search"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Activity.CameraActivity" />
         <activity android:name=".Activity.RegistrationVerificationActivity" />
         <activity

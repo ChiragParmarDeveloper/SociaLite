@@ -269,6 +269,15 @@ public interface RService {
                            @Field("post_id") String post_id,
                            @Field("rate") String rate);
 
+
+    @FormUrlEncoded
+    @POST("normal_post_delete.php")
+    Call<json> timeline_post(@Field("user_id") String user_id,
+                           @Field("post_id") String post_id);
+
+
+
+
     @FormUrlEncoded
     @POST("add_post_comment.php")
     Call<json> add_comment_post(@Field("user_id") String user_id,

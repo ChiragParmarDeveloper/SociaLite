@@ -41,9 +41,6 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         this.alldata.addAll(datas);
     }
 
-
-
-
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -71,11 +68,10 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
             if (datas.get(position).is_connected.equals("Accepted")) {
                 search.txt_connection.setText("Connected");
             } else if (datas.get(position).is_connected.equals("Requested")) {
-                search.txt_connection.setText("Request");
+                search.txt_connection.setText("Requesting");
             } else {
                 search.txt_connection.setText("Connect");
             }
-
         }
 
         if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
@@ -102,7 +98,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
                     search.txt_connection.setText("Connected");
                 }else if(datas.get(position).is_connected.equals("Requested"))
                 {
-                    search.txt_connection.setText("Request");
+                    search.txt_connection.setText("Requesting");
                 }
                 else
                 {

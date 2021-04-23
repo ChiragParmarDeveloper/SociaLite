@@ -12,4 +12,5 @@ public interface TimeLineFragmentContract {
     void rating_post(String user_id,String post_id,String rate);
 
 
+    void delete_post_timeline(String user_id,String post_id);
 }

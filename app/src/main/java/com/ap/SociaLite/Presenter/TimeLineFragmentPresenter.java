@@ -39,13 +39,16 @@ public class TimeLineFragmentPresenter implements TimeLineFragmentContract {
                             timeLineFragment.rv_timeline.setAdapter(new TimelineAdapter(mContext, response.body().post_list, timeLineFragment));
                         }
                     } else {
-              //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        timeLineFragment.rv_timeline.setLayoutManager(new GridLayoutManager(mContext, 1));
+                        timeLineFragment.rv_timeline.setAdapter(new TimelineAdapter(mContext, response.body().post_list, timeLineFragment));
+
+                        //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-            //        Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //        Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
@@ -64,13 +67,13 @@ public class TimeLineFragmentPresenter implements TimeLineFragmentContract {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
 
                     } else {
-                           Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                   //  Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     // Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
@@ -120,6 +123,30 @@ public class TimeLineFragmentPresenter implements TimeLineFragmentContract {
                 public void onFailure(Call<json> call, Throwable t) {
                     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void delete_post_timeline(String user_id, String post_id) {
+        try {
+            new RService.api().call(mContext).timeline_post(user_id, post_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    } else {
+                        //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+//                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {

@@ -41,7 +41,10 @@ public class HomeActivityPresenter implements HomeActivityContract {
                                 Picasso.get().load(response.body().user_details.profile_pic).into(homeActivity.img_dp);
                             }
 
-                            homeActivity.txt_name.setText(response.body().user_details.username);
+                            String input= response.body().user_details.username;
+                            String output = input.substring(0, 1).toUpperCase() + input.substring(1);
+                            homeActivity.txt_name.setText(output);
+
                             homeActivity.txt_email.setText(response.body().user_details.email);
 
                         }

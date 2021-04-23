@@ -32,9 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toolbar"
                 android:layout_width="0dp"
@@ -55,9 +52,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/textView"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/toolbar"
-                    app:layout_constraintTop_toTopOf="@+id/toolbar">
+                    app:layout_constraintTop_toTopOf="@+id/toolbar"/>
 
-                </androidx.appcompat.widget.AppCompatImageView>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout41"
@@ -70,7 +66,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
-                        android:layout_height="55dp"
+                        android:layout_height="40dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginEnd="16dp"
@@ -84,8 +80,8 @@
 
                         <ImageView
                             android:id="@+id/imgsearch"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginLeft="16dp"
                             android:src="@drawable/search"
@@ -97,7 +93,7 @@
                             android:id="@+id/search_view"
                             style="@style/Widget.AppCompat.SearchView.ActionBar"
                             android:layout_width="0dp"
-                            android:layout_height="40dp"
+                            android:layout_height="30dp"
                             android:layout_marginEnd="8dp"
                             android:background="@null"
                             android:gravity="start|top"

@@ -45,8 +45,6 @@ public class Search extends AppCompatActivity {
     @BindView(R.id.txt_connection)
     public TextView txt_connection;
 
-
-
     public SearchProfileAdapter searchProfileAdapter;
     public List<data> datas;
 
@@ -73,8 +71,9 @@ public class Search extends AppCompatActivity {
                 break;
 
             case R.id.search_connect:
+            //    txt_connection.setText("Requesting");
                 new SearchPresenter(this, this).send_request(user_id, RequestId);
-                new SearchPresenter(this, this).all_user(user_id);
+             //   new SearchPresenter(this, this).all_user(user_id);
                 break;
 
             case R.id.search_msg:
@@ -141,5 +140,12 @@ public class Search extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new SearchPresenter(this, this).all_user(user_id);
+        filter();
     }
 }
