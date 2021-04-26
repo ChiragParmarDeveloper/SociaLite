@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Model.comments;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -27,7 +30,6 @@ public class view_commentAdapter extends RecyclerView.Adapter<view_commentAdapte
     CommentActivity commentActivity;
     List<comments> comments;
     comments item;
-    //  List<String> mList;
 
     public view_commentAdapter(Context context, List<comments> list, CommentActivity fragment) {
         this.mContext = context;
@@ -49,25 +51,19 @@ public class view_commentAdapter extends RecyclerView.Adapter<view_commentAdapte
         holder.viewer_name.setText(item.user_name);
         holder.viewer_comment.setText(item.comment);
 
-        String avatarTitle = String.valueOf(item.user_name.charAt(0)).toUpperCase();
-        ColorGenerator generator = ColorGenerator.MATERIAL;
-        int randomcolor = generator.getRandomColor();
+        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
 
-        TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+            String avatarTitle = String.valueOf(item.user_name.charAt(0)).toUpperCase();
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int randomcolor = generator.getRandomColor();
 
-        TextDrawable drawable = builder.build(avatarTitle, randomcolor);
-        holder.viewer_profile.setImageDrawable(drawable);
+            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
 
-
-//        String avatarTitle = String.valueOf(item.user_name.charAt(0)).toUpperCase();
-//        holder.text_user_avatar_title.setText(avatarTitle);
-
-//        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
-//            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-//            holder.viewer_profile.setImageDrawable(upload_img);
-//        } else {
-//            Picasso.get().load(item.profile_pic).into(holder.viewer_profile);
-//        }
+            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+            holder.viewer_profile.setImageDrawable(drawable);
+        } else {
+            Picasso.get().load(item.profile_pic).into(holder.viewer);
+        }
 
     }
 
@@ -87,6 +83,10 @@ public class view_commentAdapter extends RecyclerView.Adapter<view_commentAdapte
 
         @BindView(R.id.viewer_profile)
         ImageView viewer_profile;
+
+        @BindView(R.id.viewer)
+        CircularImageView viewer;
+
 
         @BindView(R.id.viewer_comment)
         TextView viewer_comment;

@@ -19,11 +19,8 @@ import butterknife.OnClick;
 
 public class CommentActivity extends AppCompatActivity {
 
-//    @BindView(R.id.img_back)
-//    ImageView img_back;
-
-    @BindView(R.id.img_send)
-    ImageView img_send;
+//    @BindView(R.id.img_send)
+//    ImageView img_send;
 
     @BindView(R.id.edt_comment)
     public EditText edt_comment;
@@ -62,10 +59,7 @@ public class CommentActivity extends AppCompatActivity {
                 break;
             case R.id.ing_camera:
                 Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
-                ;
                 break;
-
-
         }
     }
 }

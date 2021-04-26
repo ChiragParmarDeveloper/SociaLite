@@ -22,6 +22,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/viewer"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:civ_border="false"
+                android:src="@drawable/ic_user_icon" />
+
+
             <ImageView
                 android:id="@+id/viewer_profile"
                 android:layout_width="40dp"
