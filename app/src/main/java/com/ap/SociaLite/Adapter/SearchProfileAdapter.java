@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +40,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
 
         this.alldata = new ArrayList<>();
         this.alldata.addAll(datas);
+     //   notifyDataSetChanged();
     }
 
     @NonNull
@@ -54,6 +56,9 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         item = datas.get(position);
         id = datas.get(position).request_id;
         holder.name.setText(item.username);
+
+
+
 
         if (selectedItem == position) {
             search.RequestId = datas.get(position).request_id;
@@ -104,9 +109,11 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
                 {
                     search.txt_connection.setText("Connect");
                 }
-
             }
+
         });
+
+
     }
 
     @Override
@@ -143,5 +150,4 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         }
         notifyDataSetChanged();
     }
-
 }

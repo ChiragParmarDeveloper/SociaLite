@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Pojo.interest_details;
 import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
-import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -29,6 +28,10 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     List<interest_details> details = new ArrayList<>();
     interest_details item;
     private int selectedItem;
+
+    private int clickItem = 0;
+
+    Boolean selectlayout = true;
 
     public CategoryListAdapter(Context context, List<interest_details> list, CategoryFragment fragment) {
         this.mContext = context;
@@ -59,9 +62,12 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
         if (selectedItem == position) {
             String interest_id = details.get(position).interest_id;
+
+            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
+            holder.img_category.setBorderWidth(8);
+
             new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(interest_id);
         }
-
 
         if (item.flag.equals("1")) {
             holder.img_right.setVisibility(View.VISIBLE);
@@ -78,14 +84,28 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             }
         });
 
+
+        if (position == clickItem) {
+            holder.img_category.setSelected(true);
+            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
+            holder.img_category.setBorderWidth(8);
+
+            String interest_id = details.get(position).interest_id;
+            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(interest_id);
+
+        } else {
+            holder.img_category.setSelected(false);
+            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.white));
+            holder.img_category.setBorderWidth(8);
+        }
+
         holder.img_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String interest_id = details.get(position).interest_id;
-                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(interest_id);
+                clickItem = holder.getAdapterPosition();
+                notifyDataSetChanged();
             }
         });
-
     }
 
     @Override

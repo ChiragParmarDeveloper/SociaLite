@@ -2,22 +2,21 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Activity.HiddedPostDetailActivity;
-import com.ap.SociaLite.Activity.HidedPost;
 import com.ap.SociaLite.Activity.SavedPostDetailActivity;
 import com.ap.SociaLite.Pojo.hide_post;
 import com.ap.SociaLite.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,7 +49,8 @@ public class SavedPostAdapter extends RecyclerView.Adapter<SavedPostAdapter.MyHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent saved = new Intent(view.getContext(), SavedPostDetailActivity.class);
+              Intent saved = new Intent(view.getContext(), SavedPostDetailActivity.class);
+                saved.putExtra("click_position",position);
                 view.getContext().startActivity(saved);
             }
         });
@@ -61,7 +61,7 @@ public class SavedPostAdapter extends RecyclerView.Adapter<SavedPostAdapter.MyHo
         return hide_posts.size();
     }
 
-    public static class MyHolder extends RecyclerView.ViewHolder{
+    public static class MyHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.img_category)
         ImageView img_category;

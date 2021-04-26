@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ap.SociaLite.Adapter.Profile_adapters.TimelineAdapter;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Presenter.TimeLineFragmentPresenter;
 import com.ap.SociaLite.R;

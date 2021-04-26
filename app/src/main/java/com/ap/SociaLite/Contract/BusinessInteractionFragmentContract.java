@@ -10,4 +10,6 @@ public interface BusinessInteractionFragmentContract {
 
     void rating_post(String user_id,String post_id,String rate);
 
+    void delete_post_business(String user_id,String post_id);
+
 }

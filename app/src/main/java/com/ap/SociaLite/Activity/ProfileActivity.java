@@ -82,7 +82,6 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.share)
     ConstraintLayout share;
 
-
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
     String image, user_id;

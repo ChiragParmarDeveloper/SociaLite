@@ -26,6 +26,7 @@ import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Pojo.hide_post;
+import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.Presenter.SavedPostDetailActivityPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -66,237 +67,239 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
-        Drawable star1 = mContext.getDrawable(R.drawable.ic_rating_star1);
-        Drawable star2 = mContext.getDrawable(R.drawable.ic_rating_star2);
-        Drawable star3 = mContext.getDrawable(R.drawable.ic_rating_star3);
-        Drawable star4 = mContext.getDrawable(R.drawable.ic_rating_star4);
-        Drawable star5 = mContext.getDrawable(R.drawable.ic_rating_star5);
+            Drawable star1 = mContext.getDrawable(R.drawable.ic_rating_star1);
+            Drawable star2 = mContext.getDrawable(R.drawable.ic_rating_star2);
+            Drawable star3 = mContext.getDrawable(R.drawable.ic_rating_star3);
+            Drawable star4 = mContext.getDrawable(R.drawable.ic_rating_star4);
+            Drawable star5 = mContext.getDrawable(R.drawable.ic_rating_star5);
 
-        item = mList.get(position);
-        String id = mList.get(position).post_id;
-        Picasso.get().load(item.profile_pic).into(holder.circularImageView);
-        holder.txt_name.setText(item.username);
-        holder.txt_time.setText(item.post_time);
-        Picasso.get().load(item.image).into(holder.img_category);
+            item = mList.get(position);
+            String id = mList.get(position).post_id;
+            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+            holder.txt_name.setText(item.username);
+            holder.txt_time.setText(item.post_time);
+            Picasso.get().load(item.image).into(holder.img_category);
 
-        holder.txt_description.setText(item.description);
-        holder.txt_rating.setText(item.rate);
+            holder.txt_description.setText(item.description);
+            holder.txt_rating.setText(item.rate);
 
-        if(mList.get(position).rate.equals("0")){
-            holder.img_star.setImageDrawable(star1);
-        }
-        if(mList.get(position).rate.equals("1")){
-            holder.img_star.setImageDrawable(star1);
-        }
-        if(mList.get(position).rate.equals("2")){
-            holder.img_star.setImageDrawable(star2);
-        }
-        if(mList.get(position).rate.equals("3")){
-            holder.img_star.setImageDrawable(star3);
-        }
-        if(mList.get(position).rate.equals("4")){
-            holder.img_star.setImageDrawable(star4);
-        }
-        if(mList.get(position).rate.equals("5")){
-            holder.img_star.setImageDrawable(star5);
-        }
 
-        holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            if (mList.get(position).rate.equals("0")) {
+                holder.img_star.setImageDrawable(star1);
+            }
+            if (mList.get(position).rate.equals("1")) {
+                holder.img_star.setImageDrawable(star1);
+            }
+            if (mList.get(position).rate.equals("2")) {
+                holder.img_star.setImageDrawable(star2);
+            }
+            if (mList.get(position).rate.equals("3")) {
+                holder.img_star.setImageDrawable(star3);
+            }
+            if (mList.get(position).rate.equals("4")) {
+                holder.img_star.setImageDrawable(star4);
+            }
+            if (mList.get(position).rate.equals("5")) {
+                holder.img_star.setImageDrawable(star5);
+            }
 
-                PopupMenu popup = new PopupMenu(mContext, holder.img_popup);
-                //Inflating the Popup using xml file
-                popup.getMenuInflater()
-                        .inflate(R.menu.popup_menu, popup.getMenu());
+            holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                //registering popup with OnMenuItemClickListener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
+                    PopupMenu popup = new PopupMenu(mContext, holder.img_popup);
+                    //Inflating the Popup using xml file
+                    popup.getMenuInflater()
+                            .inflate(R.menu.popup_menu, popup.getMenu());
 
-                        switch (item.getItemId()) {
-                            case R.id.hide:
-                                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).hide_post(savedPostDetailActivity.user_id, id);
-                                break;
+                    //registering popup with OnMenuItemClickListener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
 
-                            case R.id.save:
-                                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).category_save_post(savedPostDetailActivity.user_id, id);
-                                break;
+                            switch (item.getItemId()) {
+                                case R.id.hide:
+                                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).hide_post(savedPostDetailActivity.user_id, id);
+                                    break;
 
-                            case R.id.report:
-                                Intent in = new Intent(view.getContext(), Report.class).putExtra("post_id", id);
-                                view.getContext().startActivity(in);
-                                break;
+                                case R.id.save:
+                                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).category_save_post(savedPostDetailActivity.user_id, id);
+                                    break;
 
-                            case R.id.copylink:
-                                Toast.makeText(view.getContext(), "Coming soon", Toast.LENGTH_SHORT).show();
-                                break;
+                                case R.id.report:
+                                    Intent in = new Intent(view.getContext(), Report.class).putExtra("post_id", id);
+                                    view.getContext().startActivity(in);
+                                    break;
 
-                            default:
-                                return false;
+                                case R.id.copylink:
+                                    Toast.makeText(view.getContext(), "Coming soon", Toast.LENGTH_SHORT).show();
+                                    break;
+
+                                default:
+                                    return false;
+                            }
+                            // return true;
+                            return false;
                         }
-                        // return true;
-                        return false;
+                    });
+                    popup.show(); //showing popup menu
+                    //  context.startActivity(new Intent(context, LoginActivity.class));
+                }
+            });
+
+            holder.layout_share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent in = new Intent(view.getContext(), ShareToFriend.class);
+                    view.getContext().startActivity(in);
+                }
+            });
+
+            holder.layout_star.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (click == true) {
+                        holder.rating_bar.setVisibility(View.VISIBLE);
+                        click = false;
+                    } else {
+                        holder.rating_bar.setVisibility(View.GONE);
+                        click = true;
                     }
-                });
-                popup.show(); //showing popup menu
-                //  context.startActivity(new Intent(context, LoginActivity.class));
-            }
-        });
 
-        holder.layout_share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(view.getContext(), ShareToFriend.class);
-                view.getContext().startActivity(in);
-            }
-        });
+                }
+            });
 
-        holder.layout_star.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (click == true) {
-                    holder.rating_bar.setVisibility(View.VISIBLE);
-                    click = false;
-                } else {
+            holder.rating_star1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    rate = "1";
+                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
+                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
                     holder.rating_bar.setVisibility(View.GONE);
+                    holder.img_star.setImageDrawable(star1);
                     click = true;
                 }
+            });
 
-            }
-        });
-
-        holder.rating_star1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rate = "1";
-                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
-                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
-                holder.rating_bar.setVisibility(View.GONE);
-                holder.img_star.setImageDrawable(star1);
-                click = true;
-            }
-        });
-
-        holder.rating_star2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rate = "2";
-                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
-                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
-
-                holder.rating_bar.setVisibility(View.GONE);
-                holder.img_star.setImageDrawable(star2);
-                click = true;
-            }
-        });
-
-        holder.rating_star3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rate = "3";
-                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
-                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
-                holder.rating_bar.setVisibility(View.GONE);
-                holder.img_star.setImageDrawable(star3);
-                click = true;
-            }
-        });
-
-        holder.rating_star4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rate = "4";
-                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
-                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
-                holder.rating_bar.setVisibility(View.GONE);
-                holder.img_star.setImageDrawable(star4);
-                click = true;
-            }
-        });
-
-        holder.rating_star5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rate = "5";
-                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
-                new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
-                holder.rating_bar.setVisibility(View.GONE);
-                holder.img_star.setImageDrawable(star5);
-                click = true;
-            }
-        });
-
-        holder.txt_allcomment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(view.getContext(), CommentActivity.class);
-                in.putExtra("post_id", id);
-                view.getContext().startActivity(in);
-            }
-        });
-
-        holder.layout_comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(view.getContext(), CommentActivity.class);
-                in.putExtra("post_id", id);
-                view.getContext().startActivity(in);
-            }
-        });
-
-
-        try {
-            new RService.api().call(mContext).fetch_comments(id).enqueue(new Callback<json>() {
+            holder.rating_star2.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onResponse(Call<json> call, Response<json> response) {
+                public void onClick(View view) {
+                    rate = "2";
+                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
+                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
 
-                    if (response.body().status.equals("1")) {
+                    holder.rating_bar.setVisibility(View.GONE);
+                    holder.img_star.setImageDrawable(star2);
+                    click = true;
+                }
+            });
 
-                        if (response.body().comments.comments != null && response.body().comments.comments.size() > 0) {
+            holder.rating_star3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    rate = "3";
+                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
+                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
+                    holder.rating_bar.setVisibility(View.GONE);
+                    holder.img_star.setImageDrawable(star3);
+                    click = true;
+                }
+            });
 
-                            Log.d("commnet_new", String.valueOf(response.body().comments.comments.size()));
-                            holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name);
+            holder.rating_star4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    rate = "4";
+                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
+                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
+                    holder.rating_bar.setVisibility(View.GONE);
+                    holder.img_star.setImageDrawable(star4);
+                    click = true;
+                }
+            });
 
-                            holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
+            holder.rating_star5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    rate = "5";
+                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).rating_post(savedPostDetailActivity.user_id, id, rate);
+                    new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).save_post(savedPostDetailActivity.user_id);
+                    holder.rating_bar.setVisibility(View.GONE);
+                    holder.img_star.setImageDrawable(star5);
+                    click = true;
+                }
+            });
 
-                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
-                            Picasso.get().load(img).into(holder.circularImageView3);
+            holder.txt_allcomment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent in = new Intent(view.getContext(), CommentActivity.class);
+                    in.putExtra("post_id", id);
+                    view.getContext().startActivity(in);
+                }
+            });
+
+            holder.layout_comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent in = new Intent(view.getContext(), CommentActivity.class);
+                    in.putExtra("post_id", id);
+                    view.getContext().startActivity(in);
+                }
+            });
+
+
+            try {
+                new RService.api().call(mContext).fetch_comments(id).enqueue(new Callback<json>() {
+                    @Override
+                    public void onResponse(Call<json> call, Response<json> response) {
+
+                        if (response.body().status.equals("1")) {
+
+                            if (response.body().comments.comments != null && response.body().comments.comments.size() > 0) {
+
+                                Log.d("commnet_new", String.valueOf(response.body().comments.comments.size()));
+                                holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name);
+
+                                holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
+
+                                String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+                                Picasso.get().load(img).into(holder.circularImageView3);
+
+                            } else {
+                                holder.layout.setVisibility(View.GONE);
+                            }
+
+                            if (response.body().comments.comments != null && response.body().comments.comments.size() > 1) {
+
+                                holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
+                                holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
+                                //        Picasso.get().load(item.profile_pic).into(holder.circular);
+
+                                String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                                Picasso.get().load(img).into(holder.circular);
+                            } else {
+                                holder.layout1.setVisibility(View.GONE);
+                            }
 
                         } else {
                             holder.layout.setVisibility(View.GONE);
-                        }
-
-                        if (response.body().comments.comments != null && response.body().comments.comments.size() > 1) {
-
-                            holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
-                            holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
-                            //        Picasso.get().load(item.profile_pic).into(holder.circular);
-
-                            String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
-                            Picasso.get().load(img).into(holder.circular);
-                        } else {
                             holder.layout1.setVisibility(View.GONE);
+                            //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         }
-
-                    } else {
-                        holder.layout.setVisibility(View.GONE);
-                        holder.layout1.setVisibility(View.GONE);
-                        //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
-                }
 
-                @Override
-                public void onFailure(Call<json> call, Throwable t) {
-                    //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    //  Log.d("error", String.valueOf(t.getMessage()));
-                }
-            });
-        } catch (Exception e) {
+                    @Override
+                    public void onFailure(Call<json> call, Throwable t) {
+                        //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        //  Log.d("error", String.valueOf(t.getMessage()));
+                    }
+                });
+            } catch (Exception e) {
 
-        }
+            }
+
     }
 
     @Override

@@ -147,5 +147,9 @@ public class Search extends AppCompatActivity {
         super.onResume();
         new SearchPresenter(this, this).all_user(user_id);
         filter();
+
     }
+
+
+
 }

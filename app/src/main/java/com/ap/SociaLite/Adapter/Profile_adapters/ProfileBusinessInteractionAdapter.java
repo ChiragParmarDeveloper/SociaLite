@@ -29,6 +29,7 @@ import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Fragment.Profile_fragments.BusinessInteractionFragment;
 import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.BusinessInteractionFragmentPresenter;
+import com.ap.SociaLite.Presenter.TimeLineFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -123,7 +124,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
                 PopupMenu popup = new PopupMenu(mContext, holder.img_popup);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
-                        .inflate(R.menu.popup_menu, popup.getMenu());
+                        .inflate(R.menu.timeline_menu, popup.getMenu());
 
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -138,6 +139,11 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
 
                             case R.id.save:
                                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).category_save_post(businessInteractionFragment.user_id, id);
+                                break;
+
+                            case R.id.delete:
+                                new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).delete_post_business(businessInteractionFragment.user_id, id);
+                                removeAt(position);
                                 break;
 
                             case R.id.report:
@@ -488,5 +494,10 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public void removeAt(int pos) {
+        post_lists.remove(pos);
+        notifyDataSetChanged();
     }
 }

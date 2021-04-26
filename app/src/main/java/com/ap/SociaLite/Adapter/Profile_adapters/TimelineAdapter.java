@@ -3,7 +3,6 @@ package com.ap.SociaLite.Adapter.Profile_adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,10 +23,8 @@ import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
-import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Fragment.Profile_fragments.TimeLineFragment;
 import com.ap.SociaLite.Pojo.post_list;
-import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.Presenter.TimeLineFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -90,22 +87,22 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             Picasso.get().load(item.profile_pic).into(holder.circularImageView);
         }
 
-        if(post_lists.get(position).rate.equals("0")){
+        if (post_lists.get(position).rate.equals("0")) {
             holder.img_star.setImageDrawable(star1);
         }
-        if(post_lists.get(position).rate.equals("1")){
+        if (post_lists.get(position).rate.equals("1")) {
             holder.img_star.setImageDrawable(star1);
         }
-        if(post_lists.get(position).rate.equals("2")){
+        if (post_lists.get(position).rate.equals("2")) {
             holder.img_star.setImageDrawable(star2);
         }
-        if(post_lists.get(position).rate.equals("3")){
+        if (post_lists.get(position).rate.equals("3")) {
             holder.img_star.setImageDrawable(star3);
         }
-        if(post_lists.get(position).rate.equals("4")){
+        if (post_lists.get(position).rate.equals("4")) {
             holder.img_star.setImageDrawable(star4);
         }
-        if(post_lists.get(position).rate.equals("5")){
+        if (post_lists.get(position).rate.equals("5")) {
             holder.img_star.setImageDrawable(star5);
         }
 
@@ -136,7 +133,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
 
                             case R.id.delete:
                                 new TimeLineFragmentPresenter(mContext, timeLineFragment).delete_post_timeline(timeLineFragment.user_id, id);
-                                new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+                                removeAt(position);
                                 break;
 
                             case R.id.report:
@@ -173,13 +170,10 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             @Override
             public void onClick(View view) {
 
-                if(click == true)
-                {
+                if (click == true) {
                     holder.rating_bar.setVisibility(View.VISIBLE);
                     click = false;
-                }
-                else
-                {
+                } else {
                     holder.rating_bar.setVisibility(View.GONE);
                     click = true;
                 }
@@ -275,8 +269,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
 
                         if (response.body().comments.comments != null && response.body().comments.comments.size() > 0) {
 
-                            holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).user_name);
-                            holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).comment);
+                            holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name);
+                            holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
 
 
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
@@ -288,16 +282,14 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
                                 Picasso.get().load(img).into(holder.circularImageView3);
                             }
 
-                        }
-                        else
-                        {
+                        } else {
                             holder.layout.setVisibility(View.GONE);
                         }
 
                         if (response.body().comments.comments != null && response.body().comments.comments.size() > 1) {
 
-                            holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).user_name);
-                            holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).comment);
+                            holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
+                            holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
 
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
 
@@ -307,9 +299,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
                             } else {
                                 Picasso.get().load(img).into(holder.circular);
                             }
-                        }
-                        else
-                        {
+                        } else {
                             holder.layout1.setVisibility(View.GONE);
                         }
 
@@ -336,7 +326,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
         return post_lists.size();
     }
 
-    public static class MyHolder extends RecyclerView.ViewHolder{
+    public static class MyHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.txt_name)
         TextView txt_name;
@@ -425,4 +415,10 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             ButterKnife.bind(this, itemView);
         }
     }
+
+    public void removeAt(int pos) {
+        post_lists.remove(pos);
+        notifyDataSetChanged();
+    }
+
 }

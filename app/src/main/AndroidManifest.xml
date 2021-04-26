@@ -36,8 +36,8 @@
         <activity android:name=".Activity.EditProfileActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.SchedulePostSettingActivity" />
-        <activity android:name=".Activity.SavedPostDetailActivity" />
-        <activity android:name=".Activity.SavedPostActivity" />
+        <activity android:name=".Activity.SavedPostDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.SavedPostActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".Activity.ProfileActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".Activity.AddCardActivity"
             android:screenOrientation="portrait" />

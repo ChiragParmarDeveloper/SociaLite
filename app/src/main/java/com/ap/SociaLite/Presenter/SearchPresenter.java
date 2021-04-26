@@ -1,7 +1,6 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -41,10 +40,12 @@ public class SearchPresenter implements SearchContract {
                         search.searchProfileAdapter = new SearchProfileAdapter(mContext, search.datas, search);
                         search.rv_search_profile.setLayoutManager(new GridLayoutManager(mContext, 1));
                         search.rv_search_profile.setAdapter(search.searchProfileAdapter);
+                   //     search.searchProfileAdapter.notifyDataSetChanged();
+                        search.searchProfileAdapter.notifyItemChanged(2);
 
                     }
                 } else {
-                //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -59,7 +60,7 @@ public class SearchPresenter implements SearchContract {
 
     @Override
     public void send_request(String UserId, String RequestId) {
-        new RService.api().call(mContext).connection_request(UserId,RequestId).enqueue(new Callback<json>() {
+        new RService.api().call(mContext).connection_request(UserId, RequestId).enqueue(new Callback<json>() {
             @Override
             public void onResponse(Call<json> call, Response<json> response) {
                 if (response.body().status.equals("1")) {
@@ -72,7 +73,7 @@ public class SearchPresenter implements SearchContract {
 
             @Override
             public void onFailure(Call<json> call, Throwable t) {
-            //      Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                //      Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
 //                Log.d("error", String.valueOf(t.getMessage()));
             }
         });
