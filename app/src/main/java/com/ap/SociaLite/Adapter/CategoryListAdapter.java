@@ -31,8 +31,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     private int clickItem = 0;
 
-    Boolean selectlayout = true;
-
     public CategoryListAdapter(Context context, List<interest_details> list, CategoryFragment fragment) {
         this.mContext = context;
         this.details = list;
@@ -64,7 +62,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             String interest_id = details.get(position).interest_id;
 
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
-            holder.img_category.setBorderWidth(8);
 
             new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(interest_id);
         }
@@ -88,7 +85,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         if (position == clickItem) {
             holder.img_category.setSelected(true);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
-            holder.img_category.setBorderWidth(8);
 
             String interest_id = details.get(position).interest_id;
             new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(interest_id);
@@ -96,7 +92,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         } else {
             holder.img_category.setSelected(false);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.white));
-            holder.img_category.setBorderWidth(8);
         }
 
         holder.img_category.setOnClickListener(new View.OnClickListener() {

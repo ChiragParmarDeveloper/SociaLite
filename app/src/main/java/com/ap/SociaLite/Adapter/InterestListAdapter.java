@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.Pojo.interest_details;
+import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -29,6 +30,8 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
     List<interest_details> details = new ArrayList<>();
     interest_details item;
     private int selectedItem;
+
+    private int clickItem = 0;
 
     public InterestListAdapter(Context context, List<interest_details> list, InterestFragment fragment) {
         this.mContext = context;
@@ -56,14 +59,26 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
 
 
         if (selectedItem == position) {
+            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
             new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(id);
         }
 
+        if (position == clickItem) {
+            holder.img_category.setSelected(true);
+            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
+
+            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(id);
+
+        } else {
+            holder.img_category.setSelected(false);
+            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.white));
+        }
 
         holder.img_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(id);
+                clickItem = holder.getAdapterPosition();
+                notifyDataSetChanged();
             }
         });
     }

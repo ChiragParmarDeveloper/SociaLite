@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ap.SociaLite.Fragment.BusinessFragment;
 import com.ap.SociaLite.Pojo.interest_details;
 import com.ap.SociaLite.Presenter.BusinessFragmentPresenter;
+import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -28,6 +29,8 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
     List<interest_details> details = new ArrayList<>();
     interest_details item;
     private int selectedItem;
+
+    private int clickItem = 0;
 
     public BusinessListAdapter(Context context, List<interest_details> list, BusinessFragment fragment) {
         this.mContext = context;
@@ -61,11 +64,11 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
             holder.img_right.setImageDrawable(plus_favorite);
         }
 
-
         if (selectedItem == position) {
 
             if (details.get(position).flag.equals("1")) {
                 String interest_id = details.get(position).interest_id;
+                holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
                 new BusinessFragmentPresenter(mContext, businessFragment).business_post(interest_id);
             } else {
                 //         Toast.makeText(mContext, "id not selected", Toast.LENGTH_SHORT).show();
@@ -85,13 +88,24 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
             }
         });
 
+        if (position == clickItem) {
+            holder.img_category.setSelected(true);
+            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
+
+            String interest_id = details.get(position).interest_id;
+            new BusinessFragmentPresenter(mContext, businessFragment).business_post(interest_id);
+
+        } else {
+            holder.img_category.setSelected(false);
+            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.white));
+        }
 
         holder.img_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (details.get(position).flag.equals("1")) {
-                    String interest_id = details.get(position).interest_id;
-                    new BusinessFragmentPresenter(mContext, businessFragment).business_post(interest_id);
+                    clickItem = holder.getAdapterPosition();
+                    notifyDataSetChanged();
                 } else {
                     //         Toast.makeText(mContext, "id not selected", Toast.LENGTH_SHORT).show();
                 }
