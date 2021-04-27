@@ -33,6 +33,8 @@ public class Notification extends AppCompatActivity {
 
         Session session = new Session(getApplicationContext());
         UserId = session.getUser_id();
+
+        new NotificationPresenter(this, this).user_notification_list(UserId);
     }
 
     @OnClick({R.id.img_back})
@@ -44,9 +46,9 @@ public class Notification extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new NotificationPresenter(this, this).user_notification_list(UserId);
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        new NotificationPresenter(this, this).user_notification_list(UserId);
+//    }
 }

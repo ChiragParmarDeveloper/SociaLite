@@ -313,7 +313,6 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
                                 Picasso.get().load(img).into(holder.circular);
                             }
 
-
                         } else {
                             holder.layout1.setVisibility(View.GONE);
                         }

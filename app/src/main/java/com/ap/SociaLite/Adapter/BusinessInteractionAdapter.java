@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,8 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
@@ -326,14 +329,33 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                             holder.textView11.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
 
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+                            String username = response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name;
 
                             if (img.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                                holder.circularImageView3.setImageDrawable(upload_img);
+
+                                String avatarTitle = String.valueOf(username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                holder.viewer.setImageDrawable(drawable);
                             } else {
-                          //      String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
                                 Picasso.get().load(img).into(holder.circularImageView3);
                             }
+
+
+
+
+//
+//                            if (img.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                                holder.circularImageView3.setImageDrawable(upload_img);
+//                            } else {
+//                          //      String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+//                                Picasso.get().load(img).into(holder.circularImageView3);
+//                            }
 
 
                         } else {
@@ -346,14 +368,29 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                             holder.textView13.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
 
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                            String username = response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name;
 
                             if (img.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                                holder.circularImageView5.setImageDrawable(upload_img);
+
+                                String avatarTitle = String.valueOf(username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                holder.viewer_profile.setImageDrawable(drawable);
                             } else {
-                           //     String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
                                 Picasso.get().load(img).into(holder.circularImageView5);
                             }
+
+//                            if (img.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                                holder.circularImageView5.setImageDrawable(upload_img);
+//                            } else {
+//                           //     String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+//                                Picasso.get().load(img).into(holder.circularImageView5);
+//                            }
 
                         } else {
                             holder.layout1.setVisibility(View.GONE);
@@ -424,10 +461,10 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         Button message;
 
         @BindView(R.id.layout)
-        ConstraintLayout layout;
+        RelativeLayout layout;
 
         @BindView(R.id.layout1)
-        ConstraintLayout layout1;
+        RelativeLayout layout1;
 
         @BindView(R.id.rating_bar)
         CardView rating_bar;
@@ -468,18 +505,30 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
 
         @BindView(R.id.address_post)
         TextView address_post;
+
         @BindView(R.id.txt_rating)
         TextView txt_rating;
+
         @BindView(R.id.txt_time)
         TextView txt_time;
+
         @BindView(R.id.textView15)
         TextView textView15;
+
         @BindView(R.id.textView14)
         TextView textView14;
 
         @BindView(R.id.textView13)
         TextView textView13;
 
+        @BindView(R.id.viewer)
+        ImageView viewer;
+
+        @BindView(R.id.text_avatar_title)
+        TextView text_avatar_title;
+
+        @BindView(R.id.viewer_profile)
+        ImageView viewer_profile;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
