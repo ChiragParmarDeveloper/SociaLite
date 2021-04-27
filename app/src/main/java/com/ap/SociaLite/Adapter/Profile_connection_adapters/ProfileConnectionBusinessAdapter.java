@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
@@ -28,7 +31,6 @@ import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Fragment.profile_connection_fragments.ProfileConnectionBusinessFragment;
 import com.ap.SociaLite.Pojo.post_list;
-import com.ap.SociaLite.Presenter.BusinessInteractionFragmentPresenter;
 import com.ap.SociaLite.Presenter.ProfileConnectionBusinessFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -198,7 +200,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             @Override
             public void onClick(View view) {
                 rate = "1";
-                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id,id,rate);
+                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
@@ -210,7 +212,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             @Override
             public void onClick(View view) {
                 rate = "2";
-                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id,id,rate);
+                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
@@ -222,7 +224,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             @Override
             public void onClick(View view) {
                 rate = "3";
-                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id,id,rate);
+                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
@@ -234,7 +236,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             @Override
             public void onClick(View view) {
                 rate = "4";
-                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id,id,rate);
+                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
@@ -246,7 +248,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             @Override
             public void onClick(View view) {
                 rate = "5";
-                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id,id,rate);
+                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
@@ -329,13 +331,28 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                             holder.textView11.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
 
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
+                            String username = response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name;
 
                             if (img.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                                holder.circularImageView3.setImageDrawable(upload_img);
+
+                                String avatarTitle = String.valueOf(username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                holder.viewer.setImageDrawable(drawable);
                             } else {
                                 Picasso.get().load(img).into(holder.circularImageView3);
                             }
+
+//                            if (img.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                                holder.circularImageView3.setImageDrawable(upload_img);
+//                            } else {
+//                                Picasso.get().load(img).into(holder.circularImageView3);
+//                            }
 
                         } else {
                             holder.layout.setVisibility(View.GONE);
@@ -347,13 +364,29 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                             holder.textView13.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
 
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                            String username = response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name;
 
                             if (img.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                                holder.circularImageView5.setImageDrawable(upload_img);
+
+                                String avatarTitle = String.valueOf(username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                holder.viewer_profile.setImageDrawable(drawable);
                             } else {
                                 Picasso.get().load(img).into(holder.circularImageView5);
                             }
+
+
+//                            if (img.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                                holder.circularImageView5.setImageDrawable(upload_img);
+//                            } else {
+//                                Picasso.get().load(img).into(holder.circularImageView5);
+//                            }
 
                         } else {
                             holder.layout1.setVisibility(View.GONE);
@@ -463,10 +496,10 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
         TextView textView15;
 
         @BindView(R.id.layout)
-        ConstraintLayout layout;
+        RelativeLayout layout;
 
         @BindView(R.id.layout1)
-        ConstraintLayout layout1;
+        RelativeLayout layout1;
 
         @BindView(R.id.textView12)
         TextView textView12;
@@ -480,6 +513,14 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
         @BindView(R.id.textView14)
         TextView textView14;
 
+        @BindView(R.id.viewer)
+        ImageView viewer;
+
+        @BindView(R.id.text_avatar_title)
+        TextView text_avatar_title;
+
+        @BindView(R.id.viewer_profile)
+        ImageView viewer_profile;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
