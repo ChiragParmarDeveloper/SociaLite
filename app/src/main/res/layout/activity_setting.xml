@@ -140,7 +140,7 @@
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
                         android:background="@drawable/toggle_selector"
-                        android:checked="true"
+                        android:checked="false"
                         android:text=""
                         android:textOff=""
                         android:textOn=""

@@ -40,4 +40,8 @@ public class user_details {
     @SerializedName("connection")
     public String connection;
 
+    @SerializedName("notification_on_off")
+    public String notification_on_off;
+
+
 }

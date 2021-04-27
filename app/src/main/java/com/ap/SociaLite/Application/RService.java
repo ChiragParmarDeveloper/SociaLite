@@ -182,6 +182,13 @@ public interface RService {
     Call<json> profile(@Field("user_id") String user_id);
 
 
+
+
+    @FormUrlEncoded
+    @POST("notification_on_off.php")
+    Call<json> on_off_notification(@Field("user_id") String user_id,
+                                   @Field("is_toggle") String is_toggle);
+
     @FormUrlEncoded
     @POST("contact_us.php")
     Call<json> contact(@Field("name") String name,
