@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.HiddedPostDetailActivity;
 import com.ap.SociaLite.Activity.Report;
@@ -82,22 +85,22 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
         holder.txt_description.setText(item.description);
         holder.txt_rating.setText(item.rate);
 
-        if(mList.get(position).rate.equals("0")){
+        if (mList.get(position).rate.equals("0")) {
             holder.img_star.setImageDrawable(star1);
         }
-        if(mList.get(position).rate.equals("1")){
+        if (mList.get(position).rate.equals("1")) {
             holder.img_star.setImageDrawable(star1);
         }
-        if(mList.get(position).rate.equals("2")){
+        if (mList.get(position).rate.equals("2")) {
             holder.img_star.setImageDrawable(star2);
         }
-        if(mList.get(position).rate.equals("3")){
+        if (mList.get(position).rate.equals("3")) {
             holder.img_star.setImageDrawable(star3);
         }
-        if(mList.get(position).rate.equals("4")){
+        if (mList.get(position).rate.equals("4")) {
             holder.img_star.setImageDrawable(star4);
         }
-        if(mList.get(position).rate.equals("5")){
+        if (mList.get(position).rate.equals("5")) {
             holder.img_star.setImageDrawable(star5);
         }
 
@@ -267,7 +270,22 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
                             holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
 
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
-                            Picasso.get().load(img).into(holder.circularImageView3);
+                            String username = response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name;
+
+                            if (img.equals("http://the-socialite.com/admin/")) {
+
+                                String avatarTitle = String.valueOf(username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                holder.viewer.setImageDrawable(drawable);
+                            } else {
+                                Picasso.get().load(img).into(holder.circularImageView3);
+                            }
+
 
                         } else {
                             holder.layout.setVisibility(View.GONE);
@@ -279,7 +297,21 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
                             holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
                             //        Picasso.get().load(item.profile_pic).into(holder.circular);
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
-                            Picasso.get().load(img).into(holder.circular);
+                            String username = response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name;
+
+                            if (img.equals("http://the-socialite.com/admin/")) {
+
+                                String avatarTitle = String.valueOf(username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                holder.viewer_profile.setImageDrawable(drawable);
+                            } else {
+                                Picasso.get().load(img).into(holder.circular);
+                            }
 
 
                         } else {
@@ -316,10 +348,10 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
         TextView txt_allcomment;
 
         @BindView(R.id.layout)
-        LinearLayout layout;
+        RelativeLayout layout;
 
         @BindView(R.id.layout1)
-        LinearLayout layout1;
+        RelativeLayout layout1;
 
         @BindView(R.id.circularImageView)
         CircularImageView circularImageView;
@@ -394,6 +426,14 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
         @BindView(R.id.txt_rating)
         TextView txt_rating;
 
+        @BindView(R.id.viewer)
+        ImageView viewer;
+
+        @BindView(R.id.text_avatar_title)
+        TextView text_avatar_title;
+
+        @BindView(R.id.viewer_profile)
+        ImageView viewer_profile;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

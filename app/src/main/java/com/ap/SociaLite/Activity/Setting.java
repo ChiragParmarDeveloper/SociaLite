@@ -42,7 +42,6 @@ public class Setting extends AppCompatActivity {
                 //  text.setText("Status: " + isChecked);
             }
         });
-
     }
 
     @OnClick({R.id.img_back, R.id.constraintLayout42, R.id.constraintLayout_saved, R.id.constraintLayout_schedulepost, R.id.togglenotification})
