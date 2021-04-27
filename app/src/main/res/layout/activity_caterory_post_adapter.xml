@@ -176,7 +176,7 @@
                         <ImageView
                             android:id="@+id/img_category"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="250dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginLeft="16dp"
                             android:layout_marginEnd="16dp"
@@ -189,19 +189,19 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.constraintlayout.widget.Barrier
-                            android:id="@+id/barrier"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:barrierDirection="left"
-                            app:constraint_referenced_ids="img_category" />
+<!--                        <androidx.constraintlayout.widget.Barrier-->
+<!--                            android:id="@+id/barrier"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:barrierDirection="left"-->
+<!--                            app:constraint_referenced_ids="img_category" />-->
 
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guideline"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_begin="20dp" />
+<!--                        <androidx.constraintlayout.widget.Guideline-->
+<!--                            android:id="@+id/guideline"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="vertical"-->
+<!--                            app:layout_constraintGuide_end="327dp" />-->
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -228,40 +228,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
-
-                        <!--                        <androidx.cardview.widget.CardView-->
-                        <!--                            android:layout_width="match_parent"-->
-                        <!--                            android:layout_height="wrap_content"-->
-                        <!--                            app:cardElevation="15dp"-->
-                        <!--                            app:cardUseCompatPadding="true"-->
-                        <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--                            app:layout_constraintStart_toStartOf="parent"-->
-                        <!--                            app:layout_constraintTop_toTopOf="parent">-->
-                        <!--                            -->
-                        <!--                            <androidx.constraintlayout.widget.ConstraintLayout-->
-                        <!--                                android:layout_width="match_parent"-->
-                        <!--                                android:layout_height="match_parent">-->
-
-                        <!--                                <RatingBar-->
-                        <!--                                    android:id="@+id/rating_order_ratingbar"-->
-                        <!--                                    android:layout_width="m"-->
-                        <!--                                    android:layout_height="20dp"-->
-                        <!--                                    android:numStars="5"-->
-                        <!--                                    android:stepSize="0.5"-->
-                        <!--                                    android:progressBackgroundTint="#ECECEC"-->
-                        <!--                                    android:progressTint="#0094DA"-->
-                        <!--                                    android:rating="0"-->
-                        <!--                                    android:layout_marginTop="100dp"-->
-                        <!--                                    app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--                                    app:layout_constraintStart_toStartOf="parent"-->
-                        <!--                                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />-->
-
-
-                        <!--                            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-                        <!--                        </androidx.cardview.widget.CardView>-->
-
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -393,7 +359,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout34"
                     app:layout_constraintVertical_bias="0.0">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -404,6 +370,11 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
+                    <RelativeLayout
+                        android:id="@+id/rl_im"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp">
+
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:id="@+id/circularImageView3"
                             android:layout_width="30dp"
@@ -411,6 +382,27 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_user_icon" />
+
+                        <ImageView
+                            android:id="@+id/viewer"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerVertical="true"
+                            android:scaleType="centerInside" />
+
+                        <TextView
+                            android:id="@+id/text_avatar_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:paddingBottom="2dp"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="17sp"
+                            android:textStyle="normal" />
+
+                    </RelativeLayout>
+
 
 
                         <TextView
@@ -421,6 +413,8 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginLeft="8dp"
                             android:text="Name"
+                            android:layout_centerInParent="true"
+                            android:layout_toRightOf="@id/rl_im"
                             android:textSize="9sp" />
 
                         <TextView
@@ -430,12 +424,14 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="8dp"
                             android:layout_marginLeft="8dp"
+                            android:layout_centerInParent="true"
                             android:text="Comment"
+                            android:layout_toRightOf="@id/txt_name_position_0"
                             android:textSize="9sp" />
-                    </LinearLayout>
+                    </RelativeLayout>
 
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/layout1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -443,6 +439,11 @@
                         android:layout_marginTop="8dp"
                         android:orientation="horizontal"
                         app:layout_constraintTop_toBottomOf="@+id/layout">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_img"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp">
 
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:id="@+id/circular"
@@ -452,6 +453,26 @@
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_user_icon" />
 
+                            <ImageView
+                                android:id="@+id/viewer_profile"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerVertical="true"
+                                android:scaleType="centerInside" />
+
+                            <TextView
+                                android:id="@+id/text_user_avatar_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:paddingBottom="2dp"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="17sp"
+                                android:textStyle="normal" />
+
+                        </RelativeLayout>
+
                         <TextView
                             android:id="@+id/txt_name_pos_1"
                             android:layout_width="wrap_content"
@@ -459,7 +480,9 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="8dp"
                             android:layout_marginLeft="8dp"
+                            android:layout_centerVertical="true"
                             android:text="Name"
+                            android:layout_toRightOf="@id/rl_img"
                             android:textSize="9sp" />
 
                         <TextView
@@ -470,8 +493,10 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginLeft="8dp"
                             android:text="Comment"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/txt_name_pos_1"
                             android:textSize="9sp" />
-                    </LinearLayout>
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/txt_time"

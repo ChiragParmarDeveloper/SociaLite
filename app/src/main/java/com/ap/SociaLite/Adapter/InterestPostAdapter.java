@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.CommentActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
@@ -26,7 +29,6 @@ import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.Pojo.post_list;
-import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -89,22 +91,22 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             Picasso.get().load(item.profile_pic).into(holder.circularImageView);
         }
 
-        if(post_lists.get(position).rate.equals("0")){
+        if (post_lists.get(position).rate.equals("0")) {
             holder.img_star.setImageDrawable(star1);
         }
-        if(post_lists.get(position).rate.equals("1")){
+        if (post_lists.get(position).rate.equals("1")) {
             holder.img_star.setImageDrawable(star1);
         }
-        if(post_lists.get(position).rate.equals("2")){
+        if (post_lists.get(position).rate.equals("2")) {
             holder.img_star.setImageDrawable(star2);
         }
-        if(post_lists.get(position).rate.equals("3")){
+        if (post_lists.get(position).rate.equals("3")) {
             holder.img_star.setImageDrawable(star3);
         }
-        if(post_lists.get(position).rate.equals("4")){
+        if (post_lists.get(position).rate.equals("4")) {
             holder.img_star.setImageDrawable(star4);
         }
-        if(post_lists.get(position).rate.equals("5")){
+        if (post_lists.get(position).rate.equals("5")) {
             holder.img_star.setImageDrawable(star5);
         }
 
@@ -175,7 +177,6 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
 
             }
         });
-
 
 
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
@@ -261,43 +262,69 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
                         if (response.body().comments.comments != null && response.body().comments.comments.size() > 0) {
 
                             Log.d("commnet_new", String.valueOf(response.body().comments.comments.size()));
-                            holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).user_name);
+                            holder.txt_name_position_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name);
 
-                            holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size()-1).comment);
+                            holder.txt_comment_pos_0.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 1).comment);
 
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 1).profile_pic;
 
+                            String username = response.body().comments.comments.get(response.body().comments.comments.size() - 1).user_name;
+
                             if (img.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                                holder.circularImageView3.setImageDrawable(upload_img);
+
+                                String avatarTitle = String.valueOf(username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                holder.viewer.setImageDrawable(drawable);
                             } else {
                                 Picasso.get().load(img).into(holder.circularImageView3);
                             }
 
+//                            if (img.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                                holder.circularImageView3.setImageDrawable(upload_img);
+//                            } else {
+//                                Picasso.get().load(img).into(holder.circularImageView3);
+//                            }
 
 
-                        }
-                        else
-                        {
+                        } else {
                             holder.layout.setVisibility(View.GONE);
                         }
 
                         if (response.body().comments.comments != null && response.body().comments.comments.size() > 1) {
 
-                            holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).user_name);
-                            holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size()-2).comment);
+                            holder.txt_name_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name);
+                            holder.txt_comment_pos_1.setText(response.body().comments.comments.get(response.body().comments.comments.size() - 2).comment);
 
                             String img = response.body().comments.comments.get(response.body().comments.comments.size() - 2).profile_pic;
+                            String username = response.body().comments.comments.get(response.body().comments.comments.size() - 2).user_name;
 
                             if (img.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                                holder.circular.setImageDrawable(upload_img);
+
+                                String avatarTitle = String.valueOf(username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                holder.viewer_profile.setImageDrawable(drawable);
                             } else {
                                 Picasso.get().load(img).into(holder.circular);
                             }
-                        }
-                        else
-                        {
+
+//                            if (img.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                                holder.circular.setImageDrawable(upload_img);
+//                            } else {
+//                                Picasso.get().load(img).into(holder.circular);
+//                            }
+                        } else {
                             holder.layout1.setVisibility(View.GONE);
                         }
 
@@ -403,11 +430,19 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         TextView txt_time;
 
         @BindView(R.id.layout)
-        LinearLayout layout;
+        RelativeLayout layout;
 
         @BindView(R.id.layout1)
-        LinearLayout layout1;
+        RelativeLayout layout1;
 
+        @BindView(R.id.viewer)
+        ImageView viewer;
+
+        @BindView(R.id.text_avatar_title)
+        TextView text_avatar_title;
+
+        @BindView(R.id.viewer_profile)
+        ImageView viewer_profile;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

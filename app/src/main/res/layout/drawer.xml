@@ -75,18 +75,6 @@
                     android:textSize="@dimen/_14sdp" />
             </RelativeLayout>
 
-
-            <!-- <ImageView
-                 android:id="@+id/img_arrow"
-                 android:layout_width="@dimen/_25sdp"
-                 android:layout_height="@dimen/_25sdp"
-                 android:layout_gravity="top"
-                 android:layout_alignParentTop="true"
-                 android:layout_alignParentEnd="true"
-                 android:layout_marginEnd="@dimen/_20sdp"
-                 android:src="@drawable/white_leftarrow" />-->
-
-
         </RelativeLayout>
 
         <View

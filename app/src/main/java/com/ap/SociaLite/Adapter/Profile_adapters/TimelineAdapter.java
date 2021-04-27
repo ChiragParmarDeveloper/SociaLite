@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -395,10 +396,10 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
         TextView txt_comment_pos_1;
 
         @BindView(R.id.layout)
-        LinearLayout layout;
+        RelativeLayout layout;
 
         @BindView(R.id.layout1)
-        LinearLayout layout1;
+        RelativeLayout layout1;
 
         @BindView(R.id.circularImageView)
         CircularImageView circularImageView;

@@ -31,7 +31,6 @@
                 app:civ_border="false"
                 android:src="@drawable/ic_user_icon" />
 
-
             <ImageView
                 android:id="@+id/viewer_profile"
                 android:layout_width="40dp"
