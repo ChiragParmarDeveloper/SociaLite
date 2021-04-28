@@ -283,7 +283,10 @@ public interface RService {
                            @Field("post_id") String post_id);
 
 
-
+    @FormUrlEncoded
+    @POST("unhide_post.php")
+    Call<json> unhide(@Field("user_id") String user_id,
+                             @Field("post_id") String post_id);
 
     @FormUrlEncoded
     @POST("add_post_comment.php")

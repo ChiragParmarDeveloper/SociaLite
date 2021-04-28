@@ -26,7 +26,6 @@ public class Privacy extends AppCompatActivity {
 
     String user_id;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

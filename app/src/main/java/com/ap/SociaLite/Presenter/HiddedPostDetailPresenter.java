@@ -39,7 +39,6 @@ public class HiddedPostDetailPresenter implements HiddedPostDetailContract {
                         if (response.body().hide_post != null) {
                             hiddedPostDetailActivity.rec_hidedpost_detail.setLayoutManager(new GridLayoutManager(mContext, 1));
                             hiddedPostDetailActivity.rec_hidedpost_detail.setAdapter(new HiddedPostDetailAdapter(mContext, response.body().hide_post, hiddedPostDetailActivity));
-
                         }
                     } else {
 
@@ -57,6 +56,17 @@ public class HiddedPostDetailPresenter implements HiddedPostDetailContract {
         } catch (Exception e) {
 
         }
+    }
+
+    public void refresh() {
+        // notifyDataSetChanged must run in main ui thread, if run in not ui thread, it will not update until manually scroll recyclerview
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                hiddedPostDetailActivity.hiddedPostDetailAdapter.notifyDataSetChanged();
+            }
+
+        };
     }
 
     @Override
@@ -77,6 +87,30 @@ public class HiddedPostDetailPresenter implements HiddedPostDetailContract {
                 public void onFailure(Call<json> call, Throwable t) {
                     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void unhide_post(String user_id, String post_id) {
+        try {
+            new RService.api().call(mContext).unhide(user_id, post_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    } else {
+                        //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //  Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //   Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {

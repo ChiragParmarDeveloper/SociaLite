@@ -56,6 +56,7 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
         this.mContext = mContext;
         this.mList = mList;
         this.hiddedPostDetailActivity = hiddedPostDetailActivity;
+
     }
 
     @NonNull
@@ -120,8 +121,8 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
 
                         switch (item.getItemId()) {
                             case R.id.unhide:
-                                Toast.makeText(view.getContext(), "Coming soon", Toast.LENGTH_SHORT).show();
-                                //startActivity(new Intent(App.this, App_Main.class));
+                                new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).unhide_post(hiddedPostDetailActivity.user_id, id);
+                                removeAt(position);
                                 break;
 
                             case R.id.save:
@@ -373,7 +374,6 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
         @BindView(R.id.txt_comment_pos_0)
         TextView txt_comment_pos_0;
 
-
         @BindView(R.id.txt_name_pos_1)
         TextView txt_name_pos_1;
 
@@ -440,5 +440,9 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
         }
     }
 
+    public void removeAt(int pos) {
+        mList.remove(pos);
+        notifyDataSetChanged();
+    }
 
 }

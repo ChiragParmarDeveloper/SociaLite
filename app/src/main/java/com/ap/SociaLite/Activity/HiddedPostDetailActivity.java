@@ -7,9 +7,13 @@ import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ap.SociaLite.Adapter.HiddedPostDetailAdapter;
 import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Pojo.hide_post;
 import com.ap.SociaLite.Presenter.HiddedPostDetailPresenter;
 import com.ap.SociaLite.R;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +28,8 @@ public class HiddedPostDetailActivity extends AppCompatActivity {
     public RecyclerView rec_hidedpost_detail;
 
     public String user_id;
+    public List<hide_post> mList;
+    public HiddedPostDetailAdapter hiddedPostDetailAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +50,11 @@ public class HiddedPostDetailActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new HiddedPostDetailPresenter(this, this).view_hided_post(user_id);
     }
 }

@@ -41,7 +41,7 @@ public class SearchPresenter implements SearchContract {
                         search.rv_search_profile.setLayoutManager(new GridLayoutManager(mContext, 1));
                         search.rv_search_profile.setAdapter(search.searchProfileAdapter);
                    //     search.searchProfileAdapter.notifyDataSetChanged();
-                        search.searchProfileAdapter.notifyItemChanged(2);
+                    //    search.searchProfileAdapter.notifyItemChanged(2);
 
                     }
                 } else {
