@@ -30,6 +30,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.SpotlightActivityForUser" />
         <activity android:name=".Activity.ProfileConnectionsActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.ProfileConnectionActivity"
             android:screenOrientation="portrait" />
@@ -91,6 +92,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Search"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".Activity.CameraActivity" />
         <activity android:name=".Activity.RegistrationVerificationActivity" />
