@@ -78,9 +78,6 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
             }
         }
 
-        Log.d("adasrdsar", item.is_connected);
-
-
         if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
             Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
             holder.profile.setImageDrawable(upload_img);
