@@ -71,22 +71,21 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
-                        android:background="@drawable/ic_search_square"
+
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
+<!--                        android:background="@drawable/ic_search_square"-->
 
                         <ImageView
                             android:id="@+id/imgsearch"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
                             android:src="@drawable/search"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.SearchView
@@ -94,16 +93,15 @@
                             style="@style/Widget.AppCompat.SearchView.ActionBar"
                             android:layout_width="0dp"
                             android:layout_height="30dp"
-                            android:layout_marginEnd="8dp"
+                            android:layout_marginEnd="5dp"
                             android:background="@null"
                             android:gravity="start|top"
                             android:text=""
                             android:textSize="11dp"
                             app:iconifiedByDefault="false"
                             app:layout_constraintBottom_toBottomOf="parent"
-
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imgsearch"
+                            app:layout_constraintEnd_toStartOf="@+id/imgsearch"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:queryHint="Search Here..."
                             tools:ignore="NestedWeights" />

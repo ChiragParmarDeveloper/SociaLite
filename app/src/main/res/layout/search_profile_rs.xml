@@ -18,6 +18,7 @@
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:src="@drawable/ic_user_icon"
+            app:civ_border="false"
             app:layout_constraintBottom_toTopOf="@+id/user_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
