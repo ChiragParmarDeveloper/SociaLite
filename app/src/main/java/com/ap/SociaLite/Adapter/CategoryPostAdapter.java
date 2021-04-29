@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.CommentActivity;
-import com.ap.SociaLite.Activity.HomeActivity;
 import com.ap.SociaLite.Activity.Report;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Application.RService;
@@ -130,7 +129,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                         switch (item.getItemId()) {
                             case R.id.hide:
                                 new CategoryFragmentPresenter(mContext, categoryFragment).hide_post(categoryFragment.user_id, id);
-                                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
+                                //    new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
                                 break;
 
                             case R.id.save:
@@ -186,7 +185,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "1";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
-                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
+
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -326,8 +325,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                             } else {
                                 Picasso.get().load(img).into(holder.circular);
                             }
-
-
 
 
 //                            if (img.equals("http://the-socialite.com/admin/")) {

@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -29,10 +30,12 @@ public class SearchPresenter implements SearchContract {
     @Override
     public void all_user(String user_id) {
         search.progressbar.setVisibility(View.VISIBLE);
+        Log.d("requested_data","hjdsjfdsfd");
         new RService.api().call(mContext).fetch_user(user_id).enqueue(new Callback<json>() {
             @Override
             public void onResponse(Call<json> call, Response<json> response) {
                 search.progressbar.setVisibility(View.GONE);
+                Log.d("response_all user",response.toString());
                 if (response.body().status.equals("1")) {
                     if (response.body().data != null && response.body().data.size() > 0) {
 
@@ -40,12 +43,12 @@ public class SearchPresenter implements SearchContract {
                         search.searchProfileAdapter = new SearchProfileAdapter(mContext, search.datas, search);
                         search.rv_search_profile.setLayoutManager(new GridLayoutManager(mContext, 1));
                         search.rv_search_profile.setAdapter(search.searchProfileAdapter);
-                   //     search.searchProfileAdapter.notifyDataSetChanged();
-                    //    search.searchProfileAdapter.notifyItemChanged(2);
+                        search.searchProfileAdapter.notifyDataSetChanged();
+                        //    search.searchProfileAdapter.notifyItemChanged(2);
 
                     }
                 } else {
-                    //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -60,12 +63,14 @@ public class SearchPresenter implements SearchContract {
 
     @Override
     public void send_request(String UserId, String RequestId) {
+
         new RService.api().call(mContext).connection_request(UserId, RequestId).enqueue(new Callback<json>() {
             @Override
             public void onResponse(Call<json> call, Response<json> response) {
                 if (response.body().status.equals("1")) {
                     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-
+                   all_user(UserId);
+                 //   search.searchProfileAdapter.notifyDataSetChanged();
                 } else {
                     //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }

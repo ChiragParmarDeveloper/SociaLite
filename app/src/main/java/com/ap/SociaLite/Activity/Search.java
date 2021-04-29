@@ -3,6 +3,7 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class Search extends AppCompatActivity {
     public List<data> datas;
 
     public String user_id, RequestId;
+           public int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class Search extends AppCompatActivity {
             case R.id.search_connect:
             //    txt_connection.setText("Requesting");
                 new SearchPresenter(this, this).send_request(user_id, RequestId);
+                Log.d("adapter_position", String.valueOf(position));
              //   new SearchPresenter(this, this).all_user(user_id);
                 break;
 
@@ -145,8 +148,8 @@ public class Search extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        new SearchPresenter(this, this).all_user(user_id);
-        filter();
+//        new SearchPresenter(this, this).all_user(user_id);
+//        filter();
 
     }
 

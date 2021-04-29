@@ -152,6 +152,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
                     } else {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
@@ -177,16 +178,16 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                    //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                        new CategoryFragmentPresenter(mContext, categoryFragment).remove_interest(categoryFragment.user_id,categoryFragment.interest_ids);
+                        //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new CategoryFragmentPresenter(mContext, categoryFragment).remove_interest(categoryFragment.user_id, categoryFragment.interest_ids);
                         new CategoryFragmentPresenter(mContext, categoryFragment).fetch_all_intrest(categoryFragment.user_id);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                //    Log.d("error", String.valueOf(t.getMessage()));
+                    //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {

@@ -2,11 +2,11 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +40,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
 
         this.alldata = new ArrayList<>();
         this.alldata.addAll(datas);
-     //   notifyDataSetChanged();
+
     }
 
     @NonNull
@@ -57,10 +57,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         id = datas.get(position).request_id;
         holder.name.setText(item.username);
 
-
-
-
-        if (selectedItem == position) {
+        if (search.position == position) {
             search.RequestId = datas.get(position).request_id;
             search.search_profile_user_name.setText(datas.get(position).username);
             if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
@@ -70,14 +67,19 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
                 Picasso.get().load(item.profile_pic).into(search.search_profile_image);
             }
 
-            if (datas.get(position).is_connected.equals("Accepted")) {
-                search.txt_connection.setText("Connected");
-            } else if (datas.get(position).is_connected.equals("Requested")) {
-                search.txt_connection.setText("Requesting");
-            } else {
-                search.txt_connection.setText("Connect");
+            for (int i = 0; i < datas.size(); i++) {
+                if (datas.get(position).is_connected.equals("Accepted")) {
+                    search.txt_connection.setText("Connected");
+                } else if (datas.get(position).is_connected.equals("Requested")) {
+                    search.txt_connection.setText("Requesting");
+                } else {
+                    search.txt_connection.setText("Connect");
+                }
             }
         }
+
+        Log.d("adasrdsar", item.is_connected);
+
 
         if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
             Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
@@ -90,6 +92,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
             @Override
             public void onClick(View view) {
                 search.RequestId = datas.get(position).request_id;
+                search.position = (position);
                 if (datas.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
                     Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
                     search.search_profile_image.setImageDrawable(upload_img);
@@ -98,16 +101,14 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
                 }
                 search.search_profile_user_name.setText(datas.get(position).username);
 
-                if( datas.get(position).is_connected.equals("Accepted"))
-                {
-                    search.txt_connection.setText("Connected");
-                }else if(datas.get(position).is_connected.equals("Requested"))
-                {
-                    search.txt_connection.setText("Requesting");
-                }
-                else
-                {
-                    search.txt_connection.setText("Connect");
+                for (int i = 0; i < datas.size(); i++) {
+                    if (datas.get(position).is_connected.equals("Accepted")) {
+                        search.txt_connection.setText("Connected");
+                    } else if (datas.get(position).is_connected.equals("Requested")) {
+                        search.txt_connection.setText("Requesting");
+                    } else {
+                        search.txt_connection.setText("Connect");
+                    }
                 }
             }
 
