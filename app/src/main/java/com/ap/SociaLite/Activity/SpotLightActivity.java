@@ -38,6 +38,10 @@ public class SpotLightActivity extends AppCompatActivity {
     @BindView(R.id.user_frndstory)
     public ImageView user_frndstory;
 
+    @BindView(R.id.viewer_profile)
+    public ImageView viewer_profile;
+
+
     public String user_id,UserId;
 
     @Override

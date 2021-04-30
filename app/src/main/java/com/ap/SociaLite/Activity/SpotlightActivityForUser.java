@@ -45,6 +45,8 @@ public class SpotlightActivityForUser extends AppCompatActivity {
     @BindView(R.id.view_count)
     public TextView view_count;
 
+    @BindView(R.id.viewer_profile)
+    public ImageView viewer_profile;
     public String user_id,id;
 
     @Override

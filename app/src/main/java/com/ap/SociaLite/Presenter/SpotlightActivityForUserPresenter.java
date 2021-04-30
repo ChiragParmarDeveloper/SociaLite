@@ -8,6 +8,8 @@ import android.view.View;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.SpotlightActivityForUser;
 import com.ap.SociaLite.Adapter.MyAllStoryAdapter;
 import com.ap.SociaLite.Adapter.SpotlightViewerAdapter;
@@ -44,12 +46,30 @@ public class SpotlightActivityForUserPresenter implements SpotlightActivityForUs
                     if (response.body().status.equals("1")) {
                         if (response.body().user_details != null) {
 
+//                            if (response.body().user_details.profile_pic.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                                spotlightActivityForUser.user_profile.setImageDrawable(upload_img);
+//                            } else {
+//                                Picasso.get().load(response.body().user_details.profile_pic).into(spotlightActivityForUser.user_profile);
+//                            }
                             if (response.body().user_details.profile_pic.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                                spotlightActivityForUser.user_profile.setImageDrawable(upload_img);
+
+                                spotlightActivityForUser.viewer_profile.setVisibility(View.VISIBLE);
+                                String avatarTitle = String.valueOf(response.body().user_details.username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                spotlightActivityForUser.viewer_profile.setImageDrawable(drawable);
                             } else {
+                                spotlightActivityForUser.viewer_profile.setVisibility(View.GONE);
                                 Picasso.get().load(response.body().user_details.profile_pic).into(spotlightActivityForUser.user_profile);
                             }
+
+
+
                             spotlightActivityForUser.user_name.setText(response.body().user_details.username);
                         }
                     } else {
