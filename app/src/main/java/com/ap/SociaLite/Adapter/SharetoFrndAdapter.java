@@ -8,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.R;
@@ -56,12 +59,28 @@ public class SharetoFrndAdapter extends RecyclerView.Adapter<SharetoFrndAdapter.
         item = datas.get(position);
         holder.txt_name.setText(item.username);
 
-        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
-            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-            holder.user_profile.setImageDrawable(upload_img);
+        if (datas.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
+
+            holder.viewer_profile.setVisibility(View.VISIBLE);
+            String avatarTitle = String.valueOf(datas.get(position).username.charAt(0)).toUpperCase();
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int randomcolor = generator.getRandomColor();
+
+            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+            holder.viewer_profile.setImageDrawable(drawable);
         } else {
-            Picasso.get().load(item.profile_pic).into(holder.user_profile);
+            holder.viewer_profile.setVisibility(View.GONE);
+            Picasso.get().load(datas.get(position).profile_pic).into(holder.user_profile);
         }
+
+//        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+//            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//            holder.user_profile.setImageDrawable(upload_img);
+//        } else {
+//            Picasso.get().load(item.profile_pic).into(holder.user_profile);
+//        }
 
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -100,13 +119,14 @@ public class SharetoFrndAdapter extends RecyclerView.Adapter<SharetoFrndAdapter.
         CircularImageView user_profile;
         TextView txt_name;
         CheckBox checkBox;
+        ImageView viewer_profile;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             user_profile = itemView.findViewById(R.id.user_profile);
             txt_name = itemView.findViewById(R.id.txt_name);
             checkBox = itemView.findViewById(R.id.checkBox);
-
+            viewer_profile= itemView.findViewById(R.id.viewer_profile);
         }
     }
 
