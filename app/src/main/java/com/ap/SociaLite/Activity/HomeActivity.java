@@ -110,6 +110,9 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.imgnotification)
     ImageView imgnotification;
 
+
+    public ImageView home_latter;
+
     private int REQUEST_CODE = 1;
     public TextView txt_name, txt_email, txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
     ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout,img_arrow;
@@ -131,6 +134,10 @@ public class HomeActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
         View headerView = navigation_view.getHeaderView(0);
+
+
+
+        home_latter = (ImageView) headerView.findViewById(R.id.home_latter);
 
         category = (LinearLayout) headerView.findViewById(R.id.category);
         txt_category1 = (TextView) headerView.findViewById(R.id.txt_category1);

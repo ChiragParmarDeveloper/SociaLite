@@ -1,13 +1,14 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.view.View;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.HomeActivity;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.HomeActivityContract;
-import com.ap.SociaLite.R;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
@@ -34,14 +35,32 @@ public class HomeActivityPresenter implements HomeActivityContract {
                     if (response.body().status.equals("1")) {
 
                         if (response.body().user_details != null) {
+
                             if (response.body().user_details.profile_pic.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                                homeActivity.img_dp.setImageDrawable(upload_img);
+                                homeActivity.home_latter.setVisibility(View.VISIBLE);
+                                String avatarTitle = String.valueOf(response.body().user_details.username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                homeActivity.home_latter.setImageDrawable(drawable);
                             } else {
+                                homeActivity.home_latter.setVisibility(View.GONE);
                                 Picasso.get().load(response.body().user_details.profile_pic).into(homeActivity.img_dp);
+                                //          Picasso.get().load(datas.get(position).profile_pic).into(holder.profile);
                             }
 
-                            String input= response.body().user_details.username;
+
+//                            if (response.body().user_details.profile_pic.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                                homeActivity.img_dp.setImageDrawable(upload_img);
+//                            } else {
+//                                Picasso.get().load(response.body().user_details.profile_pic).into(homeActivity.img_dp);
+//                            }
+
+                            String input = response.body().user_details.username;
                             String output = input.substring(0, 1).toUpperCase() + input.substring(1);
                             homeActivity.txt_name.setText(output);
 
