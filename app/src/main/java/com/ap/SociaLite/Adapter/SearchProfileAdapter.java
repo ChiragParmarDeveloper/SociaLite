@@ -105,9 +105,9 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         }
 
 
-        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
-
-            String avatarTitle = String.valueOf(item.username.charAt(0)).toUpperCase();
+        if (datas.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
+           holder.viewer_profile.setVisibility(View.VISIBLE);
+            String avatarTitle = String.valueOf(datas.get(position).username.charAt(0)).toUpperCase();
             ColorGenerator generator = ColorGenerator.MATERIAL;
             int randomcolor = generator.getRandomColor();
 
@@ -116,7 +116,8 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
             TextDrawable drawable = builder.build(avatarTitle, randomcolor);
             holder.viewer_profile.setImageDrawable(drawable);
         } else {
-            Picasso.get().load(item.profile_pic).into(holder.profile);
+            holder.viewer_profile.setVisibility(View.GONE);
+            Picasso.get().load(datas.get(position).profile_pic).into(holder.profile);
         }
 
 

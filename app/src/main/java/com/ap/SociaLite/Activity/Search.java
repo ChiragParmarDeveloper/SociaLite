@@ -50,7 +50,6 @@ public class Search extends AppCompatActivity {
     @BindView(R.id.img_pic)
     public ImageView img_pic;
 
-
     public SearchProfileAdapter searchProfileAdapter;
     public List<data> datas;
 
@@ -153,8 +152,5 @@ public class Search extends AppCompatActivity {
         super.onResume();
         new SearchPresenter(this, this).all_user(user_id);
         filter();
-
     }
-
-
 }
