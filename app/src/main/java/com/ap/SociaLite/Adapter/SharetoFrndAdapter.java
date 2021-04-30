@@ -35,7 +35,7 @@ public class SharetoFrndAdapter extends RecyclerView.Adapter<SharetoFrndAdapter.
     ShareToFriend shareToFriend;
     List<data> alldata;
     data item;
-
+//asdasd
     public SharetoFrndAdapter(Context mContext, List<data> datas, ShareToFriend shareToFriend) {
         this.mContext = mContext;
         this.datas = datas;
