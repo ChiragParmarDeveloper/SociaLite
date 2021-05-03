@@ -101,10 +101,6 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
             Picasso.get().load(mList.get(position).profile_pic).into(holder.circularImageView);
         }
 
-
-
-
-
         if (mList.get(position).rate.equals("0")) {
             holder.img_star.setImageDrawable(star1);
         }

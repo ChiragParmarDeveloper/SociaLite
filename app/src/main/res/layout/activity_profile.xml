@@ -349,7 +349,7 @@
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="10dp"
                     android:singleLine="true"
-                    android:text="Name"
+                    android:text=""
                     android:textColor="#263238"
                     android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -362,11 +362,19 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="145dp"
                     app:civ_border="false"
-                    android:src="@drawable/ic_user_icon"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-                </com.mikhaellopez.circularimageview.CircularImageView>
+
+                <ImageView
+                    android:id="@+id/img_pic"
+                    android:visibility="gone"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="145dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

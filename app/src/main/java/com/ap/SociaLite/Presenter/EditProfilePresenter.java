@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.EditProfileActivity;
 import com.ap.SociaLite.Application.AppUtils;
 import com.ap.SociaLite.Application.RService;
@@ -42,13 +44,30 @@ public class EditProfilePresenter implements EditProfileContract {
                     if (response.body().status.equals("1")) {
                         if (response.body().user_details != null) {
 
+//                            if (response.body().user_details.profile_pic.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                                editProfileActivity.schedule_post_image.setImageDrawable(upload_img);
+//                            } else {
+//                                Picasso.get().load(response.body().user_details.profile_pic).into(editProfileActivity.schedule_post_image);
+//                            }
 
                             if (response.body().user_details.profile_pic.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                                editProfileActivity.schedule_post_image.setImageDrawable(upload_img);
+
+                                String avatarTitle = String.valueOf(response.body().user_details.username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().rect();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                               // holder.img_pic.setImageDrawable(drawable);
+                                editProfileActivity.schedule_post_image.setImageDrawable(drawable);
                             } else {
                                 Picasso.get().load(response.body().user_details.profile_pic).into(editProfileActivity.schedule_post_image);
                             }
+
+
+
 
                             editProfileActivity.edt_username.setText(response.body().user_details.username);
                             editProfileActivity.edt_email.setText(response.body().user_details.email);

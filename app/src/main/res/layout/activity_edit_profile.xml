@@ -437,8 +437,7 @@
                     android:id="@+id/schedule_post_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_user_icon" />
+                    android:scaleType="centerCrop"/>
 
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

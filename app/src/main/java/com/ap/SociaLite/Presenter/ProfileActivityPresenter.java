@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Toast;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.ProfileActivity;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
@@ -39,12 +41,36 @@ public class ProfileActivityPresenter implements ProfileActivityContract {
                     if (response.body().status.equals("1")) {
                         if (response.body().my_profile_user_details != null && response.body().my_profile_user_details.size() > 0) {
 
+//                            if (response.body().my_profile_user_details.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                                profileActivity.circularImageView6.setImageDrawable(upload_img);
+//                            } else {
+//                                Picasso.get().load(response.body().my_profile_user_details.get(0).profile_pic).into(profileActivity.circularImageView6);
+//                            }
+
+
                             if (response.body().my_profile_user_details.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                                profileActivity.circularImageView6.setImageDrawable(upload_img);
+                                profileActivity.img_pic.setVisibility(View.VISIBLE);
+
+                                String avatarTitle = String.valueOf(response.body().my_profile_user_details.get(0).username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                profileActivity.img_pic.setImageDrawable(drawable);
                             } else {
+                                profileActivity.img_pic.setVisibility(View.GONE);
                                 Picasso.get().load(response.body().my_profile_user_details.get(0).profile_pic).into(profileActivity.circularImageView6);
-                            }
+                           }
+
+
+
+
+
+
+
 
                             if (response.body().my_profile_user_details.get(0).cover_photo.equals("http://the-socialite.com/admin/")) {
                                 Drawable upload_cover = mContext.getDrawable(R.drawable.socialite_cover_photo);
