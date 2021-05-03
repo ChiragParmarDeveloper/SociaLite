@@ -1,8 +1,6 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -65,11 +62,11 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         holder.name.setText(item.username);
 
         if (search.position == position) {
-          //  holder.profile.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
+            //  holder.profile.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
             search.RequestId = datas.get(position).request_id;
             search.search_profile_user_name.setText(datas.get(position).username);
 
-         //   search.img_pic.set(mContext.getResources().getColor(R.color.colorAccent));
+            //   search.img_pic.set(mContext.getResources().getColor(R.color.colorAccent));
             if (datas.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
                 search.img_pic.setVisibility(View.VISIBLE);
                 String avatarTitle = String.valueOf(datas.get(position).username.charAt(0)).toUpperCase();
@@ -106,7 +103,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
 
 
         if (datas.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
-           holder.viewer_profile.setVisibility(View.VISIBLE);
+            holder.viewer_profile.setVisibility(View.VISIBLE);
             String avatarTitle = String.valueOf(datas.get(position).username.charAt(0)).toUpperCase();
             ColorGenerator generator = ColorGenerator.MATERIAL;
             int randomcolor = generator.getRandomColor();
@@ -121,7 +118,6 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         }
 
 
-
 //        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
 //            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
 //            holder.profile.setImageDrawable(upload_img);
@@ -132,7 +128,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  holder.profile.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
+                //  holder.profile.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
                 search.RequestId = datas.get(position).request_id;
                 search.position = (position);
 
@@ -160,7 +156,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
                 } else {
                     search.img_pic.setVisibility(View.GONE);
                     Picasso.get().load(datas.get(position).profile_pic).into(search.search_profile_image);
-                  }
+                }
 
 
                 for (int i = 0; i < datas.size(); i++) {

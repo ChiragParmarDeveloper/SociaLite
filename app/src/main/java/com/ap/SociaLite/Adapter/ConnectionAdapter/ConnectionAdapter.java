@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Fragment.Connection.ConnectionFragment;
 import com.ap.SociaLite.Pojo.user_connection;
 import com.ap.SociaLite.R;
@@ -19,6 +21,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.MyHolder> {
     private int selectedItem;
@@ -52,22 +57,54 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.My
         item = user_connections.get(position);
         holder.name.setText(item.username);
 
-        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
-            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-            holder.profile.setImageDrawable(upload_img);
+//        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+//            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//            holder.profile.setImageDrawable(upload_img);
+//        } else {
+//            Picasso.get().load(item.profile_pic).into(holder.profile);
+//        }
+
+        if (user_connections.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
+            holder.viewer_profile.setVisibility(View.VISIBLE);
+            String avatarTitle = String.valueOf(user_connections.get(position).username.charAt(0)).toUpperCase();
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int randomcolor = generator.getRandomColor();
+
+            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+            holder.viewer_profile.setImageDrawable(drawable);
         } else {
-            Picasso.get().load(item.profile_pic).into(holder.profile);
+            holder.viewer_profile.setVisibility(View.GONE);
+            Picasso.get().load(user_connections.get(position).profile_pic).into(holder.profile);
         }
+
 
         if (selectedItem == position) {
             connectionFragment.RequestId = user_connections.get(position).Request_Id;
             connectionFragment.search_profile_user_name.setText(user_connections.get(position).username);
-            if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
-                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                connectionFragment.search_profile_image.setImageDrawable(upload_img);
+//            if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+//                Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                connectionFragment.search_profile_image.setImageDrawable(upload_img);
+//            } else {
+//                Picasso.get().load(item.profile_pic).into(connectionFragment.search_profile_image);
+//            }
+
+            if (user_connections.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
+                connectionFragment.img_pic.setVisibility(View.VISIBLE);
+                String avatarTitle = String.valueOf(user_connections.get(position).username.charAt(0)).toUpperCase();
+                ColorGenerator generator = ColorGenerator.MATERIAL;
+                int randomcolor = generator.getRandomColor();
+
+                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                connectionFragment.img_pic.setImageDrawable(drawable);
+
             } else {
-                Picasso.get().load(item.profile_pic).into(connectionFragment.search_profile_image);
-            }
+                connectionFragment.img_pic.setVisibility(View.GONE);
+                Picasso.get().load(user_connections.get(position).profile_pic).into(connectionFragment.search_profile_image);
+           }
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -76,16 +113,30 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.My
                 connectionFragment.RequestId = user_connections.get(position).Request_Id;
                 connectionFragment.search_profile_user_name.setText(user_connections.get(position).username);
 
+//                if (user_connections.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
+//                    Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//                    connectionFragment.search_profile_image.setImageDrawable(upload_img);
+//                } else {
+//                    Picasso.get().load(user_connections.get(position).profile_pic).into(connectionFragment.search_profile_image);
+//                }
+
                 if (user_connections.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
-                    Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-                    connectionFragment.search_profile_image.setImageDrawable(upload_img);
+                    connectionFragment.img_pic.setVisibility(View.VISIBLE);
+
+                    String avatarTitle = String.valueOf(user_connections.get(position).username.charAt(0)).toUpperCase();
+                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                    int randomcolor = generator.getRandomColor();
+
+                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                    connectionFragment.img_pic.setImageDrawable(drawable);
                 } else {
+                    connectionFragment.img_pic.setVisibility(View.GONE);
                     Picasso.get().load(user_connections.get(position).profile_pic).into(connectionFragment.search_profile_image);
                 }
             }
         });
-
-
     }
 
     @Override
@@ -98,8 +149,12 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.My
         ImageView profile;
         TextView name;
 
+        @BindView(R.id.viewer_profile)
+        ImageView viewer_profile;
+
         public MyHolder(@NonNull View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
 
             profile = itemView.findViewById(R.id.user_profile);
             name = itemView.findViewById(R.id.user_name);

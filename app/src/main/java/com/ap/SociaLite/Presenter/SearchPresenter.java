@@ -30,12 +30,12 @@ public class SearchPresenter implements SearchContract {
     @Override
     public void all_user(String user_id) {
         search.progressbar.setVisibility(View.VISIBLE);
-        Log.d("requested_data","hjdsjfdsfd");
+        Log.d("requested_data", "hjdsjfdsfd");
         new RService.api().call(mContext).fetch_user(user_id).enqueue(new Callback<json>() {
             @Override
             public void onResponse(Call<json> call, Response<json> response) {
                 search.progressbar.setVisibility(View.GONE);
-                Log.d("response_all user",response.toString());
+                Log.d("response_all user", response.toString());
                 if (response.body().status.equals("1")) {
                     if (response.body().data != null && response.body().data.size() > 0) {
 
@@ -70,8 +70,8 @@ public class SearchPresenter implements SearchContract {
             public void onResponse(Call<json> call, Response<json> response) {
                 if (response.body().status.equals("1")) {
                     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                   all_user(UserId);
-                 //   search.searchProfileAdapter.notifyDataSetChanged();
+                    all_user(UserId);
+                    //   search.searchProfileAdapter.notifyDataSetChanged();
                 } else {
                     //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
