@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.Notification;
 import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.Presenter.NotificationPresenter;
@@ -85,19 +88,56 @@ public class Notification_adapter extends RecyclerView.Adapter<Notification_adap
         holder.txt_user_name.setText(item.username);
         holder.txt_request_username.setText(item.request_username);
 
-        if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
-            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-            holder.user_image.setImageDrawable(upload_img);
+//        if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
+//            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//            holder.user_image.setImageDrawable(upload_img);
+//        } else {
+//            Picasso.get().load(item.user_profile_pic).into(holder.user_image);
+//        }
+
+        if (datas.get(position).user_profile_pic.equals("http://the-socialite.com/admin/")) {
+            holder.img_pic.setVisibility(View.VISIBLE);
+            String avatarTitle = String.valueOf(datas.get(position).username.charAt(0)).toUpperCase();
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int randomcolor = generator.getRandomColor();
+
+            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+            holder.img_pic.setImageDrawable(drawable);
+
         } else {
+            holder.img_pic.setVisibility(View.GONE);
             Picasso.get().load(item.user_profile_pic).into(holder.user_image);
         }
 
-        if (item.request_user_profile_pic.equals("http://the-socialite.com/admin/")) {
-            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-            holder.request_user_image.setImageDrawable(upload_img);
+
+
+
+//        if (item.request_user_profile_pic.equals("http://the-socialite.com/admin/")) {
+//            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//            holder.request_user_image.setImageDrawable(upload_img);
+//        } else {
+//            Picasso.get().load(item.request_user_profile_pic).into(holder.request_user_image);
+//        }
+
+        if (datas.get(position).request_user_profile_pic.equals("http://the-socialite.com/admin/")) {
+            holder.request_img_pic.setVisibility(View.VISIBLE);
+            String avatarTitle = String.valueOf(datas.get(position).request_username.charAt(0)).toUpperCase();
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int randomcolor = generator.getRandomColor();
+
+            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+            holder.request_img_pic.setImageDrawable(drawable);
+
         } else {
+            holder.request_img_pic.setVisibility(View.GONE);
             Picasso.get().load(item.request_user_profile_pic).into(holder.request_user_image);
         }
+
+
 
         holder.request_accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +180,13 @@ public class Notification_adapter extends RecyclerView.Adapter<Notification_adap
 
         @BindView(R.id.request_decline)
         Button request_decline;
+
+        @BindView(R.id.img_pic)
+        ImageView img_pic;
+
+
+        @BindView(R.id.request_img_pic)
+        ImageView request_img_pic;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

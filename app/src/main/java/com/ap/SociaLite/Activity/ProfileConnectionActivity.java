@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Application.json;
@@ -61,6 +63,10 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
     @BindView(R.id.txt_connect)
     public TextView txt_connect;
+
+    @BindView(R.id.img_pic)
+    public ImageView img_pic;
+
 
 
     Button timeline_btn, business_btn, spotlight_btn;
@@ -140,12 +146,12 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     }
 
     private void profile_connection(String UserId, String RequestId) {
-        progressbar.setVisibility(View.VISIBLE);
+     //   progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(this).connection_type(UserId, RequestId).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
-                    progressbar.setVisibility(View.GONE);
+                 //   progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().data != null && response.body().data.size() > 0) {
 //
@@ -221,7 +227,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                                 txt_connect.setText("Not Connected");
                             }
 
-//
 //                            profile_bio.setText(response.body().my_profile_user_details.get(0).bio);
 //                            //profileActivity.textView10.setText(response.body().my_profile_user_details.get(0).connection);
 
@@ -234,7 +239,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    progressbar.setVisibility(View.GONE);
+                 //   progressbar.setVisibility(View.GONE);
                     //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //    Log.d("error", String.valueOf(t.getMessage()));
                 }
@@ -247,21 +252,38 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     }
 
     private void my_profile(String user_id) {
-        progressbar.setVisibility(View.VISIBLE);
+      //  progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(this).my_profileActivity(user_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
-                    progressbar.setVisibility(View.GONE);
+               //     progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().my_profile_user_details != null && response.body().my_profile_user_details.size() > 0) {
 
+//                            if (response.body().my_profile_user_details.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+//                                Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+//                                profile_pic.setImageDrawable(upload_img);
+//                            } else {
+//                                Picasso.get().load(response.body().my_profile_user_details.get(0).profile_pic).into(profile_pic);
+//                            }
+
                             if (response.body().my_profile_user_details.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
-                                Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
-                                profile_pic.setImageDrawable(upload_img);
+                                img_pic.setVisibility(View.VISIBLE);
+                                String avatarTitle = String.valueOf(response.body().my_profile_user_details.get(0).username.charAt(0)).toUpperCase();
+                                ColorGenerator generator = ColorGenerator.MATERIAL;
+                                int randomcolor = generator.getRandomColor();
+
+                                TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                img_pic.setImageDrawable(drawable);
+
                             } else {
+                                img_pic.setVisibility(View.GONE);
                                 Picasso.get().load(response.body().my_profile_user_details.get(0).profile_pic).into(profile_pic);
                             }
+
 
                             if (response.body().my_profile_user_details.get(0).cover_photo.equals("http://the-socialite.com/admin/")) {
                                 Drawable upload_cover = getDrawable(R.drawable.socialite_cover_photo);
@@ -283,7 +305,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    progressbar.setVisibility(View.GONE);
+             //       progressbar.setVisibility(View.GONE);
                     //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //    Log.d("error", String.valueOf(t.getMessage()));
                 }

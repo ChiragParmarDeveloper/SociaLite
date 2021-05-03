@@ -35,67 +35,74 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/layout_category"
                     android:layout_width="0dp"
+                    android:gravity="center"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
+                    android:layout_weight="1">
 
                     <com.mikhaellopez.circularimageview.CircularImageView
                         android:id="@+id/user_image"
                         android:layout_width="55dp"
                         android:layout_height="55dp"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_centerInParent="true"
                         app:civ_border="false"
-                        android:src="@drawable/ic_user_icon"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        android:src="@drawable/ic_user_icon" />
+
+
+                    <ImageView
+                        android:id="@+id/img_pic"
+                        android:visibility="gone"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_centerInParent="true"/>
 
                     <TextView
                         android:id="@+id/txt_user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_centerInParent="true"
                         android:text="Catty Parry"
+                        android:layout_below="@id/user_image"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
 
-                </LinearLayout>
+                </RelativeLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/layout_interest"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
+                    android:gravity="center">
 
                     <com.mikhaellopez.circularimageview.CircularImageView
                         android:id="@+id/request_user_image"
                         android:layout_width="55dp"
                         android:layout_height="55dp"
-                        android:layout_gravity="center_horizontal"
                         app:civ_border="false"
-                        android:src="@drawable/ic_user_icon"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_user_icon" />
+
+                    <ImageView
+                        android:id="@+id/request_img_pic"
+                        android:visibility="gone"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_centerInParent="true"/>
 
                     <TextView
                         android:id="@+id/txt_request_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:text="Louis Smith"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@id/request_user_image"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
 
-                </LinearLayout>
+                </RelativeLayout>
 
             </LinearLayout>
 
