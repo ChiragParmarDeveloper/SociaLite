@@ -14,18 +14,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Activity.MessageChatActivity;
 import com.ap.SociaLite.Activity.ProfileConnectionActivity;
 import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Adapter.ConnectionAdapter.ConnectionAdapter;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Pojo.user_connection;
 import com.ap.SociaLite.Presenter.ConnectionFragmentPresenter;
-import com.ap.SociaLite.Presenter.SearchPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,13 +38,16 @@ public class ConnectionFragment extends Fragment {
     public TextView search_profile_user_name;
 
     @BindView(R.id.search_profile_image)
-    public ImageView search_profile_image;
+    public CircularImageView search_profile_image;
 
     @BindView(R.id.connections_recyclerview)
     public RecyclerView connections_recyclerview;
 
     @BindView(R.id.layout_connection)
     public ConstraintLayout layout_connection;
+
+    @BindView(R.id.img_pic)
+    public ImageView img_pic;
 
     public static ConnectionAdapter connectionAdapter;
     public String UserId, RequestId;
@@ -66,11 +66,11 @@ public class ConnectionFragment extends Fragment {
         return view;
     }
 
-    @OnClick({R.id.layout_connect,R.id.connection_msg,R.id.share,R.id.search_profile_user_name,R.id.search_profile_image})
+    @OnClick({R.id.layout_connect, R.id.connection_msg, R.id.share, R.id.search_profile_user_name, R.id.search_profile_image})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.layout_connect:
-                new ConnectionFragmentPresenter(this, getContext()).send_request(UserId,RequestId);
+                new ConnectionFragmentPresenter(this, getContext()).send_request(UserId, RequestId);
                 break;
 
             case R.id.connection_msg:
@@ -87,13 +87,13 @@ public class ConnectionFragment extends Fragment {
 
             case R.id.search_profile_user_name:
                 Intent con_pro = new Intent(getContext(), ProfileConnectionActivity.class);
-                con_pro.putExtra("request_id",RequestId);
+                con_pro.putExtra("request_id", RequestId);
                 startActivity(con_pro);
                 break;
 
             case R.id.search_profile_image:
                 Intent con_pro1 = new Intent(getContext(), ProfileConnectionActivity.class);
-                con_pro1.putExtra("request_id",RequestId);
+                con_pro1.putExtra("request_id", RequestId);
                 startActivity(con_pro1);
                 break;
         }

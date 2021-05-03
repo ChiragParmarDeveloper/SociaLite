@@ -21,6 +21,7 @@ import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Pojo.user_connection;
 import com.ap.SociaLite.Presenter.MyConnectionFragmentPresenter;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.List;
 
@@ -41,7 +42,11 @@ public class MyConnectionFragment extends Fragment {
     public TextView search_profile_user_name;
 
     @BindView(R.id.search_profile_image)
-    public ImageView search_profile_image;
+    public CircularImageView search_profile_image;
+
+    @BindView(R.id.img_pic)
+    public ImageView img_pic;
+
 
     @BindView(R.id.constraint_myconnection)
     public ConstraintLayout constraint_myconnection;
