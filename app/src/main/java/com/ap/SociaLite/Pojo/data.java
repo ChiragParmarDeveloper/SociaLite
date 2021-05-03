@@ -21,7 +21,6 @@ public class data {
     @SerializedName("story")
     public List<com.ap.SociaLite.Pojo.story> story;
 
-
     @SerializedName("user_id")
     public String user_id;
 
@@ -36,7 +35,6 @@ public class data {
 
     @SerializedName("notification_type")
     public String notification_type;
-
 
     @SerializedName("user_id__connected")
     public String user_id__connected;

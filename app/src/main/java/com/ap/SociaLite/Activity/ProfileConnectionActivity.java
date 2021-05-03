@@ -67,6 +67,11 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     @BindView(R.id.img_pic)
     public ImageView img_pic;
 
+    @BindView(R.id.avatar_img_1)
+    public ImageView avatar_img_1;
+
+    @BindView(R.id.avatar_img_2)
+    public ImageView avatar_img_2;
 
 
     Button timeline_btn, business_btn, spotlight_btn;
@@ -90,7 +95,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
         UserId = session.getUser_id();
         user_id = getIntent().getStringExtra("request_id");
         RequestId = getIntent().getStringExtra("request_id");
-
 
         timeline_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +141,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
 //                Intent spotlight = new Intent(ProfileConnectionActivity.this, SpotLightActivity.class);
 //                startActivity(spotlight);
-
             }
         });
 
@@ -154,73 +157,222 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                  //   progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().data != null && response.body().data.size() > 0) {
-//
+
                             if (response.body().data.get(0).user_id__connected.equals("Accepted") && response.body().data.get(0).request_id_connection.equals("Accepted")) {
 
+//                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+//                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+//                                    profile_pic_1.setImageDrawable(upload_img);
+//                                } else {
+//                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+//                                }
+
                                 if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
-                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
-                                    profile_pic_1.setImageDrawable(upload_img);
+                                    avatar_img_1.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_1.setImageDrawable(drawable);
+
                                 } else {
+                                    avatar_img_1.setVisibility(View.GONE);
                                     Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
                                 }
 
+//                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+//                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+//                                    profile_pic_2.setImageDrawable(upload_img);
+//                                } else {
+//                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+//                                }
+
                                 if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
-                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
-                                    profile_pic_2.setImageDrawable(upload_img);
+                                    avatar_img_2.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).request_username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_2.setImageDrawable(drawable);
+
                                 } else {
+                                    avatar_img_2.setVisibility(View.GONE);
                                     Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
                                 }
+
+
                             } else if (response.body().data.get(0).user_id__connected.equals("Accepted") && response.body().data.get(0).request_id_connection.equals("Requested")) {
 
+//                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+//                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+//                                    profile_pic_1.setImageDrawable(upload_img);
+//                                } else {
+//                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+//                                }
+
                                 if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
-                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
-                                    profile_pic_1.setImageDrawable(upload_img);
+                                    avatar_img_1.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_1.setImageDrawable(drawable);
+
                                 } else {
+                                    avatar_img_1.setVisibility(View.GONE);
                                     Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
                                 }
 
+
+//                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+//                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+//                                    profile_pic_2.setImageDrawable(upload_img);
+//                                    profile_pic_2.setAlpha(.150f);
+//                                } else {
+//                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+//                                    profile_pic_2.setAlpha(.150f);
+//                                }
                                 if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
-                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
-                                    profile_pic_2.setImageDrawable(upload_img);
-                                    profile_pic_2.setAlpha(.150f);
+                                    avatar_img_2.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).request_username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_2.setImageDrawable(drawable);
+                                    avatar_img_2.setAlpha(.150f);
+
                                 } else {
+                                    avatar_img_2.setVisibility(View.GONE);
                                     Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
                                     profile_pic_2.setAlpha(.150f);
                                 }
+
+
+
+
+
+
+
+
                             } else if (response.body().data.get(0).user_id__connected.equals("Requested") && response.body().data.get(0).request_id_connection.equals("Accepted")) {
 
+//                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+//                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+//                                    profile_pic_1.setImageDrawable(upload_img);
+//                                    profile_pic_2.setAlpha(.150f);
+//                                } else {
+//                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+//                                    profile_pic_2.setAlpha(.150f);
+//                                }
+
                                 if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
-                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
-                                    profile_pic_1.setImageDrawable(upload_img);
-                                    profile_pic_2.setAlpha(.150f);
+                                    avatar_img_1.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_1.setImageDrawable(drawable);
+                                    avatar_img_2.setAlpha(.150f);
+
                                 } else {
+                                    avatar_img_1.setVisibility(View.GONE);
                                     Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
                                     profile_pic_2.setAlpha(.150f);
                                 }
 
-                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
-                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
-                                    profile_pic_2.setImageDrawable(upload_img);
-                                } else {
-                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
 
+                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+                                    avatar_img_2.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).request_username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_2.setImageDrawable(drawable);
+                                } else {
+                                    avatar_img_2.setVisibility(View.GONE);
+                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
                                 }
+
+
+
+//                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+//                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+//                                    profile_pic_2.setImageDrawable(upload_img);
+//                                } else {
+//                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+//
+//                                }
+
+
                             } else if (response.body().data.get(0).user_id__connected.equals("not_connected") && response.body().data.get(0).request_id_connection.equals("not_connected")) {
 
+//                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+//                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+//                                    profile_pic_1.setImageDrawable(upload_img);
+//                                    profile_pic_1.setAlpha(.150f);
+//                                } else {
+//                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+//                                    profile_pic_1.setAlpha(.150f);
+//                                }
+
                                 if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
-                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
-                                    profile_pic_1.setImageDrawable(upload_img);
-                                    profile_pic_1.setAlpha(.150f);
+                                    avatar_img_1.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_1.setImageDrawable(drawable);
+                                    avatar_img_1.setAlpha(.150f);
+
                                 } else {
+                                    avatar_img_1.setVisibility(View.GONE);
                                     Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
                                     profile_pic_1.setAlpha(.150f);
                                 }
 
+//                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+//                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
+//                                    profile_pic_2.setImageDrawable(upload_img);
+//                                    profile_pic_2.setAlpha(.150f);
+//                                } else {
+//                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+//                                    profile_pic_2.setAlpha(.150f);
+//                                }
+
                                 if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
-                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
-                                    profile_pic_2.setImageDrawable(upload_img);
-                                    profile_pic_2.setAlpha(.150f);
+                                    avatar_img_2.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).request_username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_2.setImageDrawable(drawable);
+                                    avatar_img_2.setAlpha(.150f);
                                 } else {
+                                    avatar_img_2.setVisibility(View.GONE);
                                     Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
                                     profile_pic_2.setAlpha(.150f);
                                 }
@@ -313,7 +465,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
         } catch (Exception e) {
 
         }
-
     }
 
 

@@ -269,19 +269,16 @@ public interface RService {
     Call<json> connection_type(@Field("UserId") String UserId,
                                @Field("RequestId") String RequestId);
 
-
     @FormUrlEncoded
     @POST("add_post_rating.php")
     Call<json> give_rating(@Field("user_id") String user_id,
                            @Field("post_id") String post_id,
                            @Field("rate") String rate);
 
-
     @FormUrlEncoded
     @POST("normal_post_delete.php")
     Call<json> timeline_post(@Field("user_id") String user_id,
                            @Field("post_id") String post_id);
-
 
     @FormUrlEncoded
     @POST("unhide_post.php")
@@ -294,21 +291,17 @@ public interface RService {
                                 @Field("post_id") String post_id,
                                 @Field("comment") String comment);
 
-
     @FormUrlEncoded
     @POST("fetch_comments.php")
     Call<json> fetch_comments(@Field("post_id") String post_id);
-
 
     @FormUrlEncoded
     @POST("my_post.php")
     Call<json> timeline_my_post(@Field("user_id") String user_id);
 
-
     @FormUrlEncoded
     @POST("my_bussiness_post.php")
     Call<json> my_bussiness_post(@Field("user_id") String user_id);
-
 
     @FormUrlEncoded
     @POST("interest_list_post_page.php")
@@ -318,7 +311,6 @@ public interface RService {
     @POST("add_interest.php")
     Call<json> plus_add_interest(@Field("user_id") String user_id,
                                  @Field("interest_id") String interest_id);
-
 
     @FormUrlEncoded
     @POST("remove_interest.php")
@@ -338,11 +330,9 @@ public interface RService {
     @POST("delete_post.php")
     Call<json> delete_post(@Field("post_id") String post_id);
 
-
     @FormUrlEncoded
     @POST("my_all_story.php")
     Call<json> my_all_story(@Field("user_id") String user_id);
-
 
     @FormUrlEncoded
     @POST("story_viewers.php")
@@ -354,7 +344,6 @@ public interface RService {
     Call<json> post_report(@Field("user_id") String user_id,
                            @Field("post_id") String post_id,
                            @Field("reason") String reason);
-
 
     public class api {
         static Retrofit retrofit = null;
