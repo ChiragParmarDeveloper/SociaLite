@@ -102,12 +102,31 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
             holder.img_star.setImageDrawable(star5);
         }
 
-        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
-            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-            holder.circularImageView.setImageDrawable(upload_img);
+//        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+//            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//            holder.circularImageView.setImageDrawable(upload_img);
+//        } else {
+//            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+//        }
+
+
+        if (post_lists.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
+            holder.img_pic.setVisibility(View.VISIBLE);
+            String avatarTitle = String.valueOf(post_lists.get(position).username.charAt(0)).toUpperCase();
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int randomcolor = generator.getRandomColor();
+
+            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+            holder.img_pic.setImageDrawable(drawable);
         } else {
-            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+            holder.img_pic.setVisibility(View.GONE);
+            Picasso.get().load(post_lists.get(position).profile_pic).into(holder.circularImageView);
         }
+
+
+
 
         holder.constraint_popup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -446,6 +465,11 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
 
         @BindView(R.id.viewer_profile)
         ImageView viewer_profile;
+
+        @BindView(R.id.img_pic)
+        ImageView img_pic;
+
+
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
