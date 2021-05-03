@@ -111,9 +111,6 @@ public class Notification_adapter extends RecyclerView.Adapter<Notification_adap
             Picasso.get().load(item.user_profile_pic).into(holder.user_image);
         }
 
-
-
-
 //        if (item.request_user_profile_pic.equals("http://the-socialite.com/admin/")) {
 //            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
 //            holder.request_user_image.setImageDrawable(upload_img);
