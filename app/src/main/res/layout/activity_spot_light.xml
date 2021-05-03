@@ -95,6 +95,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout55"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -198,7 +199,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center_horizontal"
                 android:layout_below="@id/user_profile"
-                android:text="Name"
+                android:text=""
                 android:textSize="9dp" />
 
         </RelativeLayout>

@@ -2,9 +2,12 @@ package com.ap.SociaLite.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Adapter.SearchProfileAdapter;
 import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.Fragment.Connection.ConnectionFragment;
 import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.Presenter.SearchPresenter;
 import com.ap.SociaLite.R;
@@ -39,7 +43,7 @@ public class Search extends AppCompatActivity {
     public CircularImageView search_profile_image;
 
     @BindView(R.id.search_view)
-    public SearchView search_view;
+    public EditText search_view;
 
     @BindView(R.id.progressbar)
     public ProgressBar progressbar;
@@ -104,47 +108,65 @@ public class Search extends AppCompatActivity {
                 con_pro.putExtra("request_id", RequestId);
                 startActivity(con_pro);
                 break;
-
         }
     }
 
     private void filter() {
-        search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        search_view.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                //  search_history.setVisibility(View.VISIBLE);
-                Search.this.searchProfileAdapter.filter(query);
-                searchProfileAdapter.notifyDataSetChanged();
-                return false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
-                  /*  search_madical_recyclerview.setVisibility(View.GONE);
-                    rcycl_search_history.setVisibility(View.VISIBLE);
-                    search_madical_search.setVisibility(View.VISIBLE);
-                    tv_data_not_found.setVisibility(View.GONE);*/
-                } else {
-                  /*  search_madical_recyclerview.setVisibility(View.VISIBLE);
-                    rcycl_search_history.setVisibility(View.GONE);
-                    search_madical_search.setVisibility(View.GONE);*/
-                }
-
-               /* if (mList.isEmpty()) {
-                    // mRecyclerMessage.setVisibility(View.GONE);
-                    tv_data_not_found.setVisibility(View.VISIBLE);
-
-                } else {
-                    //  mRecyclerMessage.setVisibility(View.VISIBLE);
-                    tv_data_not_found.setVisibility(View.GONE);
-                }
-*/
-                Search.this.searchProfileAdapter.filter(newText);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+           //     ConnectionFragment.connectionAdapter.filter(String.valueOf(s));
+                Search.this.searchProfileAdapter.filter(String.valueOf(s));
                 searchProfileAdapter.notifyDataSetChanged();
-                return false;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
+
+//        search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                //  search_history.setVisibility(View.VISIBLE);
+//                Search.this.searchProfileAdapter.filter(query);
+//                searchProfileAdapter.notifyDataSetChanged();
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                if (TextUtils.isEmpty(newText)) {
+//                  /*  search_madical_recyclerview.setVisibility(View.GONE);
+//                    rcycl_search_history.setVisibility(View.VISIBLE);
+//                    search_madical_search.setVisibility(View.VISIBLE);
+//                    tv_data_not_found.setVisibility(View.GONE);*/
+//                } else {
+//                  /*  search_madical_recyclerview.setVisibility(View.VISIBLE);
+//                    rcycl_search_history.setVisibility(View.GONE);
+//                    search_madical_search.setVisibility(View.GONE);*/
+//                }
+//
+//               /* if (mList.isEmpty()) {
+//                    // mRecyclerMessage.setVisibility(View.GONE);
+//                    tv_data_not_found.setVisibility(View.VISIBLE);
+//
+//                } else {
+//                    //  mRecyclerMessage.setVisibility(View.VISIBLE);
+//                    tv_data_not_found.setVisibility(View.GONE);
+//                }
+//*/
+//                Search.this.searchProfileAdapter.filter(newText);
+//                searchProfileAdapter.notifyDataSetChanged();
+//                return false;
+//            }
+//        });
     }
 
     @Override

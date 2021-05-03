@@ -78,13 +78,32 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
 
         item = mList.get(position);
         String id = mList.get(position).post_id;
-        Picasso.get().load(item.profile_pic).into(holder.circularImageView);
         holder.txt_name.setText(item.username);
         holder.txt_time.setText(item.post_time);
         Picasso.get().load(item.image).into(holder.img_category);
-
         holder.txt_description.setText(item.description);
         holder.txt_rating.setText(item.rate);
+
+
+        if (mList.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
+            holder.img_pic.setVisibility(View.VISIBLE);
+
+            String avatarTitle = String.valueOf(mList.get(position).username.charAt(0)).toUpperCase();
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int randomcolor = generator.getRandomColor();
+
+            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+            holder.img_pic.setImageDrawable(drawable);
+        } else {
+            holder.img_pic.setVisibility(View.GONE);
+            Picasso.get().load(mList.get(position).profile_pic).into(holder.circularImageView);
+        }
+
+
+
+
 
         if (mList.get(position).rate.equals("0")) {
             holder.img_star.setImageDrawable(star1);
@@ -433,6 +452,9 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
 
         @BindView(R.id.viewer_profile)
         ImageView viewer_profile;
+
+        @BindView(R.id.img_pic)
+        ImageView img_pic;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

@@ -91,14 +91,30 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         holder.txt_time.setText(item.post_time);
         holder.txt_name.setText(item.username);
 
+//        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+//            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//            holder.circularImageView.setImageDrawable(upload_img);
+//        } else {
+//            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+//        }
 
+        if (post_lists.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
+            holder.img_pic.setVisibility(View.VISIBLE);
 
-        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
-            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-            holder.circularImageView.setImageDrawable(upload_img);
+            String avatarTitle = String.valueOf(post_lists.get(position).username.charAt(0)).toUpperCase();
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int randomcolor = generator.getRandomColor();
+
+            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+            holder.img_pic.setImageDrawable(drawable);
         } else {
-            Picasso.get().load(item.profile_pic).into(holder.circularImageView);
+            holder.img_pic.setVisibility(View.GONE);
+            Picasso.get().load(post_lists.get(position).profile_pic).into(holder.circularImageView);
         }
+
+
 
         if(post_lists.get(position).rate.equals("0")){
             holder.img_star.setImageDrawable(star1);
@@ -412,11 +428,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         } catch (Exception e) {
 
         }
-
     }
-
-
-
 
     @Override
     public int getItemCount() {
@@ -434,7 +446,6 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
 
         @BindView(R.id.textView12)
         TextView textView12;
-
 
         @BindView(R.id.img_popup)
         ImageView img_popup;
@@ -496,7 +507,6 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         @BindView(R.id.circularImageView3)
         CircularImageView circularImageView3;
 
-
         @BindView(R.id.post_image)
         ImageView post_image;
 
@@ -529,6 +539,9 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
 
         @BindView(R.id.viewer_profile)
         ImageView viewer_profile;
+
+        @BindView(R.id.img_pic)
+        ImageView img_pic;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
