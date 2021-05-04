@@ -258,14 +258,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                                     Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
                                     profile_pic_2.setAlpha(.150f);
                                 }
-
-
-
-
-
-
-
-
                             } else if (response.body().data.get(0).user_id__connected.equals("Requested") && response.body().data.get(0).request_id_connection.equals("Accepted")) {
 
 //                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
@@ -287,12 +279,12 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
                                     TextDrawable drawable = builder.build(avatarTitle, randomcolor);
                                     avatar_img_1.setImageDrawable(drawable);
-                                    avatar_img_2.setAlpha(.150f);
+                                    avatar_img_1.setAlpha(.150f);
 
                                 } else {
                                     avatar_img_1.setVisibility(View.GONE);
                                     Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
-                                    profile_pic_2.setAlpha(.150f);
+                                    profile_pic_1.setAlpha(.150f);
                                 }
 
 
