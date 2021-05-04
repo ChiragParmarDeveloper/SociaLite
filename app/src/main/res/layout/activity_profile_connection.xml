@@ -87,7 +87,6 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
-                        android:src="@drawable/ic_user_icon"
                         app:civ_border="false"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -97,10 +96,10 @@
                         android:id="@+id/avatar_img_1"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:visibility="gone"
                         android:layout_marginStart="20dp"
+                        android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <com.mikhaellopez.circularimageview.CircularImageView
@@ -108,7 +107,6 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="0dp"
-                        android:src="@drawable/ic_user_icon"
                         app:civ_border="false"
                         app:layout_constraintStart_toEndOf="@+id/profile_pic_1"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -118,9 +116,9 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="0dp"
-                       android:visibility="gone"
+                        android:visibility="gone"
                         app:layout_constraintStart_toEndOf="@+id/profile_pic_1"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
