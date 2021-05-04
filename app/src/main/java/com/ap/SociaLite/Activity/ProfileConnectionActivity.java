@@ -381,8 +381,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
 //                            profile_bio.setText(response.body().my_profile_user_details.get(0).bio);
 //                            //profileActivity.textView10.setText(response.body().my_profile_user_details.get(0).connection);
-
-
                         }
                     } else {
                         //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
