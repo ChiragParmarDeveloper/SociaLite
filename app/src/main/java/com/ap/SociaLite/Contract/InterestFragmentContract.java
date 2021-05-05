@@ -18,4 +18,5 @@ public interface InterestFragmentContract {
 
     void rating_post(String user_id, String post_id, String rate);
 
+    void remove_interest(String user_id,String interest_ids);
 }

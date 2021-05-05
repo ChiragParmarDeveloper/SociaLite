@@ -1,20 +1,17 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Fragment.InterestFragment;
 import com.ap.SociaLite.Pojo.interest_details;
-import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.Presenter.InterestFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -57,7 +54,6 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
         holder.txt_iconname.setText(item.interest_name);
         Picasso.get().load(item.interest_image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
 
-
         if (selectedItem == position) {
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
             new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(id);
@@ -74,11 +70,21 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.white));
         }
 
+
         holder.img_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickItem = holder.getAdapterPosition();
                 notifyDataSetChanged();
+            }
+        });
+
+        holder.img_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                interestFragment.interest_id = details.get(position).interest_id;
+                new InterestFragmentPresenter(mContext, interestFragment).remove_interest(interestFragment.user_id, interestFragment.interest_id);
+                removeAt(position);
             }
         });
     }
@@ -99,5 +105,10 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
             txt_iconname = itemView.findViewById(R.id.txt_iconname);
             img_right = itemView.findViewById(R.id.img_right);
         }
+    }
+
+    public void removeAt(int pos) {
+        details.remove(pos);
+        notifyDataSetChanged();
     }
 }

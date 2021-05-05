@@ -226,4 +226,30 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
 
         }
     }
+
+
+    @Override
+    public void remove_interest(String user_id, String interest_ids) {
+        try {
+            new RService.api().call(mContext).delete_interest(user_id, interest_ids).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new InterestFragmentPresenter(mContext,interestFragment).fetch_my_intrest(interestFragment.user_id);
+                    } else {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
 }

@@ -451,6 +451,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/border_rs"
                             android:text="Message"
+                            android:visibility="gone"
                             android:textAllCaps="false"
                             android:textColor="#263238"
                             android:textSize="15dp" />

@@ -72,10 +72,10 @@ public class BusinessFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        new BusinessFragmentPresenter(getActivity(),this).fetch_all_intrest(user_id);
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        new BusinessFragmentPresenter(getActivity(),this).fetch_all_intrest(user_id);
+//
+//    }
 }
