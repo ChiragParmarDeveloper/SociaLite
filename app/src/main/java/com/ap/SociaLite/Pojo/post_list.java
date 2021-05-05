@@ -39,4 +39,9 @@ public class post_list {
 
     @SerializedName("user_id")
     public String user_id;
+
+    @SerializedName("is_interest")
+    public String is_interest;
+
+
 }

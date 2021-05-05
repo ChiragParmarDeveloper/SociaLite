@@ -9,7 +9,7 @@ public interface BusinessFragmentContract {
     //update new  intrests (on plus icon click)
 
 
-    void business_post(String interest_id);
+    void business_post(String interest_id,String user_id);
 
     void hide_post(String user_id, String post_id);
 

@@ -37,7 +37,6 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-
                         if (response.body().interest_details != null && response.body().interest_details.size() > 0) {
                             businessFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
                             businessFragment.rv_interestlist.setAdapter(new BusinessListAdapter(mContext, response.body().interest_details, businessFragment));
@@ -67,9 +66,9 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                     //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                        new BusinessFragmentPresenter(mContext, businessFragment).remove_interest(businessFragment.user_id,businessFragment.interest_ids);
-                        new BusinessFragmentPresenter(mContext,businessFragment).fetch_all_intrest(businessFragment.user_id);
+                        //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new BusinessFragmentPresenter(mContext, businessFragment).remove_interest(businessFragment.user_id, businessFragment.interest_ids);
+                        new BusinessFragmentPresenter(mContext, businessFragment).fetch_all_intrest(businessFragment.user_id);
 
                     }
                 }
@@ -87,10 +86,10 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
     }
 
     @Override
-    public void business_post(String interest_id) {
+    public void business_post(String interest_id, String user_id) {
         businessFragment.progressbar.setVisibility(View.VISIBLE);
         try {
-            new RService.api().call(mContext).post_business(interest_id).enqueue(new Callback<json>() {
+            new RService.api().call(mContext).post_business(interest_id, user_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     businessFragment.progressbar.setVisibility(View.GONE);

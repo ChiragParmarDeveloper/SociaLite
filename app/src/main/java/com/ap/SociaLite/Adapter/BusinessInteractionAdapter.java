@@ -282,6 +282,17 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             }
         });
 
+
+        if(item.is_interest == null)
+        {
+
+        }
+        else if(item.is_interest.equals("1"))
+        {
+            holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
+            holder.intrested.setTextColor(Color.WHITE);
+        }
+
         holder.intrested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
