@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ap.SociaLite.Adapter.BusinessInteractionAdapter;
 import com.ap.SociaLite.Adapter.BusinessListAdapter;
-import com.ap.SociaLite.Adapter.SearchProfileAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.BusinessFragmentContract;
@@ -96,10 +95,10 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                     businessFragment.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
-                         //   businessFragment.recycleview_business_post.setLayoutManager(new GridLayoutManager(mContext, 1));
-                          //  businessFragment.recycleview_business_post.setAdapter(new BusinessInteractionAdapter(mContext, businessFragment, response.body().post_list));
+                            //   businessFragment.recycleview_business_post.setLayoutManager(new GridLayoutManager(mContext, 1));
+                            //  businessFragment.recycleview_business_post.setAdapter(new BusinessInteractionAdapter(mContext, businessFragment, response.body().post_list));
 
-                            businessFragment.businessInteractionAdapter = new BusinessInteractionAdapter(mContext,businessFragment,response.body().post_list);
+                            businessFragment.businessInteractionAdapter = new BusinessInteractionAdapter(mContext, businessFragment, response.body().post_list);
                             businessFragment.recycleview_business_post.setLayoutManager(new GridLayoutManager(mContext, 1));
                             businessFragment.recycleview_business_post.setAdapter(businessFragment.businessInteractionAdapter);
                             businessFragment.businessInteractionAdapter.notifyDataSetChanged();
@@ -231,15 +230,15 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                        business_post(businessFragment.interest_id,user_id);
+                        business_post(businessFragment.interest_id, user_id);
                     } else {
-                   //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                        Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //    Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
@@ -256,7 +255,7 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                        business_post(businessFragment.interest_id,user_id);
+                        business_post(businessFragment.interest_id, user_id);
                     } else {
                         //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }

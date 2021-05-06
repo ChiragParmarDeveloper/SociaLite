@@ -35,13 +35,13 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onResponse(Call<json> call, Response<json> response) {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-                        if (response.body().data != null && response.body().data.size() > 0) {
+                     //   if (response.body().data != null && response.body().data.size() > 0) {
                             notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
-                            notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
-                        }
+                            notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data,response.body().intrested));
+                       // }
                     } else {
                         notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
-                        notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
+                        notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data,response.body().intrested));
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }

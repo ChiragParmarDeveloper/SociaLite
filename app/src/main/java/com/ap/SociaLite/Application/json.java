@@ -63,5 +63,6 @@ public class json {
     @SerializedName("user_connection")
     public List<com.ap.SociaLite.Pojo.user_connection> user_connection;
 
-
+    @SerializedName("intrested")
+    public List<com.ap.SociaLite.Pojo.intrested> intrested;
 }
