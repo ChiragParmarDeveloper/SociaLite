@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ap.SociaLite.Adapter.BusinessInteractionAdapter;
 import com.ap.SociaLite.Adapter.BusinessListAdapter;
+import com.ap.SociaLite.Adapter.SearchProfileAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.BusinessFragmentContract;
@@ -95,8 +96,14 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                     businessFragment.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
+                         //   businessFragment.recycleview_business_post.setLayoutManager(new GridLayoutManager(mContext, 1));
+                          //  businessFragment.recycleview_business_post.setAdapter(new BusinessInteractionAdapter(mContext, businessFragment, response.body().post_list));
+
+                            businessFragment.businessInteractionAdapter = new BusinessInteractionAdapter(mContext,businessFragment,response.body().post_list);
                             businessFragment.recycleview_business_post.setLayoutManager(new GridLayoutManager(mContext, 1));
-                            businessFragment.recycleview_business_post.setAdapter(new BusinessInteractionAdapter(mContext, businessFragment, response.body().post_list));
+                            businessFragment.recycleview_business_post.setAdapter(businessFragment.businessInteractionAdapter);
+                            businessFragment.businessInteractionAdapter.notifyDataSetChanged();
+
                         }
                     } else {
 
@@ -216,4 +223,53 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
         }
     }
 
+    @Override
+    public void interest_button(String user_id, String post_id) {
+        try {
+            new RService.api().call(mContext).like_interest_btn(user_id, post_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        business_post(businessFragment.interest_id,user_id);
+                    } else {
+                   //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                        Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void remove_interest_button(String user_id, String post_id) {
+        try {
+            new RService.api().call(mContext).remove_interest_btn(user_id, post_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        business_post(businessFragment.interest_id,user_id);
+                    } else {
+                        //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
 }

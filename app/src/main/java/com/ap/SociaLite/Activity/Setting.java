@@ -1,7 +1,10 @@
 package com.ap.SociaLite.Activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
@@ -11,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Presenter.SettingPresenter;
 import com.ap.SociaLite.R;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,5 +82,18 @@ public class Setting extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         new SettingPresenter(this, this).fetch_profile(user_id);
+    }
+
+    public void getPhoneNumbers() {
+        String PHONE_NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
+        ContentResolver cr = getContentResolver();
+        Cursor cur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, new String[]{PHONE_NUMBER}, null, null, null);
+        ArrayList<String> phones = new ArrayList<>();
+        while (cur.moveToNext()) {
+            String number = cur.getString(0);
+            number = number.replaceAll(" ", "");
+            if (!phones.contains(number)) phones.add(number);
+        }
+        cur.close();
     }
 }

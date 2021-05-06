@@ -67,9 +67,9 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
         if (selectedItem == position) {
 
             if (details.get(position).flag.equals("1")) {
-                String interest_id = details.get(position).interest_id;
+                businessFragment.interest_id = details.get(position).interest_id;
                 holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
-                new BusinessFragmentPresenter(mContext, businessFragment).business_post(interest_id,businessFragment.user_id);
+                new BusinessFragmentPresenter(mContext, businessFragment).business_post(businessFragment.interest_id,businessFragment.user_id);
             } else {
                 //         Toast.makeText(mContext, "id not selected", Toast.LENGTH_SHORT).show();
             }
@@ -91,8 +91,8 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
             holder.img_category.setSelected(true);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
 
-            String interest_id = details.get(position).interest_id;
-            new BusinessFragmentPresenter(mContext, businessFragment).business_post(interest_id,businessFragment.user_id);
+            businessFragment.interest_id = details.get(position).interest_id;
+            new BusinessFragmentPresenter(mContext, businessFragment).business_post(businessFragment.interest_id,businessFragment.user_id);
 
         } else {
             holder.img_category.setSelected(false);
