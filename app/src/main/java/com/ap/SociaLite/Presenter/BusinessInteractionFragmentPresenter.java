@@ -161,7 +161,7 @@ public class BusinessInteractionFragmentPresenter implements BusinessInteraction
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         my_post_business_intrection(businessInteractionFragment.user_id);
                     } else {
-                             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -186,7 +186,7 @@ public class BusinessInteractionFragmentPresenter implements BusinessInteraction
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         my_post_business_intrection(businessInteractionFragment.user_id);
                     } else {
-                             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
