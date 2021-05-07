@@ -31,6 +31,7 @@ import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Fragment.Profile_fragments.BusinessInteractionFragment;
 import com.ap.SociaLite.Pojo.post_list;
+import com.ap.SociaLite.Presenter.BusinessFragmentPresenter;
 import com.ap.SociaLite.Presenter.BusinessInteractionFragmentPresenter;
 import com.ap.SociaLite.Presenter.TimeLineFragmentPresenter;
 import com.ap.SociaLite.R;
@@ -282,17 +283,41 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             }
         });
 
+
+        if (item.is_interest == null) {
+            //    Toast.makeText(mContext, "0", Toast.LENGTH_SHORT).show();
+        } else if (item.is_interest.equals("1")) {
+            holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
+            holder.intrested.setTextColor(Color.WHITE);
+            //    Toast.makeText(mContext, "1", Toast.LENGTH_SHORT).show();
+        }
+
+
         holder.intrested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
-                holder.intrested.setTextColor(Color.WHITE);
-                holder.card.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
-                holder.card.setTextColor(Color.BLACK);
-                holder.message.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
-                holder.message.setTextColor(Color.BLACK);
+                if (post_lists.get(position).is_interest == null) {
+                    // int pos = position;
+                    holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
+                    holder.intrested.setTextColor(Color.WHITE);
+                    new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).interest_button(businessInteractionFragment.user_id, post_lists.get(position).post_id);
 
-                Toast.makeText(mContext, "Coming soon...", Toast.LENGTH_SHORT).show();
+                } else if (post_lists.get(position).is_interest.equals("1")) {
+                    //      int pos = position;
+                    holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
+                    holder.intrested.setTextColor(Color.BLACK);
+                    //   Toast.makeText(mContext, "not null", Toast.LENGTH_SHORT).show();
+                    new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).remove_interest_button(businessInteractionFragment.user_id, post_lists.get(position).post_id);
+                }
+
+//                holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
+//                holder.intrested.setTextColor(Color.WHITE);
+//                holder.card.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
+//                holder.card.setTextColor(Color.BLACK);
+//                holder.message.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
+//                holder.message.setTextColor(Color.BLACK);
+//
+//                Toast.makeText(mContext, "Coming soon...", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -302,8 +327,8 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
 
                 holder.card.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
                 holder.card.setTextColor(Color.WHITE);
-                holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
-                holder.intrested.setTextColor(Color.BLACK);
+//                holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
+//                holder.intrested.setTextColor(Color.BLACK);
                 holder.message.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.message.setTextColor(Color.BLACK);
 
@@ -318,8 +343,8 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
 
                 holder.message.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
                 holder.message.setTextColor(Color.WHITE);
-                holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
-                holder.intrested.setTextColor(Color.BLACK);
+//                holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
+//                holder.intrested.setTextColor(Color.BLACK);
                 holder.card.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                 holder.card.setTextColor(Color.BLACK);
                 Toast.makeText(mContext, "Coming soon...", Toast.LENGTH_SHORT).show();

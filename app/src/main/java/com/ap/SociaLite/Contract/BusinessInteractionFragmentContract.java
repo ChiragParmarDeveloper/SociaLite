@@ -12,4 +12,8 @@ public interface BusinessInteractionFragmentContract {
 
     void delete_post_business(String user_id,String post_id);
 
+
+    void interest_button(String user_id,String post_id);
+
+    void remove_interest_button(String user_id,String post_id);
 }

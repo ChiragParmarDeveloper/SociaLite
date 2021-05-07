@@ -396,7 +396,6 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
 //                                Picasso.get().load(img).into(holder.circularImageView3);
 //                            }
 
-
                         } else {
                             holder.layout.setVisibility(View.GONE);
                         }
