@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,21 +36,34 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onResponse(Call<json> call, Response<json> response) {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-                     //   if (response.body().data != null && response.body().data.size() > 0) {
+
+
+//                        for (int i = 0; i < response.body().data.size(); i++) {
+//                            String name =  response.body().data.get(i).username;
+//                            Log.d("response",name);
+//                        }
+
+
+                        if (response.body().data != null && response.body().data.size() > 0) {
+
+
+
+
+                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                             notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
-                            notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data,response.body().intrested));
-                       // }
+                            notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
+                        }
                     } else {
                         notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
-                        notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data,response.body().intrested));
-                        //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
                     notification.progressbar.setVisibility(View.GONE);
-                    //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //    Log.d("error", String.valueOf(t.getMessage()));
                 }
             });

@@ -1,7 +1,6 @@
 package com.ap.SociaLite.Activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -11,16 +10,11 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.ap.SociaLite.Application.BitmapUtils;
 import com.ap.SociaLite.R;
 
 import java.io.File;
@@ -105,7 +99,7 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 
             if (imgFile.exists()) {
 
-               myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 imageView.setImageBitmap(myBitmap);
                 imageView.setTag(imgFile.toString());
             }
@@ -121,11 +115,11 @@ public class Text extends AppCompatActivity implements View.OnTouchListener {
 
             case R.id.btn_save:
 
-              //startActivity(new Intent(Text.this, CameraActivity.class));
+                //startActivity(new Intent(Text.this, CameraActivity.class));
                 edt_text.buildDrawingCache();
                 Bitmap bmp = Bitmap.createBitmap(edt_text.getDrawingCache());
-                System.out.println("ashish"+edt_text.getText().toString());
-                Bitmap bmw=combineImages1( myBitmap,bmp);
+                System.out.println("ashish" + edt_text.getText().toString());
+                Bitmap bmw = combineImages1(myBitmap, bmp);
                 blackimg.setImageBitmap(bmw);
                 break;
 

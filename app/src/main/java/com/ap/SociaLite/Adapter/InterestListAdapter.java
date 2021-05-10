@@ -55,25 +55,27 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
         Picasso.get().load(item.interest_image).placeholder(R.mipmap.ic_launcher).into(holder.img_category);
 
         if (selectedItem == position) {
+            interestFragment.interest_id = details.get(position).interest_id;
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
-            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(id);
+            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.interest_id);
         }
 
         if (position == clickItem) {
+            interestFragment.interest_id = details.get(position).interest_id;
             holder.img_category.setSelected(true);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
 
-            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(id);
+            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.interest_id);
 
         } else {
             holder.img_category.setSelected(false);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.white));
         }
 
-
         holder.img_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                interestFragment.interest_id = details.get(position).interest_id;
                 clickItem = holder.getAdapterPosition();
                 notifyDataSetChanged();
             }

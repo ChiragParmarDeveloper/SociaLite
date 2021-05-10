@@ -211,6 +211,7 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.interest_id);
                     } else {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }

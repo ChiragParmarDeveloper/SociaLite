@@ -97,6 +97,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         holder.img_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                categoryFragment.interest_ids = details.get(position).interest_id;
                 clickItem = holder.getAdapterPosition();
                 notifyDataSetChanged();
             }

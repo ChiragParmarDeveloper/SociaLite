@@ -182,6 +182,7 @@ public class BusinessFragmentPresenter implements BusinessFragmentContract {
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new BusinessFragmentPresenter(mContext, businessFragment).business_post(businessFragment.interest_id,businessFragment.user_id);
                     } else {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
