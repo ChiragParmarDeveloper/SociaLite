@@ -228,7 +228,6 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
         }
     }
 
-
     @Override
     public void remove_interest(String user_id, String interest_ids) {
         try {

@@ -39,4 +39,11 @@ public class Faq extends AppCompatActivity {
                 break;
         }
     }
+
+//    public void updateData(ArrayList<cart_details> models) {
+//        mList.clear();
+//        mList.addAll(models);
+//        notifyDataSetChanged();
+//    }
+
 }

@@ -482,4 +482,14 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
         notifyDataSetChanged();
     }
 
+//    public void updateData(List<post_list> post_lists) {
+//        post_lists.clear();
+//        item.addAll(viewModels);
+//        notifyDataSetChanged();
+//    }
+//    public void addItem(int position, ViewModel viewModel) {
+//        items.add(position, viewModel);
+//        notifyItemInserted(position);
+//    }
+
 }

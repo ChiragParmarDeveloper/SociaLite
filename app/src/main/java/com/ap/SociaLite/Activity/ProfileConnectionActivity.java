@@ -73,10 +73,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     @BindView(R.id.avatar_img_2)
     public ImageView avatar_img_2;
 
-
-
-
-
     Button timeline_btn, business_btn, spotlight_btn;
     String user_id, UserId, RequestId;
 

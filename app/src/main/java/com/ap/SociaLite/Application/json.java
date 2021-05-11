@@ -63,4 +63,8 @@ public class json {
     @SerializedName("user_connection")
     public List<com.ap.SociaLite.Pojo.user_connection> user_connection;
 
+
+//    @SerializedName("notification_data")
+//    public List<com.ap.SociaLite.Pojo.notification_data> notification_data;
+
 }
