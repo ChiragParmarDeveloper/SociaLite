@@ -1,7 +1,6 @@
 package com.ap.SociaLite.Adapter.Notification_adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,22 +15,24 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.Notification;
 import com.ap.SociaLite.Pojo.data;
-import com.ap.SociaLite.Presenter.NotificationPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class Notification_adapter extends RecyclerView.Adapter<Notification_adapter.MyHolder> {
+public class Notification_adapter extends RecyclerView.Adapter {
 
     Context mContext;
     Notification notification;
     List<data> datas;
     data item;
+    // String Type;
 
     public Notification_adapter(Context mContext, Notification notification, List<data> datas) {
         this.mContext = mContext;
@@ -39,121 +40,155 @@ public class Notification_adapter extends RecyclerView.Adapter<Notification_adap
         this.datas = datas;
     }
 
-    @NonNull
     @Override
-    public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-//        String array = Name.toString();
-        //  String Type = "accept_decline";
-        String Type = datas.get(viewType).notification_type;
-
-//        for(int i = 0 ; i < Name.size() ; i++){
-//            Type = (String) Name.get(i);
-//            System.out.println("type is : " + i + " : " + Type);
-
-        switch (Type) {
+    public int getItemViewType(int position) {
+        // return a value between 0 and (getViewTypeCount - 1)
+        switch (datas.get(position).notification_type) {
             case "Requested":
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_accept_decline_rs, parent, false);
-                Notification_adapter.MyHolder myholder = new Notification_adapter.MyHolder(view);
-                return myholder;
+                return 0;
 
-            case "connect":
-                View view1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_connect_rs, parent, false);
-                Notification_adapter.MyHolder holder1 = new Notification_adapter.MyHolder(view1);
-                return holder1;
+            case "Public":
+                return 1;
 
-            case "Rat":
-                View view2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_post_rs, parent, false);
-                Notification_adapter.MyHolder holder2 = new Notification_adapter.MyHolder(view2);
-                return holder2;
+            case "Rating":
+                return 2;
 
             case "Interest":
+                return 3;
+
+            default:
+                return -1;
+
+        }
+    }
+
+    @NonNull
+    @NotNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+
+        int Type = getItemViewType(viewType);
+
+        switch (Type) {
+            case 0:
+                //Requested
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_accept_decline_rs, parent, false);
+                Notification_adapter.Frnd_request myholder = new Notification_adapter.Frnd_request(view);
+                return myholder;
+
+            case 1:
+                //Public
+                View view1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_connect_rs, parent, false);
+                Notification_adapter.Public holder1 = new Notification_adapter.Public(view1);
+                return holder1;
+
+            case 2:
+                //Rating
+                View view2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_rating_rs, parent, false);
+                Notification_adapter.Rating holder2 = new Notification_adapter.Rating(view2);
+                return holder2;
+
+            case 3:
+
+                //Interest
                 View view3 = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_interested, parent, false);
-                Notification_adapter.MyHolder holder3 = new Notification_adapter.MyHolder(view3);
+                Notification_adapter.Interest holder3 = new Notification_adapter.Interest(view3);
                 return holder3;
         }
-//        System.out.println("type is : " + Type);
-//        System.out.println("type is : " + viewType);
 
         return null;
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        item = datas.get(position);
+    public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
+        String type = datas.get(position).notification_type;
 
-//        holder.txt_user_name.setText(item.username);
-//        holder.txt_request_username.setText(item.request_username);
+        if (type != null) {
+            switch (type) {
+                case "Requested":
+                    item = datas.get(position);
 
-//        if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
-//            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-//            holder.user_image.setImageDrawable(upload_img);
-//        } else {
-//            Picasso.get().load(item.user_profile_pic).into(holder.user_image);
-//        }
+                    ((Frnd_request) holder).txt_user_name.setText(item.username);
+                    ((Frnd_request) holder).txt_request_username.setText(item.request_username);
 
+                    if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
+                        ((Frnd_request) holder).img_pic.setVisibility(View.VISIBLE);
+                        String avatarTitle = String.valueOf(item.username.charAt(0)).toUpperCase();
+                        ColorGenerator generator = ColorGenerator.MATERIAL;
+                        int randomcolor = generator.getRandomColor();
 
-        // for (int i = 0; i < datas.get(i).intrested.size(); i++) {
-        //     holder.notification_text.setText(intresteds.get(position).username + " " + "interested in your post");
-        //    Picasso.get().load(intresteds.get(position).post_image).into(holder.notification_profile_user_1);
-        //   Toast.makeText(mContext, "", Toast.LENGTH_SHORT).show();
-        // }
+                        TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
 
+                        TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                        ((Frnd_request) holder).img_pic.setImageDrawable(drawable);
 
-        if (datas.get(position).user_profile_pic.equals("http://the-socialite.com/admin/")) {
-            holder.img_pic.setVisibility(View.VISIBLE);
-            String avatarTitle = String.valueOf(datas.get(position).username.charAt(0)).toUpperCase();
-            ColorGenerator generator = ColorGenerator.MATERIAL;
-            int randomcolor = generator.getRandomColor();
+                    } else {
+                        ((Frnd_request) holder).img_pic.setVisibility(View.GONE);
+                        Picasso.get().load(item.user_profile_pic).into(((Frnd_request) holder).user_image);
+                    }
 
-            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+                    if (datas.get(position).request_user_profile_pic.equals("http://the-socialite.com/admin/")) {
+                        ((Frnd_request) holder).request_img_pic.setVisibility(View.VISIBLE);
+                        String avatarTitle = String.valueOf(datas.get(position).request_username.charAt(0)).toUpperCase();
+                        ColorGenerator generator = ColorGenerator.MATERIAL;
+                        int randomcolor = generator.getRandomColor();
 
-            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
-            holder.img_pic.setImageDrawable(drawable);
+                        TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
 
-        } else {
-            holder.img_pic.setVisibility(View.GONE);
-            Picasso.get().load(item.user_profile_pic).into(holder.user_image);
-        }
+                        TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                        ((Frnd_request) holder).request_img_pic.setImageDrawable(drawable);
 
-        if (item.request_user_profile_pic.equals("http://the-socialite.com/admin/")) {
-            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-            holder.request_user_image.setImageDrawable(upload_img);
-        } else {
-            Picasso.get().load(item.request_user_profile_pic).into(holder.request_user_image);
-        }
+                    } else {
+                        ((Frnd_request) holder).request_img_pic.setVisibility(View.GONE);
+                        Picasso.get().load(item.request_user_profile_pic).into(((Frnd_request) holder).request_user_image);
+                    }
 
-        if (datas.get(position).request_user_profile_pic.equals("http://the-socialite.com/admin/")) {
-            holder.request_img_pic.setVisibility(View.VISIBLE);
-            String avatarTitle = String.valueOf(datas.get(position).request_username.charAt(0)).toUpperCase();
-            ColorGenerator generator = ColorGenerator.MATERIAL;
-            int randomcolor = generator.getRandomColor();
+//                    ((Frnd_request)holder).request_accept.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
+//                        }
+//                    });
+//
+//                    ((Frnd_request)holder).request_decline.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            new NotificationPresenter(notification, mContext).request_denied(item.request_id, notification.UserId);
+//                        }
+//                    });
+                    break;
 
-            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+                case "Public":
+                    break;
 
-            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
-            holder.request_img_pic.setImageDrawable(drawable);
+                case "Rating":
+                    item = datas.get(position);
 
-        } else {
-            holder.request_img_pic.setVisibility(View.GONE);
-            Picasso.get().load(item.request_user_profile_pic).into(holder.request_user_image);
-        }
+                    ((Rating) holder).rate_text.setText(item.username + " " + "rates" + " " + item.rate + " " + "star to your photo");
 
+                    if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
+                        ((Rating) holder).rate_img_pic.setVisibility(View.VISIBLE);
+                        String avatarTitle = String.valueOf(item.username.charAt(0)).toUpperCase();
+                        ColorGenerator generator = ColorGenerator.MATERIAL;
+                        int randomcolor = generator.getRandomColor();
 
-        holder.request_accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
+                        TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                        TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                        ((Rating) holder).rate_img_pic.setImageDrawable(drawable);
+
+                    } else {
+                        ((Rating) holder).rate_img_pic.setVisibility(View.GONE);
+                        Picasso.get().load(item.user_profile_pic).into(((Rating) holder).rate_user_pic);
+                    }
+                    break;
+
+                case "Interest":
+                    break;
+
             }
-        });
-
-        holder.request_decline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new NotificationPresenter(notification, mContext).request_denied(item.request_id, notification.UserId);
-                new NotificationPresenter(notification, mContext).user_notification_list(notification.UserId);
-            }
-        });
+        }
     }
 
     @Override
@@ -161,7 +196,7 @@ public class Notification_adapter extends RecyclerView.Adapter<Notification_adap
         return datas.size();
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder {
+    public class Frnd_request extends RecyclerView.ViewHolder {
 
         @BindView(R.id.user_image)
         CircularImageView user_image;
@@ -187,17 +222,55 @@ public class Notification_adapter extends RecyclerView.Adapter<Notification_adap
         @BindView(R.id.request_img_pic)
         ImageView request_img_pic;
 
-//        @BindView(R.id.notification_text)
-//        TextView notification_text;
-
-//        @BindView(R.id.notification_profile_user_1)
-//        CircularImageView notification_profile_user_1;
-
-
-        public MyHolder(@NonNull View itemView) {
+        public Frnd_request(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+    }
 
+    public class Rating extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.rate_text)
+        TextView rate_text;
+
+        @BindView(R.id.rate_user_pic)
+        CircularImageView rate_user_pic;
+
+        @BindView(R.id.rate_img_pic)
+        ImageView rate_img_pic;
+
+
+        public Rating(@NonNull View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
+    public class Interest extends RecyclerView.ViewHolder {
+
+        public Interest(@NonNull View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
+    public class Public extends RecyclerView.ViewHolder {
+
+        public Public(@NonNull View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
+
+//    @NonNull
+//    @Override
+//    public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+//
+//
+//
+//    @Override
+//    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+
+//    }

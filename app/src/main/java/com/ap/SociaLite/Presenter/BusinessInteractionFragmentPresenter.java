@@ -61,10 +61,10 @@ public class BusinessInteractionFragmentPresenter implements BusinessInteraction
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                 //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
 
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                   //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -86,9 +86,9 @@ public class BusinessInteractionFragmentPresenter implements BusinessInteraction
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+               //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                 //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -110,16 +110,16 @@ public class BusinessInteractionFragmentPresenter implements BusinessInteraction
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+              //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+              //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("error", String.valueOf(t.getMessage()));
+             //       Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+           //         Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {
@@ -134,7 +134,7 @@ public class BusinessInteractionFragmentPresenter implements BusinessInteraction
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+             //           Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
@@ -158,16 +158,16 @@ public class BusinessInteractionFragmentPresenter implements BusinessInteraction
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         my_post_business_intrection(businessInteractionFragment.user_id);
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //    Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
@@ -183,16 +183,16 @@ public class BusinessInteractionFragmentPresenter implements BusinessInteraction
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+               //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         my_post_business_intrection(businessInteractionFragment.user_id);
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                 //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //    Log.d("error", String.valueOf(t.getMessage()));
                 }
             });

@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,8 +64,8 @@ public class ShareToFriend extends AppCompatActivity {
                 break;
 
             case R.id.btn_share:
-                startActivity(new Intent(ShareToFriend.this, HomeActivity.class));
-                //Toast.makeText(getApplicationContext(),"share",Toast.LENGTH_LONG).show();
+              //  startActivity(new Intent(ShareToFriend.this, HomeActivity.class));
+                Toast.makeText(getApplicationContext(),"Coming soon", Toast.LENGTH_LONG).show();
                 break;
         }
     }

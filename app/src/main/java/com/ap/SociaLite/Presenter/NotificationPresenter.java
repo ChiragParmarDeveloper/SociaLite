@@ -13,13 +13,6 @@ import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.NotificationContrast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,41 +35,20 @@ public class NotificationPresenter implements NotificationContrast {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     notification.progressbar.setVisibility(View.GONE);
-                    JSONObject myObject = null;
 
-                    List<String> services = new ArrayList<>();
-                    try {
-                        myObject = new JSONObject(String.valueOf(response));
-                        Log.d("msgggggggg", String.valueOf(myObject));
-                        JSONArray jsonArray=myObject.getJSONArray("notification_data");
-                        Log.d("sizeeeeeeeeeeeee", String.valueOf(jsonArray.length()));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    if (response.body().status.equals("1")) {
 
-                    /*for (int i = 0; i < ; i++) {
+                        if (response.body().data != null && response.body().data.size() > 0) {
 
-                        for (int j = 0; j < response.body().data.size(); j++) {
-                            services.add(response.body().data.get(i).username);
-                            Log.d("name_user_profile", String.valueOf(services));
+                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                            notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
+                            notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
 
-                            //         Log.d("hiol_name_user_profile", response.body().data.get(j).username);
+                        } else {
+                            notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
+                            notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
+                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         }
-
-                    }
-*/
-                    //    if (response.body().status.equals("1")) {
-
-                    if (response != null ) {
-
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                   //     notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
-                 //       notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
-                        //      }
-                    } else {
-                 //       notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
-                   //     notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -84,7 +56,6 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onFailure(Call<json> call, Throwable t) {
                     notification.progressbar.setVisibility(View.GONE);
                     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(notification, "onFailure", Toast.LENGTH_SHORT).show();
                     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });

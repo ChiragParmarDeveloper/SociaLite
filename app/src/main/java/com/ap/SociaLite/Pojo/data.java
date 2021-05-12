@@ -45,6 +45,9 @@ public class data {
     @SerializedName("request_id_connection")
     public String request_id_connection;
 
+    @SerializedName("rate")
+    public String rate;
+
 
 
 }

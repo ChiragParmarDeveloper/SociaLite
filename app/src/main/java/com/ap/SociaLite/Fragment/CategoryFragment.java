@@ -9,18 +9,16 @@ import android.widget.ProgressBar;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Activity.CameraActivity;
 import com.ap.SociaLite.Adapter.CategoryPostAdapter;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Editors.EditImageActivity;
+import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.R;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +38,9 @@ public class CategoryFragment extends Fragment {
     @BindView(R.id.progressbar)
     public ProgressBar progressbar;
 
-    public String user_id,interest_ids;
+    public String user_id, interest_ids;
+    public CategoryPostAdapter categoryPostAdapter;
+   public List<post_list> post_lists;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +69,6 @@ public class CategoryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         new CategoryFragmentPresenter(getActivity(), this).fetch_all_intrest(user_id);
-  //      new CategoryFragmentPresenter(getActivity(), this).Category_post_fragment(user_id);
+        //      new CategoryFragmentPresenter(getActivity(), this).Category_post_fragment(user_id);
     }
 }

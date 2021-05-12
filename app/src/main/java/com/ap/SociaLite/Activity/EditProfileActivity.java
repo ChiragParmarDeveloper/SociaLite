@@ -64,14 +64,14 @@ public class EditProfileActivity extends AppCompatActivity {
     @BindView(R.id.edt_location)
     public EditText edt_location;
 
-    @BindView(R.id.img_back)
-    public ImageView img_back;
+//    @BindView(R.id.img_back)
+//    public ImageView img_back;
 
-    @BindView(R.id.edit_profile_save)
-    public Button edit_profile_save;
+//    @BindView(R.id.edit_profile_save)
+//    public Button edit_profile_save;
 
-    @BindView(R.id.edit_profile_change_profile)
-    public Button edit_profile_change_profile;
+//    @BindView(R.id.edit_profile_change_profile)
+//    public Button edit_profile_change_profile;
 
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
@@ -127,9 +127,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
 
                 break;
+
             case R.id.edit_profile_change_profile:
                 openGallery();
                 break;
+
             case R.id.edt_dob:
                 DatePickerDialog datePickerDialog = new DatePickerDialog(EditProfileActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),

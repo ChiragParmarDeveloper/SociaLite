@@ -205,6 +205,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
+
             }
         });
 
@@ -213,7 +214,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "2";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
-                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -225,8 +225,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "3";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
-                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
-
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -238,7 +236,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "4";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
-                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
 
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
@@ -251,7 +248,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "5";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
-                new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -370,6 +366,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         } catch (Exception e) {
 
         }
+        holder.itemView.setTag(item);
     }
 
 
@@ -480,4 +477,10 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             ButterKnife.bind(this, itemView);
         }
     }
+
+    public void updateData(post_list model) {
+        post_lists.add(model);
+        notifyDataSetChanged();
+    }
+
 }
