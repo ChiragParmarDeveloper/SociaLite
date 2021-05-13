@@ -35,7 +35,6 @@ public class Notification extends AppCompatActivity {
         UserId = session.getUser_id();
 
         new NotificationPresenter(this, this).user_notification_list(UserId);
-
     }
 
     @OnClick({R.id.img_back})

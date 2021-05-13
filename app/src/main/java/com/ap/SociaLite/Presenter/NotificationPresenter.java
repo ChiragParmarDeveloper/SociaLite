@@ -1,7 +1,6 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -38,12 +37,6 @@ public class NotificationPresenter implements NotificationContrast {
                     if (response.body().status.equals("1")) {
 
                         if (response.body().data != null && response.body().data.size() > 0) {
-                            String dataadapter = null;
-                            for (int i = 0; i < response.body().data.size(); i++) {
-                                dataadapter = response.body().data.get(i).notification_type;
-                                Log.d("dataadapter", dataadapter);
-                            }
-
                             notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
                             notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
 
@@ -103,6 +96,7 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onResponse(Call<json> call, Response<json> response) {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
+                        new NotificationPresenter(notification, mContext).user_notification_list(notification.UserId);
                         //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();

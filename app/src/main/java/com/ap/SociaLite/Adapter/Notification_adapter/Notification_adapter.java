@@ -149,44 +149,42 @@ public class Notification_adapter extends RecyclerView.Adapter {
                 ((Frnd_request) holder).request_accept.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
+                                  new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
+                     //   removeAt(position);
                     }
                 });
 
                 ((Frnd_request) holder).request_decline.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        new NotificationPresenter(notification, mContext).request_denied(item.request_id, notification.UserId);
+                                 new NotificationPresenter(notification, mContext).request_denied(item.request_id, notification.UserId);
+                      //  removeAt(position);
                     }
                 });
                 break;
 
-            case "Public":
-                item = datas.get(position);
-                ((Notification_Public) holder).notificationconnect_text.setText(item.request_username + " " + "has made connection with you");
+            case "Interest":
 
-                if (item.request_user_profile_pic.equals("http://the-socialite.com/admin/")) {
-                    ((Notification_Public) holder).notification_connect_img_pic.setVisibility(View.VISIBLE);
-                    String avatarTitle = String.valueOf(item.request_username.charAt(0)).toUpperCase();
+                item = datas.get(position);
+
+                ((Interest) holder).txt_interest_username.setText(item.username + "Interested in your post");
+                ((Interest) holder).interest_email.setText(item.email);
+
+                if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
+                    ((Interest) holder).interest_img_pic.setVisibility(View.VISIBLE);
+                    String avatarTitle = String.valueOf(item.username.charAt(0)).toUpperCase();
                     ColorGenerator generator = ColorGenerator.MATERIAL;
                     int randomcolor = generator.getRandomColor();
 
                     TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
 
                     TextDrawable drawable = builder.build(avatarTitle, randomcolor);
-                    ((Notification_Public) holder).notification_connect_img_pic.setImageDrawable(drawable);
+                    ((Interest) holder).interest_img_pic.setImageDrawable(drawable);
 
                 } else {
-                    ((Notification_Public) holder).notification_connect_img_pic.setVisibility(View.GONE);
-                    Picasso.get().load(item.request_user_profile_pic).into(((Notification_Public) holder).notification_connect_user_pic);
+                    ((Interest) holder).interest_img_pic.setVisibility(View.GONE);
+                    Picasso.get().load(item.user_profile_pic).into(((Interest) holder).interest_user_pic);
                 }
-
-                ((Notification_Public) holder).notification_connect.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(mContext, "connected", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
                 break;
 
@@ -212,30 +210,39 @@ public class Notification_adapter extends RecyclerView.Adapter {
                 }
                 break;
 
-            case "Interest":
 
+            case "Public":
                 item = datas.get(position);
+                ((Notification_Public) holder).notificationconnect_text.setText(item.request_username + " " + "has made connection with you");
 
-                ((Interest) holder).txt_interest_username.setText(item.username + "Interested in your post");
-                ((Interest) holder).interest_email.setText(item.email);
+                if (item.request_user_profile_pic.equals("http://the-socialite.com/admin/")) {
+                    ((Notification_Public) holder).notification_connect_img_pic.setVisibility(View.VISIBLE);
+                    String avatarTitle = String.valueOf(item.request_username.charAt(0)).toUpperCase();
+                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                    int randomcolor = generator.getRandomColor();
 
-                    if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
-                        ((Interest) holder).interest_img_pic.setVisibility(View.VISIBLE);
-                        String avatarTitle = String.valueOf(item.username.charAt(0)).toUpperCase();
-                        ColorGenerator generator = ColorGenerator.MATERIAL;
-                        int randomcolor = generator.getRandomColor();
+                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
 
-                        TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                    ((Notification_Public) holder).notification_connect_img_pic.setImageDrawable(drawable);
 
-                        TextDrawable drawable = builder.build(avatarTitle, randomcolor);
-                        ((Interest) holder).interest_img_pic.setImageDrawable(drawable);
+                } else {
+                    ((Notification_Public) holder).notification_connect_img_pic.setVisibility(View.GONE);
+                    Picasso.get().load(item.request_user_profile_pic).into(((Notification_Public) holder).notification_connect_user_pic);
+                }
 
-                    } else {
-                        ((Interest) holder).interest_img_pic.setVisibility(View.GONE);
-                        Picasso.get().load(item.user_profile_pic).into(((Interest) holder).interest_user_pic);
+                ((Notification_Public) holder).notification_connect.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
+                        removeAt(position);
                     }
+                });
 
                 break;
+
+
+
         }
     }
 
@@ -339,5 +346,10 @@ public class Notification_adapter extends RecyclerView.Adapter {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public void removeAt(int pos) {
+        datas.remove(pos);
+        notifyDataSetChanged();
     }
 }
