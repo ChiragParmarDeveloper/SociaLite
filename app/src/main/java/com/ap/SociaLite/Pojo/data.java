@@ -48,6 +48,7 @@ public class data {
     @SerializedName("rate")
     public String rate;
 
-
+    @SerializedName("email")
+    public String email;
 
 }

@@ -3,7 +3,6 @@ package com.ap.SociaLite.Presenter;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -40,9 +39,9 @@ public class NotificationPresenter implements NotificationContrast {
 
                         if (response.body().data != null && response.body().data.size() > 0) {
                             String dataadapter = null;
-                            for (int i = 0; i < response.body().data.size() ; i++) {
+                            for (int i = 0; i < response.body().data.size(); i++) {
                                 dataadapter = response.body().data.get(i).notification_type;
-                                Log.d("dataadapter",dataadapter);
+                                Log.d("dataadapter", dataadapter);
                             }
 
                             notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
@@ -76,7 +75,7 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onResponse(Call<json> call, Response<json> response) {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-                     //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         new NotificationPresenter(notification, mContext).user_notification_list(notification.UserId);
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
@@ -104,7 +103,7 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onResponse(Call<json> call, Response<json> response) {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
