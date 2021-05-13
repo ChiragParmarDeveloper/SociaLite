@@ -28,6 +28,7 @@ import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Fragment.CategoryFragment;
+import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.R;
@@ -53,10 +54,16 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
     List<post_list> post_lists = new ArrayList<>();
     post_list item;
 
+   // List<post_list> refresh;
+
     public CategoryPostAdapter(Context context, List<post_list> list, CategoryFragment fragment) {
         this.mContext = context;
         this.post_lists = list;
         this.categoryFragment = fragment;
+
+//        this.refresh = new ArrayList<>();
+//        this.refresh.addAll(list);
+
     }
 
     @NonNull
@@ -205,6 +212,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
+                //newupdate(refresh);
 
             }
         });
@@ -366,7 +374,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         } catch (Exception e) {
 
         }
-        holder.itemView.setTag(item);
     }
 
 
@@ -478,9 +485,9 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         }
     }
 
-    public void updateData(post_list model) {
-        post_lists.add(model);
+    public void newupdate(List<post_list> refresh) {
+        post_lists.clear();
+        post_lists.addAll(refresh);
         notifyDataSetChanged();
     }
-
 }

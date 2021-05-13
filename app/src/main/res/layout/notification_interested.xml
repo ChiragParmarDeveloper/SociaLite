@@ -1,72 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/ic_notification_square3"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="@drawable/ic_notification_square3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/rate_text"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="rating screen"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/circularImageView1"
-            app:layout_constraintStart_toEndOf="@+id/rate_user_pic"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/rate_user_pic"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <ImageView
-            android:id="@+id/rate_img_pic"
-            android:visibility="gone"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-
-
-
-
-
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/circularImageView1"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/dummy1"
-            android:visibility="gone"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toEndOf="@+id/interest_user_pic"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="username"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/interest_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="email"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/interest_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mobile"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/interest_user_pic"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/interest_img_pic"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

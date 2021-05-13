@@ -45,7 +45,6 @@ public class SearchPresenter implements SearchContract {
                         search.rv_search_profile.setAdapter(search.searchProfileAdapter);
                         search.searchProfileAdapter.notifyDataSetChanged();
                         search.rv_search_profile.scrollToPosition(search.position);
-                        //    search.searchProfileAdapter.notifyItemChanged(2);
 
                     }
                 } else {

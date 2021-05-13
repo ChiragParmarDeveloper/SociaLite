@@ -30,6 +30,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
     Context mContext;
     public List<data> datas;
     Search search;
+
     List<data> alldata;
     data item;
 

@@ -39,15 +39,18 @@ public class NotificationPresenter implements NotificationContrast {
                     if (response.body().status.equals("1")) {
 
                         if (response.body().data != null && response.body().data.size() > 0) {
+                            String dataadapter = null;
+                            for (int i = 0; i < response.body().data.size() ; i++) {
+                                dataadapter = response.body().data.get(i).notification_type;
+                                Log.d("dataadapter",dataadapter);
+                            }
 
-                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                             notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
                             notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
 
                         } else {
                             notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
                             notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
-                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -55,8 +58,8 @@ public class NotificationPresenter implements NotificationContrast {
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
                     notification.progressbar.setVisibility(View.GONE);
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("error", String.valueOf(t.getMessage()));
+                    //      Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {
@@ -73,7 +76,7 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onResponse(Call<json> call, Response<json> response) {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         new NotificationPresenter(notification, mContext).user_notification_list(notification.UserId);
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
@@ -101,7 +104,7 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onResponse(Call<json> call, Response<json> response) {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
