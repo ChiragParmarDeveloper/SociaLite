@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -18,8 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.contact_us"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.Sync_contact"></activity>
+        <activity
+            android:name=".Activity.contact_us"
+            android:screenOrientation="portrait" />
         <activity android:name=".Activity.privacy_policy" />
         <activity android:name=".Activity.help_center" />
         <activity
@@ -29,25 +32,37 @@
             android:name=".Editors.EditImageActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.SpotlightActivityForUser" />
-        <activity android:name=".Activity.ProfileConnectionsActivity"
-            android:windowSoftInputMode="stateHidden"
+        <activity
+            android:name=".Activity.ProfileConnectionsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Activity.ProfileConnectionActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.ProfileConnectionActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".Activity.EditProfileActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.EditProfileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.SchedulePostSettingActivity" />
-        <activity android:name=".Activity.SavedPostDetailActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".Activity.SavedPostActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".Activity.ProfileActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".Activity.AddCardActivity"
+        <activity
+            android:name=".Activity.SavedPostDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.SavedPostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.AddCardActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.PostNetwork" />
-        <activity android:name=".Activity.PostBusiness"
+        <activity
+            android:name=".Activity.PostBusiness"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.HiddedPostDetailActivity" />
-        <activity android:name=".Activity.ViewCardActivity"
+        <activity
+            android:name=".Activity.ViewCardActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.HiddenMessageChatActivity" />
         <activity android:name=".Activity.MessageChatActivity" />
@@ -57,9 +72,10 @@
         <activity android:name=".Activity.AddSpotlightActivity" />
         <activity android:name=".Activity.UserFriendSpotlightViewActivity" />
         <activity android:name=".Activity.UserSpotlightViewActivity" />
-        <activity android:name=".Activity.SpotLightActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.SpotLightActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.ViewAllContectActivity" />
         <activity
             android:name=".Activity.Notification"
@@ -69,9 +85,10 @@
             android:name=".Activity.Report"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.CommentActivity" />
-        <activity android:name=".Activity.ShareToFriend"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.ShareToFriend"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.ShapeCut" />
         <activity android:name=".Activity.PropDrama" />
         <activity android:name=".Activity.SchedulePost" />
@@ -88,14 +105,16 @@
             android:name=".Activity.Faq"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.HidedPost" />
-        <activity android:name=".Activity.Privacy"
+        <activity
+            android:name=".Activity.Privacy"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.Setting"
+        <activity
+            android:name=".Activity.Setting"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Search"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.CameraActivity" />
         <activity android:name=".Activity.RegistrationVerificationActivity" />
         <activity

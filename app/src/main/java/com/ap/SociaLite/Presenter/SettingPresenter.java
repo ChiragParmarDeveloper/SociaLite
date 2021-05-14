@@ -8,6 +8,8 @@ import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.SettingContrast;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,7 +64,7 @@ public class SettingPresenter implements SettingContrast {
                 public void onResponse(Call<json> call, Response<json> response) {
 
                     if (response.body().status.equals("1")) {
-                     //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
@@ -78,4 +80,6 @@ public class SettingPresenter implements SettingContrast {
 
         }
     }
+
+
 }

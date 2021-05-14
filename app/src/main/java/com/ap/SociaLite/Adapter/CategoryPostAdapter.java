@@ -54,15 +54,15 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
     List<post_list> post_lists = new ArrayList<>();
     post_list item;
 
-   // List<post_list> refresh;
+    List<post_list> refresh;
 
     public CategoryPostAdapter(Context context, List<post_list> list, CategoryFragment fragment) {
         this.mContext = context;
         this.post_lists = list;
         this.categoryFragment = fragment;
 
-//        this.refresh = new ArrayList<>();
-//        this.refresh.addAll(list);
+        this.refresh = new ArrayList<>();
+        this.refresh.addAll(list);
 
     }
 
@@ -212,7 +212,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
-                //newupdate(refresh);
+
 
             }
         });
@@ -259,6 +259,8 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
+//                newupdate(post_lists);
+//                notifyDataSetChanged();
             }
         });
 
@@ -485,9 +487,14 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         }
     }
 
-    public void newupdate(List<post_list> refresh) {
+    public void newupdate(List<post_list> post_lists) {
         post_lists.clear();
         post_lists.addAll(refresh);
         notifyDataSetChanged();
     }
+    public void addItem(int position, post_list model) {
+        post_lists.add(position, model);
+        notifyItemInserted(position);
+    }
+
 }

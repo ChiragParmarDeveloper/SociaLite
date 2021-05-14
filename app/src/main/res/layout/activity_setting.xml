@@ -237,19 +237,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ToggleButton
-                    android:id="@+id/togglecontact"
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                <ImageView
+                    android:layout_width="@dimen/_13sdp"
+                    android:layout_height="@dimen/_13sdp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:background="@drawable/toggle_selector"
-                    android:checked="true"
-                    android:text=""
-                    android:textOff=""
-                    android:textOn=""
+                    android:src="@drawable/ic_movearrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

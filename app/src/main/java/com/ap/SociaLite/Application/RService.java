@@ -223,6 +223,12 @@ public interface RService {
     Call<json> addinterest(@Field("interest_ids[]") ArrayList<String> interest_ids,
                            @Field("user_id") String user_id);
 
+
+    @FormUrlEncoded
+    @POST("sync_contacts.php")
+    Call<json> contact(@Field("contacts[]") ArrayList<String> contacts);
+
+
     @FormUrlEncoded
     @POST("private_account.php")
     Call<json> account(@Field("user_id") String user_id,

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ap.SociaLite.Adapter.CategoryListAdapter;
 import com.ap.SociaLite.Adapter.CategoryPostAdapter;
+import com.ap.SociaLite.Adapter.SearchProfileAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.CategoryFragmentContract;
@@ -71,12 +72,16 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                     if (response.body().status.equals("1")) {
 
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
-                            categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
-                            categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
+//                            categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
+//                            categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
 
-//                            categoryFragment.categoryPostAdapter.newupdate();
-//                            categoryFragment.categoryPostAdapter.notifyDataSetChanged();
-                        }
+                            categoryFragment.post_lists = response.body().post_list;
+                            categoryFragment.categoryPostAdapter = new CategoryPostAdapter(mContext, categoryFragment.post_lists, categoryFragment);
+                            categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
+                            categoryFragment.rv_categorypost.setAdapter(categoryFragment.categoryPostAdapter);
+                          //  categoryFragment.categoryPostAdapter.newupdate();
+                            categoryFragment.categoryPostAdapter.notifyDataSetChanged();
+                         }
                     } else {
                         categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
                         categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));

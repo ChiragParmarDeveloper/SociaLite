@@ -1,12 +1,11 @@
 package com.ap.SociaLite.Activity;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,9 +25,6 @@ public class Setting extends AppCompatActivity {
     @BindView(R.id.togglenotification)
     public ToggleButton togglenotification;
 
-    @BindView(R.id.togglecontact)
-    ToggleButton togglecontact;
-
     String user_id;
 
     @Override
@@ -39,17 +35,10 @@ public class Setting extends AppCompatActivity {
 
         Session session = new Session(Setting.this);
         user_id = session.getUser_id();
-
-        togglecontact.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
-                //  text.setText("Status: " + isChecked);
-            }
-        });
     }
 
-    @OnClick({R.id.img_back, R.id.constraintLayout42, R.id.constraintLayout_saved, R.id.constraintLayout_schedulepost, R.id.togglenotification})
+    @OnClick({R.id.img_back, R.id.constraintLayout42, R.id.constraintLayout_saved,
+            R.id.constraintLayout_schedulepost, R.id.togglenotification,R.id.constraintLayout_contact})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -75,6 +64,11 @@ public class Setting extends AppCompatActivity {
                     new SettingPresenter(this, this).notification_on_off(user_id, "0");
                 }
                 break;
+
+            case R.id.constraintLayout_contact:
+                startActivity(new Intent(Setting.this, Sync_contact.class));
+                break;
+
         }
     }
 
@@ -82,18 +76,5 @@ public class Setting extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         new SettingPresenter(this, this).fetch_profile(user_id);
-    }
-
-    public void getPhoneNumbers() {
-        String PHONE_NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
-        ContentResolver cr = getContentResolver();
-        Cursor cur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, new String[]{PHONE_NUMBER}, null, null, null);
-        ArrayList<String> phones = new ArrayList<>();
-        while (cur.moveToNext()) {
-            String number = cur.getString(0);
-            number = number.replaceAll(" ", "");
-            if (!phones.contains(number)) phones.add(number);
-        }
-        cur.close();
     }
 }
