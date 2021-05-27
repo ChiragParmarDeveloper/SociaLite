@@ -148,12 +148,12 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     }
 
     private void profile_connection(String UserId, String RequestId) {
-     //   progressbar.setVisibility(View.VISIBLE);
+        //   progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(this).connection_type(UserId, RequestId).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
-                 //   progressbar.setVisibility(View.GONE);
+                    //   progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().data != null && response.body().data.size() > 0) {
 
@@ -303,7 +303,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                                 }
 
 
-
 //                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
 //                                    Drawable upload_img = getDrawable(R.drawable.ic_user_icon);
 //                                    profile_pic_2.setImageDrawable(upload_img);
@@ -368,8 +367,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                                     profile_pic_2.setAlpha(.150f);
                                 }
                                 txt_connect.setText("Not Connected");
-                            }
-                            else if (response.body().data.get(0).user_id__connected.equals("Accepted") && response.body().data.get(0).request_id_connection.equals("not connected")) {
+                            } else if (response.body().data.get(0).user_id__connected.equals("Accepted") && response.body().data.get(0).request_id_connection.equals("not connected")) {
 
                                 if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
                                     avatar_img_1.setVisibility(View.VISIBLE);
@@ -405,8 +403,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                                 }
 
 
-                            }
-                            else if (response.body().data.get(0).user_id__connected.equals("not connected") && response.body().data.get(0).request_id_connection.equals("Accepted")) {
+                            } else if (response.body().data.get(0).user_id__connected.equals("not connected") && response.body().data.get(0).request_id_connection.equals("Accepted")) {
 
                                 if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
                                     avatar_img_1.setVisibility(View.VISIBLE);
@@ -441,8 +438,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                                     Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
                                 }
 
-                        }
-                            else if (response.body().data.get(0).user_id__connected.equals("not connected") && response.body().data.get(0).request_id_connection.equals("not connected")) {
+                            } else if (response.body().data.get(0).user_id__connected.equals("not connected") && response.body().data.get(0).request_id_connection.equals("not connected")) {
                                 if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
                                     avatar_img_1.setVisibility(View.VISIBLE);
                                     String avatarTitle = String.valueOf(response.body().data.get(0).username.charAt(0)).toUpperCase();
@@ -480,9 +476,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
                             }
 
-//
-
-//                            profile_bio.setText(response.body().my_profile_user_details.get(0).bio);
+                            //                            profile_bio.setText(response.body().my_profile_user_details.get(0).bio);
 //                            //profileActivity.textView10.setText(response.body().my_profile_user_details.get(0).connection);
                         }
                     } else {
@@ -492,7 +486,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                 //   progressbar.setVisibility(View.GONE);
+                    //   progressbar.setVisibility(View.GONE);
                     //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //    Log.d("error", String.valueOf(t.getMessage()));
                 }
@@ -505,12 +499,12 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     }
 
     private void my_profile(String user_id) {
-      //  progressbar.setVisibility(View.VISIBLE);
+        //  progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(this).my_profileActivity(user_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
-               //     progressbar.setVisibility(View.GONE);
+                    //     progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().my_profile_user_details != null && response.body().my_profile_user_details.size() > 0) {
 
@@ -558,7 +552,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-             //       progressbar.setVisibility(View.GONE);
+                    //       progressbar.setVisibility(View.GONE);
                     //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //    Log.d("error", String.valueOf(t.getMessage()));
                 }
