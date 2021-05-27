@@ -369,6 +369,118 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                                 }
                                 txt_connect.setText("Not Connected");
                             }
+                            else if (response.body().data.get(0).user_id__connected.equals("Accepted") && response.body().data.get(0).request_id_connection.equals("not connected")) {
+
+                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+                                    avatar_img_1.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_1.setImageDrawable(drawable);
+
+                                } else {
+                                    avatar_img_1.setVisibility(View.GONE);
+                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+                                }
+
+                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+                                    avatar_img_2.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).request_username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_2.setImageDrawable(drawable);
+                                    avatar_img_2.setAlpha(.150f);
+                                } else {
+                                    avatar_img_2.setVisibility(View.GONE);
+                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+                                    profile_pic_2.setAlpha(.150f);
+                                }
+
+
+                            }
+                            else if (response.body().data.get(0).user_id__connected.equals("not connected") && response.body().data.get(0).request_id_connection.equals("Accepted")) {
+
+                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+                                    avatar_img_1.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_1.setImageDrawable(drawable);
+                                    avatar_img_1.setAlpha(.150f);
+
+                                } else {
+                                    avatar_img_1.setVisibility(View.GONE);
+                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+                                    profile_pic_1.setAlpha(.150f);
+                                }
+
+                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+                                    avatar_img_2.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).request_username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_2.setImageDrawable(drawable);
+                                } else {
+                                    avatar_img_2.setVisibility(View.GONE);
+                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+                                }
+
+                        }
+                            else if (response.body().data.get(0).user_id__connected.equals("not connected") && response.body().data.get(0).request_id_connection.equals("not connected")) {
+                                if (response.body().data.get(0).profile_pic.equals("http://the-socialite.com/admin/")) {
+                                    avatar_img_1.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_1.setImageDrawable(drawable);
+                                    avatar_img_1.setAlpha(.150f);
+
+                                } else {
+                                    avatar_img_1.setVisibility(View.GONE);
+                                    Picasso.get().load(response.body().data.get(0).profile_pic).into(profile_pic_1);
+                                    profile_pic_1.setAlpha(.150f);
+                                }
+
+                                if (response.body().data.get(0).reuest_profile_pics.equals("http://the-socialite.com/admin/")) {
+                                    avatar_img_2.setVisibility(View.VISIBLE);
+                                    String avatarTitle = String.valueOf(response.body().data.get(0).request_username.charAt(0)).toUpperCase();
+                                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                                    int randomcolor = generator.getRandomColor();
+
+                                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                                    avatar_img_2.setImageDrawable(drawable);
+                                    avatar_img_2.setAlpha(.150f);
+                                } else {
+                                    avatar_img_2.setVisibility(View.GONE);
+                                    Picasso.get().load(response.body().data.get(0).reuest_profile_pics).into(profile_pic_2);
+                                    profile_pic_2.setAlpha(.150f);
+                                }
+
+                            }
+
+//
 
 //                            profile_bio.setText(response.body().my_profile_user_details.get(0).bio);
 //                            //profileActivity.textView10.setText(response.body().my_profile_user_details.get(0).connection);
