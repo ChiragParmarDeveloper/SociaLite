@@ -1,8 +1,6 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.SpotlightActivityForUser;
-import com.ap.SociaLite.Activity.UserFriendSpotlightViewActivity;
-import com.ap.SociaLite.Fragment.CategoryFragment;
-import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Pojo.story_view;
 import com.ap.SociaLite.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SpotlightViewerAdapter extends RecyclerView.Adapter<SpotlightViewerAdapter.MyHolder> {
@@ -50,13 +47,30 @@ public class SpotlightViewerAdapter extends RecyclerView.Adapter<SpotlightViewer
         String id = views.get(position).user_id;
 
         if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
-            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
-            holder.profile.setImageDrawable(upload_img);
+
+            holder.viewer.setVisibility(View.VISIBLE);
+            String avatarTitle = String.valueOf(item.username.charAt(0)).toUpperCase();
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int randomcolor = generator.getRandomColor();
+
+            TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+            TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+            holder.viewer.setImageDrawable(drawable);
         } else {
-            Picasso.get().load(item.profile_pic).into(holder.profile);
+            holder.viewer.setVisibility(View.GONE);
+            Picasso.get().load(item.profile_pic).into(holder.viewer_profile);
         }
-        holder.name.setText(item.username);
-     }
+
+//        if (item.profile_pic.equals("http://the-socialite.com/admin/")) {
+//            Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
+//            holder.profile.setImageDrawable(upload_img);
+//        } else {
+//            Picasso.get().load(item.profile_pic).into(holder.profile);
+//        }
+
+        holder.viewer_name.setText(item.username);
+    }
 
     @Override
     public int getItemCount() {
@@ -64,16 +78,18 @@ public class SpotlightViewerAdapter extends RecyclerView.Adapter<SpotlightViewer
     }
 
 
-    public class MyHolder extends RecyclerView.ViewHolder{
+    public class MyHolder extends RecyclerView.ViewHolder {
 
-        ImageView profile;
-        TextView name;
+        ImageView viewer;
+        TextView viewer_name;
+        CircularImageView viewer_profile;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
-            profile = itemView.findViewById(R.id.viewer_profile);
-            name = itemView.findViewById(R.id.viewer_name);
+            viewer_profile = itemView.findViewById(R.id.viewer_profile);
+            viewer = itemView.findViewById(R.id.viewer);
+            viewer_name = itemView.findViewById(R.id.viewer_name);
 
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
