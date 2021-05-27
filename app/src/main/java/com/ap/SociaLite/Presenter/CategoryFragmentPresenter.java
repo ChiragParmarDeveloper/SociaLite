@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ap.SociaLite.Adapter.CategoryListAdapter;
 import com.ap.SociaLite.Adapter.CategoryPostAdapter;
-import com.ap.SociaLite.Adapter.SearchProfileAdapter;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.CategoryFragmentContract;
@@ -79,9 +78,9 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                             categoryFragment.categoryPostAdapter = new CategoryPostAdapter(mContext, categoryFragment.post_lists, categoryFragment);
                             categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
                             categoryFragment.rv_categorypost.setAdapter(categoryFragment.categoryPostAdapter);
-                          //  categoryFragment.categoryPostAdapter.newupdate();
+                            //  categoryFragment.categoryPostAdapter.newupdate();
                             categoryFragment.categoryPostAdapter.notifyDataSetChanged();
-                         }
+                        }
                     } else {
                         categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
                         categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
@@ -91,7 +90,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
                     categoryFragment.progressbar.setVisibility(View.GONE);
-                         Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
@@ -108,7 +107,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+              //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
 
                     } else {
                         //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
@@ -133,9 +132,9 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+           //             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+           //             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -157,17 +156,17 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                //        new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                 //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("error", String.valueOf(t.getMessage()));
+               //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+               //     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {
@@ -182,7 +181,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+          //              Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         new CategoryFragmentPresenter(mContext, categoryFragment).remove_interest(categoryFragment.user_id, categoryFragment.interest_ids);
@@ -209,9 +208,9 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+            //            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+              //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 

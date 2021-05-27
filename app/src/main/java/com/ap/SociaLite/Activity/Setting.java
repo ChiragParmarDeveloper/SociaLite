@@ -1,10 +1,7 @@
 package com.ap.SociaLite.Activity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.ToggleButton;
 
@@ -13,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Presenter.SettingPresenter;
 import com.ap.SociaLite.R;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +33,7 @@ public class Setting extends AppCompatActivity {
     }
 
     @OnClick({R.id.img_back, R.id.constraintLayout42, R.id.constraintLayout_saved,
-            R.id.constraintLayout_schedulepost, R.id.togglenotification,R.id.constraintLayout_contact})
+            R.id.constraintLayout_schedulepost, R.id.togglenotification, R.id.constraintLayout_contact})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:

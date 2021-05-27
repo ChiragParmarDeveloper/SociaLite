@@ -59,11 +59,11 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         Drawable right_favorite = mContext.getDrawable(R.drawable.ic_category_right);
 
         if (selectedItem == position) {
-            String interest_id = details.get(position).interest_id;
+            categoryFragment.interest_ids = details.get(position).interest_id;
 
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
 
-            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(interest_id);
+            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
         }
 
         if (item.flag.equals("1")) {
@@ -86,8 +86,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             holder.img_category.setSelected(true);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
 
-            String interest_id = details.get(position).interest_id;
-            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(interest_id);
+            categoryFragment.interest_ids = details.get(position).interest_id;
+            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
 
         } else {
             holder.img_category.setSelected(false);

@@ -3,6 +3,7 @@ package com.ap.SociaLite.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -54,15 +55,10 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
     List<post_list> post_lists = new ArrayList<>();
     post_list item;
 
-    List<post_list> refresh;
-
     public CategoryPostAdapter(Context context, List<post_list> list, CategoryFragment fragment) {
         this.mContext = context;
         this.post_lists = list;
         this.categoryFragment = fragment;
-
-        this.refresh = new ArrayList<>();
-        this.refresh.addAll(list);
 
     }
 
@@ -166,7 +162,18 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                                 break;
 
                             case R.id.copylink:
-                                Toast.makeText(view.getContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
+                           //     https://www.myawesomesite.com/turtles/types?type=1&sort=relevance#section-name
+                              //  http://the-socialite.com/API/faq.php
+//                                Uri.Builder builder = new Uri.Builder();
+//                                builder.scheme("http")
+//                                        .authority("the-socialite.com")
+//                                        .appendPath("API")
+//                                        .appendPath("faq");
+//                                       // .appendQueryParameter("type", "1")
+//                                        //.appendQueryParameter("sort", "relevance")
+//                                        //.fragment("section-name");
+//                                String myUrl = builder.build().toString();
+//                                Toast.makeText(view.getContext(), myUrl, Toast.LENGTH_SHORT).show();
                                 break;
 
                             default:
@@ -487,14 +494,14 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         }
     }
 
-    public void newupdate(List<post_list> post_lists) {
-        post_lists.clear();
-        post_lists.addAll(refresh);
-        notifyDataSetChanged();
-    }
-    public void addItem(int position, post_list model) {
-        post_lists.add(position, model);
-        notifyItemInserted(position);
-    }
+//    public void newupdate(List<post_list> post_lists) {
+//        post_lists.clear();
+//        post_lists.addAll(refresh);
+//        notifyDataSetChanged();
+//    }
+//    public void addItem(int position, post_list model) {
+//        post_lists.add(position, model);
+//        notifyItemInserted(position);
+//    }
 
 }

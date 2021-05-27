@@ -46,7 +46,6 @@
 
         </LinearLayout>
 
-
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/interest_user_pic"
             android:layout_width="55dp"

@@ -243,7 +243,6 @@ public interface RService {
     @POST("post_list.php")
     Call<json> category_post(@Field("interest_id") String interest_id);
 
-
     @FormUrlEncoded
     @POST("hide_post.php")
     Call<json> dashboard_hidepost(@Field("user_id") String user_id,
