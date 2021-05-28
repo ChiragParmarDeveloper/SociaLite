@@ -19,7 +19,6 @@ import retrofit2.Response;
 
 public class ProfileConnectionBusinessFragmentPresenter implements ProfileConnectionBusinessFragmentContrast {
 
-
     public Context mContext;
     public ProfileConnectionBusinessFragment profileConnectionBusinessFragment;
 
@@ -68,10 +67,10 @@ public class ProfileConnectionBusinessFragmentPresenter implements ProfileConnec
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
 
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -93,9 +92,9 @@ public class ProfileConnectionBusinessFragmentPresenter implements ProfileConnec
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+               //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -117,16 +116,16 @@ public class ProfileConnectionBusinessFragmentPresenter implements ProfileConnec
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                 //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("error", String.valueOf(t.getMessage()));
+             //       Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+              //      Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {

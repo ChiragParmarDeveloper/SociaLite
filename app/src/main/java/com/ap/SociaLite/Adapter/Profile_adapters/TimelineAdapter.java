@@ -208,7 +208,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             public void onClick(View view) {
                 rate = "1";
                 new TimeLineFragmentPresenter(mContext, timeLineFragment).rating_post(timeLineFragment.user_id, id, rate);
-                new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+              //  new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -220,7 +220,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             public void onClick(View view) {
                 rate = "2";
                 new TimeLineFragmentPresenter(mContext, timeLineFragment).rating_post(timeLineFragment.user_id, id, rate);
-                new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+              //  new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -232,7 +232,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             public void onClick(View view) {
                 rate = "3";
                 new TimeLineFragmentPresenter(mContext, timeLineFragment).rating_post(timeLineFragment.user_id, id, rate);
-                new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+            //    new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -244,7 +244,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             public void onClick(View view) {
                 rate = "4";
                 new TimeLineFragmentPresenter(mContext, timeLineFragment).rating_post(timeLineFragment.user_id, id, rate);
-                new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+               // new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -256,7 +256,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             public void onClick(View view) {
                 rate = "5";
                 new TimeLineFragmentPresenter(mContext, timeLineFragment).rating_post(timeLineFragment.user_id, id, rate);
-                new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+             //   new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;

@@ -217,7 +217,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "1";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+               // new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -229,7 +229,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "2";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+             //   new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -241,7 +241,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "3";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+              //  new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -253,7 +253,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "4";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+              //  new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -265,7 +265,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "5";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+              //  new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;

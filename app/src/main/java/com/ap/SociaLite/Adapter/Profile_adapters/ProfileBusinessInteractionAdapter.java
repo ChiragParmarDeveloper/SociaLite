@@ -228,7 +228,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             public void onClick(View view) {
                 rate = "1";
                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).rating_post(businessInteractionFragment.user_id, id, rate);
-                new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
+             //   new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -240,7 +240,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             public void onClick(View view) {
                 rate = "2";
                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).rating_post(businessInteractionFragment.user_id, id, rate);
-                new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
+           //     new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -252,7 +252,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             public void onClick(View view) {
                 rate = "3";
                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).rating_post(businessInteractionFragment.user_id, id, rate);
-                new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
+              //  new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -264,7 +264,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             public void onClick(View view) {
                 rate = "4";
                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).rating_post(businessInteractionFragment.user_id, id, rate);
-                new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
+               // new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -276,7 +276,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             public void onClick(View view) {
                 rate = "5";
                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).rating_post(businessInteractionFragment.user_id, id, rate);
-                new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
+              //  new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;

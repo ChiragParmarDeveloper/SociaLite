@@ -203,7 +203,7 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
 
                 rate = "1";
                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).rating_post(profileConnectionTimelineFragment.user_id, id, rate);
-                new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+             //   new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -216,9 +216,9 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "2";
                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).rating_post(profileConnectionTimelineFragment.user_id, id, rate);
-                new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+           //     new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
-                holder.img_star.setImageDrawable(star1);
+                holder.img_star.setImageDrawable(star2);
                 click = true;
             }
         });
@@ -228,9 +228,9 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "3";
                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).rating_post(profileConnectionTimelineFragment.user_id, id, rate);
-                new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+              //  new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
-                holder.img_star.setImageDrawable(star1);
+                holder.img_star.setImageDrawable(star3);
                 click = true;
             }
         });
@@ -240,9 +240,9 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "4";
                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).rating_post(profileConnectionTimelineFragment.user_id, id, rate);
-                new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+              //  new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
-                holder.img_star.setImageDrawable(star1);
+                holder.img_star.setImageDrawable(star4);
                 click = true;
             }
         });
@@ -252,9 +252,9 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "5";
                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).rating_post(profileConnectionTimelineFragment.user_id, id, rate);
-                new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+              //  new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
                 holder.rating_bar.setVisibility(View.GONE);
-                holder.img_star.setImageDrawable(star1);
+                holder.img_star.setImageDrawable(star5);
                 click = true;
             }
         });
