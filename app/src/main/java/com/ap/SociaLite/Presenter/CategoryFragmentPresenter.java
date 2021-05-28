@@ -90,7 +90,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
                     categoryFragment.progressbar.setVisibility(View.GONE);
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });

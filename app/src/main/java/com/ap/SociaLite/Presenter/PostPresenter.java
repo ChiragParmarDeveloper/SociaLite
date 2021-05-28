@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.ap.SociaLite.Activity.HomeActivity;
 import com.ap.SociaLite.Activity.Post;
-import com.ap.SociaLite.Activity.SplashActivity;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.PostContract;
@@ -104,6 +103,7 @@ public class PostPresenter implements PostContract {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         Intent in = new Intent(mContext, HomeActivity.class);
+                        in.putExtra("pass", "category_fragment");
                         in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         mContext.startActivity(in);
                         post.finish();
@@ -116,7 +116,7 @@ public class PostPresenter implements PostContract {
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
                     post.progressbar.setVisibility(View.GONE);
-                   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });

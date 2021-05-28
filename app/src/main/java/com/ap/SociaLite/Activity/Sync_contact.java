@@ -2,6 +2,7 @@ package com.ap.SociaLite.Activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Sync_contact extends AppCompatActivity {
 
@@ -46,5 +48,13 @@ public class Sync_contact extends AppCompatActivity {
         //    phones.close();
     }
 
+    @OnClick({R.id.img_back})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
+                onBackPressed();
+                break;
 
+        }
+    }
 }

@@ -8,6 +8,7 @@ import android.widget.ToggleButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ap.SociaLite.Application.Session;
+import com.ap.SociaLite.BuildConfig;
 import com.ap.SociaLite.Presenter.SettingPresenter;
 import com.ap.SociaLite.R;
 
@@ -61,7 +62,10 @@ public class Setting extends AppCompatActivity {
                 break;
 
             case R.id.constraintLayout_contact:
-                startActivity(new Intent(Setting.this, Sync_contact.class));
+
+
+
+               // startActivity(new Intent(Setting.this, Sync_contact.class));
                 break;
 
         }

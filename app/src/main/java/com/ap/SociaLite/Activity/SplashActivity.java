@@ -33,6 +33,7 @@ public class SplashActivity extends BaseActivity {
 
                 if (session.getEmail_or_mobile() != "") {
                     Intent in = new Intent(SplashActivity.this, HomeActivity.class);
+                    in.putExtra("pass", "category_fragment");
                     startActivity(in);
                     finish();
                 } else {

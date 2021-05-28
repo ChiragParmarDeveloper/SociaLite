@@ -39,6 +39,8 @@ import com.google.android.play.core.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -117,7 +119,7 @@ public class HomeActivity extends AppCompatActivity {
     public TextView txt_name, txt_email, txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
     ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout,img_arrow;
     public CircularImageView img_dp;
-
+    String todeside_fragment;
     LinearLayout Notification,category, Profile, help, faq, setting, logout;
     String user_id;
 
@@ -132,10 +134,18 @@ public class HomeActivity extends AppCompatActivity {
 
         Log.d("token_Socialite", FirebaseInstanceId.getInstance().getToken());
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
+        }
+
+        todeside_fragment = Objects.requireNonNull(Objects.requireNonNull(getIntent().getExtras()).get("pass")).toString();
+
+        if (todeside_fragment.equals("category_fragment")) {
+            Toast.makeText(this, "fragementshs", Toast.LENGTH_SHORT).show();
+            getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
+        }
+
         View headerView = navigation_view.getHeaderView(0);
-
-
 
         home_latter = (ImageView) headerView.findViewById(R.id.home_latter);
 

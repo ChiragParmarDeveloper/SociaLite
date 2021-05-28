@@ -35,19 +35,6 @@ public class CameraActivity extends AppCompatActivity {
     @BindView(R.id.imageView)
     ImageView imageView;
 
-
-//    @BindView(R.id.video_one)
-//    VideoView video_one;
-//
-//    @BindView(R.id.video)
-//    VideoView video;
-//
-//    @BindView(R.id.video_two)
-//    VideoView video_two;
-//
-//    @BindView(R.id.video_three)
-//    VideoView video_three;
-
     @Nullable
     @VisibleForTesting
     Uri mSaveImageUri;

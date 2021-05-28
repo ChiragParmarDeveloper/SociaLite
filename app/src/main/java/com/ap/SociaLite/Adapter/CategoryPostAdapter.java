@@ -1,5 +1,7 @@
 package com.ap.SociaLite.Adapter;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -29,7 +31,6 @@ import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Fragment.CategoryFragment;
-import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.R;
@@ -44,6 +45,8 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapter.MyHolder> {
 
@@ -162,18 +165,21 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                                 break;
 
                             case R.id.copylink:
-                           //     https://www.myawesomesite.com/turtles/types?type=1&sort=relevance#section-name
-                              //  http://the-socialite.com/API/faq.php
-//                                Uri.Builder builder = new Uri.Builder();
-//                                builder.scheme("http")
-//                                        .authority("the-socialite.com")
-//                                        .appendPath("API")
-//                                        .appendPath("faq");
-//                                       // .appendQueryParameter("type", "1")
-//                                        //.appendQueryParameter("sort", "relevance")
-//                                        //.fragment("section-name");
-//                                String myUrl = builder.build().toString();
-//                                Toast.makeText(view.getContext(), myUrl, Toast.LENGTH_SHORT).show();
+
+                                Uri.Builder builder = new Uri.Builder();
+                                builder.scheme("http")
+                                        .authority("the-socialite.com")
+                                        .appendPath("API")
+                                        .appendPath("post_list.php")
+                                        .appendQueryParameter("interest_id",categoryFragment.interest_ids);
+                                //.appendQueryParameter("sort", "relevance")
+                                //.fragment("section-name");
+                                String myUrl = builder.build().toString();
+
+                                ClipboardManager cm = (ClipboardManager)mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                                cm.setText(myUrl);
+                                Toast.makeText(mContext, "Link copied", Toast.LENGTH_SHORT).show();
+
                                 break;
 
                             default:
