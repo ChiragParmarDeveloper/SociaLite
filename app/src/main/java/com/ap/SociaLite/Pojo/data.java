@@ -51,4 +51,8 @@ public class data {
     @SerializedName("email")
     public String email;
 
+    @SerializedName("post_image")
+    public String post_image;
+
+
 }

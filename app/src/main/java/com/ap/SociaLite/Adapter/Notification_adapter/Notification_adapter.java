@@ -167,8 +167,9 @@ public class Notification_adapter extends RecyclerView.Adapter {
 
                 item = datas.get(position);
 
-                ((Interest) holder).txt_interest_username.setText(item.username + "Interested in your post");
+                ((Interest) holder).txt_interest_username.setText(item.username + " " + "Interested in your post");
                 ((Interest) holder).interest_email.setText(item.email);
+                Picasso.get().load(item.post_image).into(((Interest) holder).interest_post);
 
                 if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
                     ((Interest) holder).interest_img_pic.setVisibility(View.VISIBLE);
@@ -192,6 +193,7 @@ public class Notification_adapter extends RecyclerView.Adapter {
                 item = datas.get(position);
 
                 ((Rating) holder).rate_text.setText(item.username + " " + "rates" + " " + item.rate + " " + "star to your post");
+                Picasso.get().load(item.post_image).into(((Rating) holder).rating_post);
 
                 if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
                     ((Rating) holder).rate_img_pic.setVisibility(View.VISIBLE);
@@ -294,6 +296,9 @@ public class Notification_adapter extends RecyclerView.Adapter {
         @BindView(R.id.rate_img_pic)
         ImageView rate_img_pic;
 
+        @BindView(R.id.rating_post)
+        CircularImageView rating_post;
+
         public Rating(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -313,6 +318,10 @@ public class Notification_adapter extends RecyclerView.Adapter {
 
         @BindView(R.id.interest_img_pic)
         ImageView interest_img_pic;
+
+        @BindView(R.id.interest_post)
+        CircularImageView interest_post;
+
 
         public Interest(@NonNull View itemView) {
             super(itemView);

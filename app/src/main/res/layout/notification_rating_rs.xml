@@ -22,11 +22,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="5dp"
             android:text="rating screen"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/circularImageView1"
+            app:layout_constraintEnd_toStartOf="@+id/rating_post"
             app:layout_constraintStart_toEndOf="@+id/rate_user_pic"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,13 +52,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/circularImageView1"
+            android:id="@+id/rating_post"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/dummy1"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
