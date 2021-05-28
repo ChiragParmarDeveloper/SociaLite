@@ -36,12 +36,12 @@ public class NetworkFragmentPresenter implements NetworkFragmentContrast {
                 networkFragment.progressbar.setVisibility(View.GONE);
                 if (response.body().status.equals("1")) {
                     if (response.body().post_list != null && response.body().post_list.size() > 0) {
-                    //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         networkFragment.recycleview_network_post.setLayoutManager(new GridLayoutManager(mContext, 1));
-                        networkFragment.recycleview_network_post.setAdapter(new MyNetworkAdapter(mContext,  networkFragment,response.body().post_list));
+                        networkFragment.recycleview_network_post.setAdapter(new MyNetworkAdapter(mContext, networkFragment, response.body().post_list));
                     }
                 } else {
-                   // Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    // Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -62,8 +62,7 @@ public class NetworkFragmentPresenter implements NetworkFragmentContrast {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-
+                        //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
@@ -87,9 +86,9 @@ public class NetworkFragmentPresenter implements NetworkFragmentContrast {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //           Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -111,9 +110,9 @@ public class NetworkFragmentPresenter implements NetworkFragmentContrast {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 

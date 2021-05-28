@@ -1,7 +1,6 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -76,9 +75,9 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -126,7 +125,7 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
     @Override
     public void fetch_my_intrest_wise_post(String interest_id) {
         try {
-            new RService.api().call(mContext).interest_wise_post( interest_id).enqueue(new Callback<json>() {
+            new RService.api().call(mContext).interest_wise_post(interest_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
@@ -161,10 +160,10 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //           Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
 
                     } else {
-                           Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -186,9 +185,9 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //           Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -210,17 +209,17 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                        new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.interest_id);
+                        //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //          new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.interest_id);
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("error", String.valueOf(t.getMessage()));
+                    //      Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {
@@ -235,10 +234,10 @@ public class InterestFragmentPresenter implements InterestFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                        new InterestFragmentPresenter(mContext,interestFragment).fetch_my_intrest(interestFragment.user_id);
+                  //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest(interestFragment.user_id);
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                  //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 

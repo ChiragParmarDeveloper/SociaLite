@@ -221,7 +221,6 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 rate = "1";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id, rate);
                 holder.rating_bar.setVisibility(View.GONE);

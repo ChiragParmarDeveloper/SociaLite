@@ -206,7 +206,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             public void onClick(View view) {
                 rate = "1";
                 new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id, rate);
-                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+               // new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -218,7 +218,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             public void onClick(View view) {
                 rate = "2";
                 new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id, rate);
-                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+               // new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -230,7 +230,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             public void onClick(View view) {
                 rate = "3";
                 new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id, rate);
-                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+            //    new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -242,7 +242,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             public void onClick(View view) {
                 rate = "4";
                 new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id, rate);
-                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+              //  new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -254,7 +254,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             public void onClick(View view) {
                 rate = "5";
                 new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id, rate);
-                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+             //   new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
