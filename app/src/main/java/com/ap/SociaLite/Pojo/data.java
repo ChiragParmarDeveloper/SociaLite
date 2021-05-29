@@ -54,5 +54,10 @@ public class data {
     @SerializedName("post_image")
     public String post_image;
 
+    @SerializedName("name")
+    public String name;
+
+    @SerializedName("number")
+    public String number;
 
 }

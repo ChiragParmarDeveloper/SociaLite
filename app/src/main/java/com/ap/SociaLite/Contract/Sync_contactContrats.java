@@ -13,7 +13,9 @@ import retrofit2.Response;
 
 public interface Sync_contactContrats {
 
-    void contact_sync(ArrayList<String> contacts);
+  //  void contact_sync(ArrayList<String> contacts);
+
+    void contact_sync(String contacts);
 }
 
 

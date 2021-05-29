@@ -74,7 +74,7 @@ public class InterestActivityPresenter implements InterestActivityContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        mContext.startActivity(new Intent(mContext, HomeActivity.class));
+                        mContext.startActivity(new Intent(mContext, HomeActivity.class).putExtra("pass", "category_fragment"));
                         interestActivity.finish();
                     } else {
                         //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();

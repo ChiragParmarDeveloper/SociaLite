@@ -141,7 +141,6 @@ public class HomeActivity extends AppCompatActivity {
         todeside_fragment = Objects.requireNonNull(Objects.requireNonNull(getIntent().getExtras()).get("pass")).toString();
 
         if (todeside_fragment.equals("category_fragment")) {
-            Toast.makeText(this, "fragementshs", Toast.LENGTH_SHORT).show();
             getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
         }
 
