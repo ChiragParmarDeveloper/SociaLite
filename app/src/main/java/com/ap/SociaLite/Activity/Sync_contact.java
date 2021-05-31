@@ -38,7 +38,6 @@ public class Sync_contact extends AppCompatActivity {
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 null, null, null, null);
 
-
         // ArrayList<String> contacts = new ArrayList<>();
         // contacts.add("9879073207");
         while (phones.moveToNext()) {

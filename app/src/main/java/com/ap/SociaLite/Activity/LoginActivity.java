@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ap.SociaLite.Application.Remember_Session;
 import com.ap.SociaLite.Presenter.LoginPresenter;
 import com.ap.SociaLite.R;
 
@@ -38,13 +39,21 @@ public class LoginActivity extends AppCompatActivity {
     public EditText edt_email;
 
     @BindView(R.id.password)
-    EditText password;
+    public EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        Remember_Session remember_session = new Remember_Session(LoginActivity.this);
+       if(remember_session.getEmail_or_mobile() != "")
+       {
+           edt_email.setText( remember_session.getEmail_or_mobile());
+           password.setText( remember_session.getPassword());
+           checkbox.setChecked(true);
+       }
     }
 
     @SuppressLint("ResourceAsColor")

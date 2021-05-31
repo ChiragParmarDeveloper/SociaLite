@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.ap.SociaLite.Activity.HomeActivity;
 import com.ap.SociaLite.Activity.LoginActivity;
 import com.ap.SociaLite.Application.RService;
+import com.ap.SociaLite.Application.Remember_Session;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.LoginContract;
@@ -52,22 +53,25 @@ public class LoginPresenter implements LoginContract {
                     if (response.body().status.equals("1")) {
                         if (response.body().user_details != null) {
 
-                            if(loginActivity.checkbox.isChecked())
-                            {
+                            if (loginActivity.checkbox.isChecked()) {
                                 Session session = new Session(mContext);
+                                Remember_Session remember_session = new Remember_Session(mContext);
+
                                 Intent in = new Intent(mContext, HomeActivity.class);
                                 session.setEmail_or_mobile(loginActivity.edt_email.getText().toString().trim());
+                                remember_session.setEmail_or_mobile(loginActivity.edt_email.getText().toString().trim());
+                                remember_session.setPassword(loginActivity.password.getText().toString().trim());
                                 session.setUser_id(response.body().user_details.user_id);
                                 in.putExtra("pass", "category_fragment");
                                 mContext.startActivity(in);
                                 loginActivity.finish();
-                            }
-                            else
-                            {
+                            } else {
                                 Session session = new Session(mContext);
                                 Intent in = new Intent(mContext, HomeActivity.class);
-                                in.putExtra("pass", "category_fragment");
+                                new Remember_Session(mContext).removeuser();
+                                session.setEmail_or_mobile(loginActivity.edt_email.getText().toString().trim());
                                 session.setUser_id(response.body().user_details.user_id);
+                                in.putExtra("pass", "category_fragment");
                                 mContext.startActivity(in);
                                 loginActivity.finish();
                             }
