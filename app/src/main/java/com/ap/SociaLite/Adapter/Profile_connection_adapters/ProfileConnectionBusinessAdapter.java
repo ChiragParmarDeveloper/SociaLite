@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -54,6 +55,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
     ProfileConnectionBusinessFragment profileConnectionBusinessFragment;
     List<post_list> post_lists = new ArrayList<>();
     post_list item;
+    List<post_list> new_post_list = new ArrayList<>();
 
     public ProfileConnectionBusinessAdapter(Context mContext, ProfileConnectionBusinessFragment profileConnectionBusinessFragment, List<post_list> post_lists) {
         this.mContext = mContext;
@@ -217,7 +219,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "1";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-               // new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+                my_post_business_intrection(profileConnectionBusinessFragment.user_id,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -229,7 +231,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "2";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-             //   new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+                my_post_business_intrection(profileConnectionBusinessFragment.user_id,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -241,7 +243,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "3";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-              //  new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+                my_post_business_intrection(profileConnectionBusinessFragment.user_id,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -253,7 +255,8 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "4";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-              //  new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+                my_post_business_intrection(profileConnectionBusinessFragment.user_id,position);
+
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -265,7 +268,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "5";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-              //  new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+                my_post_business_intrection(profileConnectionBusinessFragment.user_id,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -553,6 +556,41 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+    }
+
+
+    public void my_post_business_intrection(String user_id,int position) {
+        profileConnectionBusinessFragment.progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(mContext).my_bussiness_post(user_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    profileConnectionBusinessFragment.progressbar.setVisibility(View.GONE);
+
+                    if (response.body().status.equals("1")) {
+
+                        if (response.body().post_list != null && response.body().post_list.size() > 0) {
+
+                            new_post_list = response.body().post_list;
+                            post_lists.set(position,new_post_list.get(position));
+                            notifyItemChanged(position);
+                        }
+                    } else {
+                        //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    profileConnectionBusinessFragment.progressbar.setVisibility(View.GONE);
+
+                    //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //     Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
         }
     }
 

@@ -168,11 +168,4 @@ public class Search extends AppCompatActivity {
 //            }
 //        });
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new SearchPresenter(this, this).all_user(user_id);
-        filter();
-    }
 }

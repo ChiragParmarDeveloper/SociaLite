@@ -98,10 +98,4 @@ public class ConnectionFragment extends Fragment {
                 break;
         }
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        new ConnectionFragmentPresenter(this, getContext()).followers(UserId);
-    }
 }

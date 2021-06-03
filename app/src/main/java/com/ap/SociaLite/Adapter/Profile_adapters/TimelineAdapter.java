@@ -51,6 +51,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
     TimeLineFragment timeLineFragment;
     List<post_list> post_lists = new ArrayList<>();
     post_list item;
+    List<post_list> new_post_list = new ArrayList<>();
 
     public TimelineAdapter(Context context, List<post_list> list, TimeLineFragment fragment) {
         this.mContext = context;
@@ -104,9 +105,6 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             holder.img_pic.setVisibility(View.GONE);
             Picasso.get().load(post_lists.get(position).profile_pic).into(holder.circularImageView);
         }
-
-
-
 
 
         if (post_lists.get(position).rate.equals("0")) {
@@ -208,7 +206,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             public void onClick(View view) {
                 rate = "1";
                 new TimeLineFragmentPresenter(mContext, timeLineFragment).rating_post(timeLineFragment.user_id, id, rate);
-              //  new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+                time_line_post(timeLineFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -220,7 +218,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             public void onClick(View view) {
                 rate = "2";
                 new TimeLineFragmentPresenter(mContext, timeLineFragment).rating_post(timeLineFragment.user_id, id, rate);
-              //  new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+                time_line_post(timeLineFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -232,7 +230,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             public void onClick(View view) {
                 rate = "3";
                 new TimeLineFragmentPresenter(mContext, timeLineFragment).rating_post(timeLineFragment.user_id, id, rate);
-            //    new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+                time_line_post(timeLineFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -244,7 +242,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             public void onClick(View view) {
                 rate = "4";
                 new TimeLineFragmentPresenter(mContext, timeLineFragment).rating_post(timeLineFragment.user_id, id, rate);
-               // new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+                time_line_post(timeLineFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -256,7 +254,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
             public void onClick(View view) {
                 rate = "5";
                 new TimeLineFragmentPresenter(mContext, timeLineFragment).rating_post(timeLineFragment.user_id, id, rate);
-             //   new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+                time_line_post(timeLineFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -482,14 +480,30 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
         notifyDataSetChanged();
     }
 
-//    public void updateData(List<post_list> post_lists) {
-//        post_lists.clear();
-//        item.addAll(viewModels);
-//        notifyDataSetChanged();
-//    }
-//    public void addItem(int position, ViewModel viewModel) {
-//        items.add(position, viewModel);
-//        notifyItemInserted(position);
-//    }
+    public void time_line_post(String user_id, int position) {
+        try {
+            new RService.api().call(mContext).timeline_my_post(user_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+                        if (response.body().post_list != null && response.body().post_list.size() > 0) {
+                            new_post_list = response.body().post_list;
+                            post_lists.set(position, new_post_list.get(position));
+                            notifyItemChanged(position);
+                        }
+                    } else {
 
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //        Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //     Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
 }

@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -51,6 +52,7 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
     ProfileConnectionTimelineFragment profileConnectionTimelineFragment;
     List<post_list> post_lists = new ArrayList<>();
     post_list item;
+    List<post_list> new_post_list = new ArrayList<>();
 
     public ProfileConnectionTimelineAdapter(Context mContext, ProfileConnectionTimelineFragment profileConnectionTimelineFragment, List<post_list> post_lists) {
         this.mContext = mContext;
@@ -203,7 +205,7 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
 
                 rate = "1";
                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).rating_post(profileConnectionTimelineFragment.user_id, id, rate);
-             //   new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+                time_line_post(profileConnectionTimelineFragment.user_id,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -216,7 +218,8 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "2";
                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).rating_post(profileConnectionTimelineFragment.user_id, id, rate);
-           //     new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+                time_line_post(profileConnectionTimelineFragment.user_id,position);
+
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -228,7 +231,8 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "3";
                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).rating_post(profileConnectionTimelineFragment.user_id, id, rate);
-              //  new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+                time_line_post(profileConnectionTimelineFragment.user_id,position);
+
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -240,7 +244,7 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "4";
                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).rating_post(profileConnectionTimelineFragment.user_id, id, rate);
-              //  new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+                time_line_post(profileConnectionTimelineFragment.user_id,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -252,7 +256,7 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "5";
                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).rating_post(profileConnectionTimelineFragment.user_id, id, rate);
-              //  new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+                time_line_post(profileConnectionTimelineFragment.user_id,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -475,4 +479,39 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
             ButterKnife.bind(this, itemView);
         }
     }
+
+
+    public void time_line_post(String user_id,int position) {
+        profileConnectionTimelineFragment.progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(mContext).timeline_my_post(user_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    profileConnectionTimelineFragment.progressbar.setVisibility(View.GONE);
+                    if (response.body().status.equals("1")) {
+                        if (response.body().post_list != null && response.body().post_list.size() > 0) {
+
+                            new_post_list = response.body().post_list;
+                            post_lists.set(position,new_post_list.get(position));
+                            notifyItemChanged(position);
+
+                        }
+                    } else {
+                        //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    profileConnectionTimelineFragment.progressbar.setVisibility(View.GONE);
+
+                    //        Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //     Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
 }

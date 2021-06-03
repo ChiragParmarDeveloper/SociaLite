@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -56,7 +57,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
     BusinessInteractionFragment businessInteractionFragment;
     List<post_list> post_lists = new ArrayList<>();
     post_list item;
-
+    List<post_list> new_post_list = new ArrayList<>();
     public ProfileBusinessInteractionAdapter(Context context, List<post_list> list, BusinessInteractionFragment fragment) {
         this.mContext = context;
         this.post_lists = list;
@@ -228,7 +229,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             public void onClick(View view) {
                 rate = "1";
                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).rating_post(businessInteractionFragment.user_id, id, rate);
-             //   new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
+                my_post_business_intrection(businessInteractionFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -240,7 +241,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             public void onClick(View view) {
                 rate = "2";
                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).rating_post(businessInteractionFragment.user_id, id, rate);
-           //     new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
+                my_post_business_intrection(businessInteractionFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -252,7 +253,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             public void onClick(View view) {
                 rate = "3";
                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).rating_post(businessInteractionFragment.user_id, id, rate);
-              //  new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
+                my_post_business_intrection(businessInteractionFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -264,7 +265,7 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             public void onClick(View view) {
                 rate = "4";
                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).rating_post(businessInteractionFragment.user_id, id, rate);
-               // new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
+                my_post_business_intrection(businessInteractionFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -276,13 +277,12 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             public void onClick(View view) {
                 rate = "5";
                 new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).rating_post(businessInteractionFragment.user_id, id, rate);
-              //  new BusinessInteractionFragmentPresenter(mContext, businessInteractionFragment).my_post_business_intrection(businessInteractionFragment.user_id);
+                my_post_business_intrection(businessInteractionFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
             }
         });
-
 
         if (item.is_interest == null) {
             //    Toast.makeText(mContext, "0", Toast.LENGTH_SHORT).show();
@@ -291,7 +291,6 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
             holder.intrested.setTextColor(Color.WHITE);
             //    Toast.makeText(mContext, "1", Toast.LENGTH_SHORT).show();
         }
-
 
         holder.intrested.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -589,4 +588,33 @@ public class ProfileBusinessInteractionAdapter extends RecyclerView.Adapter<Prof
         post_lists.remove(pos);
         notifyDataSetChanged();
     }
+
+    public void my_post_business_intrection(String user_id,int position) {
+        try {
+            new RService.api().call(mContext).my_bussiness_post(user_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+
+                        if (response.body().post_list != null && response.body().post_list.size() > 0) {
+                            new_post_list = response.body().post_list;
+                            post_lists.set(position,new_post_list.get(position));
+                            notifyItemChanged(position);
+                        }
+                    } else {
+                        //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //     Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
 }
