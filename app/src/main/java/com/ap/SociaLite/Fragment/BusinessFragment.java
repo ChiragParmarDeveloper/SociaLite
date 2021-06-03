@@ -35,6 +35,7 @@ public class BusinessFragment extends Fragment {
 
     @BindView(R.id.progressbar)
     public ProgressBar progressbar;
+
     public String user_id, interest_ids;
     public String interest_id;
 
@@ -64,11 +65,4 @@ public class BusinessFragment extends Fragment {
                 break;
         }
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        new BusinessFragmentPresenter(getActivity(),this).fetch_all_intrest(user_id);
-//
-//    }
 }

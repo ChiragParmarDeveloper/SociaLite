@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -52,6 +53,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
     NetworkFragment networkFragment;
     List<post_list> post_lists = new ArrayList<>();
     post_list item;
+    List<post_list> new_post_list = new ArrayList<>();
 
     public MyNetworkAdapter(Context mContext, NetworkFragment networkFragment, List<post_list> post_lists) {
         this.mContext = mContext;
@@ -206,7 +208,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             public void onClick(View view) {
                 rate = "1";
                 new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id, rate);
-               // new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+                my_network_post(networkFragment.UserId,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -218,7 +220,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             public void onClick(View view) {
                 rate = "2";
                 new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id, rate);
-               // new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+                my_network_post(networkFragment.UserId,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -230,7 +232,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             public void onClick(View view) {
                 rate = "3";
                 new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id, rate);
-            //    new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+                my_network_post(networkFragment.UserId,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -242,7 +244,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             public void onClick(View view) {
                 rate = "4";
                 new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id, rate);
-              //  new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+                my_network_post(networkFragment.UserId,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -254,7 +256,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             public void onClick(View view) {
                 rate = "5";
                 new NetworkFragmentPresenter(mContext, networkFragment).rating_post(networkFragment.UserId, id, rate);
-             //   new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+                my_network_post(networkFragment.UserId,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -480,6 +482,35 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             ButterKnife.bind(this, itemView);
 
         }
+    }
+
+
+    public void my_network_post(String UserId,int position) {
+        networkFragment.progressbar.setVisibility(View.VISIBLE);
+        new RService.api().call(mContext).netork_post(UserId).enqueue(new Callback<json>() {
+            @Override
+            public void onResponse(Call<json> call, Response<json> response) {
+                networkFragment.progressbar.setVisibility(View.GONE);
+                if (response.body().status.equals("1")) {
+                    if (response.body().post_list != null && response.body().post_list.size() > 0) {
+
+                        new_post_list = response.body().post_list;
+                        post_lists.set(position,new_post_list.get(position));
+                        notifyItemChanged(position);
+
+                         }
+                } else {
+                    // Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<json> call, Throwable t) {
+                networkFragment.progressbar.setVisibility(View.GONE);
+                //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                //    Log.d("error", String.valueOf(t.getMessage()));
+            }
+        });
     }
 
 

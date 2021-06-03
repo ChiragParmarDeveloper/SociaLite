@@ -55,6 +55,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
     BusinessFragment businessFragment;
     List<post_list> post_lists = new ArrayList<>();
     post_list item;
+    List<post_list> new_post_list = new ArrayList<>();
 
     public BusinessInteractionAdapter(Context mContext, BusinessFragment businessFragment, List<post_list> post_lists) {
         this.mContext = mContext;
@@ -223,6 +224,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             public void onClick(View view) {
                 rate = "1";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id, rate);
+                business_post(businessFragment.interest_id, businessFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -234,6 +236,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             public void onClick(View view) {
                 rate = "2";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id, rate);
+                business_post(businessFragment.interest_id, businessFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -245,6 +248,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             public void onClick(View view) {
                 rate = "3";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id, rate);
+                business_post(businessFragment.interest_id, businessFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -256,6 +260,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             public void onClick(View view) {
                 rate = "4";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id, rate);
+                business_post(businessFragment.interest_id, businessFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -267,6 +272,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             public void onClick(View view) {
                 rate = "5";
                 new BusinessFragmentPresenter(mContext, businessFragment).rating_post(businessFragment.user_id, id, rate);
+                business_post(businessFragment.interest_id, businessFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -275,11 +281,11 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
 
 
         if (item.is_interest == null) {
-        //    Toast.makeText(mContext, "0", Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(mContext, "0", Toast.LENGTH_SHORT).show();
         } else if (item.is_interest.equals("1")) {
             holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
             holder.intrested.setTextColor(Color.WHITE);
-        //    Toast.makeText(mContext, "1", Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(mContext, "1", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -287,16 +293,16 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
             @Override
             public void onClick(View view) {
                 if (post_lists.get(position).is_interest == null) {
-                   // int pos = position;
+                    // int pos = position;
                     holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.button_5dp_corner_rs));
                     holder.intrested.setTextColor(Color.WHITE);
                     new BusinessFragmentPresenter(mContext, businessFragment).interest_button(businessFragment.user_id, post_lists.get(position).post_id);
 
                 } else if (post_lists.get(position).is_interest.equals("1")) {
-              //      int pos = position;
+                    //      int pos = position;
                     holder.intrested.setBackground(mContext.getResources().getDrawable(R.drawable.border_rs));
                     holder.intrested.setTextColor(Color.BLACK);
-                 //   Toast.makeText(mContext, "not null", Toast.LENGTH_SHORT).show();
+                    //   Toast.makeText(mContext, "not null", Toast.LENGTH_SHORT).show();
                     new BusinessFragmentPresenter(mContext, businessFragment).remove_interest_button(businessFragment.user_id, post_lists.get(position).post_id);
                 }
 
@@ -570,8 +576,36 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         }
     }
 
-//    public void update_list() {
-//        post_lists.add(post_lists);
-//        notifyDataSetChanged();
-//    }
+    public void business_post(String interest_id, String user_id, int position) {
+        businessFragment.progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(mContext).post_business(interest_id, user_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    businessFragment.progressbar.setVisibility(View.GONE);
+                    if (response.body().status.equals("1")) {
+                        if (response.body().post_list != null && response.body().post_list.size() > 0) {
+
+                            new_post_list = response.body().post_list;
+                            post_lists.set(position, new_post_list.get(position));
+                            notifyItemChanged(position);
+
+                        }
+                    } else {
+
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    businessFragment.progressbar.setVisibility(View.GONE);
+                    // Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
 }

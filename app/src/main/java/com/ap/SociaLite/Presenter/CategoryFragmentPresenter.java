@@ -1,9 +1,7 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -69,7 +67,6 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 public void onResponse(Call<json> call, Response<json> response) {
                     categoryFragment.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
 //                            categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
 //                            categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
@@ -91,7 +88,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
                     categoryFragment.progressbar.setVisibility(View.GONE);
-                 //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
@@ -108,7 +105,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-              //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
 
                     } else {
                         //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
@@ -133,9 +130,9 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-           //             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-           //             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //             Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -157,19 +154,19 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                 //      new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+                        //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //      new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
 
 
                     } else {
-                 //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-               //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-               //     Log.d("error", String.valueOf(t.getMessage()));
+                    //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {
@@ -184,7 +181,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-          //              Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //              Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         new CategoryFragmentPresenter(mContext, categoryFragment).remove_interest(categoryFragment.user_id, categoryFragment.interest_ids);
@@ -211,9 +208,9 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-            //            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //            Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-              //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
