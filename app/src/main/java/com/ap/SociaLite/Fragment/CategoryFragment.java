@@ -64,11 +64,4 @@ public class CategoryFragment extends Fragment {
                 break;
         }
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        new CategoryFragmentPresenter(getActivity(), this).fetch_all_intrest(user_id);
-        //      new CategoryFragmentPresenter(getActivity(), this).Category_post_fragment(user_id);
-    }
 }

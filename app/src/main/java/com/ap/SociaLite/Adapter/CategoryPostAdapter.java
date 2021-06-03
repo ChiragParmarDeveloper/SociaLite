@@ -236,6 +236,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "2";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
+                Category_post_fragment(categoryFragment.interest_ids,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -247,6 +248,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "3";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
+                Category_post_fragment(categoryFragment.interest_ids,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -258,6 +260,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "4";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
+                Category_post_fragment(categoryFragment.interest_ids,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -269,11 +272,10 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "5";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
+                Category_post_fragment(categoryFragment.interest_ids,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
-//                newupdate(post_lists);
-//                notifyDataSetChanged();
             }
         });
 
@@ -518,8 +520,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
                         }
                     } else {
-                    //    categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
-                     //   categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
                     }
                 }
 
