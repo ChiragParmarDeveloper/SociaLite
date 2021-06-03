@@ -16,7 +16,6 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Random;
 
-
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";

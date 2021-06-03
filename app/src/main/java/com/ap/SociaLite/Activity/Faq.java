@@ -1,5 +1,7 @@
 package com.ap.SociaLite.Activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ public class Faq extends AppCompatActivity {
         setContentView(R.layout.activity_faq);
         ButterKnife.bind(this);
         new FaqPresenter(this, this).faq_listdata();
+
     }
 
     @OnClick({R.id.img_back})

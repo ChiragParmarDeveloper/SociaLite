@@ -38,7 +38,20 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.ProfileConnectionActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <tools:validation testUrl="http://the-socialite.com/profile/" />
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="the-socialite.com"
+                    android:pathPattern="/profile/" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activity.EditProfileActivity"
             android:screenOrientation="portrait"
@@ -104,6 +117,7 @@
         <activity
             android:name=".Activity.Faq"
             android:screenOrientation="portrait" />
+
         <activity android:name=".Activity.HidedPost" />
         <activity
             android:name=".Activity.Privacy"
@@ -163,6 +177,7 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <service android:name=".Application.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

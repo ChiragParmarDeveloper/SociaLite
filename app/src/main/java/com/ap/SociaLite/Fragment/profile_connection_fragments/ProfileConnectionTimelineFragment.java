@@ -35,7 +35,6 @@ public class ProfileConnectionTimelineFragment extends Fragment {
 
         new ProfileConnectionTimelineFragmentPresenter(getContext(), this).time_line_post(user_id);
 
-
         return view;
     }
 }

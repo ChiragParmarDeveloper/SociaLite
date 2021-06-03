@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -58,11 +59,13 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
     List<post_list> post_lists = new ArrayList<>();
     post_list item;
 
+    List<post_list> new_post_list = new ArrayList<>();
+
+
     public CategoryPostAdapter(Context context, List<post_list> list, CategoryFragment fragment) {
         this.mContext = context;
         this.post_lists = list;
         this.categoryFragment = fragment;
-
     }
 
     @NonNull
@@ -169,9 +172,8 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                                 Uri.Builder builder = new Uri.Builder();
                                 builder.scheme("http")
                                         .authority("the-socialite.com")
-                                        .appendPath("API")
-                                        .appendPath("post_list.php")
-                                        .appendQueryParameter("interest_id",categoryFragment.interest_ids);
+                                        .appendPath("profile/")
+                                        .appendQueryParameter("user_id","37");
                                 //.appendQueryParameter("sort", "relevance")
                                 //.fragment("section-name");
                                 String myUrl = builder.build().toString();
@@ -221,10 +223,10 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "1";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
+                Category_post_fragment(categoryFragment.interest_ids,position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
-
 
             }
         });
@@ -497,6 +499,43 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             ButterKnife.bind(this, itemView);
         }
     }
+
+
+    public void Category_post_fragment(String interest_id,int position) {
+        categoryFragment.progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(mContext).category_post(interest_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    categoryFragment.progressbar.setVisibility(View.GONE);
+                    if (response.body().status.equals("1")) {
+
+                        if (response.body().post_list != null && response.body().post_list.size() > 0) {
+
+                            new_post_list = response.body().post_list;
+                            post_lists.set(position,new_post_list.get(position));
+                            notifyItemChanged(position);
+
+                        }
+                    } else {
+                    //    categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
+                     //   categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    categoryFragment.progressbar.setVisibility(View.GONE);
+                    //   Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //     Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+
 
 //    public void newupdate(List<post_list> post_lists) {
 //        post_lists.clear();

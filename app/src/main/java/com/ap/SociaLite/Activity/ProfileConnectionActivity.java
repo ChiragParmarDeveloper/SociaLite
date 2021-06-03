@@ -3,7 +3,9 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -91,9 +93,9 @@ public class ProfileConnectionActivity extends AppCompatActivity {
         //UserId = login user_id;
         //user_id = request_id;
         Session session = new Session(getApplicationContext());
-        UserId = session.getUser_id();
-        user_id = getIntent().getStringExtra("request_id");
-        RequestId = getIntent().getStringExtra("request_id");
+//        UserId = session.getUser_id();
+//        user_id = getIntent().getStringExtra("request_id");
+//        RequestId = getIntent().getStringExtra("request_id");
 
         timeline_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,8 +145,27 @@ public class ProfileConnectionActivity extends AppCompatActivity {
             }
         });
 
-        my_profile(user_id);
-        profile_connection(UserId, RequestId);
+
+        // ATTENTION: This was auto-generated to handle app links.
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
+
+        if (appLinkData != null){
+
+            RequestId = appLinkData.getQueryParameter("user_id");
+            Log.d("Recipe id", RequestId);
+
+//            Uri appData = Uri.parse("http://the-socialite.com/profile/").buildUpon()
+//                    .appendPath(user_id).build();
+
+        //    showRecipe(appData);
+            my_profile(RequestId);
+            profile_connection(session.getUser_id(), RequestId);
+        }
+
+     //   my_profile(user_id);
+      //  profile_connection(UserId, RequestId);
     }
 
     private void profile_connection(String UserId, String RequestId) {
@@ -499,6 +520,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     }
 
     private void my_profile(String user_id) {
+        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
         //  progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(this).my_profileActivity(user_id).enqueue(new Callback<json>() {
@@ -584,8 +606,8 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        my_profile(user_id);
-        profile_connection(UserId, RequestId);
+     //   my_profile(user_id);
+     //   profile_connection(UserId, RequestId);
     }
 }
 

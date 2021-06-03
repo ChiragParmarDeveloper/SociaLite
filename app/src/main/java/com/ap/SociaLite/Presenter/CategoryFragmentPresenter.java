@@ -80,6 +80,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                             categoryFragment.rv_categorypost.setAdapter(categoryFragment.categoryPostAdapter);
                             //  categoryFragment.categoryPostAdapter.newupdate();
                             categoryFragment.categoryPostAdapter.notifyDataSetChanged();
+
                         }
                     } else {
                         categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
@@ -157,7 +158,9 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
                 //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                  //      new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+                 //      new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+
+
                     } else {
                  //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }

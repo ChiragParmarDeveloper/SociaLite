@@ -103,8 +103,8 @@ public class PostPresenter implements PostContract {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         Intent in = new Intent(mContext, HomeActivity.class);
-                        in.putExtra("pass", "category_fragment");
                         in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        in.putExtra("pass", "category_fragment");
                         mContext.startActivity(in);
                         post.finish();
 
@@ -116,8 +116,8 @@ public class PostPresenter implements PostContract {
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
                     post.progressbar.setVisibility(View.GONE);
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("error", String.valueOf(t.getMessage()));
+                   // Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                   // Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {
