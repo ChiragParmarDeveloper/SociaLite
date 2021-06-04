@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,9 +28,9 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     CategoryFragment categoryFragment;
     List<interest_details> details = new ArrayList<>();
     interest_details item;
-    private int selectedItem;
+    public int selectedItem;
 
-    private int clickItem = 0;
+    public int clickItem = 0;
 
     public CategoryListAdapter(Context context, List<interest_details> list, CategoryFragment fragment) {
         this.mContext = context;
@@ -58,13 +59,16 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         Drawable plus_favorite = mContext.getDrawable(R.drawable.ic_category_plus);
         Drawable right_favorite = mContext.getDrawable(R.drawable.ic_category_right);
 
-        if (selectedItem == position) {
-            categoryFragment.interest_ids = details.get(position).interest_id;
-
-            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
-
-            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
-        }
+//        if (selectedItem == position) {
+//            categoryFragment.interest_ids = details.get(position).interest_id;
+//            Toast.makeText(mContext,"default" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+//
+//            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
+//
+//            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment("3");
+//            Toast.makeText(mContext,"default1" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+//
+//        }
 
         if (item.flag.equals("1")) {
             holder.img_right.setVisibility(View.VISIBLE);
@@ -85,9 +89,12 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         if (position == clickItem) {
             holder.img_category.setSelected(true);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
+            Toast.makeText(mContext,"default2" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
 
             categoryFragment.interest_ids = details.get(position).interest_id;
             new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+            //Toast.makeText(mContext,categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext,"default4" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
 
         } else {
             holder.img_category.setSelected(false);

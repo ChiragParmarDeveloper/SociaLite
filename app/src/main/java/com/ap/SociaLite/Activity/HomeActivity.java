@@ -143,6 +143,13 @@ public class HomeActivity extends AppCompatActivity {
         if (todeside_fragment.equals("category_fragment")) {
             getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
         }
+//        if (todeside_fragment.equals("network_fragment")) {
+//            getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new NetworkFragment()).commit();
+//        }
+//        if (todeside_fragment.equals("network_fragment")) {
+//            getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new NetworkFragment()).commit();
+//        }
+
 
         View headerView = navigation_view.getHeaderView(0);
 

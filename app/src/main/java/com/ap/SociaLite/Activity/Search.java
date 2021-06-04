@@ -3,7 +3,6 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ap.SociaLite.Adapter.SearchProfileAdapter;
 import com.ap.SociaLite.Application.Session;
-import com.ap.SociaLite.Fragment.Connection.ConnectionFragment;
 import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.Presenter.SearchPresenter;
 import com.ap.SociaLite.R;
@@ -120,7 +117,7 @@ public class Search extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-           //     ConnectionFragment.connectionAdapter.filter(String.valueOf(s));
+                //     ConnectionFragment.connectionAdapter.filter(String.valueOf(s));
                 Search.this.searchProfileAdapter.filter(String.valueOf(s));
                 searchProfileAdapter.notifyDataSetChanged();
             }

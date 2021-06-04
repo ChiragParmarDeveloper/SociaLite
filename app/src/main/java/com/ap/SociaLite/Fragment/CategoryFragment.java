@@ -39,8 +39,8 @@ public class CategoryFragment extends Fragment {
     public ProgressBar progressbar;
 
     public String user_id, interest_ids;
-    public CategoryPostAdapter categoryPostAdapter;
-    public List<post_list> post_lists;
+//    public CategoryPostAdapter categoryPostAdapter;
+//    public List<post_list> post_lists;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

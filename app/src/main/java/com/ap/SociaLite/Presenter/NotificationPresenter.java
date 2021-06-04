@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.ap.SociaLite.Activity.Notification;
 import com.ap.SociaLite.Adapter.Notification_adapter.Notification_adapter;
+import com.ap.SociaLite.Adapter.new_notification;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Contract.NotificationContrast;
@@ -38,11 +39,11 @@ public class NotificationPresenter implements NotificationContrast {
 
                         if (response.body().data != null && response.body().data.size() > 0) {
                             notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
-                            notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
+                            notification.recycleview_notification.setAdapter(new new_notification(mContext, notification, response.body().data));
 
                         } else {
                             notification.recycleview_notification.setLayoutManager(new GridLayoutManager(mContext, 1));
-                            notification.recycleview_notification.setAdapter(new Notification_adapter(mContext, notification, response.body().data));
+                            notification.recycleview_notification.setAdapter(new new_notification(mContext, notification, response.body().data));
                         }
                     }
                 }

@@ -44,6 +44,7 @@ public class PostNetworkPresenter implements PostNetworkContrast {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         Intent in = new Intent(mContext, HomeActivity.class);
                         in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                     //   in.putExtra("pass", "network_fragment");
                         mContext.startActivity(in);
                         postNetwork.finish();
 

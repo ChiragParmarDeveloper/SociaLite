@@ -86,6 +86,8 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
         Drawable star5 = mContext.getDrawable(R.drawable.ic_rating_star5);
 
         item = post_lists.get(position);
+
+        Log.d("post_size", String.valueOf(post_lists.size()));
         String id = post_lists.get(position).post_id;
 
         Picasso.get().load(item.image).into(holder.img_category);
