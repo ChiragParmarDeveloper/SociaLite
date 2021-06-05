@@ -1,9 +1,11 @@
 package com.ap.SociaLite.Adapter;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -163,7 +165,21 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                                 break;
 
                             case R.id.copylink:
-                                Toast.makeText(view.getContext(), "Coming Soon...", Toast.LENGTH_SHORT).show();
+                                String post_id = post_lists.get(position).post_id;
+
+                                Uri.Builder builder = new Uri.Builder();
+                                builder.scheme("http")
+                                        .authority("the-socialite.com")
+                                        .appendPath("businesspost/")
+                                        .appendQueryParameter("post", post_id);
+                                //.appendQueryParameter("sort", "relevance")
+                                //.fragment("section-name");
+                                String myUrl = builder.build().toString();
+
+                                ClipboardManager cm = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                                cm.setText(myUrl);
+                                Toast.makeText(mContext, "Copied", Toast.LENGTH_SHORT).show();
+
                                 break;
 
                             default:

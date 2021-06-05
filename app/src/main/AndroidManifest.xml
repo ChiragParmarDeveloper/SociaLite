@@ -19,8 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.post_link">
-            <intent-filter android:autoVerify="true">
+        <activity android:name=".Activity.business_post_link">
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -29,7 +29,20 @@
                 <data
                     android:scheme="http"
                     android:host="the-socialite.com"
-                    android:pathPattern="/post/" />
+                    android:pathPattern="/businesspost/" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.post_link">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="the-socialite.com"
+                    android:pathPattern="/post/"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity android:name=".Activity.Sync_contact" />
