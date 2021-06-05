@@ -1,8 +1,10 @@
 package com.ap.SociaLite.Adapter;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -109,9 +110,6 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         }
 
 
-
-
-
         if (post_lists.get(position).rate.equals("0")) {
             holder.img_star.setImageDrawable(star1);
         }
@@ -161,7 +159,21 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
                                 break;
 
                             case R.id.copylink:
-                                Toast.makeText(view.getContext(), "coming soon", Toast.LENGTH_SHORT).show();
+                                String post_id = post_lists.get(position).post_id;
+
+                                Uri.Builder builder = new Uri.Builder();
+                                builder.scheme("http")
+                                        .authority("the-socialite.com")
+                                        .appendPath("post/")
+                                        .appendQueryParameter("post", post_id);
+                                //.appendQueryParameter("sort", "relevance")
+                                //.fragment("section-name");
+                                String myUrl = builder.build().toString();
+
+                                ClipboardManager cm = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                                cm.setText(myUrl);
+                                Toast.makeText(mContext, "Copied", Toast.LENGTH_SHORT).show();
+
                                 break;
 
                             default:
@@ -205,7 +217,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             public void onClick(View view) {
                 rate = "1";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
-                fetch_my_intrest_wise_post(interestFragment.interest_id,position);
+                fetch_my_intrest_wise_post(interestFragment.interest_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -217,7 +229,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             public void onClick(View view) {
                 rate = "2";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
-                fetch_my_intrest_wise_post(interestFragment.interest_id,position);
+                fetch_my_intrest_wise_post(interestFragment.interest_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -229,7 +241,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             public void onClick(View view) {
                 rate = "3";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
-                fetch_my_intrest_wise_post(interestFragment.interest_id,position);
+                fetch_my_intrest_wise_post(interestFragment.interest_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -241,7 +253,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             public void onClick(View view) {
                 rate = "4";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
-                fetch_my_intrest_wise_post(interestFragment.interest_id,position);
+                fetch_my_intrest_wise_post(interestFragment.interest_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -253,7 +265,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             public void onClick(View view) {
                 rate = "5";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
-                fetch_my_intrest_wise_post(interestFragment.interest_id,position);
+                fetch_my_intrest_wise_post(interestFragment.interest_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -479,7 +491,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         }
     }
 
-    public void fetch_my_intrest_wise_post(String interest_id,int position) {
+    public void fetch_my_intrest_wise_post(String interest_id, int position) {
         try {
             new RService.api().call(mContext).interest_wise_post(interest_id).enqueue(new Callback<json>() {
                 @Override
@@ -489,7 +501,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
 
                             new_post_list = response.body().post_list;
-                            post_lists.set(position,new_post_list.get(position));
+                            post_lists.set(position, new_post_list.get(position));
                             notifyItemChanged(position);
 
                         }

@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.Notification;
+import com.ap.SociaLite.Application.RService;
+import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.Presenter.NotificationPresenter;
 import com.ap.SociaLite.R;
@@ -23,10 +25,14 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -39,6 +45,8 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
     Notification notification;
     List<data> datas;
     data item;
+
+    List<data> new_data = new ArrayList<>();
 
     public new_notification(Context mContext, Notification notification, List<data> datas) {
         this.mContext = mContext;
@@ -125,7 +133,7 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
                     @Override
                     public void onClick(View v) {
                         new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
-                        //   removeAt(position);
+                        user_notification_list(notification.UserId, position);
                     }
                 });
 
@@ -133,13 +141,9 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
                     @Override
                     public void onClick(View v) {
                         new NotificationPresenter(notification, mContext).request_denied(item.request_id, notification.UserId);
-                        //  removeAt(position);
+                        user_notification_list(notification.UserId, position);
                     }
                 });
-
-//                Frnd_request  frnd_request = (Frnd_request) holder;
-//               // ((Frnd_request) holder).txt_user_name.setText(item.username);
-//                frnd_request.txt_user_name.setText(item.username);
                 break;
 
             case TYPE_Public:
@@ -166,7 +170,7 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
                     @Override
                     public void onClick(View v) {
                         new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
-                        //    removeAt(position);
+                        user_notification_list(notification.UserId, position);
                     }
                 });
                 break;
@@ -346,4 +350,35 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
                 return -1;
         }
     }
+
+
+    public void user_notification_list(String UserId, int position) {
+        try {
+            new RService.api().call(mContext).notification(UserId).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    if (response.body().status.equals("1")) {
+
+                        if (response.body().data != null && response.body().data.size() > 0) {
+                            new_data = response.body().data;
+                            datas.set(position, new_data.get(position));
+                            notifyItemChanged(position);
+                        } else {
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //      Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+
 }

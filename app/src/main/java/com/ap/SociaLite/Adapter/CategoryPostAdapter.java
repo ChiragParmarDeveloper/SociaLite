@@ -1,6 +1,5 @@
 package com.ap.SociaLite.Adapter;
 
-import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -46,8 +44,6 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapter.MyHolder> {
 
@@ -170,19 +166,20 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                                 break;
 
                             case R.id.copylink:
+                                String post_id = post_lists.get(position).post_id;
 
                                 Uri.Builder builder = new Uri.Builder();
                                 builder.scheme("http")
                                         .authority("the-socialite.com")
-                                        .appendPath("profile/")
-                                        .appendQueryParameter("user_id","37");
+                                        .appendPath("post/")
+                                        .appendQueryParameter("post", post_id);
                                 //.appendQueryParameter("sort", "relevance")
                                 //.fragment("section-name");
                                 String myUrl = builder.build().toString();
 
-                                ClipboardManager cm = (ClipboardManager)mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                                ClipboardManager cm = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
                                 cm.setText(myUrl);
-                                Toast.makeText(mContext, "Link copied", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, "Copied", Toast.LENGTH_SHORT).show();
 
                                 break;
 
@@ -225,7 +222,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "1";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
-                Category_post_fragment(categoryFragment.interest_ids,position);
+                Category_post_fragment(categoryFragment.interest_ids, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -238,7 +235,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "2";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
-                Category_post_fragment(categoryFragment.interest_ids,position);
+                Category_post_fragment(categoryFragment.interest_ids, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -250,7 +247,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "3";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
-                Category_post_fragment(categoryFragment.interest_ids,position);
+                Category_post_fragment(categoryFragment.interest_ids, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -262,7 +259,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "4";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
-                Category_post_fragment(categoryFragment.interest_ids,position);
+                Category_post_fragment(categoryFragment.interest_ids, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -274,7 +271,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
             public void onClick(View view) {
                 rate = "5";
                 new CategoryFragmentPresenter(mContext, categoryFragment).rating_post(categoryFragment.user_id, id, rate);
-                Category_post_fragment(categoryFragment.interest_ids,position);
+                Category_post_fragment(categoryFragment.interest_ids, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -505,7 +502,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
     }
 
 
-    public void Category_post_fragment(String interest_id,int position) {
+    public void Category_post_fragment(String interest_id, int position) {
         categoryFragment.progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(mContext).category_post(interest_id).enqueue(new Callback<json>() {
@@ -517,7 +514,7 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
 
                             new_post_list = response.body().post_list;
-                            post_lists.set(position,new_post_list.get(position));
+                            post_lists.set(position, new_post_list.get(position));
                             notifyItemChanged(position);
 
                         }
@@ -536,7 +533,6 @@ public class CategoryPostAdapter extends RecyclerView.Adapter<CategoryPostAdapte
 
         }
     }
-
 
 
 //    public void newupdate(List<post_list> post_lists) {

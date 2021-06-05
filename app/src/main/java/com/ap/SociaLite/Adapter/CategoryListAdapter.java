@@ -89,12 +89,12 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         if (position == clickItem) {
             holder.img_category.setSelected(true);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
-            Toast.makeText(mContext,"default2" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+       //     Toast.makeText(mContext,"default2" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
 
             categoryFragment.interest_ids = details.get(position).interest_id;
             new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
             //Toast.makeText(mContext,categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
-            Toast.makeText(mContext,"default4" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(mContext,"default4" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
 
         } else {
             holder.img_category.setSelected(false);

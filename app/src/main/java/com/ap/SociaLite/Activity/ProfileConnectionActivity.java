@@ -146,26 +146,37 @@ public class ProfileConnectionActivity extends AppCompatActivity {
         });
 
 
+        handleIntent();
+
+        //   my_profile(user_id);
+        //  profile_connection(UserId, RequestId);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleIntent();
+    }
+
+    private void handleIntent() {
         // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
 
-        if (appLinkData != null){
+        if (appLinkData != null) {
 
             RequestId = appLinkData.getQueryParameter("user_id");
             Log.d("Recipe id", RequestId);
 
 //            Uri appData = Uri.parse("http://the-socialite.com/profile/").buildUpon()
 //                    .appendPath(user_id).build();
-
-        //    showRecipe(appData);
+            Session session = new Session(getApplicationContext());
+            //    showRecipe(appData);
             my_profile(RequestId);
             profile_connection(session.getUser_id(), RequestId);
         }
-
-     //   my_profile(user_id);
-      //  profile_connection(UserId, RequestId);
     }
 
     private void profile_connection(String UserId, String RequestId) {
@@ -606,8 +617,8 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-     //   my_profile(user_id);
-     //   profile_connection(UserId, RequestId);
+        //   my_profile(user_id);
+        //   profile_connection(UserId, RequestId);
     }
 }
 

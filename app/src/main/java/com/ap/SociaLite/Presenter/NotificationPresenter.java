@@ -2,11 +2,11 @@ package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.ap.SociaLite.Activity.Notification;
-import com.ap.SociaLite.Adapter.Notification_adapter.Notification_adapter;
 import com.ap.SociaLite.Adapter.new_notification;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
@@ -69,8 +69,7 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onResponse(Call<json> call, Response<json> response) {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-                        //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
-                        new NotificationPresenter(notification, mContext).user_notification_list(notification.UserId);
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
@@ -97,8 +96,7 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onResponse(Call<json> call, Response<json> response) {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
-                        new NotificationPresenter(notification, mContext).user_notification_list(notification.UserId);
-                        //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
