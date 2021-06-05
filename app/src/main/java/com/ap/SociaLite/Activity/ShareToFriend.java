@@ -36,10 +36,9 @@ public class ShareToFriend extends AppCompatActivity {
     @BindView(R.id.edt_search)
     public EditText edt_search;
 
-
     public static ArrayList<String> sharefrnd_id = new ArrayList<>();
     public SharetoFrndAdapter sharetoFrndAdapter;
-    String UserId;
+    String UserId,myUrl;
     public List<data> datas;
 
     @Override
@@ -50,6 +49,9 @@ public class ShareToFriend extends AppCompatActivity {
 
         Session session = new Session(getApplicationContext());
         UserId = session.getUser_id();
+
+        myUrl = getIntent().getStringExtra("url");
+        Toast.makeText(this, myUrl, Toast.LENGTH_SHORT).show();
 
         new ShareToFriendPresenter(this, this).friend_list(UserId);
         filter();

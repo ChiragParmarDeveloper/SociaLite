@@ -200,7 +200,19 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
         holder.layout_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String post_id = post_lists.get(position).post_id;
+
+                Uri.Builder builder = new Uri.Builder();
+                builder.scheme("http")
+                        .authority("the-socialite.com")
+                        .appendPath("businesspost/")
+                        .appendQueryParameter("post", post_id);
+                //.appendQueryParameter("sort", "relevance")
+                //.fragment("section-name");
+                String myUrl = builder.build().toString();
+
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
+                in.putExtra("url",myUrl);
                 view.getContext().startActivity(in);
             }
         });
