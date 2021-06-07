@@ -38,6 +38,8 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                     categoryFragment.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
 
+                        categoryFragment.interest_ids = response.body().interest_details.get(response.body().interest_details.size() - 1).interest_id;
+
                         if (response.body().interest_details != null && response.body().interest_details.size() > 0) {
                             categoryFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
                             categoryFragment.rv_interestlist.setAdapter(new CategoryListAdapter(mContext, response.body().interest_details, categoryFragment));
@@ -69,13 +71,13 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                     categoryFragment.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
-                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_SHORT).show();
+                   //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_SHORT).show();
                             categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
                             categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
 
                         }
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_SHORT).show();
 
                         categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
                         categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));

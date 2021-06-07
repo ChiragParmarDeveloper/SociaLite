@@ -12,8 +12,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ap.SociaLite.Application.RService;
+import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Pojo.interest_details;
+import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -22,22 +25,27 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.Holder> {
 
     Context mContext;
     CategoryFragment categoryFragment;
     List<interest_details> details = new ArrayList<>();
     interest_details item;
-    public int selectedItem;
+    public String clickItem;
+    public static int selectedItem;
 
-    public int clickItem = 0;
-
+    int i;
     public CategoryListAdapter(Context context, List<interest_details> list, CategoryFragment fragment) {
         this.mContext = context;
         this.details = list;
         this.categoryFragment = fragment;
-
         selectedItem = 0;
+        clickItem = categoryFragment.interest_ids;
+        i=Integer.parseInt(clickItem);
     }
 
     @NonNull
@@ -57,18 +65,33 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         Picasso.get().load(item.interest_image).into(holder.img_category);
 
         Drawable plus_favorite = mContext.getDrawable(R.drawable.ic_category_plus);
-        Drawable right_favorite = mContext.getDrawable(R.drawable.ic_category_right);
-
+  //      new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+   //     Toast.makeText(mContext, "default) id " + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
 //        if (selectedItem == position) {
-//            categoryFragment.interest_ids = details.get(position).interest_id;
-//            Toast.makeText(mContext,"default" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+//         //   categoryFragment.interest_ids = details.get(position).interest_id;
 //
 //            holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
 //
-//            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment("3");
-//            Toast.makeText(mContext,"default1" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(mContext, "default1" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+//          //  new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+//
 //
 //        }
+//       else
+//       {
+//        //   Toast.makeText(mContext,"else condition" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+//      //     new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+//       }
+
+        if ( categoryFragment.interest_ids != ""){
+            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+       //     Toast.makeText(mContext, categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+      //      holder.img_category.setSelected(true);
+      //      holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
+
+        }else {
+            //  Toast.makeText(mContext, "Fail", Toast.LENGTH_SHORT).show();
+        }
 
         if (item.flag.equals("1")) {
             holder.img_right.setVisibility(View.VISIBLE);
@@ -86,12 +109,13 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         });
 
 
-        if (position == clickItem) {
+        if (position == i) {
             holder.img_category.setSelected(true);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
        //     Toast.makeText(mContext,"default2" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
 
-            categoryFragment.interest_ids = details.get(position).interest_id;
+        //    categoryFragment.interest_ids = details.get(position).interest_id;
+
             new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
             //Toast.makeText(mContext,categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
           //  Toast.makeText(mContext,"default4" + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
@@ -105,7 +129,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             @Override
             public void onClick(View view) {
                 categoryFragment.interest_ids = details.get(position).interest_id;
-                clickItem = holder.getAdapterPosition();
+                i = holder.getAdapterPosition();
                 notifyDataSetChanged();
             }
         });
@@ -129,4 +153,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             img_right = itemView.findViewById(R.id.img_right);
         }
     }
+
+
 }

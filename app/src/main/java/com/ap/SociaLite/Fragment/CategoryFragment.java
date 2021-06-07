@@ -2,15 +2,18 @@ package com.ap.SociaLite.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ap.SociaLite.Adapter.CategoryListAdapter;
 import com.ap.SociaLite.Adapter.CategoryPostAdapter;
 import com.ap.SociaLite.Application.Session;
 import com.ap.SociaLite.Editors.EditImageActivity;
@@ -39,8 +42,6 @@ public class CategoryFragment extends Fragment {
     public ProgressBar progressbar;
 
     public String user_id, interest_ids;
-//    public CategoryPostAdapter categoryPostAdapter;
-//    public List<post_list> post_lists;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +54,8 @@ public class CategoryFragment extends Fragment {
 
         new CategoryFragmentPresenter(getActivity(), this).fetch_all_intrest(user_id);
 
+   //     Log.d("adapter selected pos",interest_ids);
+   //     Toast.makeText(getActivity(), interest_ids,Toast.LENGTH_SHORT).show();
         return view;
     }
 
