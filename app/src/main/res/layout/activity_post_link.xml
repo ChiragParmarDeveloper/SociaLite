@@ -184,7 +184,6 @@
                             android:layout_marginRight="16dp"
                             android:maxHeight="600dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/dummy_image"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

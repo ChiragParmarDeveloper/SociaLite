@@ -54,6 +54,13 @@ public interface RService {
     Call<json> forgot_pwd(@Field("mobile_number") String mobile_number,
                           @Field("password") String password);
 
+
+    @FormUrlEncoded
+    @POST("business_link.php")
+    Call<json> business_link_post(@Field("user_id") String user_id,
+                          @Field("post_id") String post_id);
+
+
     @POST("faq.php")
     Call<json> faq();
 
@@ -65,6 +72,10 @@ public interface RService {
     @POST("bussiness_wise_post.php")
     Call<json> post_business(@Field("interest_id") String interest_id,
                              @Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("post_link.php")
+    Call<json> linking_post(@Field("post_id") String post_id);
 
 
     @FormUrlEncoded

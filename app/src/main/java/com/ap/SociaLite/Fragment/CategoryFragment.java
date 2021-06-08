@@ -54,8 +54,6 @@ public class CategoryFragment extends Fragment {
 
         new CategoryFragmentPresenter(getActivity(), this).fetch_all_intrest(user_id);
 
-   //     Log.d("adapter selected pos",interest_ids);
-   //     Toast.makeText(getActivity(), interest_ids,Toast.LENGTH_SHORT).show();
         return view;
     }
 
