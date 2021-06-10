@@ -1,7 +1,6 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +25,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 public class SharetoFrndAdapter extends RecyclerView.Adapter<SharetoFrndAdapter.MyHolder> {
 
@@ -35,6 +33,7 @@ public class SharetoFrndAdapter extends RecyclerView.Adapter<SharetoFrndAdapter.
     ShareToFriend shareToFriend;
     List<data> alldata;
     data item;
+    public static ArrayList<String> sharefrnd_id = new ArrayList<>();
 
     public SharetoFrndAdapter(Context mContext, List<data> datas, ShareToFriend shareToFriend) {
         this.mContext = mContext;
@@ -89,25 +88,25 @@ public class SharetoFrndAdapter extends RecyclerView.Adapter<SharetoFrndAdapter.
                 if (holder.checkBox.isChecked()) {
 
                     String id = datas.get(position).request_id;
-                    shareToFriend.sharefrnd_id.add(id);
-                 //   id = shareToFriend.sharefrnd_id.stream().collect(Collectors.joining(","));
+                    sharefrnd_id.add(id);
+                    //  id = shareToFriend.sharefrnd_id.stream().collect(Collectors.joining(","));
 
-                    Log.d("sharefrnd_id_check", String.valueOf(shareToFriend.sharefrnd_id));
-                   // Log.d("id_check---", String.valueOf(id));
+                    Log.d("sharefrnd_id_check", String.valueOf(sharefrnd_id));
+                    // Log.d("id_check---", String.valueOf(id));
 
                 } else {
                     String id = datas.get(position).request_id;
 
-                    shareToFriend.sharefrnd_id.remove(id);
-                //    id = shareToFriend.sharefrnd_id.stream().collect(Collectors.joining(","));
+                    sharefrnd_id.remove(id);
+                    //    id = shareToFriend.sharefrnd_id.stream().collect(Collectors.joining(","));
 
-                    Log.d("sharefrnd_id_uncheck---", String.valueOf(shareToFriend.sharefrnd_id));
-              //      Log.d("id_uncheck---", String.valueOf(id));
+                    Log.d("sharefrnd_id_uncheck---", String.valueOf(sharefrnd_id));
+                    //      Log.d("id_uncheck---", String.valueOf(id));
 
                 }
             }
         });
-            }
+    }
 
     @Override
     public int getItemCount() {
@@ -126,7 +125,7 @@ public class SharetoFrndAdapter extends RecyclerView.Adapter<SharetoFrndAdapter.
             user_profile = itemView.findViewById(R.id.user_profile);
             txt_name = itemView.findViewById(R.id.txt_name);
             checkBox = itemView.findViewById(R.id.checkBox);
-            viewer_profile= itemView.findViewById(R.id.viewer_profile);
+            viewer_profile = itemView.findViewById(R.id.viewer_profile);
         }
     }
 

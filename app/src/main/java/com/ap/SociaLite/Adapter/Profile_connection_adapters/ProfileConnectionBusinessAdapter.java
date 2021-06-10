@@ -21,7 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -211,9 +210,13 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                 //.fragment("section-name");
                 String myUrl = builder.build().toString();
 
+
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
-                in.putExtra("url",myUrl);
+                in.putExtra("url", myUrl);
+                in.putExtra("share_post", "share_post");
+                in.putExtra("post_id", post_id);
                 view.getContext().startActivity(in);
+
             }
         });
 
@@ -246,7 +249,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "1";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-                my_post_business_intrection(profileConnectionBusinessFragment.user_id,position);
+                my_post_business_intrection(profileConnectionBusinessFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -258,7 +261,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "2";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-                my_post_business_intrection(profileConnectionBusinessFragment.user_id,position);
+                my_post_business_intrection(profileConnectionBusinessFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -270,7 +273,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "3";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-                my_post_business_intrection(profileConnectionBusinessFragment.user_id,position);
+                my_post_business_intrection(profileConnectionBusinessFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -282,7 +285,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "4";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-                my_post_business_intrection(profileConnectionBusinessFragment.user_id,position);
+                my_post_business_intrection(profileConnectionBusinessFragment.user_id, position);
 
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
@@ -295,7 +298,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
             public void onClick(View view) {
                 rate = "5";
                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).rating_post(profileConnectionBusinessFragment.user_id, id, rate);
-                my_post_business_intrection(profileConnectionBusinessFragment.user_id,position);
+                my_post_business_intrection(profileConnectionBusinessFragment.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -587,7 +590,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
     }
 
 
-    public void my_post_business_intrection(String user_id,int position) {
+    public void my_post_business_intrection(String user_id, int position) {
         profileConnectionBusinessFragment.progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(mContext).my_bussiness_post(user_id).enqueue(new Callback<json>() {
@@ -600,7 +603,7 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
 
                             new_post_list = response.body().post_list;
-                            post_lists.set(position,new_post_list.get(position));
+                            post_lists.set(position, new_post_list.get(position));
                             notifyItemChanged(position);
                         }
                     } else {

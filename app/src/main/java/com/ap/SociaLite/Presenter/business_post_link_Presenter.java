@@ -169,9 +169,14 @@ public class business_post_link_Presenter implements business_post_link_Contrast
                                 //.fragment("section-name");
                                 String myUrl = builder.build().toString();
 
+
+
                                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
-                                in.putExtra("url", myUrl);
+                                in.putExtra("url",myUrl);
+                                in.putExtra("share_post","share_post");
+                                in.putExtra("post_id",post_id);
                                 view.getContext().startActivity(in);
+
                             }
                         });
 
@@ -496,6 +501,8 @@ public class business_post_link_Presenter implements business_post_link_Contrast
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
+
+                        business_post_link(businessPostLink.user_id,businessPostLink.post_id);
                         //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         //        new BusinessFragmentPresenter(mContext, businessFragment).business_post(businessFragment.interest_id,businessFragment.user_id);
                     } else {
@@ -521,6 +528,7 @@ public class business_post_link_Presenter implements business_post_link_Contrast
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
+                        business_post_link(businessPostLink.user_id,businessPostLink.post_id);
                         //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         //    business_post(businessFragment.interest_id, user_id);
                     } else {
@@ -546,6 +554,7 @@ public class business_post_link_Presenter implements business_post_link_Contrast
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
+                        business_post_link(businessPostLink.user_id,businessPostLink.post_id);
                         //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         //    business_post(businessFragment.interest_id, user_id);
                     } else {

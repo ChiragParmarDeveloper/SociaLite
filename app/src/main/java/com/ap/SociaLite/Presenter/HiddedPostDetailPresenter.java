@@ -58,17 +58,6 @@ public class HiddedPostDetailPresenter implements HiddedPostDetailContract {
         }
     }
 
-    public void refresh() {
-        // notifyDataSetChanged must run in main ui thread, if run in not ui thread, it will not update until manually scroll recyclerview
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                hiddedPostDetailActivity.hiddedPostDetailAdapter.notifyDataSetChanged();
-            }
-
-        };
-    }
-
     @Override
     public void rating_post(String user_id, String post_id, String rate) {
 
@@ -77,16 +66,16 @@ public class HiddedPostDetailPresenter implements HiddedPostDetailContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+               //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                //        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("error", String.valueOf(t.getMessage()));
+               //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+               //     Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {
@@ -101,7 +90,7 @@ public class HiddedPostDetailPresenter implements HiddedPostDetailContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+              //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
                         //       Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
@@ -126,9 +115,9 @@ public class HiddedPostDetailPresenter implements HiddedPostDetailContract {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+              //          Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+               //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
                 }
 

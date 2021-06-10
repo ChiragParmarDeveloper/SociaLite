@@ -2,6 +2,7 @@ package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         holder.txt_iconname.setText(item.interest_name);
         Picasso.get().load(item.interest_image).into(holder.img_category);
 
+
+
         Drawable plus_favorite = mContext.getDrawable(R.drawable.ic_category_plus);
   //      new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
    //     Toast.makeText(mContext, "default) id " + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
@@ -84,6 +87,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 //       }
 
         if ( categoryFragment.interest_ids != ""){
+
+            Log.d("category_id",categoryFragment.interest_ids);
             new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
        //     Toast.makeText(mContext, categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
       //      holder.img_category.setSelected(true);

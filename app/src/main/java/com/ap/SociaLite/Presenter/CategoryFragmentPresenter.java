@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,6 +38,14 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 public void onResponse(Call<json> call, Response<json> response) {
                     categoryFragment.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
+
+
+                        Log.d("Size", String.valueOf(response.body().interest_details.size()));
+                        Log.d("Size_id0", String.valueOf(response.body().interest_details.get(0).interest_id));
+
+                        Log.d("Size_id1", String.valueOf(response.body().interest_details.get(1).interest_id));
+                        Log.d("Size_id2", String.valueOf(response.body().interest_details.get(2).interest_id));
+
 
                         categoryFragment.interest_ids = response.body().interest_details.get(response.body().interest_details.size() - 1).interest_id;
 

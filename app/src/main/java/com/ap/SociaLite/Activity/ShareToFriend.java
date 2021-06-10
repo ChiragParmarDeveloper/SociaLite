@@ -1,13 +1,12 @@
 package com.ap.SociaLite.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +17,6 @@ import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.Presenter.ShareToFriendPresenter;
 import com.ap.SociaLite.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,9 +34,9 @@ public class ShareToFriend extends AppCompatActivity {
     @BindView(R.id.edt_search)
     public EditText edt_search;
 
-    public static ArrayList<String> sharefrnd_id = new ArrayList<>();
+
     public SharetoFrndAdapter sharetoFrndAdapter;
-    String UserId,myUrl;
+    String UserId, myUrl, share_post, share_profile, post_id, profile_share_id;
     public List<data> datas;
 
     @Override
@@ -51,12 +49,16 @@ public class ShareToFriend extends AppCompatActivity {
         UserId = session.getUser_id();
 
         myUrl = getIntent().getStringExtra("url");
-        Toast.makeText(this, myUrl, Toast.LENGTH_SHORT).show();
+        post_id = getIntent().getStringExtra("post_id");
+        share_post = getIntent().getStringExtra("share_post");
+        share_profile = getIntent().getStringExtra("share_profile");
+        profile_share_id = getIntent().getStringExtra("profile_share_id");
+
+    //    Log.d("share_profile", profile_share_id);
 
         new ShareToFriendPresenter(this, this).friend_list(UserId);
         filter();
     }
-
 
     @OnClick({R.id.img_back, R.id.btn_share})
     public void OnClick(View view) {
@@ -66,8 +68,15 @@ public class ShareToFriend extends AppCompatActivity {
                 break;
 
             case R.id.btn_share:
-              //  startActivity(new Intent(ShareToFriend.this, HomeActivity.class));
-                Toast.makeText(getApplicationContext(),"Coming soon", Toast.LENGTH_LONG).show();
+
+                if (share_post != null) {
+
+                    new ShareToFriendPresenter(this, this).share_link_api(UserId, SharetoFrndAdapter.sharefrnd_id, myUrl,
+                            "share_post", "", post_id);
+                } else if (share_profile != null) {
+                    new ShareToFriendPresenter(this, this).share_link_api(UserId, SharetoFrndAdapter.sharefrnd_id, myUrl,
+                            "share_profile", profile_share_id, "");
+                }
                 break;
         }
     }
@@ -91,12 +100,5 @@ public class ShareToFriend extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new ShareToFriendPresenter(this, this).friend_list(UserId);
-        filter();
     }
 }

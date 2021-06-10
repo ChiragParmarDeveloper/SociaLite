@@ -60,4 +60,13 @@ public class data {
     @SerializedName("number")
     public String number;
 
+    @SerializedName("url")
+    public String url;
+
+    @SerializedName("shareuser_profile_pic")
+    public String shareuser_profile_pic;
+
+    @SerializedName("share_username")
+    public String share_username;
+
 }

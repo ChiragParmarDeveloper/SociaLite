@@ -126,8 +126,21 @@ public class ProfileActivity extends AppCompatActivity {
                 break;
 
             case R.id.share:
+
+                Uri.Builder builder = new Uri.Builder();
+                builder.scheme("http")
+                        .authority("the-socialite.com")
+                        .appendPath("profile/")
+                        .appendQueryParameter("account", user_id);
+
+                String myUrl = builder.build().toString();
+
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
+                in.putExtra("url",myUrl);
+                in.putExtra("share_profile","share_profile");
+                in.putExtra("profile_share_id",user_id);
                 view.getContext().startActivity(in);
+
                 break;
 
             case R.id.messages:

@@ -206,7 +206,11 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
 
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
                 in.putExtra("url",myUrl);
+                in.putExtra("share_post","share_post");
+                in.putExtra("post_id",post_id);
                 view.getContext().startActivity(in);
+
+
             }
         });
 

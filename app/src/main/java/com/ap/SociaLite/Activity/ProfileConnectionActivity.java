@@ -84,18 +84,27 @@ public class ProfileConnectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_connection);
         ButterKnife.bind(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new ProfileConnectionTimelineFragment()).commit();
 
         timeline_btn = findViewById(R.id.timeline_btn);
         business_btn = findViewById(R.id.business_btn);
         spotlight_btn = findViewById(R.id.spotlight_btn);
 
-        //UserId = login user_id;
-        //user_id = request_id;
+//        UserId = login user_id;
+//        user_id = request_id;
         Session session = new Session(getApplicationContext());
-//        UserId = session.getUser_id();
-//        user_id = getIntent().getStringExtra("request_id");
-//        RequestId = getIntent().getStringExtra("request_id");
+        UserId = session.getUser_id();
+        user_id = getIntent().getStringExtra("request_id");
+        RequestId = getIntent().getStringExtra("request_id");
+
+        handleIntent();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new ProfileConnectionTimelineFragment(user_id)).commit();
+
+        my_profile(user_id);
+        profile_connection(UserId, RequestId);
+
+
+
+
 
         timeline_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +116,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                 spotlight_btn.setBackground(getResources().getDrawable(R.drawable.border_square_rs));
                 spotlight_btn.setTextColor(Color.BLACK);
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new ProfileConnectionTimelineFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new ProfileConnectionTimelineFragment(user_id)).commit();
             }
         });
 
@@ -121,7 +130,7 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                 spotlight_btn.setBackground(getResources().getDrawable(R.drawable.border_square_rs));
                 spotlight_btn.setTextColor(Color.BLACK);
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new ProfileConnectionBusinessFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_profile, new ProfileConnectionBusinessFragment(user_id)).commit();
             }
         });
 
@@ -146,10 +155,9 @@ public class ProfileConnectionActivity extends AppCompatActivity {
         });
 
 
-        handleIntent();
 
-        //   my_profile(user_id);
-        //  profile_connection(UserId, RequestId);
+
+
     }
 
     @Override
@@ -167,15 +175,12 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 
         if (appLinkData != null) {
 
-            RequestId = appLinkData.getQueryParameter("user_id");
-            Log.d("Recipe id", RequestId);
+            user_id = appLinkData.getQueryParameter("account");
+            Log.d("RequestId", user_id);
 
-//            Uri appData = Uri.parse("http://the-socialite.com/profile/").buildUpon()
-//                    .appendPath(user_id).build();
             Session session = new Session(getApplicationContext());
-            //    showRecipe(appData);
-            my_profile(RequestId);
-            profile_connection(session.getUser_id(), RequestId);
+            my_profile(user_id);
+            profile_connection(session.getUser_id(), user_id);
         }
     }
 
@@ -604,7 +609,18 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                 break;
 
             case R.id.share:
+                Uri.Builder builder = new Uri.Builder();
+                builder.scheme("http")
+                        .authority("the-socialite.com")
+                        .appendPath("profile/")
+                        .appendQueryParameter("account", user_id);
+
+                String myUrl = builder.build().toString();
+
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
+                in.putExtra("url",myUrl);
+                in.putExtra("share_profile","share_profile");
+                in.putExtra("profile_share_id",user_id);
                 view.getContext().startActivity(in);
                 break;
 
@@ -612,13 +628,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                 Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show();
                 break;
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //   my_profile(user_id);
-        //   profile_connection(UserId, RequestId);
     }
 }
 

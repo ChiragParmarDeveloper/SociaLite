@@ -26,7 +26,6 @@
             android:gravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/rating_post"
             app:layout_constraintStart_toEndOf="@+id/interest_user_pic"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -41,6 +40,8 @@
                 android:id="@+id/interest_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autoLink="web|email"
+                android:textColorLink="#0000FF"
                 android:text="email"
                 android:textSize="14sp" />
 
@@ -76,6 +77,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/interest_img_pic1"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

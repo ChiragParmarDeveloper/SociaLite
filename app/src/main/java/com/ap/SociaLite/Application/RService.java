@@ -58,7 +58,7 @@ public interface RService {
     @FormUrlEncoded
     @POST("business_link.php")
     Call<json> business_link_post(@Field("user_id") String user_id,
-                          @Field("post_id") String post_id);
+                                  @Field("post_id") String post_id);
 
 
     @POST("faq.php")
@@ -194,8 +194,6 @@ public interface RService {
     Call<json> profile(@Field("user_id") String user_id);
 
 
-
-
     @FormUrlEncoded
     @POST("notification_on_off.php")
     Call<json> on_off_notification(@Field("user_id") String user_id,
@@ -234,6 +232,15 @@ public interface RService {
     Call<json> addinterest(@Field("interest_ids[]") ArrayList<String> interest_ids,
                            @Field("user_id") String user_id);
 
+
+    @FormUrlEncoded
+    @POST("share_link.php")
+    Call<json> link_sharing(@Field("user_id") String user_id,
+                            @Field("shared_id[]") ArrayList<String> shared_id,
+                            @Field("url") String url,
+                            @Field("type") String type,
+                            @Field("profile_share_id") String profile_share_id,
+                            @Field("post_id") String post_id);
 
 //    @FormUrlEncoded
 //    @POST("sync_contacts.php")
@@ -298,12 +305,12 @@ public interface RService {
     @FormUrlEncoded
     @POST("normal_post_delete.php")
     Call<json> timeline_post(@Field("user_id") String user_id,
-                           @Field("post_id") String post_id);
+                             @Field("post_id") String post_id);
 
     @FormUrlEncoded
     @POST("unhide_post.php")
     Call<json> unhide(@Field("user_id") String user_id,
-                             @Field("post_id") String post_id);
+                      @Field("post_id") String post_id);
 
     @FormUrlEncoded
     @POST("add_post_comment.php")
@@ -340,13 +347,13 @@ public interface RService {
     @FormUrlEncoded
     @POST("post_interest.php")
     Call<json> like_interest_btn(@Field("user_id") String user_id,
-                               @Field("post_id") String post_id);
+                                 @Field("post_id") String post_id);
 
 
     @FormUrlEncoded
     @POST("delete_post_interest.php")
     Call<json> remove_interest_btn(@Field("user_id") String user_id,
-                                 @Field("post_id") String post_id);
+                                   @Field("post_id") String post_id);
 
 
     @FormUrlEncoded

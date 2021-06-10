@@ -1,7 +1,6 @@
 package com.ap.SociaLite.Activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,24 +9,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.Session;
-import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Presenter.business_post_link_Presenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class business_post_link extends AppCompatActivity {
 
@@ -138,7 +131,7 @@ public class business_post_link extends AppCompatActivity {
 
     public String post_id, user_id;
     public Boolean click = true;
-    public  String rate = "";
+    public String rate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,8 +165,6 @@ public class business_post_link extends AppCompatActivity {
             new business_post_link_Presenter(this, this).business_post_link(user_id, post_id);
         }
     }
-
-
 
 
 }

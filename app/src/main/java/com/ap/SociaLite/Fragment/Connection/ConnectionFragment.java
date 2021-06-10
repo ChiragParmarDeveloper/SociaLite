@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Fragment.Connection;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +82,18 @@ public class ConnectionFragment extends Fragment {
                 break;
 
             case R.id.share:
+                Uri.Builder builder = new Uri.Builder();
+                builder.scheme("http")
+                        .authority("the-socialite.com")
+                        .appendPath("profile/")
+                        .appendQueryParameter("account", RequestId);
+
+                String myUrl = builder.build().toString();
+
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
+                in.putExtra("url",myUrl);
+                in.putExtra("share_profile","share_profile");
+                in.putExtra("profile_share_id",RequestId);
                 view.getContext().startActivity(in);
                 break;
 

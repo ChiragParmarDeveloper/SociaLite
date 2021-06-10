@@ -1,8 +1,10 @@
 package com.ap.SociaLite.Adapter;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -29,11 +32,13 @@ import com.ap.SociaLite.Activity.ShareToFriend;
 import com.ap.SociaLite.Application.RService;
 import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Pojo.hide_post;
+import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.HiddedPostDetailPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -51,6 +56,7 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
     List<hide_post> mList;
     HiddedPostDetailActivity hiddedPostDetailActivity;
     hide_post item;
+    List<hide_post> new_post_list = new ArrayList<>();
 
     public HiddedPostDetailAdapter(Context mContext, List<hide_post> mList, HiddedPostDetailActivity hiddedPostDetailActivity) {
         this.mContext = mContext;
@@ -150,7 +156,21 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
                                 break;
 
                             case R.id.copylink:
-                                Toast.makeText(view.getContext(), "Coming soon", Toast.LENGTH_SHORT).show();
+                                String post_id = mList.get(position).post_id;
+
+                                Uri.Builder builder = new Uri.Builder();
+                                builder.scheme("http")
+                                        .authority("the-socialite.com")
+                                        .appendPath("post/")
+                                        .appendQueryParameter("post", post_id);
+                                //.appendQueryParameter("sort", "relevance")
+                                //.fragment("section-name");
+                                String myUrl = builder.build().toString();
+
+                                ClipboardManager cm = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                                cm.setText(myUrl);
+                                Toast.makeText(mContext, "Copied", Toast.LENGTH_SHORT).show();
+
                                 break;
 
                             default:
@@ -167,7 +187,20 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
         holder.layout_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String post_id = mList.get(position).post_id;
+
+                Uri.Builder builder = new Uri.Builder();
+                builder.scheme("http")
+                        .authority("the-socialite.com")
+                        .appendPath("post/")
+                        .appendQueryParameter("post", post_id);
+
+                String myUrl = builder.build().toString();
+
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
+                in.putExtra("url",myUrl);
+                in.putExtra("share_post","share_post");
+                in.putExtra("post_id",post_id);
                 view.getContext().startActivity(in);
             }
         });
@@ -190,16 +223,12 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
         holder.rating_star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 rate = "1";
                 new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).rating_post(hiddedPostDetailActivity.user_id, id, rate);
-                new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).view_hided_post(hiddedPostDetailActivity.user_id);
+                view_hided_post(hiddedPostDetailActivity.user_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
-
-
             }
         });
 
@@ -208,7 +237,7 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
             public void onClick(View view) {
                 rate = "2";
                 new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).rating_post(hiddedPostDetailActivity.user_id, id, rate);
-                new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).view_hided_post(hiddedPostDetailActivity.user_id);
+                view_hided_post(hiddedPostDetailActivity.user_id, position);
 
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
@@ -221,7 +250,8 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
             public void onClick(View view) {
                 rate = "3";
                 new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).rating_post(hiddedPostDetailActivity.user_id, id, rate);
-                new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).view_hided_post(hiddedPostDetailActivity.user_id);
+                view_hided_post(hiddedPostDetailActivity.user_id, position);
+
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -233,7 +263,8 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
             public void onClick(View view) {
                 rate = "4";
                 new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).rating_post(hiddedPostDetailActivity.user_id, id, rate);
-                new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).view_hided_post(hiddedPostDetailActivity.user_id);
+                view_hided_post(hiddedPostDetailActivity.user_id, position);
+
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -245,7 +276,8 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
             public void onClick(View view) {
                 rate = "5";
                 new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).rating_post(hiddedPostDetailActivity.user_id, id, rate);
-                new HiddedPostDetailPresenter(mContext, hiddedPostDetailActivity).view_hided_post(hiddedPostDetailActivity.user_id);
+                view_hided_post(hiddedPostDetailActivity.user_id, position);
+
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -461,6 +493,38 @@ public class HiddedPostDetailAdapter extends RecyclerView.Adapter<HiddedPostDeta
     public void removeAt(int pos) {
         mList.remove(pos);
         notifyDataSetChanged();
+    }
+
+    public void view_hided_post(String user_id,int position) {
+        hiddedPostDetailActivity.progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(mContext).hidepost(user_id).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    hiddedPostDetailActivity.progressbar.setVisibility(View.GONE);
+                    if (response.body().status.equals("1")) {
+                        if (response.body().hide_post != null) {
+
+                            new_post_list = response.body().hide_post;
+                            mList.set(position, new_post_list.get(position));
+                            notifyItemChanged(position);
+                        }
+                    } else {
+
+                        //     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    hiddedPostDetailActivity.progressbar.setVisibility(View.GONE);
+                    //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                    //  Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
     }
 
 }

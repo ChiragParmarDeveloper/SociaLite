@@ -205,10 +205,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
                         .appendQueryParameter("post", post_id);
 
                 String myUrl = builder.build().toString();
-
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
                 in.putExtra("url",myUrl);
+                in.putExtra("share_post","share_post");
+                in.putExtra("post_id",post_id);
                 view.getContext().startActivity(in);
+
             }
         });
 

@@ -45,10 +45,4 @@ public class HidedPost extends AppCompatActivity {
                 break;
         }
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new HidedPostPresenter(this, this).view_hided_post(user_id);
-    }
 }

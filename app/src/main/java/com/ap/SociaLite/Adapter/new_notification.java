@@ -1,6 +1,7 @@
 package com.ap.SociaLite.Adapter;
 
 import android.content.Context;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,8 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
     private final int TYPE_Public = 0;
     private final int TYPE_Rating = 1;
     private final int TYPE_Interest = 2;
+    private final int TYPE_share_profile = 3;
+    private final int TYPE_share_post = 4;
 
     Context mContext;
     Notification notification;
@@ -78,9 +81,14 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
                 return new Rating(childView1);
 
             case TYPE_Interest:
+
+            case TYPE_share_profile:
+
+            case TYPE_share_post:
                 View childView2 = LayoutInflater.from(mContext)
                         .inflate(R.layout.notification_interested, parent, false);
                 return new Interest(childView2);
+
 
         }
         return null;
@@ -201,9 +209,73 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
             case TYPE_Interest:
 
                 item = datas.get(position);
-
+                ((Interest) holder).interest_email.setMovementMethod(LinkMovementMethod.getInstance());
                 ((Interest) holder).txt_interest_username.setText(item.username + " " + "Interested in your post");
                 ((Interest) holder).interest_email.setText(item.email);
+                Picasso.get().load(item.post_image).into(((Interest) holder).interest_post);
+
+                if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
+                    ((Interest) holder).interest_img_pic.setVisibility(View.VISIBLE);
+                    String avatarTitle = String.valueOf(item.username.charAt(0)).toUpperCase();
+                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                    int randomcolor = generator.getRandomColor();
+
+                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                    ((Interest) holder).interest_img_pic.setImageDrawable(drawable);
+
+                } else {
+                    ((Interest) holder).interest_img_pic.setVisibility(View.GONE);
+                    Picasso.get().load(item.user_profile_pic).into(((Interest) holder).interest_user_pic);
+                }
+                break;
+
+            case TYPE_share_profile:
+                item = datas.get(position);
+                ((Interest) holder).interest_email.setMovementMethod(LinkMovementMethod.getInstance());
+                ((Interest) holder).txt_interest_username.setText(item.username + " " + "shared profile with you");
+                ((Interest) holder).interest_email.setText(item.url);
+
+                if (item.shareuser_profile_pic.equals("http://the-socialite.com/admin/")) {
+                    ((Interest) holder).interest_img_pic1.setVisibility(View.VISIBLE);
+                    String avatarTitle = String.valueOf(item.share_username.charAt(0)).toUpperCase();
+                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                    int randomcolor = generator.getRandomColor();
+
+                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                    ((Interest) holder).interest_img_pic1.setImageDrawable(drawable);
+
+                } else {
+                    ((Interest) holder).interest_img_pic1.setVisibility(View.GONE);
+                    Picasso.get().load(item.shareuser_profile_pic).into(((Interest) holder).interest_post);
+                }
+
+                if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
+                    ((Interest) holder).interest_img_pic.setVisibility(View.VISIBLE);
+                    String avatarTitle = String.valueOf(item.username.charAt(0)).toUpperCase();
+                    ColorGenerator generator = ColorGenerator.MATERIAL;
+                    int randomcolor = generator.getRandomColor();
+
+                    TextDrawable.IBuilder builder = TextDrawable.builder().beginConfig().endConfig().round();
+
+                    TextDrawable drawable = builder.build(avatarTitle, randomcolor);
+                    ((Interest) holder).interest_img_pic.setImageDrawable(drawable);
+
+                } else {
+                    ((Interest) holder).interest_img_pic.setVisibility(View.GONE);
+                    Picasso.get().load(item.user_profile_pic).into(((Interest) holder).interest_user_pic);
+                }
+                break;
+
+            case TYPE_share_post:
+                item = datas.get(position);
+
+                ((Interest) holder).interest_email.setMovementMethod(LinkMovementMethod.getInstance());
+                ((Interest) holder).txt_interest_username.setText(item.username + " " + "shared post with you");
+                ((Interest) holder).interest_email.setText(item.url);
                 Picasso.get().load(item.post_image).into(((Interest) holder).interest_post);
 
                 if (item.user_profile_pic.equals("http://the-socialite.com/admin/")) {
@@ -323,6 +395,8 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
         @BindView(R.id.interest_post)
         CircularImageView interest_post;
 
+        @BindView(R.id.interest_img_pic1)
+        ImageView interest_img_pic1;
 
         public Interest(@NonNull View itemView) {
             super(itemView);
@@ -345,6 +419,12 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             case "Interest":
                 return TYPE_Interest;
+
+            case "share_profile":
+                return TYPE_share_profile;
+
+            case "share_post":
+                return TYPE_share_post;
 
             default:
                 return -1;

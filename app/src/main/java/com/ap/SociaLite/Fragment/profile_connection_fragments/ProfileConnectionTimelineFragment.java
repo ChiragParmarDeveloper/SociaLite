@@ -18,12 +18,21 @@ import butterknife.ButterKnife;
 
 public class ProfileConnectionTimelineFragment extends Fragment {
 
+    public String user_id;
+
+    public ProfileConnectionTimelineFragment(String user_id){
+        this.user_id = user_id;
+    }
+
+
+
+
     @BindView(R.id.recycleview_timeline)
     public RecyclerView recycleview_timeline;
 
     @BindView(R.id.progressbar)
     public ProgressBar progressbar;
-    public String user_id;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,7 +40,7 @@ public class ProfileConnectionTimelineFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile_connection_timeline, container, false);
         ButterKnife.bind(this, view);
 
-        user_id = getActivity().getIntent().getStringExtra("request_id");
+//        user_id = getActivity().getIntent().getStringExtra("request_id");
 
         new ProfileConnectionTimelineFragmentPresenter(getContext(), this).time_line_post(user_id);
 

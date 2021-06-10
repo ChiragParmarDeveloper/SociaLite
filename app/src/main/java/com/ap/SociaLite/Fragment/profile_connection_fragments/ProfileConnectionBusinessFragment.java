@@ -26,13 +26,17 @@ public class ProfileConnectionBusinessFragment extends Fragment {
 
    public String user_id;
 
+    public ProfileConnectionBusinessFragment(String user_id){
+        this.user_id = user_id;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_connection_business, container, false);
         ButterKnife.bind(this, view);
 
-        user_id = getActivity().getIntent().getStringExtra("request_id");
+       // user_id = getActivity().getIntent().getStringExtra("request_id");
 
         new ProfileConnectionBusinessFragmentPresenter(getActivity(), this).my_post_business_intrection(user_id);
         return view;
