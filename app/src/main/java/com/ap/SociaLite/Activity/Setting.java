@@ -3,6 +3,7 @@ package com.ap.SociaLite.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,7 +62,8 @@ public class Setting extends AppCompatActivity {
                 break;
 
             case R.id.constraintLayout_contact:
-                startActivity(new Intent(Setting.this, Sync_contact.class));
+           //     startActivity(new Intent(Setting.this, Sync_contact.class));
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
                 break;
 
         }

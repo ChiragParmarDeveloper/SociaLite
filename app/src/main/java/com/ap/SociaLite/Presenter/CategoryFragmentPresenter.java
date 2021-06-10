@@ -39,15 +39,8 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                     categoryFragment.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
 
-
-                        Log.d("Size", String.valueOf(response.body().interest_details.size()));
-                        Log.d("Size_id0", String.valueOf(response.body().interest_details.get(0).interest_id));
-
-                        Log.d("Size_id1", String.valueOf(response.body().interest_details.get(1).interest_id));
-                        Log.d("Size_id2", String.valueOf(response.body().interest_details.get(2).interest_id));
-
-
                         categoryFragment.interest_ids = response.body().interest_details.get(response.body().interest_details.size() - 1).interest_id;
+                        Log.d("Size_id", String.valueOf(categoryFragment.interest_ids));
 
                         if (response.body().interest_details != null && response.body().interest_details.size() > 0) {
                             categoryFragment.rv_interestlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));

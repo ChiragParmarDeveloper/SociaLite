@@ -22,10 +22,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="8dp"
             android:gravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/interest_post"
             app:layout_constraintStart_toEndOf="@+id/interest_user_pic"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -41,8 +42,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autoLink="web|email"
-                android:textColorLink="#0000FF"
                 android:text="email"
+                android:textColorLink="#0000FF"
                 android:textSize="14sp" />
 
         </LinearLayout>
