@@ -70,7 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         // Write Permission
         int writepermission = ContextCompat.checkSelfPermission(mBaseContext, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 //        // Location Permission
-//        int permissionLocation = ContextCompat.checkSelfPermission(mBaseContext, Manifest.permission.ACCESS_FINE_LOCATION);
+        int permissionRead = ContextCompat.checkSelfPermission(mBaseContext, Manifest.permission.READ_EXTERNAL_STORAGE);
 //        // Read Contacts Permission
 //        int permissionREAD_PHONE_STATE = ContextCompat.checkSelfPermission(mBaseContext, Manifest.permission.READ_PHONE_STATE);
 //        // Read Contacts
@@ -83,6 +83,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         if (writepermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (permissionRead != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
 //        if (permissionLocation != PackageManager.PERMISSION_GRANTED) {
 //            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -109,7 +112,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 // Initialize the map with both permissions
                 perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
-//                perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
 //                perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
 //                perms.put(Manifest.permission.READ_CONTACTS, PackageManager.PERMISSION_GRANTED);
 //                perms.put(Manifest.permission.RECORD_AUDIO, PackageManager.PERMISSION_GRANTED);
@@ -121,8 +124,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                     // Check for both permissions
                     if (perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
                             && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-//                            &&
-//                            perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                            &&
+                            perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 //                            &&
 //                            perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED &&
 //                            perms.get(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED &&
@@ -139,8 +142,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                         //show the dialog or snackbar saying its necessary and try again otherwise proceed with setup.
                         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA) ||
                                 ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                                ||
-//                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION) ||
+                                ||
+                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                     //           ||
 //                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE) ||
 //                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_CONTACTS) ||
 //                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)

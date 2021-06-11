@@ -536,7 +536,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
     }
 
     private void my_profile(String user_id) {
-        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
         //  progressbar.setVisibility(View.VISIBLE);
         try {
             new RService.api().call(this).my_profileActivity(user_id).enqueue(new Callback<json>() {
