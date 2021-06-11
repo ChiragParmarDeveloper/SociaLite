@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.ap.SociaLite.Activity.Notification;
-import com.ap.SociaLite.Application.RService;
-import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Pojo.data;
 import com.ap.SociaLite.Presenter.NotificationPresenter;
 import com.ap.SociaLite.R;
@@ -31,9 +29,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -141,7 +136,7 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
                     @Override
                     public void onClick(View v) {
                         new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
-                        user_notification_list(notification.UserId, position);
+                        //        user_notification_list(notification.UserId, position);
                     }
                 });
 
@@ -149,7 +144,7 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
                     @Override
                     public void onClick(View v) {
                         new NotificationPresenter(notification, mContext).request_denied(item.request_id, notification.UserId);
-                        user_notification_list(notification.UserId, position);
+                        //       user_notification_list(notification.UserId, position);
                     }
                 });
                 break;
@@ -174,13 +169,19 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
                     Picasso.get().load(item.request_user_profile_pic).into(((Public_user) holder).notification_connect_user_pic);
                 }
 
-                ((Public_user) holder).notification_connect.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
-                        user_notification_list(notification.UserId, position);
-                    }
-                });
+                if (datas.get(position).is_connected.equals("1")) {
+
+                    ((Public_user) holder).notification_connect.setVisibility(View.GONE);
+
+                } else {
+                    ((Public_user) holder).notification_connect.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            new NotificationPresenter(notification, mContext).request_accept(item.request_id, notification.UserId);
+                            //       user_notification_list(notification.UserId, position);
+                        }
+                    });
+                }
                 break;
 
             case TYPE_Rating:
@@ -431,34 +432,34 @@ public class new_notification extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-
-    public void user_notification_list(String UserId, int position) {
-        try {
-            new RService.api().call(mContext).notification(UserId).enqueue(new Callback<json>() {
-                @Override
-                public void onResponse(Call<json> call, Response<json> response) {
-                    if (response.body().status.equals("1")) {
-
-                        if (response.body().data != null && response.body().data.size() > 0) {
-                            new_data = response.body().data;
-                            datas.set(position, new_data.get(position));
-                            notifyItemChanged(position);
-                        } else {
-
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<json> call, Throwable t) {
-                    //      Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    //    Log.d("error", String.valueOf(t.getMessage()));
-                }
-            });
-        } catch (Exception e) {
-
-        }
-    }
+//
+//    public void user_notification_list(String UserId, int position) {
+//        try {
+//            new RService.api().call(mContext).notification(UserId).enqueue(new Callback<json>() {
+//                @Override
+//                public void onResponse(Call<json> call, Response<json> response) {
+//                    if (response.body().status.equals("1")) {
+//
+//                        if (response.body().data != null && response.body().data.size() > 0) {
+//                            new_data = response.body().data;
+//                            datas.set(position, new_data.get(position));
+//                            notifyItemChanged(position);
+//                        } else {
+//
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<json> call, Throwable t) {
+//                    //      Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+//                    //    Log.d("error", String.valueOf(t.getMessage()));
+//                }
+//            });
+//        } catch (Exception e) {
+//
+//        }
+//    }
 
 
 }

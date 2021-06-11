@@ -70,6 +70,7 @@ public class NotificationPresenter implements NotificationContrast {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new NotificationPresenter(notification, mContext).user_notification_list(UserId);
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
@@ -97,6 +98,8 @@ public class NotificationPresenter implements NotificationContrast {
                     notification.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                        new NotificationPresenter(notification, mContext).user_notification_list(UserId);
+
                     } else {
                         //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                     }
@@ -106,6 +109,34 @@ public class NotificationPresenter implements NotificationContrast {
                 public void onFailure(Call<json> call, Throwable t) {
                     notification.progressbar.setVisibility(View.GONE);
                     //     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void read_notification(String UserId) {
+        notification.progressbar.setVisibility(View.VISIBLE);
+        try {
+            new RService.api().call(mContext).read_count(UserId).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+                    notification.progressbar.setVisibility(View.GONE);
+                    if (response.body().status.equals("1")) {
+
+                        //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    } else {
+                        //  Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    notification.progressbar.setVisibility(View.GONE);
+                    //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
                     //    Log.d("error", String.valueOf(t.getMessage()));
                 }
             });

@@ -6,4 +6,7 @@ public interface NotificationContrast {
     void request_accept (String UserId, String RequestId);
 
     void request_denied (String UserId, String RequestId);
+
+    void read_notification (String UserId);
+
 }

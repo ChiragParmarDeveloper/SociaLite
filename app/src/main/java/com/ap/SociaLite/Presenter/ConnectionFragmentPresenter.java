@@ -40,6 +40,7 @@ public class ConnectionFragmentPresenter implements ConnectionFragmentContrast {
                             connectionFragment.connectionAdapter = new ConnectionAdapter(mContext, connectionFragment.user_connections, connectionFragment);
                             connectionFragment.connections_recyclerview.setLayoutManager(new GridLayoutManager(mContext, 1));
                             connectionFragment.connections_recyclerview.setAdapter(connectionFragment.connectionAdapter);
+                            connectionFragment.connections_recyclerview.scrollToPosition(connectionFragment.position);
                         }
                     } else {
                         connectionFragment.layout_connection.setVisibility(View.GONE);
@@ -67,6 +68,7 @@ public class ConnectionFragmentPresenter implements ConnectionFragmentContrast {
             public void onResponse(Call<json> call, Response<json> response) {
                 if (response.body().status.equals("1")) {
                     Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
+                    followers(UserId);
                 } else {
                     //    Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                 }

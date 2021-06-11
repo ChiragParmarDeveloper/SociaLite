@@ -103,7 +103,7 @@ public class PostPresenter implements PostContract {
                     if (response.body().status.equals("1")) {
                         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
                         Intent in = new Intent(mContext, HomeActivity.class);
-                        in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        //in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         in.putExtra("pass", "category_fragment");
                         mContext.startActivity(in);
                         post.finish();

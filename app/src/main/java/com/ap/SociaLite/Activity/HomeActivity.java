@@ -13,11 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -112,15 +110,17 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.imgnotification)
     ImageView imgnotification;
 
+    @BindView(R.id.cart_badge)
+    public TextView cart_badge;
 
     public ImageView home_latter;
 
     private int REQUEST_CODE = 1;
     public TextView txt_name, txt_email, txt_category1, txt_notification, txt_profile, txt_help, txt_faq, txt_setting, txt_logout;
-    ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout,img_arrow;
+    ImageView img_category1, img_notification, img_profile, img_help, img_faq, img_setting, img_logout, img_arrow;
     public CircularImageView img_dp;
     String todeside_fragment;
-    LinearLayout Notification,category, Profile, help, faq, setting, logout;
+    LinearLayout Notification, category, Profile, help, faq, setting, logout;
     String user_id;
 
     @Override
@@ -402,14 +402,13 @@ public class HomeActivity extends AppCompatActivity {
         img_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    drawer_layout.closeDrawers();
+                drawer_layout.closeDrawers();
             }
         });
 
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 startActivity(new Intent(getApplicationContext(), InterestActivity.class));
 
@@ -458,9 +457,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        new HomeActivityPresenter(this,this).save_token(user_id,FirebaseInstanceId.getInstance().getToken());
+        new HomeActivityPresenter(this, this).save_token(user_id, FirebaseInstanceId.getInstance().getToken());
         new HomeActivityPresenter(this, this).fetch_profile(user_id);
+
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -475,8 +476,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -485,16 +484,18 @@ public class HomeActivity extends AppCompatActivity {
 
     @SuppressLint("ResourceAsColor")
     @OnClick({R.id.layout_category, R.id.layout_interest, R.id.layout_network, R.id.layout_share, R.id.layout_business, R.id.img_leftmenu,
-            R.id.imgsearch,R.id.imgnotification})
+            R.id.imgsearch, R.id.imgnotification})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.layout_category:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new CategoryFragment()).commit();
 
                 txt_categorylist.setText("Dashboard");
+                cart_badge.setVisibility(View.GONE);
 
                 imgsearch.setVisibility(View.VISIBLE);
                 imgnotification.setVisibility(View.GONE);
+                cart_badge.setVisibility(View.GONE);
 
                 img_category.setImageResource(R.drawable.ic_img_category);
                 txt_category.setTextColor(getResources().getColor(R.color.colororange));
@@ -516,6 +517,7 @@ public class HomeActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new InterestFragment()).commit();
 
                 txt_categorylist.setText("My Interest");
+                cart_badge.setVisibility(View.GONE);
 
                 imgsearch.setVisibility(View.VISIBLE);
                 imgnotification.setVisibility(View.GONE);
@@ -534,12 +536,14 @@ public class HomeActivity extends AppCompatActivity {
 
                 img_business.setImageResource(R.drawable.ic_img_business);
                 txt_business.setTextColor(getResources().getColor(R.color.colorBlack));
+
                 break;
 
             case R.id.layout_network:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new NetworkFragment()).commit();
 
                 txt_categorylist.setText("My Network");
+                cart_badge.setVisibility(View.GONE);
 
                 imgsearch.setVisibility(View.VISIBLE);
                 imgnotification.setVisibility(View.GONE);
@@ -584,12 +588,15 @@ public class HomeActivity extends AppCompatActivity {
                 img_category.setImageResource(R.drawable.ic_img_categoryblack);
                 txt_category.setTextColor(getResources().getColor(R.color.colorBlack));
 
+                new HomeActivityPresenter(this, this).user_notification_list(user_id);
+
                 break;
 
             case R.id.layout_business:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame_home, new BusinessFragment()).commit();
 
                 txt_categorylist.setText("Business Interaction");
+                cart_badge.setVisibility(View.GONE);
 
                 imgsearch.setVisibility(View.VISIBLE);
                 imgnotification.setVisibility(View.GONE);

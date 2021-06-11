@@ -101,6 +101,10 @@ public interface RService {
 
 
     @FormUrlEncoded
+    @POST("read_notification.php")
+    Call<json> read_count(@Field("UserId") String UserId);
+
+    @FormUrlEncoded
     @POST("connection_fetch.php")
     Call<json> connection(@Field("UserId") String UserId);
 

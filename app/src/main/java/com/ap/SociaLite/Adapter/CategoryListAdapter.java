@@ -38,14 +38,14 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     interest_details item;
     public String clickItem;
     public static int selectedItem;
-
     int i;
+
     public CategoryListAdapter(Context context, List<interest_details> list, CategoryFragment fragment) {
         this.mContext = context;
         this.details = list;
         this.categoryFragment = fragment;
         selectedItem = 0;
-        clickItem = categoryFragment.interest_ids;
+        clickItem = String.valueOf(details.size()-1);
         i=Integer.parseInt(clickItem);
     }
 
@@ -82,17 +82,17 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 //      //     new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
 //       }
 
-        if ( categoryFragment.interest_ids != ""){
-
-            Log.d("category_id",categoryFragment.interest_ids);
-            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
-       //     Toast.makeText(mContext, categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
-      //      holder.img_category.setSelected(true);
-      //      holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
-
-        }else {
-            //  Toast.makeText(mContext, "Fail", Toast.LENGTH_SHORT).show();
-        }
+//        if (!categoryFragment.interest_ids.equals("")){
+//
+//            Log.d("category_id_check",categoryFragment.interest_ids);
+//            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+//       //     Toast.makeText(mContext, categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+//      //      holder.img_category.setSelected(true);
+//      //      holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
+//
+//        }else {
+//            //  Toast.makeText(mContext, "Fail", Toast.LENGTH_SHORT).show();
+//        }
 
         if (item.flag.equals("1")) {
             holder.img_right.setVisibility(View.VISIBLE);
@@ -108,7 +108,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                 new CategoryFragmentPresenter(mContext, categoryFragment).fetch_all_intrest(categoryFragment.user_id);
             }
         });
-
 
         if (position == i ) {
             holder.img_category.setSelected(true);

@@ -43,5 +43,7 @@ public class user_details {
     @SerializedName("notification_on_off")
     public String notification_on_off;
 
+    @SerializedName("notification_count")
+    public String notification_count;
 
 }

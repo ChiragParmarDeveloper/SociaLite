@@ -12,4 +12,9 @@ public class user_connection {
 
     @SerializedName("username")
     public String username;
+
+    @SerializedName("is_connected")
+    public String is_connected;
+
+
 }

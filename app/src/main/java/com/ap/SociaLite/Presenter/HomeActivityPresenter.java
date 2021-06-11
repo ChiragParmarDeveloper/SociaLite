@@ -66,6 +66,7 @@ public class HomeActivityPresenter implements HomeActivityContract {
 
                             homeActivity.txt_email.setText(response.body().user_details.email);
 
+
                         }
                     } else {
                         //         Toast.makeText(mContext, response.body().message, Toast.LENGTH_LONG).show();
@@ -78,8 +79,10 @@ public class HomeActivityPresenter implements HomeActivityContract {
                     //       Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
         }
+
     }
 
     @Override
@@ -105,5 +108,35 @@ public class HomeActivityPresenter implements HomeActivityContract {
         } catch (Exception e) {
         }
 
+    }
+
+    @Override
+    public void user_notification_list(String UserId) {
+        try {
+            new RService.api().call(mContext).notification(UserId).enqueue(new Callback<json>() {
+                @Override
+                public void onResponse(Call<json> call, Response<json> response) {
+
+                    if (response.body().status.equals("1")) {
+                        if (response.body().Total_count != "") {
+                            homeActivity.cart_badge.setVisibility(View.VISIBLE);
+                            homeActivity.cart_badge.setText(response.body().Total_count);
+                            //      Toast.makeText(getApplicationContext(), response.body().message, Toast.LENGTH_SHORT).show();
+                        } else {
+                            homeActivity.cart_badge.setVisibility(View.GONE);
+                            //     Toast.makeText(getApplicationContext(), response.body().message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<json> call, Throwable t) {
+                    //      Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Log.d("error", String.valueOf(t.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+
+        }
     }
 }

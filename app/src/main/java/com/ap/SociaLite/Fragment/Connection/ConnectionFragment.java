@@ -24,6 +24,8 @@ import com.ap.SociaLite.Presenter.ConnectionFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,6 +52,11 @@ public class ConnectionFragment extends Fragment {
     @BindView(R.id.img_pic)
     public ImageView img_pic;
 
+    @BindView(R.id.connect_to)
+    public TextView connect_to;
+
+
+    public int position;
     public static ConnectionAdapter connectionAdapter;
     public String UserId, RequestId;
     public static List<user_connection> user_connections;

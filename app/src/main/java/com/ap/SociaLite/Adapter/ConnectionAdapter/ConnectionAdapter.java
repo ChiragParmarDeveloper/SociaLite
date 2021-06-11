@@ -1,7 +1,6 @@
 package com.ap.SociaLite.Adapter.ConnectionAdapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,7 +103,19 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.My
             } else {
                 connectionFragment.img_pic.setVisibility(View.GONE);
                 Picasso.get().load(user_connections.get(position).profile_pic).into(connectionFragment.search_profile_image);
-           }
+            }
+
+
+            for (int i = 0; i < user_connections.size(); i++) {
+                if (user_connections.get(position).is_connected.equals("Accepted")) {
+                    connectionFragment.connect_to.setText("Connected");
+                } else if (user_connections.get(position).is_connected.equals("Requested")) {
+                    connectionFragment.connect_to.setText("Requesting");
+                } else {
+                    connectionFragment.connect_to.setText("Connect");
+                }
+            }
+
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +123,7 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.My
             public void onClick(View view) {
                 connectionFragment.RequestId = user_connections.get(position).Request_Id;
                 connectionFragment.search_profile_user_name.setText(user_connections.get(position).username);
-
+                connectionFragment.position = (position);
 //                if (user_connections.get(position).profile_pic.equals("http://the-socialite.com/admin/")) {
 //                    Drawable upload_img = mContext.getDrawable(R.drawable.ic_user_icon);
 //                    connectionFragment.search_profile_image.setImageDrawable(upload_img);
@@ -135,7 +146,19 @@ public class ConnectionAdapter extends RecyclerView.Adapter<ConnectionAdapter.My
                     connectionFragment.img_pic.setVisibility(View.GONE);
                     Picasso.get().load(user_connections.get(position).profile_pic).into(connectionFragment.search_profile_image);
                 }
+
+
+                for (int i = 0; i < user_connections.size(); i++) {
+                    if (user_connections.get(position).is_connected.equals("Accepted")) {
+                        connectionFragment.connect_to.setText("Connected");
+                    } else if (user_connections.get(position).is_connected.equals("Requested")) {
+                        connectionFragment.connect_to.setText("Requesting");
+                    } else {
+                        connectionFragment.connect_to.setText("Connect");
+                    }
+                }
             }
+
         });
     }
 

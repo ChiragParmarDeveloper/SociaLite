@@ -68,5 +68,4 @@ public class data {
 
     @SerializedName("share_username")
     public String share_username;
-
 }
