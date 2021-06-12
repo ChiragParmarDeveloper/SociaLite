@@ -8,16 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ap.SociaLite.Application.RService;
-import com.ap.SociaLite.Application.json;
 import com.ap.SociaLite.Fragment.CategoryFragment;
 import com.ap.SociaLite.Pojo.interest_details;
-import com.ap.SociaLite.Pojo.post_list;
 import com.ap.SociaLite.Presenter.CategoryFragmentPresenter;
 import com.ap.SociaLite.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -26,27 +22,27 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.Holder> {
 
     Context mContext;
     CategoryFragment categoryFragment;
     List<interest_details> details = new ArrayList<>();
     interest_details item;
-    public String clickItem;
-    public static int selectedItem;
-    int i;
+//    public String clickItem;
+//    public static int selectedItem;
+//    int i;
+
+    private int selectedItem;
+
+    private int clickItem = 0;
 
     public CategoryListAdapter(Context context, List<interest_details> list, CategoryFragment fragment) {
         this.mContext = context;
         this.details = list;
         this.categoryFragment = fragment;
         selectedItem = 0;
-        clickItem = String.valueOf(details.size()-1);
-        i=Integer.parseInt(clickItem);
+//        clickItem = String.valueOf(details.size() - 1);
+//        i = Integer.parseInt(clickItem);
     }
 
     @NonNull
@@ -66,8 +62,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         Picasso.get().load(item.interest_image).into(holder.img_category);
 
         Drawable plus_favorite = mContext.getDrawable(R.drawable.ic_category_plus);
-  //      new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
-   //     Toast.makeText(mContext, "default) id " + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
+        //      new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+        //     Toast.makeText(mContext, "default) id " + categoryFragment.interest_ids, Toast.LENGTH_SHORT).show();
 //        if (selectedItem == position) {
 //         //   categoryFragment.interest_ids = details.get(position).interest_id;
 //
@@ -109,11 +105,15 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             }
         });
 
-        if (position == i ) {
+
+
+        if (position == clickItem) {
+      //  if (position == i) {
+            categoryFragment.interest_ids = details.get(position).interest_id;
             holder.img_category.setSelected(true);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
 
-            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id,categoryFragment.interest_ids);
+            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id, categoryFragment.interest_ids);
 
         } else {
             holder.img_category.setSelected(false);
@@ -124,7 +124,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             @Override
             public void onClick(View view) {
                 categoryFragment.interest_ids = details.get(position).interest_id;
-                i = holder.getAdapterPosition();
+                clickItem = holder.getAdapterPosition();
                 notifyDataSetChanged();
             }
         });

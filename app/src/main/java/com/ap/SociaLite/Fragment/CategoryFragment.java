@@ -53,7 +53,7 @@ public class CategoryFragment extends Fragment {
         user_id = session.getUser_id();
 
         new CategoryFragmentPresenter(getActivity(), this).fetch_all_intrest(user_id);
-      //  new CategoryFragmentPresenter(getActivity(), this).Category_post_fragment(interest_ids);
+
         return view;
     }
 
