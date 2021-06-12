@@ -266,7 +266,8 @@ public interface RService {
 
     @FormUrlEncoded
     @POST("post_list.php")
-    Call<json> category_post(@Field("interest_id") String interest_id);
+    Call<json> category_post(@Field("user_id") String user_id,
+                             @Field("interest_id") String interest_id);
 
     @FormUrlEncoded
     @POST("hide_post.php")
@@ -359,10 +360,11 @@ public interface RService {
     Call<json> remove_interest_btn(@Field("user_id") String user_id,
                                    @Field("post_id") String post_id);
 
-
     @FormUrlEncoded
     @POST("interest_wise_post.php")
-    Call<json> interest_wise_post(@Field("interest_id") String interest_id);
+    Call<json> interest_wise_post(
+            @Field("user_id") String user_id,
+            @Field("interest_id") String interest_id);
 
 
     @FormUrlEncoded

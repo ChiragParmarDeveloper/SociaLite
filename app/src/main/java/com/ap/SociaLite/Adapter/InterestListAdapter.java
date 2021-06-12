@@ -57,7 +57,7 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
         if (selectedItem == position) {
             interestFragment.interest_id = details.get(position).interest_id;
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
-            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.interest_id);
+            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.user_id,interestFragment.interest_id);
         }
 
         if (position == clickItem) {
@@ -65,7 +65,7 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
             holder.img_category.setSelected(true);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
 
-            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.interest_id);
+            new InterestFragmentPresenter(mContext, interestFragment).fetch_my_intrest_wise_post(interestFragment.user_id,interestFragment.interest_id);
 
         } else {
             holder.img_category.setSelected(false);

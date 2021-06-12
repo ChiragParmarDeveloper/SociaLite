@@ -113,7 +113,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             holder.img_category.setSelected(true);
             holder.img_category.setBorderColor(mContext.getResources().getColor(R.color.colorAccent));
 
-            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.interest_ids);
+            new CategoryFragmentPresenter(mContext, categoryFragment).Category_post_fragment(categoryFragment.user_id,categoryFragment.interest_ids);
 
         } else {
             holder.img_category.setSelected(false);
@@ -148,6 +148,4 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             img_right = itemView.findViewById(R.id.img_right);
         }
     }
-
-
 }

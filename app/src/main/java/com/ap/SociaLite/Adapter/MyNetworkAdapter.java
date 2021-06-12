@@ -153,7 +153,7 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
                         switch (item.getItemId()) {
                             case R.id.hide:
                                 new NetworkFragmentPresenter(mContext, networkFragment).hide_post(networkFragment.UserId, id);
-                                new NetworkFragmentPresenter(mContext, networkFragment).my_network_post(networkFragment.UserId);
+                                removeAt(position);
                                 break;
 
                             case R.id.save:
@@ -541,6 +541,9 @@ public class MyNetworkAdapter extends RecyclerView.Adapter<MyNetworkAdapter.MyHo
             }
         });
     }
-
+    public void removeAt(int pos) {
+        post_lists.remove(pos);
+        notifyDataSetChanged();
+    }
 
 }

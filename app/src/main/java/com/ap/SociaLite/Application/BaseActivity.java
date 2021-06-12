@@ -68,9 +68,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         // Camera Permission
         int camerapermission = ContextCompat.checkSelfPermission(mBaseContext, Manifest.permission.CAMERA);
         // Write Permission
-        int writepermission = ContextCompat.checkSelfPermission(mBaseContext, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+  //      int writepermission = ContextCompat.checkSelfPermission(mBaseContext, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 //        // Location Permission
-        int permissionRead = ContextCompat.checkSelfPermission(mBaseContext, Manifest.permission.READ_EXTERNAL_STORAGE);
+   //     int permissionRead = ContextCompat.checkSelfPermission(mBaseContext, Manifest.permission.READ_EXTERNAL_STORAGE);
 //        // Read Contacts Permission
 //        int permissionREAD_PHONE_STATE = ContextCompat.checkSelfPermission(mBaseContext, Manifest.permission.READ_PHONE_STATE);
 //        // Read Contacts
@@ -81,12 +81,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (camerapermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.CAMERA);
         }
-        if (writepermission != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-        if (permissionRead != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        }
+//        if (writepermission != PackageManager.PERMISSION_GRANTED) {
+//            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        }
+//        if (permissionRead != PackageManager.PERMISSION_GRANTED) {
+//            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+//        }
 //        if (permissionLocation != PackageManager.PERMISSION_GRANTED) {
 //            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
 //        }
@@ -111,8 +111,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                 Map<String, Integer> perms = new HashMap<>();
                 // Initialize the map with both permissions
                 perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+           //     perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+          //      perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
 //                perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
 //                perms.put(Manifest.permission.READ_CONTACTS, PackageManager.PERMISSION_GRANTED);
 //                perms.put(Manifest.permission.RECORD_AUDIO, PackageManager.PERMISSION_GRANTED);
@@ -123,9 +123,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                         perms.put(permissions[i], grantResults[i]);
                     // Check for both permissions
                     if (perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-                            && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-                            &&
-                            perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                       //     && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                       ////     &&
+                       //     perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 //                            &&
 //                            perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED &&
 //                            perms.get(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED &&
@@ -140,10 +140,11 @@ public abstract class BaseActivity extends AppCompatActivity {
                         //permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
 //                        // shouldShowRequestPermissionRationale will return true
                         //show the dialog or snackbar saying its necessary and try again otherwise proceed with setup.
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA) ||
-                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                ||
-                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)
+                                //||
+                          //      ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                          //      ||
+                          //      ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                      //           ||
 //                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE) ||
 //                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_CONTACTS) ||

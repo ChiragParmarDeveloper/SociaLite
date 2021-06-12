@@ -146,6 +146,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
                         switch (item.getItemId()) {
                             case R.id.hide:
                                 new InterestFragmentPresenter(mContext, interestFragment).hide_post(interestFragment.user_id, id);
+                                removeAt(position);
+
                                 break;
 
                             case R.id.save:
@@ -203,9 +205,9 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
                 String myUrl = builder.build().toString();
 
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
-                in.putExtra("url",myUrl);
-                in.putExtra("share_post","share_post");
-                in.putExtra("post_id",post_id);
+                in.putExtra("url", myUrl);
+                in.putExtra("share_post", "share_post");
+                in.putExtra("post_id", post_id);
                 view.getContext().startActivity(in);
             }
         });
@@ -231,7 +233,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             public void onClick(View view) {
                 rate = "1";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
-                fetch_my_intrest_wise_post(interestFragment.interest_id, position);
+                fetch_my_intrest_wise_post(interestFragment.user_id, interestFragment.interest_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star1);
                 click = true;
@@ -243,7 +245,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             public void onClick(View view) {
                 rate = "2";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
-                fetch_my_intrest_wise_post(interestFragment.interest_id, position);
+                fetch_my_intrest_wise_post(interestFragment.user_id, interestFragment.interest_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star2);
                 click = true;
@@ -255,7 +257,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             public void onClick(View view) {
                 rate = "3";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
-                fetch_my_intrest_wise_post(interestFragment.interest_id, position);
+                fetch_my_intrest_wise_post(interestFragment.user_id, interestFragment.interest_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star3);
                 click = true;
@@ -267,7 +269,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             public void onClick(View view) {
                 rate = "4";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
-                fetch_my_intrest_wise_post(interestFragment.interest_id, position);
+                fetch_my_intrest_wise_post(interestFragment.user_id, interestFragment.interest_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star4);
                 click = true;
@@ -279,7 +281,7 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
             public void onClick(View view) {
                 rate = "5";
                 new InterestFragmentPresenter(mContext, interestFragment).rating_post(interestFragment.user_id, id, rate);
-                fetch_my_intrest_wise_post(interestFragment.interest_id, position);
+                fetch_my_intrest_wise_post(interestFragment.user_id, interestFragment.interest_id, position);
                 holder.rating_bar.setVisibility(View.GONE);
                 holder.img_star.setImageDrawable(star5);
                 click = true;
@@ -505,9 +507,9 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         }
     }
 
-    public void fetch_my_intrest_wise_post(String interest_id, int position) {
+    public void fetch_my_intrest_wise_post(String user_id, String interest_id, int position) {
         try {
-            new RService.api().call(mContext).interest_wise_post(interest_id).enqueue(new Callback<json>() {
+            new RService.api().call(mContext).interest_wise_post(user_id, interest_id).enqueue(new Callback<json>() {
                 @Override
                 public void onResponse(Call<json> call, Response<json> response) {
                     if (response.body().status.equals("1")) {
@@ -535,4 +537,8 @@ public class InterestPostAdapter extends RecyclerView.Adapter<InterestPostAdapte
         }
     }
 
+    public void removeAt(int pos) {
+        post_lists.remove(pos);
+        notifyDataSetChanged();
+    }
 }

@@ -1,12 +1,13 @@
 package com.ap.SociaLite.Editors;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -18,10 +19,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +51,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.io.File;
 import java.io.IOException;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class EditImageActivity extends BaseActivity implements OnPhotoEditorListener,
         View.OnClickListener,
         PropertiesBSFragment.Properties,
@@ -238,6 +245,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
             case R.id.imgClose:
                 onBackPressed();
                 break;
+
 //            case R.id.imgShare:
 //                shareImage();
 //                break;
@@ -275,9 +283,19 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 new File(uri.getPath()));
     }
 
-    @SuppressLint("MissingPermission")
+      @SuppressLint("MissingPermission")
     private void saveImage() {
-        if (requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+        //    if (requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+        if (ActivityCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        )
+
+
+        //   if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ==  PackageManager.PERMISSION_GRANTED)
+        {
+
+
             showLoading("Saving...");
             File file = new File(Environment.getExternalStorageDirectory()
                     + File.separator + ""
@@ -297,7 +315,6 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         showSnackbar("Image Saved Successfully");
                         mSaveImageUri = Uri.fromFile(new File(imagePath));
                         mPhotoEditorView.getSource().setImageURI(mSaveImageUri);
-
 
                         if (user_story != null) {
 
@@ -326,184 +343,254 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 e.printStackTrace();
                 hideLoading();
                 showSnackbar(e.getMessage());
-            }
-        }
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case CAMERA_REQUEST:
-                    mPhotoEditor.clearAllViews();
-                    Bitmap photo = (Bitmap) data.getExtras().get("data");
-                    mPhotoEditorView.getSource().setImageBitmap(photo);
-                    break;
-                case PICK_REQUEST:
-                    try {
+                Log.d("operation", e.getMessage());
+            }
+        } else {
+            // Toast.makeText(getApplicationContext(), "permission not granted", Toast.LENGTH_LONG).show();
+            //        requestPermissions(new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION}, 1);
+            requestPermissions(new String[]{READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE}, 1);
+
+        }
+
+    }
+        //  }
+
+        @Override
+        protected void onActivityResult ( int requestCode, int resultCode, Intent data){
+            super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode == RESULT_OK) {
+                switch (requestCode) {
+                    case CAMERA_REQUEST:
                         mPhotoEditor.clearAllViews();
-                        Uri uri = data.getData();
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                        mPhotoEditorView.getSource().setImageBitmap(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
+                        Bitmap photo = (Bitmap) data.getExtras().get("data");
+                        mPhotoEditorView.getSource().setImageBitmap(photo);
+                        break;
+                    case PICK_REQUEST:
+                        try {
+                            mPhotoEditor.clearAllViews();
+                            Uri uri = data.getData();
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            mPhotoEditorView.getSource().setImageBitmap(bitmap);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                }
             }
         }
-    }
 
-    @Override
-    public void onColorChanged(int colorCode) {
-        mPhotoEditor.setBrushColor(colorCode);
-        mTxtCurrentTool.setText(R.string.label_brush);
-    }
-
-    @Override
-    public void onOpacityChanged(int opacity) {
-        mPhotoEditor.setOpacity(opacity);
-        mTxtCurrentTool.setText(R.string.label_brush);
-    }
-
-    @Override
-    public void onBrushSizeChanged(int brushSize) {
-        mPhotoEditor.setBrushSize(brushSize);
-        mTxtCurrentTool.setText(R.string.label_brush);
-    }
-
-    @Override
-    public void onEmojiClick(String emojiUnicode) {
-        mPhotoEditor.addEmoji(emojiUnicode);
-        mTxtCurrentTool.setText(R.string.label_emoji);
-    }
-
-    @Override
-    public void onStickerClick(Bitmap bitmap) {
-        mPhotoEditor.addImage(bitmap);
-        mTxtCurrentTool.setText(R.string.label_sticker);
-    }
-
-    @Override
-    public void isPermissionGranted(boolean isGranted, String permission) {
-        if (isGranted) {
-            saveImage();
+        @Override
+        public void onColorChanged ( int colorCode){
+            mPhotoEditor.setBrushColor(colorCode);
+            mTxtCurrentTool.setText(R.string.label_brush);
         }
-    }
 
-    private void showSaveDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(getString(R.string.msg_save_image));
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        @Override
+        public void onOpacityChanged ( int opacity){
+            mPhotoEditor.setOpacity(opacity);
+            mTxtCurrentTool.setText(R.string.label_brush);
+        }
+
+        @Override
+        public void onBrushSizeChanged ( int brushSize){
+            mPhotoEditor.setBrushSize(brushSize);
+            mTxtCurrentTool.setText(R.string.label_brush);
+        }
+
+        @Override
+        public void onEmojiClick (String emojiUnicode){
+            mPhotoEditor.addEmoji(emojiUnicode);
+            mTxtCurrentTool.setText(R.string.label_emoji);
+        }
+
+        @Override
+        public void onStickerClick (Bitmap bitmap){
+            mPhotoEditor.addImage(bitmap);
+            mTxtCurrentTool.setText(R.string.label_sticker);
+        }
+
+        @Override
+        public void isPermissionGranted ( boolean isGranted, String permission){
+            if (isGranted) {
                 saveImage();
             }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+        }
+
+        private void showSaveDialog () {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(getString(R.string.msg_save_image));
+            builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    saveImage();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            builder.setNeutralButton("Discard", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            builder.create().show();
+
+        }
+
+        @Override
+        public void onFilterSelected (PhotoFilter photoFilter){
+            mPhotoEditor.setFilterEffect(photoFilter);
+        }
+
+        @Override
+        public void onToolSelected (ToolType toolType){
+            switch (toolType) {
+                case BRUSH:
+                    mPhotoEditor.setBrushDrawingMode(true);
+                    mTxtCurrentTool.setText(R.string.label_brush);
+                    showBottomSheetDialogFragment(mPropertiesBSFragment);
+                    break;
+                case TEXT:
+                    TextEditorDialogFragment textEditorDialogFragment = TextEditorDialogFragment.show(this);
+                    textEditorDialogFragment.setOnTextEditorListener(new TextEditorDialogFragment.TextEditor() {
+                        @Override
+                        public void onDone(String inputText, int colorCode) {
+                            final TextStyleBuilder styleBuilder = new TextStyleBuilder();
+                            styleBuilder.withTextColor(colorCode);
+
+                            mPhotoEditor.addText(inputText, styleBuilder);
+                            mTxtCurrentTool.setText(R.string.label_text);
+                        }
+                    });
+
+                    break;
+                case ERASER:
+                    mPhotoEditor.brushEraser();
+                    mTxtCurrentTool.setText(R.string.label_eraser_mode);
+                    break;
+                case FILTER:
+                    mTxtCurrentTool.setText(R.string.label_filter);
+                    showFilter(true);
+                    break;
+                case EMOJI:
+                    showBottomSheetDialogFragment(mEmojiBSFragment);
+                    break;
+                case STICKER:
+                    showBottomSheetDialogFragment(mStickerBSFragment);
+                    break;
             }
-        });
+        }
 
-        builder.setNeutralButton("Discard", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
+        private void showBottomSheetDialogFragment (BottomSheetDialogFragment fragment){
+            if (fragment == null || fragment.isAdded()) {
+                return;
             }
-        });
-        builder.create().show();
-
-    }
-
-    @Override
-    public void onFilterSelected(PhotoFilter photoFilter) {
-        mPhotoEditor.setFilterEffect(photoFilter);
-    }
-
-    @Override
-    public void onToolSelected(ToolType toolType) {
-        switch (toolType) {
-            case BRUSH:
-                mPhotoEditor.setBrushDrawingMode(true);
-                mTxtCurrentTool.setText(R.string.label_brush);
-                showBottomSheetDialogFragment(mPropertiesBSFragment);
-                break;
-            case TEXT:
-                TextEditorDialogFragment textEditorDialogFragment = TextEditorDialogFragment.show(this);
-                textEditorDialogFragment.setOnTextEditorListener(new TextEditorDialogFragment.TextEditor() {
-                    @Override
-                    public void onDone(String inputText, int colorCode) {
-                        final TextStyleBuilder styleBuilder = new TextStyleBuilder();
-                        styleBuilder.withTextColor(colorCode);
-
-                        mPhotoEditor.addText(inputText, styleBuilder);
-                        mTxtCurrentTool.setText(R.string.label_text);
-                    }
-                });
-
-                break;
-            case ERASER:
-                mPhotoEditor.brushEraser();
-                mTxtCurrentTool.setText(R.string.label_eraser_mode);
-                break;
-            case FILTER:
-                mTxtCurrentTool.setText(R.string.label_filter);
-                showFilter(true);
-                break;
-            case EMOJI:
-                showBottomSheetDialogFragment(mEmojiBSFragment);
-                break;
-            case STICKER:
-                showBottomSheetDialogFragment(mStickerBSFragment);
-                break;
-        }
-    }
-
-    private void showBottomSheetDialogFragment(BottomSheetDialogFragment fragment) {
-        if (fragment == null || fragment.isAdded()) {
-            return;
-        }
-        fragment.show(getSupportFragmentManager(), fragment.getTag());
-    }
-
-
-    void showFilter(boolean isVisible) {
-        mIsFilterVisible = isVisible;
-        mConstraintSet.clone(mRootView);
-
-        if (isVisible) {
-            mConstraintSet.clear(mRvFilters.getId(), ConstraintSet.START);
-            mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.START,
-                    ConstraintSet.PARENT_ID, ConstraintSet.START);
-            mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.END,
-                    ConstraintSet.PARENT_ID, ConstraintSet.END);
-        } else {
-            mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.START,
-                    ConstraintSet.PARENT_ID, ConstraintSet.END);
-            mConstraintSet.clear(mRvFilters.getId(), ConstraintSet.END);
+            fragment.show(getSupportFragmentManager(), fragment.getTag());
         }
 
-        ChangeBounds changeBounds = new ChangeBounds();
-        changeBounds.setDuration(350);
-        changeBounds.setInterpolator(new AnticipateOvershootInterpolator(1.0f));
-        TransitionManager.beginDelayedTransition(mRootView, changeBounds);
 
-        mConstraintSet.applyTo(mRootView);
-    }
+        void showFilter ( boolean isVisible){
+            mIsFilterVisible = isVisible;
+            mConstraintSet.clone(mRootView);
 
-    @Override
-    public void onBackPressed() {
-        if (mIsFilterVisible) {
-            showFilter(false);
-            mTxtCurrentTool.setText(" ");
+            if (isVisible) {
+                mConstraintSet.clear(mRvFilters.getId(), ConstraintSet.START);
+                mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.START,
+                        ConstraintSet.PARENT_ID, ConstraintSet.START);
+                mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.END,
+                        ConstraintSet.PARENT_ID, ConstraintSet.END);
+            } else {
+                mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.START,
+                        ConstraintSet.PARENT_ID, ConstraintSet.END);
+                mConstraintSet.clear(mRvFilters.getId(), ConstraintSet.END);
+            }
+
+            ChangeBounds changeBounds = new ChangeBounds();
+            changeBounds.setDuration(350);
+            changeBounds.setInterpolator(new AnticipateOvershootInterpolator(1.0f));
+            TransitionManager.beginDelayedTransition(mRootView, changeBounds);
+
+            mConstraintSet.applyTo(mRootView);
         }
+
+        @Override
+        public void onBackPressed () {
+            if (mIsFilterVisible) {
+                showFilter(false);
+                mTxtCurrentTool.setText(" ");
+            }
 //        else if (!mPhotoEditor.isCacheEmpty()) {
 ////            showSaveDialog();
 //        }
-        else {
-            super.onBackPressed();
+            else {
+                super.onBackPressed();
+            }
+        }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                showLoading("Saving...");
+                File file = new File(Environment.getExternalStorageDirectory()
+                        + File.separator + ""
+                        + System.currentTimeMillis() + ".png");
+                try {
+                    file.createNewFile();
+
+                    SaveSettings saveSettings = new SaveSettings.Builder()
+                            .setClearViewsEnabled(true)
+                            .setTransparencyEnabled(true)
+                            .build();
+
+                    mPhotoEditor.saveAsFile(file.getAbsolutePath(), saveSettings, new PhotoEditor.OnSaveListener() {
+                        @Override
+                        public void onSuccess(@NonNull String imagePath) {
+                            hideLoading();
+                            showSnackbar("Image Saved Successfully");
+                            mSaveImageUri = Uri.fromFile(new File(imagePath));
+                            mPhotoEditorView.getSource().setImageURI(mSaveImageUri);
+
+                            if (user_story != null) {
+
+                                startActivity(new Intent(EditImageActivity.this, AddSpotlightActivity_2.class)
+                                        .putExtra("path", imagePath));
+                            } else if (my_network_user_story != null) {
+                                startActivity(new Intent(EditImageActivity.this, AddSpotlightActivity_2.class)
+                                        .putExtra("path", imagePath)
+                                        .putExtra("my_network_user_story", my_network_user_story));
+                            } else {
+
+                                startActivity(new Intent(EditImageActivity.this, CameraActivity.class)
+                                        .putExtra("img_url", imagePath)
+                                        .putExtra("network_fragment", my_network)
+                                        .putExtra("business_fragment", business_interaction));
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            hideLoading();
+                            showSnackbar("Failed to save Image");
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    hideLoading();
+                    showSnackbar(e.getMessage());
+
+                    Log.d("operation", e.getMessage());
+                }
+                //  Toast.makeText(getApplicationContext(), "permission granted1", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            // Toast.makeText(getApplicationContext(), "permission denied", Toast.LENGTH_LONG).show();
         }
     }
-}
+    }

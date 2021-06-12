@@ -151,7 +151,7 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
                         switch (item.getItemId()) {
                             case R.id.hide:
                                 new BusinessFragmentPresenter(mContext, businessFragment).hide_post(businessFragment.user_id, id);
-                                //       new BusinessFragmentPresenter(mContext, businessFragment).business_post(categoryFragment.user_id);
+                                removeAt(position);
                                 break;
 
                             case R.id.save:
@@ -638,5 +638,9 @@ public class BusinessInteractionAdapter extends RecyclerView.Adapter<BusinessInt
         } catch (Exception e) {
 
         }
+    }
+    public void removeAt(int pos) {
+        post_lists.remove(pos);
+        notifyDataSetChanged();
     }
 }
