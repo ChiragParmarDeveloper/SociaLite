@@ -146,7 +146,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.MyHold
                         switch (item.getItemId()) {
                             case R.id.hide:
                                 new TimeLineFragmentPresenter(mContext, timeLineFragment).hide_post(timeLineFragment.user_id, id);
-                                new TimeLineFragmentPresenter(mContext, timeLineFragment).time_line_post(timeLineFragment.user_id);
+                                removeAt(position);
                                 break;
 
                             case R.id.save:

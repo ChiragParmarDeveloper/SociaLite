@@ -154,7 +154,8 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
                         switch (item.getItemId()) {
                             case R.id.hide:
                                 new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).hide_post(profileConnectionBusinessFragment.user_id, id);
-                                new ProfileConnectionBusinessFragmentPresenter(mContext, profileConnectionBusinessFragment).my_post_business_intrection(profileConnectionBusinessFragment.user_id);
+                                removeAt(position);
+
                                 break;
 
                             case R.id.save:
@@ -622,6 +623,11 @@ public class ProfileConnectionBusinessAdapter extends RecyclerView.Adapter<Profi
         } catch (Exception e) {
 
         }
+    }
+
+    public void removeAt(int pos) {
+        post_lists.remove(pos);
+        notifyDataSetChanged();
     }
 
 }

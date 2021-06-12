@@ -149,7 +149,7 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
                         switch (item.getItemId()) {
                             case R.id.hide:
                                 new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).hide_post(profileConnectionTimelineFragment.user_id, id);
-                                new ProfileConnectionTimelineFragmentPresenter(mContext, profileConnectionTimelineFragment).time_line_post(profileConnectionTimelineFragment.user_id);
+                                removeAt(position);
                                 break;
 
                             case R.id.save:
@@ -542,6 +542,10 @@ public class ProfileConnectionTimelineAdapter extends RecyclerView.Adapter<Profi
         } catch (Exception e) {
 
         }
+    }
+    public void removeAt(int pos) {
+        post_lists.remove(pos);
+        notifyDataSetChanged();
     }
 
 }

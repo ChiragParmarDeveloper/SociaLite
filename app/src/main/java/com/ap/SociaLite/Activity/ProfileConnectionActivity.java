@@ -103,9 +103,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
         profile_connection(UserId, RequestId);
 
 
-
-
-
         timeline_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,11 +150,6 @@ public class ProfileConnectionActivity extends AppCompatActivity {
 //                startActivity(spotlight);
             }
         });
-
-
-
-
-
     }
 
     @Override
@@ -617,9 +609,9 @@ public class ProfileConnectionActivity extends AppCompatActivity {
                 String myUrl = builder.build().toString();
 
                 Intent in = new Intent(view.getContext(), ShareToFriend.class);
-                in.putExtra("url",myUrl);
-                in.putExtra("share_profile","share_profile");
-                in.putExtra("profile_share_id",user_id);
+                in.putExtra("url", myUrl);
+                in.putExtra("share_profile", "share_profile");
+                in.putExtra("profile_share_id", user_id);
                 view.getContext().startActivity(in);
                 break;
 

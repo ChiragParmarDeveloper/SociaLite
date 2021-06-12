@@ -142,6 +142,7 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
                         switch (item.getItemId()) {
                             case R.id.hide:
                                 new SavedPostDetailActivityPresenter(mContext, savedPostDetailActivity).hide_post(savedPostDetailActivity.user_id, id);
+                                removeAt(position);
                                 break;
 
                             case R.id.save:
@@ -518,4 +519,9 @@ public class SavedPostDetailAdapter extends RecyclerView.Adapter<SavedPostDetail
 
         }
     }
+    public void removeAt(int pos) {
+        mList.remove(pos);
+        notifyDataSetChanged();
+    }
+
 }
