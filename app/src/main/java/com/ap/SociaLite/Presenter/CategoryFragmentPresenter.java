@@ -1,9 +1,7 @@
 package com.ap.SociaLite.Presenter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,7 +37,7 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                     categoryFragment.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
 
-                   //     categoryFragment.interest_ids = response.body().interest_details.get(response.body().interest_details.size() - 1).interest_id;
+                        //     categoryFragment.interest_ids = response.body().interest_details.get(response.body().interest_details.size() - 1).interest_id;
                         //     Log.d("Size_id", String.valueOf(categoryFragment.interest_ids));
 
                         if (response.body().interest_details != null && response.body().interest_details.size() > 0) {
@@ -73,13 +71,13 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                     categoryFragment.progressbar.setVisibility(View.GONE);
                     if (response.body().status.equals("1")) {
                         if (response.body().post_list != null && response.body().post_list.size() > 0) {
-                            Toast.makeText(mContext, response.body().message, Toast.LENGTH_SHORT).show();
+                            //   Toast.makeText(mContext, response.body().message, Toast.LENGTH_SHORT).show();
                             categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
                             categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
 
                         }
                     } else {
-                        Toast.makeText(mContext, response.body().message, Toast.LENGTH_SHORT).show();
+                        //      Toast.makeText(mContext, response.body().message, Toast.LENGTH_SHORT).show();
 
                         categoryFragment.rv_categorypost.setLayoutManager(new GridLayoutManager(mContext, 1));
                         categoryFragment.rv_categorypost.setAdapter(new CategoryPostAdapter(mContext, response.body().post_list, categoryFragment));
@@ -89,8 +87,8 @@ public class CategoryFragmentPresenter implements CategoryFragmentContract {
                 @Override
                 public void onFailure(Call<json> call, Throwable t) {
                     categoryFragment.progressbar.setVisibility(View.GONE);
-                    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("error", String.valueOf(t.getMessage()));
+                    //    Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //   Log.d("error", String.valueOf(t.getMessage()));
                 }
             });
         } catch (Exception e) {

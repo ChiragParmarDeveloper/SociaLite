@@ -18,7 +18,7 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_logo_circle"
         android:supportsRtl="true"
-
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".Activity.business_post_link">

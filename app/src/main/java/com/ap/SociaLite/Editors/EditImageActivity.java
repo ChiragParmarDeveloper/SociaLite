@@ -1,5 +1,6 @@
 package com.ap.SociaLite.Editors;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -285,15 +286,15 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
       @SuppressLint("MissingPermission")
     private void saveImage() {
-        //    if (requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-        if (ActivityCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-        )
+//        if (ActivityCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+//                && ActivityCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+//        )
 
 
         //   if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ==  PackageManager.PERMISSION_GRANTED)
-        {
+      //  {
 
 
             showLoading("Saving...");
@@ -346,12 +347,13 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
                 Log.d("operation", e.getMessage());
             }
-        } else {
-            // Toast.makeText(getApplicationContext(), "permission not granted", Toast.LENGTH_LONG).show();
-            //        requestPermissions(new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION}, 1);
-            requestPermissions(new String[]{READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE}, 1);
-
         }
+//            else {
+//            // Toast.makeText(getApplicationContext(), "permission not granted", Toast.LENGTH_LONG).show();
+//            //        requestPermissions(new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION}, 1);
+//            requestPermissions(new String[]{READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE}, 1);
+//
+//        }
 
     }
         //  }
@@ -365,7 +367,9 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         mPhotoEditor.clearAllViews();
                         Bitmap photo = (Bitmap) data.getExtras().get("data");
                         mPhotoEditorView.getSource().setImageBitmap(photo);
+
                         break;
+
                     case PICK_REQUEST:
                         try {
                             mPhotoEditor.clearAllViews();
@@ -532,65 +536,65 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 super.onBackPressed();
             }
         }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showLoading("Saving...");
-                File file = new File(Environment.getExternalStorageDirectory()
-                        + File.separator + ""
-                        + System.currentTimeMillis() + ".png");
-                try {
-                    file.createNewFile();
-
-                    SaveSettings saveSettings = new SaveSettings.Builder()
-                            .setClearViewsEnabled(true)
-                            .setTransparencyEnabled(true)
-                            .build();
-
-                    mPhotoEditor.saveAsFile(file.getAbsolutePath(), saveSettings, new PhotoEditor.OnSaveListener() {
-                        @Override
-                        public void onSuccess(@NonNull String imagePath) {
-                            hideLoading();
-                            showSnackbar("Image Saved Successfully");
-                            mSaveImageUri = Uri.fromFile(new File(imagePath));
-                            mPhotoEditorView.getSource().setImageURI(mSaveImageUri);
-
-                            if (user_story != null) {
-
-                                startActivity(new Intent(EditImageActivity.this, AddSpotlightActivity_2.class)
-                                        .putExtra("path", imagePath));
-                            } else if (my_network_user_story != null) {
-                                startActivity(new Intent(EditImageActivity.this, AddSpotlightActivity_2.class)
-                                        .putExtra("path", imagePath)
-                                        .putExtra("my_network_user_story", my_network_user_story));
-                            } else {
-
-                                startActivity(new Intent(EditImageActivity.this, CameraActivity.class)
-                                        .putExtra("img_url", imagePath)
-                                        .putExtra("network_fragment", my_network)
-                                        .putExtra("business_fragment", business_interaction));
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            hideLoading();
-                            showSnackbar("Failed to save Image");
-                        }
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    hideLoading();
-                    showSnackbar(e.getMessage());
-
-                    Log.d("operation", e.getMessage());
-                }
-                //  Toast.makeText(getApplicationContext(), "permission granted1", Toast.LENGTH_LONG).show();
-            }
-        } else {
-            // Toast.makeText(getApplicationContext(), "permission denied", Toast.LENGTH_LONG).show();
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if (requestCode == 1) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                showLoading("Saving...");
+//                File file = new File(Environment.getExternalStorageDirectory()
+//                        + File.separator + ""
+//                        + System.currentTimeMillis() + ".png");
+//                try {
+//                    file.createNewFile();
+//
+//                    SaveSettings saveSettings = new SaveSettings.Builder()
+//                            .setClearViewsEnabled(true)
+//                            .setTransparencyEnabled(true)
+//                            .build();
+//
+//                    mPhotoEditor.saveAsFile(file.getAbsolutePath(), saveSettings, new PhotoEditor.OnSaveListener() {
+//                        @Override
+//                        public void onSuccess(@NonNull String imagePath) {
+//                            hideLoading();
+//                            showSnackbar("Image Saved Successfully");
+//                            mSaveImageUri = Uri.fromFile(new File(imagePath));
+//                            mPhotoEditorView.getSource().setImageURI(mSaveImageUri);
+//
+//                            if (user_story != null) {
+//
+//                                startActivity(new Intent(EditImageActivity.this, AddSpotlightActivity_2.class)
+//                                        .putExtra("path", imagePath));
+//                            } else if (my_network_user_story != null) {
+//                                startActivity(new Intent(EditImageActivity.this, AddSpotlightActivity_2.class)
+//                                        .putExtra("path", imagePath)
+//                                        .putExtra("my_network_user_story", my_network_user_story));
+//                            } else {
+//
+//                                startActivity(new Intent(EditImageActivity.this, CameraActivity.class)
+//                                        .putExtra("img_url", imagePath)
+//                                        .putExtra("network_fragment", my_network)
+//                                        .putExtra("business_fragment", business_interaction));
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(@NonNull Exception exception) {
+//                            hideLoading();
+//                            showSnackbar("Failed to save Image");
+//                        }
+//                    });
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    hideLoading();
+//                    showSnackbar(e.getMessage());
+//
+//                    Log.d("operation", e.getMessage());
+//                }
+//                //  Toast.makeText(getApplicationContext(), "permission granted1", Toast.LENGTH_LONG).show();
+//            }
+//        } else {
+//            // Toast.makeText(getApplicationContext(), "permission denied", Toast.LENGTH_LONG).show();
+//        }
+//    }
     }
